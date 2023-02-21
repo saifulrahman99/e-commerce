@@ -2,7 +2,7 @@
     <div class="container home">
         <div class="row">
             <div class="tagline col-12 col-sm-6 d-flex flex-column justify-content-center">
-                <h1 class="mb-4">Belanja Buah Dan Sayur Hanya Di <span>Butik Buah Adastra</span></h1>
+                <h1 class="mb-4">Belanja Buah Dan Sayur Di <span>Butik Buah Adastra</span></h1>
                 <p class="mb-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab cupiditate vitae adipisci commodi non temporibus cumque ea ut, minima culpa.</p>
                 <div class="cta">
                     <a href="" class="btn btn-lg btn btn-outline-success" style="font-weight: 600 !important;">Pesan Sekarang</a>

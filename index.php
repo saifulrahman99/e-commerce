@@ -71,8 +71,8 @@ if (!isset($_SESSION['access_token'])) {
                         <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
                         <li><a href="Logout" class="menu-nav"> <i data-feather="log-out"></i></a> </li>
                     <?php else : ?>
-                        <li><a href="#" class="menu-nav rounded border py-2 px-3 fw-bolder"> Login </a></li>
-                        <li><a href="#" class="menu-nav rounded border py-2 px-3 fw-bolder"> Register </a></li>
+                        <li><a href="#" class="menu-nav rounded py-2 px-3 fw-bolder"> Login </a></li>
+                        <li><a href="#" class="menu-nav rounded py-2 px-3 fw-bolder"> Register </a></li>
                     <?php endif; ?>
                 </ul>
             </nav>
