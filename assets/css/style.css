@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+* {
+    font-family: 'Montserrat', sans-serif;
+    padding: 0;
+    margin: 0;
+    color: #393939;
+    font-weight: 300;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: 400 !important;
+}
+
+/* navbar start */
+#navbar .logo-web h1 {
+    background: linear-gradient(90deg, rgb(240, 198, 45) 0%, rgb(63, 211, 33) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* font-style: italic; */
+    text-shadow: 1px 4px 5px #4d4d4d3e;
+    padding: 0rem 0.5rem;
+    font-weight: 700;
+    font-family: 'Dancing Script', cursive;
+}
+
+#navbar {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0rem 0rem 0.5rem 0rem #4d4d4d5f;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+#navbar h1 {
+    margin: 0;
+}
+
+#navbar a {
+    text-decoration: none;
+    color: rgb(30, 30, 30);
+}
+
+#navbar .navbar-nav a::after {
+    content: '';
+    display: block;
+    padding-bottom: 0.2rem;
+    border-bottom: 0.1rem solid rgb(63, 211, 33);
+    transform: scaleX(0);
+    transition: 0.2s linear;
+}
+#navbar .navbar-nav a:hover::after{
+    transform: scaleX(0.7);
+}
+
+#navbar .container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar ul {
+    margin: 0;
+}
+
+#navbar ul li {
+    display: inline-block;
+    padding: 0rem 1rem;
+}
+
+.navbar-nav-extra span {
+    font-size: 0.8rem;
+}
+
+.navbar-nav-extra-menu {
+    display: none;
+}
+
+/* navbar end */
+
+/* section home strat */
+#home,
+#produk {
+    padding-top: 5rem;
+}
+.opsi-login{
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 0.5rem;
+    box-shadow: 0rem 0.2rem 0.4rem 0rem #2323235a;
+    transition: 0.2s;
+}
+.opsi-login:hover{
+    transform: scale(1.02);
+}
+
+/* section home end */
+
+.panel-heading,.panel-body{
+    text-align: center;
+    margin: 2rem 2rem;
+}
+
+
+
+
+
+
+
+
+/* Media */
+
+/* lepptop start*/
+@media (max-width:1200px) {}
+
+/* lepptop end*/
+
+/* tablet start*/
+@media (max-width:768px) {
+    .navbar-nav-extra-menu {
+        display: inline-block;
+    }
+
+    #navbar .container {
+        position: relative;
+    }
+
+    .navbar-nav {
+        position: absolute;
+        right: -100%;
+    }
+}
+
+/* tablet end*/
+
+/* handpone start*/
+@media (max-width:576px) {
+    .navbar-nav-extra{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: bisque;
+    }
+}
+
+/* handpone end*/

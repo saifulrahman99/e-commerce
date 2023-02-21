@@ -1,0 +1,7 @@
+RewriteEngine on
+
+# pengalamatan halaman
+RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?halaman=$1
+RewriteRule ^([a-zA-Z0-9_-]+)/$ index.php?halaman=$1
+
+# pengalamatan dengan banyak nilai GET
