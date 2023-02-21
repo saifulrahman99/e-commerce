@@ -46,7 +46,8 @@ if (!isset($_SESSION['access_token'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <title><?php echo $nm_halaman ?></title>
+    <title><?php echo ($nm_halaman == "Home") ? "Butik Buah Adastra" : $nm_halaman ?></title>
+    <link rel="shortcut icon" href="assets/img/brand/adastra.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
@@ -57,27 +58,28 @@ if (!isset($_SESSION['access_token'])) {
     <section id="navbar" class="navbar">
         <div class="container">
             <div class="logo-web">
-                <h1>Butik Buah Adastra</h1>
+                <!-- <h1>Butik Buah Adastra</h1> -->
+                <img src="assets/img/brand/adastra.png" alt="logo adastra">
             </div>
             <nav class="navbar-nav">
                 <ul>
-                    <li><a href="Home">Home</a></li>
-                    <li><a href="Produk">Produk</a></li>
-                    <li><a href="Tentang-Kami">Tentang Kami</a></li>
-                </ul>
-            </nav>
-            <div class="navbar-nav-extra">
-                <ul>
+                    <li><a href="Home" class="menu menu-nav">Home</a></li>
+                    <li><a href="Produk" class="menu menu-nav">Produk</a></li>
+                    <li><a href="Tentang-Kami" class="menu menu-nav">Tentang Kami</a></li>
                     <?php if ($login_button == '') : ?>
-                        <li><a class="d-flex justify-content-center"> <img class="mx-1" src="<?php echo $_SESSION['user_image'] ?>" alt="foto" style="border-radius: 50%; max-width:2rem;"> <span class="pt-2"><?php echo $_SESSION['name'] ?></span></a></li>
-                        <li><a href="#" class="d-flex justify-content-center"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
-                        <li><a href="#" class="d-flex justify-content-center"> <i data-feather="log-out"></i></a> </li>
+                        <li><span class="nav-user-profile menu-nav"> <img class="mx-1" src="<?php echo $_SESSION['user_image'] ?>" alt="foto" style="border-radius: 50%; max-width:2rem;"> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
+                        <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
+                        <li><a href="Logout" class="menu-nav"> <i data-feather="log-out"></i></a> </li>
                     <?php else : ?>
-                        <li><a href="#"> Login </a></li> |
-                        <li><a href="#"> Register </a></li>
+                        <li><a href="#" class="menu-nav rounded border py-2 px-3 fw-bolder"> Login </a></li>
+                        <li><a href="#" class="menu-nav rounded border py-2 px-3 fw-bolder"> Register </a></li>
                     <?php endif; ?>
                 </ul>
-            </div>
+            </nav>
+            <!-- <div class="navbar-nav-extra">
+                <ul>
+                </ul>
+            </div> -->
 
             <div class="navbar-nav-extra-menu">
                 <ul>
@@ -86,6 +88,7 @@ if (!isset($_SESSION['access_token'])) {
             </div>
         </div>
     </section>
+    <div id="navbar-show" class="navbar-show"></div>
     <!-- navigasi end -->
 
     <!-- konten halaman start -->
@@ -111,6 +114,8 @@ if (!isset($_SESSION['access_token'])) {
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!-- js costum -->
     <script src="assets/js/script.js"></script>
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- icon -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
