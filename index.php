@@ -18,7 +18,7 @@ if (isset($_GET["code"])) {
         if (!empty($data['given_name']) && !empty($data['family_name'])) {
             $given_name = $data['given_name'];
             $family_name = $data['family_name'];
-            $_SESSION['name'] = " $given_name  $family_name";
+            $_SESSION['name'] = $given_name;
         }
         if (!empty($data['email'])) {
             $_SESSION['user_email_address'] = $data['email'];
@@ -57,9 +57,10 @@ if (!isset($_SESSION['access_token'])) {
     <!-- navigasi start -->
     <section id="navbar" class="navbar">
         <div class="container">
-            <div class="logo-web">
+            <div class="logo-web" style="position:relative;">
                 <!-- <h1>Butik Buah Adastra</h1> -->
                 <img src="assets/img/brand/adastra.png" alt="logo adastra">
+                <div class="cricle-logo" style="position: absolute; padding: 4rem 4rem; background-color:white;top: -3rem;left: -2.5rem; z-index:-1; border-radius:50%;"></div>
             </div>
             <nav class="navbar-nav">
                 <ul>
@@ -67,19 +68,22 @@ if (!isset($_SESSION['access_token'])) {
                     <li><a href="Produk" class="menu menu-nav">Produk</a></li>
                     <li><a href="Tentang-Kami" class="menu menu-nav">Tentang Kami</a></li>
                     <?php if ($login_button == '') : ?>
-                        <li><span class="nav-user-profile menu-nav"> <img class="mx-1" src="<?php echo $_SESSION['user_image'] ?>" alt="foto" style="border-radius: 50%; max-width:2rem;"> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
+                        <li><span class="nav-user-profile menu-nav"> <i data-feather="user" class="pb-1"></i> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
                         <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
                         <li><a href="Logout" class="menu-nav"> <i data-feather="log-out"></i></a> </li>
-                    <?php else : ?>
-                        <li><a href="#" class="menu-nav rounded py-2 px-3 fw-bolder"> Login </a></li>
-                        <li><a href="#" class="menu-nav rounded py-2 px-3 fw-bolder"> Register </a></li>
-                    <?php endif; ?>
-                </ul>
-            </nav>
-            <!-- <div class="navbar-nav-extra">
+                        <?php else : ?>
+                            <li><a href="#" class="menu-nav rounded py-1 px-2 mx-0 fw-bolder"> Login </a></li>
+                            |
+                            <li><a href="#" class="menu-nav rounded py-1 px-2 mx-0 fw-bolder"> Register </a></li>
+                            <?php endif; ?>
+                        </ul>
+                    </nav>
+            <div class="navbar-nav-extra">
                 <ul>
+                    <li><span class="nav-user-profile menu-nav"><i data-feather="user" class="pb-1"></i></li>
+                    <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
                 </ul>
-            </div> -->
+            </div>
 
             <div class="navbar-nav-extra-menu">
                 <ul>

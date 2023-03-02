@@ -10,10 +10,6 @@
     /* box-sizing: border-box !important; */
 }
 
-body {
-    /* min-height: 2000px; */
-}
-
 h1,
 h2,
 h3,
@@ -76,7 +72,6 @@ h6 {
     content: '';
     display: block;
     padding-bottom: 0.2rem;
-    /* border-bottom: 0.1rem solid rgb(63, 211, 33); */
     border-bottom: 0.1rem solid rgb(26, 131, 0);
     transform: scaleX(0);
     transition: 0.2s linear;
@@ -102,6 +97,20 @@ h6 {
     padding: 0rem 1rem;
 }
 
+.navbar-nav-extra {
+    display: none;
+    margin-left: -3vw;
+}
+
+.navbar-nav-extraul li {
+    display: inline-block;
+}
+
+.navbar-nav-extra ul {
+    margin: 0;
+    padding: 0;
+}
+
 .navbar-nav-extra span {
     font-size: 0.8rem;
 }
@@ -109,9 +118,11 @@ h6 {
 .navbar-nav-extra-menu {
     display: none;
 }
-.menu-nav.rounded{
+
+.menu-nav.rounded {
     color: rgb(26, 131, 0) !important;
-    background-color: rgb(254, 234, 186);
+    border: 2px solid rgb(26, 131, 0);
+    /* background-color: rgb(254, 234, 186); */
     font-weight: 500 !important;
 }
 
@@ -126,15 +137,16 @@ h6 {
 #home {
     position: relative;
     overflow: hidden;
-    
+
 }
 
 .circle-home {
     position: absolute;
-    padding: 30rem 31rem;
-    background-color: rgb(245,180,46);
-    top: -18rem;
-    right: -11.3rem;
+    padding: 40rem 45rem;
+    background-color: rgb(251, 223, 159);
+    /* background-color: rgb(245, 180, 46); */
+    top: -40rem;
+    right: -40rem;
     z-index: -99;
     border-radius: 50%;
 }
@@ -152,7 +164,6 @@ h6 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700 !important;
-    /* mix-blend-mode: difference; */
 }
 
 .opsi-login {
@@ -169,7 +180,81 @@ h6 {
     transform: scale(1.02);
 }
 
+#home .indikator-carousel {
+    margin-top: -3rem;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+}
+
+#home .indikator-carousel .slides {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    max-width: 80vw;
+}
+
+.slides::-webkit-scrollbar {
+    width: 3px;
+    height: 5px;
+}
+
+.slides::-webkit-scrollbar:hover {
+    cursor: grab;
+}
+
+.slides::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+
+.slides>a {
+    scroll-snap-align: start;
+    flex-shrink: 0;
+    padding-bottom: 1rem;
+    margin: 0 10px 0 10px;
+    background: #ffffff00;
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform 0.5s;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-size: 100%;
+}
+
+.slides::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#home .indikator-carousel a img {
+    transition: 0.2s;
+    width: 8vw;
+}
+
+#home .indikator-carousel a img:hover {
+    transform: scale(1.06);
+}
+
+#home .cta a {
+    font-weight: 600;
+}
+
 /* section home end */
+
+/* section promo start */
+#promo {
+    /* background-image: linear-gradient(white, #e3e3e3); */
+    margin: 5vh 0vh;
+    padding: 10vh 0vh;
+}
+
+/* section promo end */
 
 .panel-heading,
 .panel-body {
@@ -186,8 +271,37 @@ h6 {
 
 /* Media */
 
-/* lepptop start*/
-@media (max-width:1200px) {}
+@media (max-width:1224px) {
+    .tagline {
+        min-height: 50vw;
+    }
+
+    #home .indikator-carousel {
+        margin-top: 1rem;
+    }
+
+}
+
+/* lepptop/ipad mode miring start*/
+@media (max-width:992px) {
+    #navbar ul li {
+        padding: 0rem 0.5rem;
+    }
+
+    #navbar ul li a {
+        font-size: 0.9rem;
+
+    }
+
+    .tagline {
+        min-height: 60vw;
+    }
+
+    #home .indikator-carousel {
+        margin-top: 2rem;
+    }
+
+}
 
 /* lepptop end*/
 
@@ -203,7 +317,11 @@ h6 {
 
     .navbar-nav {
         position: absolute;
-        right: -150%;
+        right: -200%;
+    }
+
+    .tagline {
+        min-height: 50vh;
     }
 }
 
@@ -212,11 +330,33 @@ h6 {
 /* handpone start*/
 @media (max-width:576px) {
     .navbar-nav-extra {
+        display: block;
         position: fixed;
         bottom: 0;
         width: 100%;
         text-align: center;
-        background-color: bisque;
+        background-color: white;
+        box-shadow: 0rem 0rem 1rem 0rem rgba(0, 0, 0, 0.236);
+        padding: 1.3vh 0vh;
+    }
+
+    .navbar-nav-extra ul li {
+        margin: 0vw 1vw;
+    }
+
+    .navbar-nav-extra ul li i {}
+
+    .tagline {
+        min-height: 50vh;
+    }
+
+    #home .indikator-carousel {
+        margin-top: 4rem;
+    }
+
+    #home .indikator-carousel a img {
+        transition: 0.3s;
+        width: 15vw;
     }
 }
 
