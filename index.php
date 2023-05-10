@@ -51,6 +51,8 @@ if (!isset($_SESSION['access_token'])) {
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
@@ -60,34 +62,74 @@ if (!isset($_SESSION['access_token'])) {
             <div class="logo-web" style="position:relative;">
                 <!-- <h1>Butik Buah Adastra</h1> -->
                 <img src="assets/img/brand/adastra.png" alt="logo adastra">
-                <div class="cricle-logo" style="position: absolute; padding: 4rem 4rem; background-color:white;top: -3rem;left: -2.5rem; z-index:-1; border-radius:50%;"></div>
+                <div class="cricle-logo" style="position: absolute; padding: 3rem 3rem; background-color:white;top: -1rem;left: -0.5rem; z-index:-1; border-radius:50%;"></div>
             </div>
             <nav class="navbar-nav">
                 <ul>
                     <li><a href="Home" class="menu menu-nav">Home</a></li>
                     <li><a href="Produk" class="menu menu-nav">Produk</a></li>
                     <li><a href="Tentang-Kami" class="menu menu-nav">Tentang Kami</a></li>
+                    <li class="search-box">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <a> <i data-feather="search"></i> </a>
+                    </li>
+                    <li class="px-2">
+                        <a href="#" class="menu-nav-extra position-relative">
+                            <i data-feather="shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                        </a>
+                    </li>
+                    <li class="px-2">
+                        <a href="#" class="menu-nav position-relative">
+                            <i data-feather="message-square"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                        </a>
+                    </li>
+                    <li class="px-2">
+                        <a href="#" class="menu-nav position-relative">
+                            <i data-feather="file-text"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                        </a>
+                    </li>
                     <?php if ($login_button == '') : ?>
-                        <li><span class="nav-user-profile menu-nav"> <i data-feather="user" class="pb-1"></i> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
-                        <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
-                        <li><a href="Logout" class="menu-nav"> <i data-feather="log-out"></i></a> </li>
-                        <?php else : ?>
-                            <li><a href="#" class="menu-nav rounded py-1 px-2 mx-0 fw-bolder"> Login </a></li>
-                            |
-                            <li><a href="#" class="menu-nav rounded py-1 px-2 mx-0 fw-bolder"> Register </a></li>
-                            <?php endif; ?>
-                        </ul>
-                    </nav>
+                        <li class="px-2"><span class="nav-user-profile menu-nav"> <i data-feather="user" class="pb-1"></i> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
+                        <!-- <li><a href="Logout" class="menu-nav"> <i data-feather="log-out"></i></a> </li> -->
+                    <?php endif; ?>
+                </ul>
+            </nav>
             <div class="navbar-nav-extra">
-                <ul>
-                    <li><span class="nav-user-profile menu-nav"><i data-feather="user" class="pb-1"></i></li>
-                    <li><a href="#" class="menu-nav"> <i data-feather="shopping-cart"></i> <span>&nbsp(0)</span></a> </li>
+                <ul class="d-flex justify-content-evenly">
+                    <li><a href="Home" class="menu-nav m-0 p-0"> <i data-feather="home" class="d-block m-auto"></i> <span class="d-block m-auto">Home</span> </a> </li>
+                    <li><a href="Produk" class="menu-nav m-0 p-0"> <i data-feather="shopping-bag"></i><span class="d-block m-auto">Produk</span> </a> </li>
+                    <!-- <li><span class="nav-user-profile menu-nav"><i data-feather="user" class="pb-1"></i></li> -->
+                    <li>
+                        <a href="#" class="menu-nav position-relative ">
+                            <i data-feather="message-square" class="d-block m-auto"></i>
+                            <span class="d-block m-auto">Pesan</span>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="menu-nav position-relative m-0 p-0">
+                            <i data-feather="archive" class="d-block m-auto"></i>
+                            <span class="d-block m-auto">Transaksi</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
 
             <div class="navbar-nav-extra-menu">
-                <ul>
-                    <li><a href="#"> <i data-feather="menu"></i> </a></li>
+                <ul class="p-0">
+                    <li class="search-box">
+                        <input type="text" class="search-input" placeholder="Search...">
+                        <a> <i data-feather="search"></i> </a>
+                    </li>
+                    <li>
+                        <a href="#" class="position-relative">
+                            <i data-feather="shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -110,7 +152,23 @@ if (!isset($_SESSION['access_token'])) {
 
     <!-- footer start -->
     <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <h5 class="text-white">Waktu Oprasional</h5>
+                    <span class="d-block text-white">Senin - Kamis : 08.00 - 16.00</span>
+                    <span class="d-block text-white">Jumat : 13.00 - 16.00</span>
+                    <span class="d-block text-white">Minggu : Libur</span>
+                </div>
+                <div class="col-4">
+                    <h5 class="text-center text-white">Sosial Media</h5>
+                </div>
+                <div class="col-4">
+                    <h5 class="text-end text-white">Alamat Toko</h5>
 
+                </div>
+            </div>
+        </div>
     </footer>
     <!-- footer end -->
 

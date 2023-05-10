@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 
 * {
     font-family: 'Montserrat', sans-serif;
@@ -7,7 +8,6 @@
     margin: 0;
     color: #393939;
     font-weight: 300;
-    /* box-sizing: border-box !important; */
 }
 
 h1,
@@ -19,7 +19,59 @@ h6 {
     font-weight: 400 !important;
 }
 
-/* navbar start */
+body {
+    background-image: url('../img/bg/bg.png');
+    background-position: right;
+    /* height: 5000px; */
+}
+
+/* custom */
+.bg-ijo {
+    background-color: rgb(80, 184, 46) !important;
+    /* background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow) !important; */
+}
+
+.btn-slide {
+    padding: 0.5rem 1rem;
+    border: none;
+}
+
+/* end custom */
+
+/* ============== CSS All ============== */
+
+.promo-content,
+.produk-promo,
+.produk-terbaru,
+.produk-terlaris {
+    overflow-x: auto;
+
+}
+
+.container-section {
+    box-shadow: 0rem 0.1rem 0.3rem 0.1rem #00000015;
+    background: rgba(255, 255, 255, 0.866);
+    padding: 1.3rem;
+    margin-bottom: 5vh;
+}
+
+.judul-section {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    margin-bottom: 2rem;
+}
+.btn-cart:hover{
+    background-color: rgb(208, 208, 0) !important;
+    color: #393939 !important;
+}
+/* ============== end CSS All ============== */
+
+
+
+
+
+/* ============== navbar start ============== */
 #navbar .logo-web img {
     max-width: 5rem !important;
 }
@@ -27,17 +79,6 @@ h6 {
 #navbar .nav-user-profile {
     vertical-align: middle;
 }
-
-/* #navbar .logo-web h1 {
-    background: linear-gradient(90deg, rgb(240, 198, 45) 0%, rgb(63, 211, 33) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-style: italic;
-    text-shadow: 1px 4px 5px #4d4d4d3e;
-    padding: 0rem 0.5rem;
-    font-weight: 700;
-    font-family: 'Dancing Script', cursive;
-} */
 
 #navbar-show {
     background-color: white;
@@ -112,23 +153,37 @@ h6 {
 }
 
 .navbar-nav-extra span {
-    font-size: 0.8rem;
+    font-size: 0.65rem;
 }
 
 .navbar-nav-extra-menu {
     display: none;
 }
 
-.menu-nav.rounded {
-    color: rgb(26, 131, 0) !important;
-    border: 2px solid rgb(26, 131, 0);
-    /* background-color: rgb(254, 234, 186); */
+.menu-nav {
+    letter-spacing: 0.12rem;
     font-weight: 500 !important;
 }
 
-/* navbar end */
+.search-input {
+    border: none;
+    background: white;
+    outline: none;
+    font-size: 14px;
+    line-height: 40px;
+    transition: 0.5s;
+    color: black;
+    border-radius: 50px;
+    padding-left: 20px;
+}
 
-/* section home strat */
+/* ============== navbar end ============== */
+
+
+
+
+
+/* ============== section home strat ============== */
 #home,
 #produk {
     padding-top: 5rem;
@@ -137,33 +192,49 @@ h6 {
 #home {
     position: relative;
     overflow: hidden;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 1) 85%, rgba(240, 185, 185, 0) 100%);
 
 }
 
 .circle-home {
     position: absolute;
     padding: 40rem 45rem;
-    background-color: rgb(251, 223, 159);
-    /* background-color: rgb(245, 180, 46); */
-    top: -40rem;
-    right: -40rem;
-    z-index: -99;
-    border-radius: 50%;
+    background-image: linear-gradient(45deg, rgb(80, 184, 46) 0%, yellow 100%);
+    top: -50rem;
+    right: -30rem;
+    z-index: 0;
+    border-radius: 30%;
+    transform: rotate(-30deg);
 }
 
 .tagline {
     min-height: 80vh;
+    z-index: 1;
 }
 
 .tagline h1 {
+    mix-blend-mode: multiply;
     font-weight: 700 !important;
+    color: rgb(2, 122, 48);
+}
+
+#home .cta a {
+    font-weight: 600;
+    /* background-color: rgb(1, 134, 52); */
+    /* background: linear-gradient(180deg, rgb(80, 184, 46) 80%, rgb(38, 198, 32) 100%); */
+    /* color: rgb(255, 240, 130); */
+
+    background-color: green;
+    color: white;
 }
 
 .tagline h1 span {
-    background: linear-gradient(90deg, rgb(122, 4, 2) 0%, rgb(92, 3, 2) 100%);
+    background: linear-gradient(90deg, rgb(2, 122, 48) 0%, rgb(38, 198, 32) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 700 !important;
+    display: block;
+    font-size: 4rem;
 }
 
 .opsi-login {
@@ -178,23 +249,6 @@ h6 {
 
 .opsi-login:hover {
     transform: scale(1.02);
-}
-
-#home .indikator-carousel {
-    margin-top: -3rem;
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-}
-
-#home .indikator-carousel .slides {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    max-width: 80vw;
 }
 
 .slides::-webkit-scrollbar {
@@ -232,26 +286,17 @@ h6 {
     background: transparent;
 }
 
-#home .indikator-carousel a img {
-    transition: 0.2s;
-    width: 8vw;
-}
+/* ============== section home end ============== */
 
-#home .indikator-carousel a img:hover {
-    transform: scale(1.06);
-}
 
-#home .cta a {
-    font-weight: 600;
-}
 
-/* section home end */
 
-/* section promo start */
+
+/* ============== section promo start ============== */
 #promo {
     /* background-image: linear-gradient(white, #e3e3e3); */
-    margin: 5vh 0vh;
-    padding: 10vh 0vh;
+    margin: 5vh 0vh 0vh 0vh;
+    padding: 10vh 0vh 0vh 0vh;
 }
 
 /* section promo end */
@@ -262,27 +307,64 @@ h6 {
     margin: 2rem 2rem;
 }
 
+.promo-content img {
+    aspect-ratio: 25/9;
+    max-height: 10rem;
+    width: 100vw;
+}
+
+
+/* ============== end section promo start ============== */
 
 
 
 
 
+/* ============== start section produk start ============== */
+
+.nama-produk {
+    font-size: 1rem !important;
+}
 
 
-/* Media */
 
+/* ============== end section produk start ============== */
+
+
+/* ============== footer start ============== */
+footer{
+    background-color: #252525f4;
+    padding: 2rem 0rem;
+    color: white !important;
+}
+footer h5{
+    font-size: 1.1rem;
+    font-weight: 600 !important;
+    margin
+}
+
+
+/* ============== footer end ============== */
+
+
+
+
+/* ============== Media break point ============== */
+
+/* ============== layar besar ============== */
 @media (max-width:1224px) {
     .tagline {
         min-height: 50vw;
     }
 
-    #home .indikator-carousel {
-        margin-top: 1rem;
-    }
-
 }
 
-/* lepptop/ipad mode miring start*/
+
+
+
+
+
+/* ============== leptop/ipad mode miring start ============== */
 @media (max-width:992px) {
     #navbar ul li {
         padding: 0rem 0.5rem;
@@ -297,16 +379,43 @@ h6 {
         min-height: 60vw;
     }
 
-    #home .indikator-carousel {
-        margin-top: 2rem;
+    .circle-home {
+        position: absolute;
+        padding: 30rem 20rem;
+        background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow);
+        top: -30rem;
+        right: -4rem;
+        z-index: 0;
+        border-radius: 35%;
+        transform: rotate(-30deg);
+    }
+
+    .search-input {
+        max-width: 130px !important;
     }
 
 }
 
-/* lepptop end*/
+/* ============== lepptop end ==============*/
 
-/* tablet start*/
+
+
+
+
+/* ============== tablet start ==============*/
 @media (max-width:768px) {
+    .navbar-nav-extra {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        background-color: white;
+        box-shadow: 0rem 0rem 1rem 0rem rgba(0, 0, 0, 0.236);
+        padding: 1.3vh 0vh 1vh 0vh;
+        border-radius: 18px 18px 0px 0px;
+    }
+
     .navbar-nav-extra-menu {
         display: inline-block;
     }
@@ -323,41 +432,111 @@ h6 {
     .tagline {
         min-height: 50vh;
     }
+
+    .search-input {
+        padding: 0;
+        width: 0;
+        opacity: 0;
+    }
+
+    .search-box:hover>.search-input {
+        min-width: 50vw;
+        border-radius: 50px;
+        padding-left: 20px;
+        background-color: #ffffff;
+        transition: 0.5s;
+        opacity: 1;
+    }
+
 }
 
-/* tablet end*/
+/* ============== tablet end ============== */
 
-/* handpone start*/
+
+
+
+/* ============== handpone start ============== */
 @media (max-width:576px) {
-    .navbar-nav-extra {
-        display: block;
-        position: fixed;
-        bottom: 0;
-        width: 100%;
-        text-align: center;
-        background-color: white;
-        box-shadow: 0rem 0rem 1rem 0rem rgba(0, 0, 0, 0.236);
-        padding: 1.3vh 0vh;
+    #home {
+        background: #ffffff00 !important;
     }
 
-    .navbar-nav-extra ul li {
-        margin: 0vw 1vw;
+    .circle-home {
+        position: absolute;
+        padding: 15rem 18rem;
+        background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow);
+        top: -10rem;
+        right: -6rem;
+        z-index: 0;
+        border-radius: 35%;
+        transform: rotate(-30deg);
     }
-
-    .navbar-nav-extra ul li i {}
 
     .tagline {
+        padding-top: 4vh;
         min-height: 50vh;
     }
 
-    #home .indikator-carousel {
-        margin-top: 4rem;
+    .tagline h1 span {
+        font-size: 2.5rem;
     }
 
-    #home .indikator-carousel a img {
-        transition: 0.3s;
-        width: 15vw;
+    #home .row-tagline {
+        flex-direction: column-reverse;
+    }
+
+    /* search */
+
+    .search-box:hover>.search-input {
+        width: 150px;
+    }
+
+    /* end search */
+    .promo-content {
+        /* scroll snap untuk efek scroll , bisa x dan y*/
+        scroll-snap-type: x mandatory;
+    }
+
+    .promo-content img {
+        /* posisi scoll bisa cenetr, strat atau end */
+        scroll-snap-align: center;
+
+    }
+
+
+
+    /* efek scroll */
+    .scroll-efek-x {
+        scroll-snap-type: x mandatory;
+    }
+
+    .scroll-efek-y {
+        scroll-snap-type: y mandatory;
+    }
+
+    .item-scroll {
+        scroll-snap-align: start;
+        /* scroll-snap-align: center; */
+        /* scroll-snap-align: end; */
+
+    }
+
+    .tombol-navigasi {
+        display: none;
     }
 }
 
-/* handpone end*/
+/* ============== handpone end ============== */
+
+
+
+
+
+
+/*costum scrollbar*/
+.promo-content::-webkit-scrollbar,
+.produk-promo::-webkit-scrollbar,
+.produk-terbaru::-webkit-scrollbar,
+.produk-terlaris::-webkit-scrollbar {
+    display: none;
+}
