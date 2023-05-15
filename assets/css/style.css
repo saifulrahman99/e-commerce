@@ -7,7 +7,7 @@
     padding: 0;
     margin: 0;
     color: #393939;
-    font-weight: 300;
+    font-weight: 400;
 }
 
 h1,
@@ -26,6 +26,10 @@ body {
 }
 
 /* custom */
+.text-ijo {
+    color: rgb(80, 184, 46) !important;
+}
+
 .bg-ijo {
     background-color: rgb(80, 184, 46) !important;
     /* background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow) !important; */
@@ -43,6 +47,7 @@ body {
 .promo-content,
 .produk-promo,
 .produk-terbaru,
+.produk-sejenis,
 .produk-terlaris {
     overflow-x: auto;
 
@@ -61,10 +66,23 @@ body {
     font-weight: 700 !important;
     margin-bottom: 2rem;
 }
-.btn-cart:hover{
+
+.btn-cart {
+    position: relative;
+    bottom: -15px;
+    margin-top: -10px;
+}
+
+.btn-cart:hover {
     background-color: rgb(208, 208, 0) !important;
     color: #393939 !important;
 }
+
+.btn-cart i {
+    color: azure;
+
+}
+
 /* ============== end CSS All ============== */
 
 
@@ -113,7 +131,7 @@ body {
     content: '';
     display: block;
     padding-bottom: 0.2rem;
-    border-bottom: 0.1rem solid rgb(26, 131, 0);
+    border-bottom: 0.2rem solid rgb(26, 131, 0);
     transform: scaleX(0);
     transition: 0.2s linear;
 }
@@ -166,7 +184,8 @@ body {
 }
 
 .search-input {
-    border: none;
+    border: 1px solid rgb(210, 210, 210);
+    /* border: none; */
     background: white;
     outline: none;
     font-size: 14px;
@@ -175,6 +194,20 @@ body {
     color: black;
     border-radius: 50px;
     padding-left: 20px;
+}
+
+.spasi-header {
+    padding-top: 5.5rem;
+}
+
+.circle-logo {
+    position: absolute;
+    padding: 3rem 3rem;
+    background-color: white;
+    top: -1rem;
+    left: -0.5rem;
+    z-index: -1;
+    border-radius: 50%;
 }
 
 /* ============== navbar end ============== */
@@ -321,30 +354,326 @@ body {
 
 
 /* ============== start section produk start ============== */
+.bar-navigasi {
+    width: 100%;
+    height: 4.8rem;
+    /* background: rgb(134, 222, 19); */
+    background: rgba(247, 255, 236, 0.622);
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
 
 .nama-produk {
     font-size: 1rem !important;
 }
 
+#toko-produk {
+    margin: 0;
+    padding: 0;
+}
 
+#toko-produk .img-toko-produk {
+    height: 45vh;
+    overflow: hidden;
+}
+
+#toko-produk .img-toko-produk img {
+    width: 100vw;
+    background-position: center;
+    /* Add the blur effect */
+    filter: blur(8px);
+    -webkit-filter: blur(2px);
+}
+
+#toko-produk .img-toko-produk .overlay-img-toko-produk {
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(180deg, rgb(196, 196, 196) 10%, rgba(59, 59, 59, 0.551) 100%); */
+    background-color: #39393969;
+}
+
+.overlay-img-toko-produk h1 {
+    padding: 1rem;
+    font-weight: 600 !important;
+    background-color: #4141417a;
+    border: 5px solid white;
+    margin-top: 4rem;
+}
+
+#produk .filter {
+    width: 100%;
+    top: -2rem;
+}
 
 /* ============== end section produk start ============== */
 
 
 /* ============== footer start ============== */
-footer{
+footer {
     background-color: #252525f4;
-    padding: 2rem 0rem;
+    padding-top: 2rem;
     color: white !important;
 }
-footer h5{
+
+footer h5 {
     font-size: 1.1rem;
     font-weight: 600 !important;
-    margin
+    margin-bottom: 1.5rem;
 }
 
+footer .copyright {
+    border-top: 1px solid rgba(255, 255, 255, 0.51);
+    margin-top: 1.5rem;
+    padding: 0.5rem 0;
+}
+
+footer .copyright span {
+    font-size: 0.8rem;
+}
 
 /* ============== footer end ============== */
+
+
+
+
+
+
+/* ============== keranjang start ============== */
+#keranjang .list-item {
+    border-bottom: 1.5px solid rgb(198, 198, 198);
+}
+
+#keranjang .list-item span,
+.tagihan h5 {
+    font-weight: 600 !important;
+
+}
+
+#keranjang .list-item .item-img {
+    width: 100%;
+    border: 1px solid rgb(198, 198, 198);
+    border-radius: 5px;
+}
+
+#keranjang .page-link:focus {
+    box-shadow: none !important;
+    background: white;
+}
+
+.tagihan {
+    position: sticky;
+    top: 15vh;
+    border: 1.5px solid rgb(198, 198, 198);
+}
+
+/* hilangkan panah pada input number */
+/* chrome dan edge */
+#keranjang input::-webkit-outer-spin-button,
+#keranjang input::-webkit-inner-spin-button,
+.keranjang-lihat-produk input::-webkit-outer-spin-button,
+.keranjang-lihat-produk input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+    text-align: center;
+}
+
+/* Firefox */
+#keranjang input[type=number],
+.keranjang-lihat-produk input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+
+}
+
+/* hilangkan panah pada input number */
+
+
+/* ============== keranjang end ============== */
+
+
+
+
+
+/* ============== lihat produk start ============== */
+
+/* galeri */
+#lihat-prouduk {
+    box-sizing: border-box;
+}
+
+.galeri .mySlides {
+    width: 100%;
+    max-height: 20rem;
+    overflow: hidden;
+    border: 1px solid rgb(214, 214, 214);
+    aspect-ratio: 1/1 !important;
+
+}
+
+.galeri .mySlides img {
+    width: 100%;
+    height: 100%;
+}
+
+.row-navigator .column {
+    width: 5rem;
+    overflow: hidden;
+    aspect-ratio: 1/1 !important;
+    padding: 0;
+    margin: 0;
+}
+
+.row-navigator .column img {
+    width: 100%;
+    height: 100%;
+    border: 1px solid rgb(193, 193, 193);
+
+}
+
+/* Position the image container (needed to position the left and right arrows) */
+.galeri {
+    position: relative;
+}
+
+/* Hide the images by default */
+#lihat-produk .mySlides {
+    display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+#lihat-produk .cursor {
+    cursor: pointer;
+}
+
+/* Next & previous buttons */
+.galeri .prev,
+.galeri .next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-decoration: none;
+}
+
+/* Position the "next button" to the right */
+.galeri .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.galeri .prev:hover,
+.galeri .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+#lihat-produk .numbertext {
+    color: #555555;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+
+/* Container for image text */
+#lihat-produk .caption-container {
+    text-align: center;
+    background-color: #222;
+    padding: 2px 16px;
+    color: white;
+}
+
+#lihat-produk .row-navigator {
+    padding-left: 0.8rem;
+}
+
+#lihat-produk .row-navigator:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Six columns side by side */
+#lihat-produk .column {
+    float: left;
+    width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+#lihat-produk .demo {
+    opacity: 0.6;
+}
+
+#lihat-produk .active,
+#lihat-produk .demo:hover {
+    opacity: 1;
+}
+
+/* galeri end */
+
+
+
+
+#lihat-produk .deskripsi .nama-produk {
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+}
+
+#lihat-produk .deskripsi .harga-produk {
+    font-size: 2rem !important;
+    font-weight: 700 !important;
+
+}
+
+#lihat-produk .deskripsi .keterangan-produk {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    border-top: 1px solid rgb(193, 193, 193);
+    border-bottom: 1px solid rgb(193, 193, 193);
+    
+}
+
+#lihat-produk .deskripsi p {
+    text-align: justify;
+}
+
+.judul-konten {
+    font-size: 1.1rem !important;
+    font-weight: 700 !important;
+}
+
+.keranjang-lihat-produk .page-item input,
+#keranjang .page-item input {
+    border-radius: 0;
+}
+
+.keranjang-lihat-produk .page-item button:focus {
+    box-shadow: none !important;
+}
+.keranjang-lihat-produk .konten{
+    border: 1px solid rgb(193, 193, 193);
+
+}
+
+/* ============== lihat produk end ============== */
+
+
+
+
+
+
+
 
 
 
@@ -392,6 +721,16 @@ footer h5{
 
     .search-input {
         max-width: 130px !important;
+    }
+
+    #toko-produk .img-toko-produk {
+        height: 30vh;
+    }
+
+    #toko-produk .img-toko-produk img {
+        width: auto !important;
+        height: 100%;
+        background-position: center;
     }
 
 }
@@ -446,6 +785,10 @@ footer h5{
         background-color: #ffffff;
         transition: 0.5s;
         opacity: 1;
+    }
+
+    footer .copyright {
+        margin-bottom: 3.6rem;
     }
 
 }
@@ -524,6 +867,7 @@ footer h5{
     .tombol-navigasi {
         display: none;
     }
+
 }
 
 /* ============== handpone end ============== */
@@ -537,6 +881,7 @@ footer h5{
 .promo-content::-webkit-scrollbar,
 .produk-promo::-webkit-scrollbar,
 .produk-terbaru::-webkit-scrollbar,
+.produk-sejenis::-webkit-scrollbar,
 .produk-terlaris::-webkit-scrollbar {
     display: none;
 }

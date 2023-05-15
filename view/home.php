@@ -51,24 +51,28 @@
         </div>
 
         <div class="produk-promo pt-3 pb-4 d-inline d-flex scroll-efek-x">
+
+            <!-- produk -->
             <?php for ($i = 0; $i < 10; $i++) { ?>
                 <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
                     <div class="card shadow-sm">
-                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" class="card-img-top" alt="..." style="aspect-ratio: 2/1.5;">
+                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" alt="..." style="aspect-ratio: 2/1.5;">
                         <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk">Buah Apel</h5>
+                            <h5 class="card-title nama-produk m-0">Buah Apel</h5>
                             <span style="font-weight: 800;">Rp 10.000 /Kg</span>
                             <!-- <span class="d-block">
-                                <input type="number" value="0" style="max-width: 30%;" class="mt-3"> Kg
+                                <input type="number" value="1" min="1" style="max-width: 30%;" class="mt-3 text-center" min="0" > Kg
                             </span> -->
                         </div>
                         <div class="cart-button text-center">
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-solid fa-cart-plus" style="color:azure"></i></a>
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-regular fa-eye" style="color:azure"></i></a>
+                            <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
+                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
+            <!-- end produk -->
+
         </div>
         <!-- navigasi -->
         <div class="tombol-navigasi text-center">
@@ -82,24 +86,28 @@
     <div class="container container-section">
         <h2 class="judul-section">Produk <span class="text-light judul-section bg-ijo px-2">Terlaris</span></h2>
         <div class="produk-terlaris pt-3 pb-4 d-inline d-flex scroll-efek-x">
+
+            <!-- produk -->
             <?php for ($i = 0; $i < 10; $i++) { ?>
                 <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
                     <div class="card shadow-sm">
-                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" class="card-img-top" alt="..." style="aspect-ratio: 2/1.5;">
+                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" alt="..." style="aspect-ratio: 2/1.5;">
                         <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk">Buah Apel</h5>
+                            <h5 class="card-title nama-produk m-0">Buah Apel</h5>
                             <span style="font-weight: 800;">Rp 10.000 /Kg</span>
                             <!-- <span class="d-block">
-                                <input type="number" value="0" style="max-width: 30%;" class="mt-3"> Kg
+                                <input type="number" value="1" min="1" style="max-width: 30%;" class="mt-3 text-center" min="0" > Kg
                             </span> -->
                         </div>
                         <div class="cart-button text-center">
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-solid fa-cart-plus" style="color:azure"></i></a>
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-regular fa-eye" style="color:azure"></i></a>
+                            <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
+                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
+            <!-- end produk -->
+
         </div>
         <!-- navigasi -->
         <div class="tombol-navigasi text-center">
@@ -113,28 +121,32 @@
     <div class="container container-section">
         <h2 class="judul-section">Produk <span class="text-light judul-section bg-ijo px-2">terbaru</span></h2>
         <div class="produk-terbaru pt-3 pb-4 d-inline d-flex scroll-efek-x">
+
+            <!-- produk -->
             <?php for ($i = 0; $i < 10; $i++) { ?>
                 <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
                     <div class="card shadow-sm">
-                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" class="card-img-top" alt="..." style="aspect-ratio: 2/1.5;">
+                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" alt="..." style="aspect-ratio: 2/1.5;">
                         <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk">Buah Apel</h5>
+                            <h5 class="card-title nama-produk m-0">Buah Apel</h5>
                             <span style="font-weight: 800;">Rp 10.000 /Kg</span>
                             <!-- <span class="d-block">
-                                <input type="number" value="0" style="max-width: 30%;" class="mt-3"> Kg
+                                <input type="number" value="1" min="1" style="max-width: 30%;" class="mt-3 text-center" min="0" > Kg
                             </span> -->
                         </div>
                         <div class="cart-button text-center">
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-solid fa-cart-plus" style="color:azure"></i></a>
-                            <a href="#" class="btn bg-ijo btn-cart" style="position: relative; bottom: -15px; margin-top:-10px;"><i class="fa-regular fa-eye" style="color:azure"></i></a>
+                            <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
+                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
             <?php } ?>
+            <!-- end produk -->
+
             <div class="col-4 col-md-2 col-lg-1 p-1 item-scroll">
                 <div class="card shadow-sm position-relative" style="min-height:30vh;">
-                    <a  href="#" class="position-absolute top-50 start-50 translate-middle p-2 text-decoration-none text-center">
-                         <i data-feather="arrow-right" class="mb-2"></i>
+                    <a href="#" class="position-absolute top-50 start-50 translate-middle p-2 text-decoration-none text-center">
+                        <i data-feather="arrow-right" class="mb-2"></i>
                         <span class="d-block fw-bolder">More</span>
                     </a>
                 </div>
@@ -148,32 +160,22 @@
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
 <section id="login" class="login">
     <div class="container">
-        <h2 align="center" class="pt-5 mt-5">Login Melalui Akun Google Menggunakan PHP</h2>
-
-        <p style="max-width:35vw; text-align:center; margin: auto; margin-bottom:1rem;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae, voluptatem!.</p>
         <div class="panel panel-default mb-5">
             <?php
             if ($login_button == '') {
             ?>
-                <div class="panel-heading">Welcome User</div>
                 <div class="panel-body">
                     <img src="<?php echo $_SESSION['user_image'] ?>" alt="foto" style="border-radius: 50%;">
                     <h3><b>Name :</b> <?php echo $_SESSION['name'] ?></h3>
                     <h3><b>Email :</b> <?php echo $_SESSION['user_email_address'] ?></h3>
-                    <h3><a href="Logout">Logout</h3>
+                    <h3><a href="Logout">Logout</a></h3>
                 </div>
             <?php } else { ?>
+                <h4 align="center" class="pt-5 mt-5" style="font-weight: 600 !important;">Login Melalui Akun Google Untuk Menggunakan Fitur Chat</h4>
+
+                <p class="fw-bolder text-center">Gunakan fitur chat untuk menghubungi penjual secara langsung!</p>
                 <div align="center"><?php echo $login_button ?></div>
             <?php }
             ?>

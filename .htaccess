@@ -1,11 +1,11 @@
-Options +FollowSymlinks
 RewriteEngine on
 
 RewriteRule ^Logout$ logout.php [nc]
 
 # pengalamatan halaman
-RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?halaman=$1
-RewriteRule ^([a-zA-Z0-9_-]+)/$ index.php?halaman=$1
 
+# halaman utama
+RewriteRule ^([a-zA-Z_-]+)$ index.php?halaman=$1
 
-# pengalamatan dengan banyak nilai GET
+# halaman detail atau lanjutan
+RewriteRule ^produk/([a-zA-Z_-]+)/([0-9]+) index.php?halaman=$1&id_produk=$2

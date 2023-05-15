@@ -3,6 +3,7 @@ var header = $('#navbar-show');
 var menu = $('.menu-nav');
 var circleLogo = $('.cricle-logo');
 var search = $('.search-input');
+var barNavigasi = $(".bar-navigasi");
 
 var range = 10;
 $(window).on('scroll', function () {
@@ -11,14 +12,16 @@ $(window).on('scroll', function () {
         header.css({ 'opacity': 0 });
         circleLogo.css({ 'background': 'white' });
         circleLogo.css({ 'opacity': 1 });
-        search.css({ 'border': 'none' });
-
+        // search.css({ 'border': 'none' });
+        barNavigasi.css({ 'opacity': 1 });
+        
     } else if (calc < '0') {
         header.css({ 'opacity': 1 });
         menu.css({ 'color': 'black' });
         circleLogo.css({ 'background': 'rgb(254, 234, 186)' });
         circleLogo.css({ 'opacity': 0 });
-        search.css({ 'border': '1px solid gray' });
+        // search.css({ 'border': '1px solid gray' });
+        barNavigasi.css({ 'opacity': 0 });
     }
 });
 // ======== end header navbar ==============
@@ -106,4 +109,126 @@ $('#btn-kiri-produk-terbaru').click(function () {
 $('#btn-kanan-produk-terbaru').click(function () {
     $('.produk-terbaru').animate({ scrollLeft: '+=440' }, 1000);
 });
+
+
+// sejenis
+function geserKiri() {
+    let bungkus = $('.produk-sejenis');
+    bungkus.animate({
+        scrollLeft: '-=440'
+    }, 1000);
+
+}
+
+function geserKanan() {
+    let bungkus = $('.produk-sejenis');
+    bungkus.animate({
+        scrollLeft: '+=440'
+    }, 1000);
+
+}
 // ======== tombol scroll ==============
+
+
+
+
+
+// ======== tombol tambah kurang keranjang ==============
+
+function tambah(i) {
+    var jml = document.getElementById("jml-item" + i).value;
+    
+    if (jml == "") {
+        jml = 0;
+    } else {
+        jml = parseInt(jml);
+    }
+    
+    if (jml < 0) {
+        document.getElementById("jml-item"+i).value = 1;
+    }
+    else {
+        document.getElementById("jml-item"+i).value = jml+1;
+    }
+}
+function kurang(i) {
+    var jml = document.getElementById("jml-item"+i).value;
+    
+    if (jml == "") {
+        jml = 1;
+    } else {
+        jml = parseInt(jml);
+    }
+    
+    if (jml < 2) {
+        document.getElementById("jml-item"+i).value = 1;
+    }
+    else {
+        document.getElementById("jml-item"+i).value = jml-1;
+    }
+}
+
+// ======== tombol tambah kurang keranjang ==============
+
+
+
+
+
+// ======== tombol tambah kurang keranjang lihat produk ==============
+
+function tambahV() {
+    var jml = document.getElementById("jml-item").value;
+    
+    if (jml == "") {
+        jml = 0;
+    } else {
+        jml = parseInt(jml);
+    }
+    
+    if (jml < 0) {
+        document.getElementById("jml-item").value = 1;
+    }
+    else {
+        document.getElementById("jml-item").value = jml+1;
+    }
+}
+function kurangV() {
+    var jml = document.getElementById("jml-item").value;
+    
+    if (jml == "") {
+        jml = 1;
+    } else {
+        jml = parseInt(jml);
+    }
+    
+    if (jml < 2) {
+        document.getElementById("jml-item").value = 1;
+    }
+    else {
+        document.getElementById("jml-item").value = jml-1;
+    }
+}
+
+// ======== tombol tambah kurang keranjang lihat produk ==============
+
+
+
+
+
+// ======== tombol kembali ==============
+function kembali() {
+    window.history.back();
+}
+// ======== tombol kembali ==============
+
+
+
+
+
+
+
+
+
+
+
+
