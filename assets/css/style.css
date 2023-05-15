@@ -200,16 +200,6 @@ body {
     padding-top: 5.5rem;
 }
 
-.circle-logo {
-    position: absolute;
-    padding: 3rem 3rem;
-    background-color: white;
-    top: -1rem;
-    left: -0.5rem;
-    z-index: -1;
-    border-radius: 50%;
-}
-
 /* ============== navbar end ============== */
 
 
@@ -641,7 +631,7 @@ footer .copyright span {
     font-weight: 600 !important;
     border-top: 1px solid rgb(193, 193, 193);
     border-bottom: 1px solid rgb(193, 193, 193);
-    
+
 }
 
 #lihat-produk .deskripsi p {
@@ -661,7 +651,8 @@ footer .copyright span {
 .keranjang-lihat-produk .page-item button:focus {
     box-shadow: none !important;
 }
-.keranjang-lihat-produk .konten{
+
+.keranjang-lihat-produk .konten {
     border: 1px solid rgb(193, 193, 193);
 
 }

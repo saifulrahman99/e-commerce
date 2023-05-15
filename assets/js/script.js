@@ -2,7 +2,7 @@
 var header = $('#navbar-show');
 var menu = $('.menu-nav');
 var circleLogo = $('.cricle-logo');
-var search = $('.search-input');
+// var search = $('.search-input');
 var barNavigasi = $(".bar-navigasi");
 
 var range = 10;

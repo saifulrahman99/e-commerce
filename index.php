@@ -61,9 +61,12 @@ if (!isset($_SESSION['access_token'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>
         <?php
-        if ($nm_halaman == "Home") { $nm_halaman = "Butik Buah Adastra";
-        } elseif($nm_halaman == "Lihat") { $nm_halaman = "Nama Buahnya"; }
-        
+        if ($nm_halaman == "Home") {
+            $nm_halaman = "Butik Buah Adastra";
+        } elseif ($nm_halaman == "Lihat") {
+            $nm_halaman = "Nama Buahnya";
+        }
+
         echo $nm_halaman;
         ?>
     </title>
@@ -82,7 +85,7 @@ if (!isset($_SESSION['access_token'])) {
             <div class="logo-web" style="position:relative;">
                 <!-- <h1>Butik Buah Adastra</h1> -->
                 <img src="<?= base_url('assets/img/brand/adastra.png') ?>" alt="logo adastra">
-                <div class="cricle-logo"></div>
+                <div class="cricle-logo" style=" position: absolute; padding: 3rem 3rem; background-color: white; top: -1rem; left: -0.5rem; z-index: -1; border-radius: 50%;"></div>
             </div>
             <nav class="navbar-nav">
                 <ul>
