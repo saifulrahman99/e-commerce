@@ -18,6 +18,7 @@ $jml = count($nm_halaman);
 $nm_halaman = ($jml > 1) ? "$nm_halaman[0] $nm_halaman[1]" : $halaman;
 
 include('config.php');
+include('assets/basis/kon.php');
 
 $login_button = '';
 
@@ -50,6 +51,7 @@ if (isset($_GET["code"])) {
 if (!isset($_SESSION['access_token'])) {
     $login_button = '<a href="' . $google_client->createAuthUrl() . '" class="opsi-login text-decoration-none rounded"><img src="assets/img/brand/google.png" width="30" alt="google"/><span class="fw-bolder"> Login Google</span></a>';
 }
+// session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +101,7 @@ if (!isset($_SESSION['access_token'])) {
                     <li class="px-2">
                         <a href="<?= base_url('keranjang') ?>" class="menu-nav-extra position-relative">
                             <i data-feather="shopping-cart"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 5 </span>
+                            <span id="jml-item-dalam-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> </span>
                         </a>
                     </li>
                     <li class="px-2">
@@ -156,7 +158,7 @@ if (!isset($_SESSION['access_token'])) {
                     <li>
                         <a href="<?= base_url('keranjang') ?>" class="position-relative">
                             <i data-feather="shopping-cart"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> 5 </span>
+                            <span id="jml-item-dalam-cart-mobile" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> </span>
                         </a>
                     </li>
                 </ul>
@@ -246,9 +248,11 @@ if (!isset($_SESSION['access_token'])) {
     <!-- footer end -->
 
     <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!-- js costum -->
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
+    <script src="<?= base_url('assets/js/ajax.js') ?>"></script>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- icon -->

@@ -35,34 +35,27 @@ function get_client_ip()
 }
 ?>
 
+
+<!-- toast pemberitahuan kalau berhasil dimasukkan ke keranjang -->
 <section id="produk" class="produk p-0 mb-5">
     <div class="container">
         <div class="filter bg-white p-4 text-center shadow position-relative rounded">
-            <h2 class="judul-section text-center m-0">Kategori Produk <?php echo get_client_ip() ?></h2>
+            <!-- <h2 class="judul-section text-center m-0">Kategori Produk <?php //echo get_client_ip() 
+                                                                            ?></h2> -->
         </div>
-        <div class="row">
-            <?php for ($i = 0; $i < 20; $i++) { ?>
-                <div class="col-6 col-md-3 col-lg-2 mb-5">
-                    <div class="card shadow-sm">
-                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" alt="..." style="aspect-ratio: 2/1.5;">
-                        <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk m-0">Buah Apel</h5>
-                            <span style="font-weight: 800;">Rp 10.000 /Kg</span>
-                            <!-- <span class="d-block">
-                                <input type="number" value="1" min="1" style="max-width: 30%;" class="mt-3 text-center"> Kg
-                            </span> -->
-                        </div>
-                        <div class="cart-button text-center">
-
-                            <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-
-                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i 
-                            class="fa-regular fa-eye"></i></a>
-
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
+        <div id="show-produk" class="row">
         </div>
     </div>
+
+    <div class="position-fixed top-50 start-50 translate-middle">
+        <div id="cartToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body p-4">
+                <b>Berhasil Ditambahkan Ke Keranjang</b>
+            </div>
+            <div class="toast-footer">
+                <button type="button" class="btn-info-cart m-auto p-2 rounded-bottom" data-bs-dismiss="toast" aria-label="Close">OK</button>
+            </div>
+        </div>
+    </div>
+
 </section>

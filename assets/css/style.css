@@ -476,6 +476,23 @@ footer .copyright span {
 
 }
 
+.keranjang-kosong {
+    padding-top: 5vh;
+}
+
+.keranjang-kosong img {
+    height: 60vh;
+}
+
+.toast-footer .btn-info-cart {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: #ffffffb5;
+}
+.toast-footer .btn-info-cart:hover{
+    background: #f0f0f0a2;
+}
 /* hilangkan panah pada input number */
 
 
