@@ -1,0 +1,46 @@
+setInterval(function () {
+    updateCartLihat();
+    subTotalLihat();
+}, 500);
+
+function addCartLihat(id, opsi) {
+    var id_produk = id;
+    var jmlItem = $("#jml-item").val();
+    var opsi_cart = opsi;
+
+    $.ajax({
+        url: "../../controllers/cart.php",
+        method: "POST",
+        data: { "id_produk": id_produk, "opsi": opsi_cart, "jml-item": jmlItem },
+        success: function () {
+            document.getElementById("jml-item").value = 1;
+
+            const cartToast = document.getElementById('cartToast')
+
+            const toast = new bootstrap.Toast(cartToast)
+
+            toast.show()
+        }
+    });
+}
+
+function updateCartLihat() {
+    $.ajax({
+        url: "../../data/jml-cart.php",
+        method: "POST",
+        success: function (data) {
+            var jml = data;
+
+            if (jml < 1) {
+                document.getElementById("jml-item-dalam-cart").style.display = "none";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "none";
+            } else {
+                document.getElementById("jml-item-dalam-cart").style.display = "block";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "block";
+                $('#jml-item-dalam-cart').html(data);
+                $('#jml-item-dalam-cart-mobile').html(data);
+            }
+        }
+    });
+
+}

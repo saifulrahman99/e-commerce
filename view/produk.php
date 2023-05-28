@@ -40,21 +40,9 @@ function get_client_ip()
 <section id="produk" class="produk p-0 mb-5">
     <div class="container">
         <div class="filter bg-white p-4 text-center shadow position-relative rounded">
-            <!-- <h2 class="judul-section text-center m-0">Kategori Produk <?php //echo get_client_ip() 
-                                                                            ?></h2> -->
+           a
         </div>
         <div id="show-produk" class="row">
-        </div>
-    </div>
-
-    <div class="position-fixed top-50 start-50 translate-middle">
-        <div id="cartToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-body p-4">
-                <b>Berhasil Ditambahkan Ke Keranjang</b>
-            </div>
-            <div class="toast-footer">
-                <button type="button" class="btn-info-cart m-auto p-2 rounded-bottom" data-bs-dismiss="toast" aria-label="Close">OK</button>
-            </div>
         </div>
     </div>
 

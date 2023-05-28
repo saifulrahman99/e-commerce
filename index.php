@@ -66,9 +66,8 @@ if (!isset($_SESSION['access_token'])) {
         if ($nm_halaman == "Home") {
             $nm_halaman = "Butik Buah Adastra";
         } elseif ($nm_halaman == "Lihat") {
-            $nm_halaman = "Nama Buahnya";
+            $nm_halaman = "Detail Produk";
         }
-
         echo $nm_halaman;
         ?>
     </title>
@@ -93,13 +92,13 @@ if (!isset($_SESSION['access_token'])) {
                 <ul>
                     <li><a href="<?= base_url('home') ?>" class="menu menu-nav">Home</a></li>
                     <li><a href="<?= base_url('produk') ?>" class="menu menu-nav">Produk</a></li>
-                    <!-- <li><a href="Tentang-Kami" class="menu menu-nav">Tentang Kami</a></li> -->
-                    <li class="search-box">
+                    <li><a href="#" class="menu menu-nav">About Us</a></li>
+                    <!-- <li class="search-box">
                         <input type="text" class="search-input" placeholder="Search...">
                         <a> <i data-feather="search"></i> </a>
-                    </li>
+                    </li> -->
                     <li class="px-2">
-                        <a href="<?= base_url('keranjang') ?>" class="menu-nav-extra position-relative">
+                        <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="menu-nav-extra position-relative">
                             <i data-feather="shopping-cart"></i>
                             <span id="jml-item-dalam-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> </span>
                         </a>
@@ -156,7 +155,7 @@ if (!isset($_SESSION['access_token'])) {
                         <a> <i data-feather="search"></i> </a>
                     </li>
                     <li>
-                        <a href="<?= base_url('keranjang') ?>" class="position-relative">
+                        <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="position-relative">
                             <i data-feather="shopping-cart"></i>
                             <span id="jml-item-dalam-cart-mobile" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> </span>
                         </a>
@@ -247,12 +246,30 @@ if (!isset($_SESSION['access_token'])) {
     </footer>
     <!-- footer end -->
 
+    <!-- popup add keranjang -->
+    <div class="position-fixed top-50 start-50 translate-middle">
+        <div id="cartToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-body p-4">
+                <b>Berhasil Ditambahkan Ke Keranjang</b>
+            </div>
+            <div class="toast-footer">
+                <button type="button" class="btn-info-cart m-auto p-2 rounded-bottom" data-bs-dismiss="toast" aria-label="Close">OK</button>
+            </div>
+        </div>
+    </div>
+    <!-- end popup add keranjang -->
+
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <!-- js costum -->
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
-    <script src="<?= base_url('assets/js/ajax.js') ?>"></script>
+    <?php
+    if ($halaman != "Lihat") { ?>
+        <script src="<?= base_url('assets/js/ajax.js') ?>"></script>
+    <?php } else { ?>
+        <script src="<?= base_url('assets/js/ajax-lihat.js') ?>"></script>
+    <?php } ?>
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- icon -->

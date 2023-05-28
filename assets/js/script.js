@@ -14,7 +14,7 @@ $(window).on('scroll', function () {
         circleLogo.css({ 'opacity': 1 });
         // search.css({ 'border': 'none' });
         barNavigasi.css({ 'opacity': 1 });
-        
+
     } else if (calc < '0') {
         header.css({ 'opacity': 1 });
         menu.css({ 'color': 'black' });
@@ -137,34 +137,34 @@ function geserKanan() {
 
 function tambah(i) {
     var jml = document.getElementById("jml-item" + i).value;
-    
+
     if (jml == "") {
         jml = 0;
     } else {
         jml = parseInt(jml);
     }
-    
+
     if (jml < 0) {
-        document.getElementById("jml-item"+i).value = 1;
+        document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item"+i).value = jml+1;
+        document.getElementById("jml-item" + i).value = jml + 1;
     }
 }
 function kurang(i) {
-    var jml = document.getElementById("jml-item"+i).value;
-    
+    var jml = document.getElementById("jml-item" + i).value;
+
     if (jml == "") {
         jml = 1;
     } else {
         jml = parseInt(jml);
     }
-    
+
     if (jml < 2) {
-        document.getElementById("jml-item"+i).value = 1;
+        document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item"+i).value = jml-1;
+        document.getElementById("jml-item" + i).value = jml - 1;
     }
 }
 
@@ -178,39 +178,68 @@ function kurang(i) {
 
 function tambahV() {
     var jml = document.getElementById("jml-item").value;
-    
+
     if (jml == "") {
         jml = 0;
     } else {
         jml = parseInt(jml);
     }
-    
+
     if (jml < 0) {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml+1;
+        document.getElementById("jml-item").value = jml + 1;
     }
+    disableTambah();
 }
 function kurangV() {
     var jml = document.getElementById("jml-item").value;
-    
+
     if (jml == "") {
         jml = 1;
     } else {
         jml = parseInt(jml);
     }
-    
+
     if (jml < 2) {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml-1;
+        document.getElementById("jml-item").value = jml - 1;
     }
+    disableTambah();
 }
+
 
 // ======== tombol tambah kurang keranjang lihat produk ==============
 
+function subTotalLihat() {
+    var jmlItem = document.getElementById("jml-item").value;
+    var price = document.getElementById("harga-produk-lihat").innerHTML;
+
+    var subtotal = jmlItem * price;
+
+    document.getElementById("total-harga-lihat-produk").innerHTML = subtotal;
+
+}
+
+
+
+function disableTambah() {
+    var stok = parseInt(document.getElementById("stok-lihat").innerHTML);
+    var jmlItemLihat = parseInt(document.getElementById("jml-item").value);
+    
+    if (jmlItemLihat > stok) {
+
+        document.getElementById("jml-item").value = stok;
+        document.getElementById("tambahV").style.display = "none";
+
+    } else {
+        document.getElementById("tambahV").style.display = "block";
+
+    }
+}
 
 
 
