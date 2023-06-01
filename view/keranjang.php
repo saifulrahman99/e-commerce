@@ -101,17 +101,17 @@ if (!empty($_POST)) {
                     <div class="col-12 col-md-3 px-0 px-md-2">
 
                         <div class="tagihan rounded d-flex flex-column p-3" style="font-weight: 600;">
-                            <div class="pengiriman mb-4 d-flex justify-content-around">
+                            <!-- <div class="pengiriman mb-4 d-flex justify-content-around">
 
                                 <input type="radio" class="btn-check" name="options-outlined" id="ambil-di-toko" autocomplete="off" checked>
                                 <label class="btn btn-outline-primary" for="ambil-di-toko">Ambli di Toko</label>
 
                                 <input type="radio" class="btn-check" name="options-outlined" id="ojek-online" autocomplete="off">
                                 <label class="btn btn-outline-primary" for="ojek-online">Ojek Online</label>
-                            </div>
+                            </div> -->
 
-                            <h5>Total</h5>
-                            <span class="fs-5"> Rp <?= $total ?></span>
+                            <span>Total</span>
+                            <span class="fs-5" style="font-weight: 700;"> Rp <?= $total ?></span>
 
                             <button class="btn bg-ijo text-white mt-3">Checkout</button>
                         </div>

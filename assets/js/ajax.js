@@ -12,15 +12,16 @@ $(document).ready(function () {
             }
         });
     }
-    // $('#search_text').keyup(function () {
-    //     var search = $(this).val();
-    //     if (search != '') {
-    //         load_data(search);
-    //     }
-    //     else {
-    //         load_data();
-    //     }
-    // });
+    
+    $('#search_show_produk').keyup(function () {
+        var search = $(this).val();
+        if (search != '') {
+            load_data(search);
+        }
+        else {
+            load_data();
+        }
+    });
 
 });
 

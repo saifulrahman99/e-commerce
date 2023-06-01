@@ -9,7 +9,7 @@
     <div class="img-toko-produk position-relative">
         <img src="https://img.freepik.com/free-photo/colorful-collage-fruits-texture-close-up_23-2149870264.jpg?w=1380&t=st=1683871383~exp=1683871983~hmac=80a6978cff7a15935ab6e9b272def2581437c43426469fedc5b3e5298df1c547" alt="">
         <div class="overlay-img-toko-produk position-absolute top-0 d-flex justify-content-center align-items-center">
-            <h1 class="text-white">Toko Adasatra</h1>
+            <h1 class="text-white">Toko Adastra</h1>
         </div>
     </div>
 </section>
@@ -39,8 +39,11 @@ function get_client_ip()
 <!-- toast pemberitahuan kalau berhasil dimasukkan ke keranjang -->
 <section id="produk" class="produk p-0 mb-5">
     <div class="container">
-        <div class="filter bg-white p-4 text-center shadow position-relative rounded">
-           a
+        <div class="filter bg-white p-4 text-center shadow position-relative rounded m-auto">
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-default"> <i data-feather="search"></i> </span>
+                <input type="text" name="search_produk" id="search_show_produk" placeholder="Cari produk..." class="form-control">
+            </div>
         </div>
         <div id="show-produk" class="row">
         </div>

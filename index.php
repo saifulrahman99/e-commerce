@@ -150,10 +150,10 @@ if (!isset($_SESSION['access_token'])) {
 
             <nav class="navbar-nav-extra-menu">
                 <ul class="p-0">
-                    <li class="search-box">
+                    <!-- <li class="search-box">
                         <input type="text" class="search-input" placeholder="Search...">
                         <a> <i data-feather="search"></i> </a>
-                    </li>
+                    </li> -->
                     <li>
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="position-relative">
                             <i data-feather="shopping-cart"></i>

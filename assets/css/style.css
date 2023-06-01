@@ -364,7 +364,7 @@ body {
 }
 
 #toko-produk .img-toko-produk {
-    height: 45vh;
+    height: 35vh;
     overflow: hidden;
 }
 
@@ -392,7 +392,7 @@ body {
 }
 
 #produk .filter {
-    width: 100%;
+    width: 60vw;
     top: -2rem;
 }
 
@@ -490,9 +490,11 @@ footer .copyright span {
     border: none;
     background: #ffffffb5;
 }
-.toast-footer .btn-info-cart:hover{
+
+.toast-footer .btn-info-cart:hover {
     background: #f0f0f0a2;
 }
+
 /* hilangkan panah pada input number */
 
 
@@ -675,8 +677,6 @@ footer .copyright span {
 }
 
 /* ============== lihat produk end ============== */
-
-
 
 
 
@@ -874,6 +874,10 @@ footer .copyright span {
 
     .tombol-navigasi {
         display: none;
+    }
+
+    #produk .filter {
+        width: 100% !important;
     }
 
 }
