@@ -200,6 +200,10 @@ body {
     padding-top: 5.5rem;
 }
 
+.navbar-nav-extra .active-mobile{
+    color: white !important;
+    background-color: rgb(80, 184, 46) !important;
+}
 /* ============== navbar end ============== */
 
 

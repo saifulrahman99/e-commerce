@@ -28,6 +28,7 @@ class ComposerStaticInit28b4b7ad6d1e6caecca24b91810a3dc5
         'M' => 
         array (
             'Monolog\\' => 8,
+            'Midtrans\\' => 9,
         ),
         'G' => 
         array (
@@ -63,6 +64,10 @@ class ComposerStaticInit28b4b7ad6d1e6caecca24b91810a3dc5
         'Monolog\\' => 
         array (
             0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
+        'Midtrans\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/midtrans/midtrans-php/Midtrans',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

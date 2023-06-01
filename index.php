@@ -125,24 +125,22 @@ if (!isset($_SESSION['access_token'])) {
             <nav class="navbar-nav-extra">
                 <ul class="d-flex justify-content-evenly">
 
-                    <li><a href="<?= base_url('home') ?>" class="menu-nav m-0 p-0"> <i data-feather="home" class="d-block m-auto"></i> <span class="d-block m-auto">Home</span> </a> </li>
+                    <li><a href="<?= base_url('home') ?>" class="menu-nav m-0 p-0"> <i data-feather="home" class="d-block m-auto"></i> <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Home") ? "active-mobile" : "" ?>">Home</span> </a> </li>
 
-                    <li><a href="<?= base_url('produk') ?>" class="menu-nav m-0 p-0"> <i data-feather="shopping-bag"></i><span class="d-block m-auto">Produk</span> </a> </li>
-
-                    <!-- <li><span class="nav-user-profile menu-nav"><i data-feather="user" class="pb-1"></i></li> -->
+                    <li><a href="<?= base_url('produk') ?>" class="menu-nav m-0 p-0"> <i data-feather="shopping-bag"></i><span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Produk" || $halaman == "Lihat") ? "active-mobile" : "" ?>">Produk</span> </a> </li>
 
                     <li>
                         <a href="#" class="menu-nav position-relative ">
-                            <i data-feather="message-square" class="d-block m-auto"></i>
-                            <span class="d-block m-auto">Pesan</span>
+                            <i data-feather="message-square" class="d-block m-auto"> </i>
                             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
+                            <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Pesan") ? "active-mobile" : "" ?>">Pesan</span>
                         </a>
                     </li>
 
                     <li>
                         <a href="#" class="menu-nav m-0 p-0">
                             <i data-feather="file-text" class="d-block m-auto"></i>
-                            <span class="d-block m-auto">Transaksi</span>
+                            <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Transaksi") ? "active-mobile" : "" ?>">Transaksi</span>
                         </a>
                     </li>
                 </ul>

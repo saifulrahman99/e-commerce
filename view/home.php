@@ -5,7 +5,7 @@
                 <h1 class="mb-3 mb-md-4">Belanja <span>Buah dan Sayur</span></h1>
                 <p class="mb-3 mb-md-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab cupiditate vitae adipisci commodi non temporibus cumque ea ut, minima culpa.</p>
                 <div class="cta">
-                    <a href="" class="btn btn-lg shadow"> <img src="assets/img/shopping-cart.svg" alt=".." class="me-2 pb-1"> Belanja Sekarang</a>
+                    <a href="produk" class="btn btn-lg shadow"> <img src="assets/img/shopping-cart.svg" alt=".." class="me-2 pb-1"> Belanja Sekarang</a>
                 </div>
             </div>
             <div class="carousel-buah col-12 col-sm-6 d-flex flex-column justify-content-center">
