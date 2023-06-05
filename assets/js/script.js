@@ -1,3 +1,13 @@
+// ======== filter angka ==============
+function hanyaAngka(evt) {
+    var charCode = (evt.which) ? evt.which : event.keyCode
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+
+        return false;
+    return true;
+}
+// ======== filter angka ==============
+
 // ======== header navbar ==============
 var header = $('#navbar-show');
 var menu = $('.menu-nav');
@@ -191,7 +201,6 @@ function tambahV() {
     else {
         document.getElementById("jml-item").value = jml + 1;
     }
-    disableTambah();
 }
 function kurangV() {
     var jml = document.getElementById("jml-item").value;
@@ -208,7 +217,6 @@ function kurangV() {
     else {
         document.getElementById("jml-item").value = jml - 1;
     }
-    disableTambah();
 }
 
 
@@ -218,26 +226,39 @@ function subTotalLihat() {
     var jmlItem = document.getElementById("jml-item").value;
     var price = document.getElementById("harga-produk-lihat").innerHTML;
 
-    var subtotal = jmlItem * price;
+    const rupiah = (number) => {
+        return new Intl.NumberFormat("id-ID", {
+            style: "currency",
+            currency: "IDR", 
+            minimumFractionDigits: 0
+        }).format(number);
+    }
+
+    var subtotal = rupiah(jmlItem * price);
+
 
     document.getElementById("total-harga-lihat-produk").innerHTML = subtotal;
 
 }
 
-
-
 function disableTambah() {
     var stok = parseInt(document.getElementById("stok-lihat").innerHTML);
-    var jmlItemLihat = parseInt(document.getElementById("jml-item").value);
-    
+    var addCart = document.getElementById("tambah-keranjang");
+    var id = document.getElementById("id-item").value;
+    var jmlitem = document.getElementById("jml-item").value;
+
+    if (jmlitem == ''|| jmlitem == 0) {
+        
+        addCart.style.background = 'gray';
+        addCart.setAttribute('onclick', '')
+    }else{
+        var jmlItemLihat = parseInt(jmlitem);
+        addCart.setAttribute('onclick', "addCartLihat("+id+",'lihat')")
+        addCart.style.background = '#198754';
+    }
+
     if (jmlItemLihat > stok) {
-
         document.getElementById("jml-item").value = stok;
-        document.getElementById("tambahV").style.display = "none";
-
-    } else {
-        document.getElementById("tambahV").style.display = "block";
-
     }
 }
 
@@ -251,13 +272,10 @@ function kembali() {
 // ======== tombol kembali ==============
 
 
+// ======== tombol popover filter produk ==============
 
-
-
-
-
-
-
-
-
-
+function open_filter() {
+    var x = document.getElementById("filter-melayang");
+    x.classList.toggle("open-filter");
+}
+// ======== tombol popover filter produk ==============

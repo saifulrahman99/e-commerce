@@ -1,5 +1,11 @@
 <?php
-$db = mysqli_connect("localhost", "root", "", "adastra");
+function rupiah($angka)
+{
+    $hasil_rupiah = "Rp " . number_format($angka, 0, ',', '.');
+    return $hasil_rupiah;
+}
+
+require('../assets/basis/kon.php');
 if (isset($_POST["query"])) {
 
     $search = mysqli_real_escape_string($db, $_POST["query"]);
@@ -13,11 +19,11 @@ if (isset($_POST["query"])) {
 if (mysqli_num_rows($query) > 0) {
     foreach ($query as $produk) { ?>
         <div class="col-6 col-md-3 col-lg-2 mb-5">
-            <div class="card">
+            <div class="card cssanimation fadeInBottom">
                 <img src="<?= $produk['gambar'] ?>" alt="..." style="aspect-ratio: 2/1.5;">
                 <div class="card-body px-3 py-3">
                     <h5 class="card-title nama-produk m-0"><?= $produk['nm_produk'] ?></h5>
-                    <span style="font-weight: 800;">Rp <?= $produk['harga'] ?></span>
+                    <span style="font-weight: 800;"><?= rupiah($produk['harga']) ?></span>
                 </div>
                 <input id="id_produk<?= $produk['id_produk'] ?>" type="text" value="<?= $produk['id_produk'] ?>" hidden>
                 <div class="cart-button text-center">
@@ -29,8 +35,8 @@ if (mysqli_num_rows($query) > 0) {
                 </div>
             </div>
         </div>
-    <?php  }
-} else { 
+<?php  }
+} else {
     echo "
     <div class='text-center' style='margin-top:-8rem;'>
     <img class='gif-empty-search' src='assets/img/empty-search.gif' alt='...' style='max-width:25rem;'>

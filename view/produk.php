@@ -13,39 +13,45 @@
         </div>
     </div>
 </section>
-<?php
-function get_client_ip()
-{
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if (getenv('HTTP_X_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
-    else if (getenv('HTTP_X_FORWARDED'))
-        $ipaddress = getenv('HTTP_X_FORWARDED');
-    else if (getenv('HTTP_FORWARDED_FOR'))
-        $ipaddress = getenv('HTTP_FORWARDED_FOR');
-    else if (getenv('HTTP_FORWARDED'))
-        $ipaddress = getenv('HTTP_FORWARDED');
-    else if (getenv('REMOTE_ADDR'))
-        $ipaddress = getenv('REMOTE_ADDR');
-    else
-        $ipaddress = 'IP tidak dikenali';
-    return $ipaddress;
-}
-?>
-
 
 <!-- toast pemberitahuan kalau berhasil dimasukkan ke keranjang -->
 <section id="produk" class="produk p-0 mb-5">
     <div class="container">
+        <script type="text/javascript">
+            function open_filter() {
+                const filter = document.getElementsByClassName('filter-melayang');
+
+                filter.preventDefault();
+                this.classList.toggle('open-filter');
+            }
+        </script>
+
         <div class="filter bg-white p-4 text-center shadow position-relative rounded m-auto">
             <div class="input-group">
-                <span class="input-group-text" id="inputGroup-sizing-default"> <i data-feather="search"></i> </span>
+                <span class="input-group-text bg-white" id="inputGroup-sizing-default"> <i data-feather="search"></i> </span>
+
                 <input type="text" name="search_produk" id="search_show_produk" placeholder="Cari produk..." class="form-control">
+
+                <button class="filter-search input-group-text bg-white" id="inputGroup-sizing-default" onclick="open_filter()">
+                    <i data-feather="sliders"></i>
+                </button>
+
+                <div id="filter-melayang" class="filter-melayang position-absolute bg-white p-3 shadow start-0 text-start" style="z-index: 1; top: 3rem; width: 100%;">
+                    <span class="d-block fw-bolder mb-2">Filter Kategori</span>
+                    <select id="filter-value" class="form-select" aria-label="Default select example">
+                        <option selected>-Pilih</option>
+                        <?php
+                        $kategori = mysqli_query($db, "SELECT * FROM kategori");
+                        foreach ($kategori as $k) { ?>
+                            <option class="form-select"><?= ucwords($k['kategori']) ?></option>
+                        <?php } ?>
+                    </select>
+                </div>
             </div>
         </div>
-        <div id="show-produk" class="row">
+
+
+        <div id="show-produk" class="row big-demo go-wide" data-js="filtering-demo">
         </div>
     </div>
 

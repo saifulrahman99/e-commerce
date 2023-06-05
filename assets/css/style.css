@@ -19,20 +19,25 @@ h6 {
     font-weight: 400 !important;
 }
 
-body {
+#body-home {
     background-image: url('../img/bg/bg.png');
     background-position: right;
     /* height: 5000px; */
 }
-
+input{
+    box-shadow: none !important;
+}
 /* custom */
 .text-ijo {
     color: rgb(80, 184, 46) !important;
 }
 
-.bg-ijo {
+.bg-ijo,.btn-ijo {
     background-color: rgb(80, 184, 46) !important;
     /* background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow) !important; */
+}
+.btn-ijo:hover{
+    background-color: rgb(70, 160, 40) !important;
 }
 
 .btn-slide {
@@ -200,10 +205,11 @@ body {
     padding-top: 5.5rem;
 }
 
-.navbar-nav-extra .active-mobile{
+.navbar-nav-extra .active-mobile {
     color: white !important;
     background-color: rgb(80, 184, 46) !important;
 }
+
 /* ============== navbar end ============== */
 
 
@@ -313,6 +319,11 @@ body {
     background: transparent;
 }
 
+.buah img {
+    width: 110%;
+    margin-top: -2rem;
+}
+
 /* ============== section home end ============== */
 
 
@@ -398,6 +409,22 @@ body {
 #produk .filter {
     width: 60vw;
     top: -2rem;
+}
+
+.filter-melayang {
+    display: none;
+}
+
+.open-filter {
+    display: block;
+}
+
+.filter .filter-search:hover {
+    cursor: pointer;
+}
+
+#produk .filter input:focus,#produk .filter-melayang select:focus{
+    box-shadow: none !important;
 }
 
 /* ============== end section produk start ============== */
@@ -884,6 +911,11 @@ footer .copyright span {
         width: 100% !important;
     }
 
+    .buah img {
+        width: 100%;
+        margin-top: 0rem;
+        margin-bottom: -4rem;
+    }
 }
 
 /* ============== handpone end ============== */
@@ -899,5 +931,21 @@ footer .copyright span {
 .produk-terbaru::-webkit-scrollbar,
 .produk-sejenis::-webkit-scrollbar,
 .produk-terlaris::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* animasi */
+
+.bounce {
+    animation: hu__hu__ infinite 4s ease-in-out
+}
+
+@keyframes hu__hu__ {
+    0% {
+        transform: translateY(5px)
+    }
+}
+.badge.rounded-pill.bg-danger{
     display: none;
 }

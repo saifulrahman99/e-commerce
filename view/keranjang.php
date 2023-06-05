@@ -1,14 +1,3 @@
-<?php
-if (!empty($_POST)) {
-    foreach ($_POST['qty'] as $id => $jumlah) {
-        $_SESSION['keranjang'][$id] = max($jumlah, 1);
-    }
-?>
-    <script type="text/javascript">
-        window.location.href = 'keranjang';
-    </script>
-<?php } ?>
-
 <div class="bar-navigasi shadow-sm bg-light"></div>
 <div class="spasi-header"></div>
 
@@ -16,7 +5,8 @@ if (!empty($_POST)) {
     <div class="container">
         <?php if (isset($_SESSION['keranjang']) && !empty($_SESSION['keranjang'])) { ?>
 
-            <form action="" method="POST">
+            <form action="<?= base_url('controllers/cart.php') ?>" method="POST">
+                <input type="text" name="opsi" value="update" hidden>
                 <div class="row g-2 p-4 bg-white">
 
                     <h1 class="judul-section">Keranjang Belanja</h1>
@@ -43,7 +33,7 @@ if (!empty($_POST)) {
                             $total += $produk['harga'] * $_SESSION['keranjang'][$produk['id_produk']];
                         ?>
                             <!-- item cart -->
-                            <div class="list-item py-3">
+                            <div class="list-item py-3 mb-3">
 
                                 <div class="item row align-items-center">
 
@@ -59,7 +49,7 @@ if (!empty($_POST)) {
                                             <span class="nama_produk mb-2"><?= $produk['nm_produk'] ?></span>
                                         </div>
                                         <div class="col-12 col-md-4 text-start text-md-center">
-                                            <span class="harga" style="font-weight: 800 !important;">Rp <?= $produk['harga'] ?></span>
+                                            <span class="harga" style="font-weight: 800 !important;"><?= rupiah($produk['harga']) ?></span>
                                         </div>
 
                                     </div>
@@ -71,9 +61,9 @@ if (!empty($_POST)) {
                                                     <button type="button" class="page-link" onclick="kurang(<?= $i ?>)"><i class="fa-solid fa-minus"></i></button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <input type="number" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control" min="1" value="<?= $_SESSION['keranjang'][$produk['id_produk']] ?>" readonly></input>
+                                                    <input type="number" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']] ?>" onkeypress="return hanyaAngka(event)"></input>
                                                 </li>
-                                                <li class="page-item">
+                                                <li class=" page-item">
                                                     <button type="button" class="page-link" onclick="tambah(<?= $i ?>)"><i class="fa-solid fa-plus"></i></button>
                                                 </li>
                                             </ul>
@@ -111,11 +101,14 @@ if (!empty($_POST)) {
                             </div> -->
 
                             <span>Total</span>
-                            <span class="fs-5" style="font-weight: 700;"> Rp <?= $total ?></span>
+                            <span class="fs-5" style="font-weight: 700;"> <?= rupiah($total) ?></span>
 
-                            <button class="btn bg-ijo text-white mt-3">Checkout</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-ijo text-white mt-3" data-bs-toggle="modal" data-bs-target="#modalCheckout">
+                                Checkout
+                            </button>
+
                         </div>
-
                     </div>
                 </div>
             </form>
@@ -128,6 +121,55 @@ if (!empty($_POST)) {
             </div>
         <?php } ?>
     </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalCheckout" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="modalCheckoutLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 fw-bolder" id="modalCheckoutLabel">Infromasi Data Pembeli</h1>
+                </div>
+
+                <div class="modal-body">
+                    <form id="form-pembayaran" method="post">
+                        <?php $arrayItem = json_encode($_SESSION['keranjang']); ?>
+                        <textarea name="item_keranjang" hidden><?= $arrayItem ?></textarea>
+                        <input type="text" name="biaya" value="<?= $total ?>" hidden>
+                        <input type="text" name="opsi" value="add" hidden>
+
+                        <div class="form-floating mb-3">
+                            <input type="text" name="nama" class="form-control" id="floatingNama" placeholder="Nama Anda" value="<?= (isset($_COOKIE['nama'])) ? $_COOKIE['nama'] : "" ?>" required>
+                            <label for="floatingNama">Nama</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea name="alamat" class="form-control" placeholder="Alamat Anda" id="floatingAlamat" style="height: 100px" required><?= (isset($_COOKIE['alamat'])) ? $_COOKIE['alamat'] : "" ?></textarea>
+                            <label for="floatingAlamat">Alamat Lengkap</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="tel" name="telepon" class="form-control" id="floatingTelp" placeholder="No Telpon yang dapat dihubungi" value="<?= (isset($_COOKIE['telepon'])) ? $_COOKIE['telepon'] : "" ?>" onkeypress=" return hanyaAngka(event)" required>
+                            <label for="floatingTelp">Nomor Telepon/ Nomor Whatsapp</label>
+                        </div>
+
+                        <!-- <textarea class="form-control" id="info-error"></textarea> -->
+                </div>
+
+                <div class="modal-footer d-flex flex-column">
+                    <button type="button" id="btn-bayar-belanjaan" class="btn btn-ijo text-white col-12">Bayar</button>
+                    <button type="button" class="btn btn-secondary col-12" data-bs-dismiss="modal">Batal</button>
+                </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <?php
+    if (isset($_SESSION['keranjang'])) {
+        include 'controllers/bayar.php';
+    }
+    ?>
 </section>
 
 <div class="spasi-header" style="padding-top: 5rem;"></div>

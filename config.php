@@ -13,5 +13,3 @@ $google_client->setRedirectUri('http://localhost/e-commerce/index.php');
 
 $google_client->addScope('email');
 $google_client->addScope('profile');
-
-session_start();

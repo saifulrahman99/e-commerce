@@ -1,4 +1,5 @@
 <?php
+require('../assets/basis/kon.php');
 session_start();
 
 if ($_POST['opsi'] == 'direct') {
@@ -19,25 +20,36 @@ if ($_POST['opsi'] == 'direct') {
     } else {
         $_SESSION['keranjang'][$id_produk] += $qty;
     }
-
 } elseif ($_POST['opsi'] == 'hapus') {
 
     $id_produk = $_POST['id_produk'];
     unset($_SESSION['keranjang'][$id_produk]);
     $jmlData = count($_SESSION['keranjang']);
-
 } elseif ($_POST['opsi'] == 'lihat') {
 
     $qty = $_POST['jml-item'];
     $id_produk = $_POST['id_produk'];
 
-    if (!isset($_SESSION['keranjang'])) {
-        $_SESSION['keranjang'] = [];
-    }
-
     if (!isset($_SESSION['keranjang'][$id_produk])) {
         $_SESSION['keranjang'][$id_produk] = $qty;
     } else {
+
         $_SESSION['keranjang'][$id_produk] += $qty;
+
+        $jumlah_item = $_SESSION['keranjang'][$id_produk];
+
+        $stok = mysqli_fetch_assoc(mysqli_query($db, "SELECT stok FROM produk WHERE id_produk = '$id_produk'"));
+
+        if ($jumlah_item > $stok['stok']) {
+            $_SESSION['keranjang'][$id_produk] = $stok['stok'];
+        }
     }
-}
+} elseif ($_POST['opsi'] == 'update') {
+    foreach ($_POST['qty'] as $id => $jumlah) {
+        $_SESSION['keranjang'][$id] = max($jumlah, 1);
+    }
+?>
+    <script type="text/javascript">
+        window.location.href = '../keranjang';
+    </script>
+<?php } ?>

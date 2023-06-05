@@ -1,32 +1,16 @@
 <section id="home" class="home">
     <div class="container home">
         <div class="row row-tagline">
-            <div class="tagline col-12 col-sm-6 d-flex flex-column justify-content-center">
+            <div class="tagline col-12 col-sm-6 d-flex flex-column justify-content-center cssanimation fadeInLeft">
                 <h1 class="mb-3 mb-md-4">Belanja <span>Buah dan Sayur</span></h1>
                 <p class="mb-3 mb-md-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab cupiditate vitae adipisci commodi non temporibus cumque ea ut, minima culpa.</p>
                 <div class="cta">
                     <a href="produk" class="btn btn-lg shadow"> <img src="assets/img/shopping-cart.svg" alt=".." class="me-2 pb-1"> Belanja Sekarang</a>
                 </div>
             </div>
-            <div class="carousel-buah col-12 col-sm-6 d-flex flex-column justify-content-center">
-                <div id="carouselBuah" class="carousel carousel-fade" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="assets/img/buah/pineapple.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="10000">
-                            <img src="assets/img/buah/strawberry.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="10000">
-                            <img src="assets/img/buah/jeruk.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="10000">
-                            <img src="assets/img/buah/melon.png" class="d-block w-100" alt="...">
-                        </div>
-                        <div class="carousel-item" data-bs-interval="10000">
-                            <img src="assets/img/buah/cabbage.png" class="d-block w-100" alt="...">
-                        </div>
-                    </div>
+            <div class="carousel-buah col-12 col-sm-6 d-flex flex-column justify-content-center bounce" style="z-index: 1;">
+                <div class="buah">
+                    <img src="<?= base_url('assets/img/home-buah.png')?>" alt="...">
                 </div>
             </div>
         </div>
@@ -66,7 +50,7 @@
                         </div>
                         <div class="cart-button text-center">
                             <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                            <a href="produk/lihat/<?= $i ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +85,7 @@
                         </div>
                         <div class="cart-button text-center">
                             <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                            <a href="produk/lihat/<?= $i ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +120,7 @@
                         </div>
                         <div class="cart-button text-center">
                             <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                            <a href="produk/lihat/<?=$i?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                            <a href="produk/lihat/<?= $i ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>

@@ -54,12 +54,14 @@ $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN 
             <div class="deskripsi col-12 col-lg-5 px-2">
                 <div class="rounded bg-white">
                     <span class="nama-produk d-block mb-3"><?= ucfirst($select['nm_produk']) ?></span>
-                    <span class="harga-produk d-block mb-3">Rp <span id="harga-produk-lihat" class="harga-produk"><?= $select['harga'] ?></span></span>
+                    <span class="harga-produk d-block mb-3"><?= rupiah($select['harga']) ?>
+                        <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga'] ?></span>
+                    </span>
 
                     <h3 class="keterangan-produk d-block mb-3 text-ijo py-2">Keterangan Produk</h3>
                     <ul>
                         <li>Kategori : <b><?= ucfirst($select['kategori']) ?></b></li>
-                        <li>Berat Satuan : <b>500 gram</b></li>
+                        <li>Berat Satuan : <b><?= $select['satuan'] ?></b></li>
                         <li>Stok : <b id="stok-lihat"><?= $select['stok'] ?></b></li>
                     </ul>
                     <p>
@@ -76,7 +78,7 @@ $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN 
                             <button class="page-link" onclick="kurangV()"><i class="fa-solid fa-minus"></i></button>
                         </li>
                         <li class="page-item" style="max-width:20%;">
-                            <input type="number" id="jml-item" class="form-control text-center" min="1" value="1" readonly></input>
+                            <input type="number" id="jml-item" class="form-control text-center" min="1" value="1" onkeypress="return hanyaAngka(event)" required></input>
                         </li>
                         <li class="page-item">
                             <button id="tambahV" class="page-link" onclick="tambahV()"><i class="fa-solid fa-plus"></i></button>
@@ -85,20 +87,18 @@ $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN 
 
                     <span>Total Harga</span>
 
-                    <span class="mb-3" style="font-weight: 800;">
-                        Rp <span id="total-harga-lihat-produk" style="font-weight: 800;"> </span>
-                    </span>
+                    <span class="mb-3" id="total-harga-lihat-produk" style="font-weight: 800;"> </span>
 
-                    <button class="btn btn-success d-block py-2" onclick="addCartLihat(<?=$id?>,'lihat')">
+                    <button id="tambah-keranjang" class="btn btn-success d-block py-2">
                         <img src="<?= base_url('assets/img/shopping-cart.svg') ?>" alt="..">
                         Tambah ke Keranjang
                     </button>
+                    <input id="id-item" type="text" value="<?= $id ?>" hidden>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
 
 <section id="sejenis" class="sejenis">
     <div class="container container-section">

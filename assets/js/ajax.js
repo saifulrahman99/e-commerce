@@ -12,7 +12,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     $('#search_show_produk').keyup(function () {
         var search = $(this).val();
         if (search != '') {
@@ -23,7 +23,18 @@ $(document).ready(function () {
         }
     });
 
+    $('#filter-value').change(function () {
+        var query = $('#filter-value').val();
+
+        if (query === '-Pilih') {
+            load_data();
+        } else {
+            load_data(query);
+        }
+    });
+
 });
+
 
 // tambah ke keranjnag dengan kuantitas 1
 function addCart(id, opsi) {
@@ -65,6 +76,7 @@ function hapusItemCart(id, opsi) {
 // jalankan fungsi jml item dalam keranjang
 setInterval(function () {
     updateCart();
+
 }, 500);
 
 

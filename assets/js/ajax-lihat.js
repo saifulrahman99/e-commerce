@@ -1,6 +1,7 @@
 setInterval(function () {
     updateCartLihat();
     subTotalLihat();
+    disableTambah();
 }, 500);
 
 function addCartLihat(id, opsi) {
