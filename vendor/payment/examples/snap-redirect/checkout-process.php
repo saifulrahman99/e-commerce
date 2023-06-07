@@ -4,7 +4,7 @@ namespace Midtrans;
 
 require_once dirname(__FILE__) . '/../../Midtrans.php';
 //Set Your server key
-Config::$serverKey = "<your server key>";
+Config::$serverKey = "SB-Mid-server-z-__Mmo5avW30d27vWSREhKd";
 
 // Uncomment for production environment
 // Config::$isProduction = true;

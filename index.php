@@ -69,7 +69,7 @@ if (!isset($_SESSION['access_token'])) {
 
 </head>
 
-<body id="<?= $body ?>">
+<body id="<? //$body ?>">
     <!-- navigasi start -->
     <header id="navbar" class="navbar">
         <div class="container">
@@ -101,7 +101,7 @@ if (!isset($_SESSION['access_token'])) {
                         </a>
                     </li>
                     <li class="px-2">
-                        <a href="#" class="menu-nav">
+                        <a href="<?= base_url('transaksi') ?>" class="menu-nav">
                             <i data-feather="file-text"></i>
                         </a>
                     </li>
@@ -129,7 +129,7 @@ if (!isset($_SESSION['access_token'])) {
                     </li>
 
                     <li>
-                        <a href="#" class="menu-nav m-0 p-0">
+                        <a href="<?= base_url('transaksi') ?>" class="menu-nav m-0 p-0">
                             <i data-feather="file-text" class="d-block m-auto"></i>
                             <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Transaksi") ? "active-mobile" : "" ?>">Transaksi</span>
                         </a>
@@ -171,6 +171,9 @@ if (!isset($_SESSION['access_token'])) {
             break;
         case 'Lihat':
             include 'view/lihat.php';
+            break;
+        case 'Transaksi':
+            include 'view/transaksi.php';
             break;
     }
     ?>

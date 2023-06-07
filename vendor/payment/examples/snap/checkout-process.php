@@ -6,6 +6,7 @@ require_once dirname(__FILE__) . '/../../Midtrans.php';
 
 //Set Your server key
 Config::$serverKey = "SB-Mid-server-z-__Mmo5avW30d27vWSREhKd";
+// Config::$serverKey = "Mid-server-khIKLaZqaGlwbUArR1wWG68m";
 
 // Uncomment for production environment
 // Config::$isProduction = true;
@@ -78,7 +79,7 @@ $customer_details = array(
 );
 
 // Optional, remove this to display all available payment methods
-$enable_payments = array('credit_card', 'cimb_clicks', 'mandiri_clickpay', 'echannel');
+$enable_payments = array('bni_va', 'bri_va', 'gopay', 'echannel');
 
 // Fill transaction details
 $transaction = array(
@@ -101,6 +102,7 @@ echo "snapToken = " . $snapToken;
 
     <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
     <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-j1UwFlBeVMen-Fxd"></script>
+    <!-- <script src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-8mpTS156jrQlXUpz"></script> -->
     <script type="text/javascript">
         document.getElementById('pay-button').onclick = function() {
             // SnapToken acquired from previous step

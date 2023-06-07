@@ -279,3 +279,14 @@ function open_filter() {
     x.classList.toggle("open-filter");
 }
 // ======== tombol popover filter produk ==============
+$(".jenis-pembayaran label").click(function () {
+    // $(this).toggleClass("payment-aktif");
+    $(".jenis-pembayaran label").addClass("payment-aktif");
+});
+// $('body').click(function () {
+
+//     if ($(".jenis-pembayaran label").hasClass("payment-aktif")) {
+//         $(".jenis-pembayaran label").removeClass("payment-aktif");
+
+//     };
+// });

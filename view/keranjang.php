@@ -91,14 +91,6 @@
                     <div class="col-12 col-md-3 px-0 px-md-2">
 
                         <div class="tagihan rounded d-flex flex-column p-3" style="font-weight: 600;">
-                            <!-- <div class="pengiriman mb-4 d-flex justify-content-around">
-
-                                <input type="radio" class="btn-check" name="options-outlined" id="ambil-di-toko" autocomplete="off" checked>
-                                <label class="btn btn-outline-primary" for="ambil-di-toko">Ambli di Toko</label>
-
-                                <input type="radio" class="btn-check" name="options-outlined" id="ojek-online" autocomplete="off">
-                                <label class="btn btn-outline-primary" for="ojek-online">Ojek Online</label>
-                            </div> -->
 
                             <span>Total</span>
                             <span class="fs-5" style="font-weight: 700;"> <?= rupiah($total) ?></span>
@@ -152,6 +144,17 @@
                             <label for="floatingTelp">Nomor Telepon/ Nomor Whatsapp</label>
                         </div>
 
+                        <div class="pengiriman mb-4">
+                            <label class="fw-bolder d-block mb-3">Pengambilan Barang</label>
+
+                            <input type="radio" class="btn-check" name="ambil_barang" value="ojol" id="ojek-online" autocomplete="off" checked>
+                            <label class="btn btn-outline-secondary" for="ojek-online">Ojek Online</label>
+
+                            <input type="radio" class="btn-check" name="ambil_barang" value="toko" id="ambil-di-toko" autocomplete="off">
+                            <label class="btn btn-outline-secondary" for="ambil-di-toko">Ambli di Toko</label>
+
+                        </div>
+
                         <!-- <textarea class="form-control" id="info-error"></textarea> -->
                 </div>
 
@@ -166,10 +169,26 @@
         </div>
     </div>
     <?php
-    if (isset($_SESSION['keranjang'])) {
-        include 'controllers/bayar.php';
-    }
-    ?>
+    if (!empty($_SESSION['keranjang'])) { ?>
+        <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
+        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-j1UwFlBeVMen-Fxd"></script>
+        <script type="text/javascript">
+            document.getElementById('btn-bayar-belanjaan').onclick = function() {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "controllers/transaksi.php",
+                    data: $('#form-pembayaran').serialize(),
+                    success: function(data) {
+                        // document.getElementById("info-error").innerHTML = data;
+                        $('#modalCheckout').modal('hide');
+                        snap.pay(data);
+                    }
+                });
+
+            };
+        </script>
+    <?php } ?>
 </section>
 
 <div class="spasi-header" style="padding-top: 5rem;"></div>

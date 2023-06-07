@@ -19,30 +19,57 @@ h6 {
     font-weight: 400 !important;
 }
 
+#navbar-show {
+    z-index: 2 !important;
+}
+
 #body-home {
     background-image: url('../img/bg/bg.png');
     background-position: right;
     /* height: 5000px; */
 }
-input{
+
+.tebal-600 {
+    font-weight: 600 !important;
+}
+
+.tebal-700 {
+    font-weight: 700 !important;
+}
+
+.tebal-500 {
+    font-weight: 500 !important;
+}
+
+input {
     box-shadow: none !important;
 }
+
 /* custom */
 .text-ijo {
     color: rgb(80, 184, 46) !important;
 }
 
-.bg-ijo,.btn-ijo {
+.bg-ijo,
+.btn-ijo {
     background-color: rgb(80, 184, 46) !important;
     /* background-image: linear-gradient(45deg, rgb(80, 184, 46), yellow) !important; */
 }
-.btn-ijo:hover{
+
+.btn-ijo:hover {
     background-color: rgb(70, 160, 40) !important;
 }
 
 .btn-slide {
     padding: 0.5rem 1rem;
     border: none;
+}
+
+/* .payment-aktif{
+    box-shadow: 0px 0px 0px 1.5px rgba(116, 255, 77, 0.72) !important;
+} */
+.jenis-pembayaran {
+    overflow: hidden;
 }
 
 /* end custom */
@@ -76,11 +103,14 @@ input{
     position: relative;
     bottom: -15px;
     margin-top: -10px;
+    transition: 0.5s;
 }
 
 .btn-cart:hover {
-    background-color: rgb(208, 208, 0) !important;
+    background-color: rgb(70, 160, 40) !important;
     color: #393939 !important;
+    transform: scale(1.1);
+    transition: 0.5s;
 }
 
 .btn-cart i {
@@ -423,7 +453,8 @@ input{
     cursor: pointer;
 }
 
-#produk .filter input:focus,#produk .filter-melayang select:focus{
+#produk .filter input:focus,
+#produk .filter-melayang select:focus {
     box-shadow: none !important;
 }
 
@@ -710,9 +741,62 @@ footer .copyright span {
 /* ============== lihat produk end ============== */
 
 
+/* ============== transaksi start ============== */
+.container-transaksi {
+    max-width: 800px;
+    margin: auto;
+    padding: 0rem 0.5rem;
+}
 
+.spasi-bawah {
+    height: 44vh;
+}
 
+.pending {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    /* background: #d5d5d5;
+    border: 2px solid #b9b9b9; */
+    color: #767676;
+    /* font-weight: 600; */
+}
 
+.sukses {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    /* background: #94ffad;
+    border: 2px solid #72ed8f; */
+    color: #1fc245;
+    font-weight: 600;
+}
+
+.gagal {
+    border-radius: 20px;
+    font-size: 0.9rem;
+    /* background: #ffb0b0;
+    border: 2px solid #eb8e8e; */
+    color: #cc3e3e;
+    font-weight: 600;
+}
+
+.accordion-button-pending{
+    background-color: #f2f2f2 !important;
+}
+.accordion-button-sukses{
+    background-color: #e8ffed !important;
+}
+.accordion-button-gagal{
+    background-color: #ffe1e1 !important;
+}
+#transaksi button {
+    box-shadow: none !important;
+}
+
+.status-pembayaran {
+    bottom: 0.5rem;
+    padding-left: 0 !important;
+}
+/* ============== transaksi end ============== */
 
 
 
@@ -946,6 +1030,7 @@ footer .copyright span {
         transform: translateY(5px)
     }
 }
-.badge.rounded-pill.bg-danger{
+
+.badge.rounded-pill.bg-danger {
     display: none;
 }
