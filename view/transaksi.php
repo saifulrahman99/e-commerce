@@ -43,7 +43,7 @@
                             ?>
 
                             <span class="col-12 p-0 mb-2 fw-bolder">
-                                <?= substr($nm_transaksi,0,-2) ?>
+                                <?= substr($nm_transaksi, 0, -2) ?>
                             </span>
                             <span class="col-12 p-0">
                                 <i data-feather="clock" style="width: 0.8rem;"> </i>
@@ -85,14 +85,25 @@
                                     </div>
                                 <?php } ?>
                             </div>
-                            <div class="row mt-2">
+                            <div class="row mt-2 pb-2">
                                 <div class="col-6 tebal-600">
                                     Total Pesanan
                                 </div>
                                 <div class="col-6 tebal-600 text-end">
                                     <?= rupiah($sk['biaya']) ?>
                                 </div>
+                                <div class="col-12">
+                                    Metode Pembayaran(<?= $sk['metode_bayar'] ?>)
+                                </div>
                             </div>
+
+                            <?php
+                            if ($ketBayar == "Belum Dibayar") { ?>
+                                <div class="tombol-aksi-transaksi py-2 text-end border-top">
+                                    <button type="button" class="btn btn-ijo text-white me-2">Bayar</button>
+                                    <button type="button" class="btn btn-danger">Batalkan Transaksi</button>
+                                </div>
+                            <?php } ?>
 
                         </div>
                     </div>

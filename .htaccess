@@ -14,7 +14,7 @@ RewriteRule ^([a-zA-Z_-]+)/$ index.php?halaman=$1 [nc]
 RewriteRule ^produk/([a-zA-Z_-]+)/([0-9]+) index.php?halaman=$1&id_produk=$2
 
 
-RewriteRule ^transaksi/status$ controllers/notification-handler.php
+# RewriteRule ^transaksi/status$ controllers/notification-handler.php
 
 
-RewriteRule ^admin/login$ admin/l09in.php
+RewriteRule ^admin/control$ admin/l09in.php
