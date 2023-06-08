@@ -32,7 +32,7 @@
 
                 <div class="accordion-item mb-2" style="border: none !important;">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed border row m-0 position-relative <?=$btnStatus?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $sk['id_transaksi'] ?>" aria-expanded="false" aria-controls="flush-collapse<?= $sk['id_transaksi'] ?>" style="z-index:0;">
+                        <button class="accordion-button collapsed border row m-0 position-relative <?= $btnStatus ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $sk['id_transaksi'] ?>" aria-expanded="false" aria-controls="flush-collapse<?= $sk['id_transaksi'] ?>" style="z-index:0;">
                             <?php
                             $nm_transaksi = '';
                             foreach ($belanjaan as $id_item => $jml_item) {
@@ -42,16 +42,17 @@
                             }
                             ?>
 
-                            <span class="col-12 p-0 mb-2 fw-bolder"> <?= $nm_transaksi ?></span>
-
+                            <span class="col-12 p-0 mb-2 fw-bolder">
+                                <?= substr($nm_transaksi,0,-2) ?>
+                            </span>
                             <span class="col-12 p-0">
                                 <i data-feather="clock" style="width: 0.8rem;"> </i>
                                 <span style="font-size: 0.7rem;"> <?= $sk['waktu_bayar'] ?> </span>
                             </span>
                             <?php
-                           
+
                             ?>
-                            <span class="status-pembayaran position-absolute <?=$statusBayar?>"><?=$ketBayar?></span>
+                            <span class="status-pembayaran position-absolute <?= $statusBayar ?>"><?= $ketBayar ?></span>
 
                         </button>
                     </h2>

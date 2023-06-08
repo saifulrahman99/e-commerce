@@ -795,7 +795,9 @@ footer .copyright span {
 .status-pembayaran {
     bottom: 0.5rem;
     padding-left: 0 !important;
+    width: 70% !important;
 }
+
 /* ============== transaksi end ============== */
 
 
