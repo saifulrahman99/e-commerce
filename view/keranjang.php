@@ -175,6 +175,29 @@
         <script type="text/javascript">
             document.getElementById('btn-bayar-belanjaan').onclick = function() {
 
+                var nama = document.getElementById("floatingNama").value;
+                var alamat = document.getElementById("floatingAlamat").value;
+                var telepon = document.getElementById("floatingTelp").value;
+                console.log(nama);
+
+
+                if (nama == '') {
+                    alert("Nama Tidak Boleh Kosong");
+                    nama.focus();
+                    return false;
+                }
+                if (alamat == '') {
+                    alert("Alamat Tidak Boleh Kosong");
+                    alamat.focus();
+                    return false;
+                }
+                if (telepon == '') {
+                    alert("Telepon Tidak Boleh Kosong");
+                    telepon.focus();
+                    return false;
+                }
+
+
                 $.ajax({
                     type: 'POST',
                     url: "controllers/transaksi.php",
