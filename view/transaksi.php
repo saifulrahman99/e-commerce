@@ -59,9 +59,15 @@
                     <div id="flush-collapse<?= $sk['id_transaksi'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordionTrensaksi">
                         <div class="accordion-body border">
 
-                            <span>ID Order : <span class="text-ijo tebal-600"><?= $sk['order_id'] ?></span></span>
+                            <div>
+                                ID Order : <span class="text-ijo tebal-600"><?= $sk['order_id'] ?></span>
+                            </div>
 
-                            <span class="d-block tebal-700 border-top pt-2">Daftar Belanjaan</span>
+                            <div class="my-1">
+                                Metode Pembayaran (<?= $sk['metode_bayar'] ?>)
+                            </div>
+
+                            <div class="tebal-700 border-top pt-2 pb-1">Daftar Belanjaan</div>
 
                             <div class="row pb-2">
                                 <?php
@@ -71,7 +77,9 @@
 
                                     <div class="col-12 col-md-4 item-produk my-1 pb-1 border-bottom">
                                         <div class="d-flex align-items-center">
-                                            <img src="<?= $produk['gambar'] ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
+                                            <a href="<?=base_url('produk/lihat/'.$id_item)?>" class="text-decoration-none">
+                                                <img src="<?= $produk['gambar'] ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
+                                            </a>
                                             <h6 class="ms-2 me-1 mb-0"><?= $produk['nm_produk'] ?></h6>
                                             <i data-feather="x" class="me-1" style="width: 0.8rem;"></i>
                                             <span><?= $jml_item ?></span>
@@ -86,22 +94,20 @@
                                 <?php } ?>
                             </div>
                             <div class="row mt-2 pb-2">
-                                <div class="col-6 tebal-600">
+                                <div class="col-6 tebal-700">
                                     Total Pesanan
                                 </div>
-                                <div class="col-6 tebal-600 text-end">
+                                <div class="col-6 tebal-700 text-end">
                                     <?= rupiah($sk['biaya']) ?>
-                                </div>
-                                <div class="col-12">
-                                    Metode Pembayaran(<?= $sk['metode_bayar'] ?>)
                                 </div>
                             </div>
 
                             <?php
                             if ($ketBayar == "Belum Dibayar") { ?>
                                 <div class="tombol-aksi-transaksi py-2 text-end border-top">
-                                    <button type="button" class="btn btn-ijo text-white me-2">Bayar</button>
-                                    <button type="button" class="btn btn-danger">Batalkan Transaksi</button>
+
+                                    <a href="transaksi/bayarlagi/<?= $sk['snap_token'] ?>" type="button" class="btn btn-ijo text-white me-2">Bayar</a>
+                                    <a href="transaksi/batalkanbayar/<?= $sk['order_id'] ?>" type="button" class="btn btn-danger">Batalkan Transaksi</a>
                                 </div>
                             <?php } ?>
 
