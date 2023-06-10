@@ -1,8 +1,11 @@
 $(document).ready(function () {
 
-    load_data();
+    show_produk();
+    show_transaksi();
 
-    function load_data(query) {
+
+    // produk
+    function show_produk(query) {
         $.ajax({
             url: "data/show-produk.php",
             method: "POST",
@@ -16,10 +19,10 @@ $(document).ready(function () {
     $('#search_show_produk').keyup(function () {
         var search = $(this).val();
         if (search != '') {
-            load_data(search);
+            show_produk(search);
         }
         else {
-            load_data();
+            show_produk();
         }
     });
 
@@ -27,11 +30,27 @@ $(document).ready(function () {
         var query = $('#filter-value').val();
 
         if (query === '-Pilih') {
-            load_data();
+            show_produk();
         } else {
-            load_data(query);
+            show_produk(query);
         }
     });
+
+
+
+    // transaksi
+    function show_transaksi(query) {
+        $.ajax({
+            url: "data/show-transaksi.php",
+            method: "POST",
+            data: { query: query },
+            success: function (data) {
+                // document.getElementById('accordionTransaksi').innerHTML = data;
+                $('#accordionTransaksi').html(data);
+            }
+        });
+    }
+
 
 });
 

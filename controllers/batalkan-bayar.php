@@ -1,13 +1,15 @@
 <?php
-$order_id = $_GET['orderId'];
-require_once('../vendor/autoload.php');
+namespace Midtrans;
 
-$client = new \GuzzleHttp\Client();
+require '../function.php';
+require_once '../vendor/payment/Midtrans.php';
+Config::$serverKey = 'SB-Mid-server-z-__Mmo5avW30d27vWSREhKd';
 
-$response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/'.$order_id.'/cancel', [
-    'headers' => [
-        'accept' => 'application/json',
-    ],
-]);
+$orderId = $_GET['orderId'];
 
-echo $response->getBody();
+$cancel = \Midtrans\Transaction::cancel($orderId);
+?>
+
+<script type="text/javascript">
+    window.location.href = "<?= base_url('transaksi') ?>";
+</script>

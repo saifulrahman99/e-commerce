@@ -35,10 +35,11 @@ if (mysqli_num_rows($query) > 0) {
                 </div>
             </div>
         </div>
-<?php  }
-} else {
-    echo "
-    <div class='text-center' style='margin-top:-8rem;'>
-    <img class='gif-empty-search' src='assets/img/empty-search.gif' alt='...' style='max-width:25rem; margin-bottom: -4rem;'>
-    <h3 class='fw-bolder m-0 bg-white text-center' style='margin-bottom: 10rem;'>Hasil Pencarian Tidak Ditemukan</h3></div>";
-} ?>
+    <?php  }
+} else { ?>
+    <div class='text-center' style='margin-top:-5rem;'>
+        <img class='gif-empty-search' src='assets/img/empty-search.gif' alt='...' style='max-width:25rem; margin-bottom: -4rem;'>
+        <h4 class='tebal-600 m-0 bg-white text-center'>Hasil Pencarian Tidak Ditemukan</h4>
+    </div>
+    <div style='margin-bottom: 6rem;'></div>
+<?php } ?>

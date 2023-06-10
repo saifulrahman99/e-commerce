@@ -2,6 +2,7 @@
 namespace Midtrans;
 session_start();
 require('../assets/basis/kon.php');
+require('../function.php');
 
 $id_pengunjung = $_SESSION['id_pengunjung'];
 
@@ -55,7 +56,8 @@ if (empty($selectId['id_transaksi'])) {
     $susunan_3 = $selectId['id_transaksi'] + 1;
 }
 
-$order_id = "order-" . $susunan_2 . "-$susunan_3";
+$kodeRandom = kodeRandom(5);
+$order_id = "order-$susunan_2$susunan_3-$kodeRandom";
 
 $transaction_details = array(
     'order_id' => $order_id,

@@ -12,6 +12,7 @@
                     <h1 class="judul-section">Keranjang Belanja</h1>
                     <div class="col-12 col-md-9 mb-3">
                         <?php
+                        
                         $keranjang = $_SESSION['keranjang'];
 
                         $idItem = "";
@@ -108,7 +109,7 @@
         <?php } else { ?>
             <div class="keranjang-kosong d-flex flex-column justify-content-center align-items-center">
                 <img src="<?= base_url('assets/img/empty-cart.gif') ?>" alt="gagal memuat gambar">
-                <h3 class="fw-bolder m-0 bg-white">Keranjang Belanja Kosong</h3>
+                <h4 class="tebal-600 m-0 bg-white">Keranjang Belanja Kosong</h4>
 
             </div>
         <?php } ?>
@@ -178,22 +179,21 @@
                 var nama = document.getElementById("floatingNama").value;
                 var alamat = document.getElementById("floatingAlamat").value;
                 var telepon = document.getElementById("floatingTelp").value;
-                console.log(nama);
 
 
                 if (nama == '') {
                     alert("Nama Tidak Boleh Kosong");
-                    nama.focus();
+                    document.getElementById("floatingNama").focus();
                     return false;
                 }
                 if (alamat == '') {
                     alert("Alamat Tidak Boleh Kosong");
-                    alamat.focus();
+                    document.getElementById("floatingAlamat").focus();
                     return false;
                 }
                 if (telepon == '') {
                     alert("Telepon Tidak Boleh Kosong");
-                    telepon.focus();
+                    document.getElementById("floatingTelp").focus();
                     return false;
                 }
 
@@ -214,4 +214,6 @@
     <?php } ?>
 </section>
 
-<div class="spasi-header" style="padding-top: 5rem;"></div>
+<div class="spasi-header" style="padding-top: 5rem;">
+
+</div>
