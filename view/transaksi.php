@@ -4,7 +4,7 @@
 <section id="transaksi" class="transaksi">
     <div class="container-transaksi bg-white">
 
-        <h1 class="judul-section my-4">Riwayat Transaksi</h1>
+        <h1 class="judul-section mt-4 mb-0">Riwayat Transaksi</h1>
 
         <div class="accordion accordion-flush" id="accordionTransaksi">
 

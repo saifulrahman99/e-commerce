@@ -6,6 +6,7 @@
     // $id_pengunjung = $_SESSION['id_pengunjung'];
     $id_pengunjung = $_COOKIE['id_pengunjung'];
 
+
     $select_transaksi = mysqli_query($db, "SELECT * FROM transaksi WHERE id_pengunjung='$id_pengunjung' ORDER BY id_transaksi DESC");
     $jml_data_transaksi = mysqli_num_rows($select_transaksi);
 
@@ -15,11 +16,11 @@
          <img class="mt-2" src="<?= base_url('assets/img/transaksi.gif') ?>" alt="..." style="max-width: 350px;">
          <h4 class="tebal-600 m-0 bg-white">Riwayat Transaksi Tidak Ditemukan</h4>
      </div>
-     <div style='margin-bottom: 6rem;'></div>
+     <div style='margin-bottom: 8rem;'></div>
 
      <?php } else {
 
-
+        $label_tgl_sebelumnya = '';
         foreach ($select_transaksi as $sk) {
             $belanjaan = $sk['belanjaan'];
             $belanjaan = json_decode($belanjaan);
@@ -37,8 +38,41 @@
                 $btnStatus = "accordion-button-gagal";
                 $ketBayar = "Dibatalkan";
             }
-        ?>
+            $tgl_bayar = explode(' ', $sk['waktu_bayar']);
+            $tgl_hari = $tgl_bayar[0];
 
+            $tgl_bayar = explode('-', $tgl_bayar[0]);
+            $tgl_bayar = "$tgl_bayar[2]-$tgl_bayar[1]-$tgl_bayar[0]";
+            $today = date('d-m-Y');
+
+            if ($tgl_bayar == $today) {
+                $label_tanggal = 'Hari ini';
+            } else {
+                $label_tanggal = $tgl_bayar;
+
+                $tanggal = $tgl_hari;
+                $day = date('D', strtotime($tanggal));
+                $dayList = array(
+                    'Sun' => 'Minggu',
+                    'Mon' => 'Senin',
+                    'Tue' => 'Selasa',
+                    'Wed' => 'Rabu',
+                    'Thu' => 'Kamis',
+                    'Fri' => 'Jumat',
+                    'Sat' => 'Sabtu'
+                );
+                $label_tanggal_hari = "$dayList[$day],";
+            }
+
+            if ($label_tanggal != $label_tgl_sebelumnya) {
+
+        ?>
+             <label class="tebal-700 mt-5 mb-2">
+                 <?= "$label_tanggal_hari $label_tanggal" ?>
+             </label>
+         <?php
+                $label_tgl_sebelumnya = $label_tanggal;
+            } ?>
          <div class="accordion-item mb-2" style="border: none !important;">
              <h2 class="accordion-header">
                  <button class="accordion-button collapsed border rounded-top row m-0 position-relative <?= $btnStatus ?>" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?= $sk['id_transaksi'] ?>" aria-expanded="false" aria-controls="flush-collapse<?= $sk['id_transaksi'] ?>" style="z-index:0;">
@@ -128,12 +162,18 @@
                  </div>
              </div>
          </div>
-         
-         <?php } ?>
-         <div class="spasi-bawah"></div>
-    <?php } ?>
 
- <script src="https://unpkg.com/feather-icons"></script>
- <script>
-     feather.replace()
- </script>
+     <?php }
+        if ($jml_data_transaksi == 1) { ?>
+         <div class="spasi-bawah"></div>
+     <?php } else { ?>
+         <div class="spasi-header">
+         <?php } ?>
+     <?php }
+
+        ?>
+
+     <script src="https://unpkg.com/feather-icons"></script>
+     <script>
+         feather.replace()
+     </script>

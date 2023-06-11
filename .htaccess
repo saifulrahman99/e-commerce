@@ -1,5 +1,8 @@
 RewriteEngine on
 
+
+# PENGGUNA
+
 RewriteRule ^Logout$ logout.php [nc]
 
 # pengalamatan halaman
@@ -18,7 +21,15 @@ RewriteRule ^transaksi/bayarlagi/([a-zA-Z0-9_-]+) controllers/bayar-lagi.php?sna
 
 RewriteRule ^transaksi/batalkanbayar/([a-zA-Z0-9_-]+) controllers/batalkan-bayar.php?orderId=$1
 
-# RewriteRule ^transaksi/status$ controllers/notification-handler.php
 
 
-RewriteRule ^admin/control$ admin/l09in.php
+
+
+# ADMIN
+
+RewriteRule ^admin/login$ admin/l09in.php
+RewriteRule ^admin/dashboard$ admin/index.php
+
+
+RewriteRule ^admin/logout$ admin/controllers/logout.php
+RewriteRule ^admin/login-control$ admin/controllers/login.php

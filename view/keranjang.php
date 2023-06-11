@@ -107,7 +107,7 @@
             </form>
 
         <?php } else { ?>
-            <div class="keranjang-kosong d-flex flex-column justify-content-center align-items-center">
+            <div class="keranjang-kosong d-flex flex-column justify-content-center align-items-center" style="overflow-x: hidden;">
                 <img src="<?= base_url('assets/img/empty-cart.gif') ?>" alt="gagal memuat gambar">
                 <h4 class="tebal-600 m-0 bg-white">Keranjang Belanja Kosong</h4>
 

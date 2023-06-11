@@ -109,7 +109,7 @@ if (empty($coockiePengunjung)) {
 }
 
 if (isset($_COOKIE['id_pengunjung'])) {
-    if ($_COOKIE['id_pengunjung'] != $coockiePengunjung) {
+    if ($_COOKIE['id_pengunjung'] != $sessionPengunjung) {
         setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 1), '/');
     }
 }

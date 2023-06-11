@@ -462,11 +462,6 @@ input {
 
 
 /* ============== footer start ============== */
-footer {
-    background-color: #252525f4;
-    padding-top: 2rem;
-    color: white !important;
-}
 
 footer h5 {
     font-size: 1.1rem;
@@ -779,15 +774,18 @@ footer .copyright span {
     font-weight: 600;
 }
 
-.accordion-button-pending{
+.accordion-button-pending {
     background-color: #f2f2f2 !important;
 }
-.accordion-button-sukses{
+
+.accordion-button-sukses {
     background-color: #e8ffed !important;
 }
-.accordion-button-gagal{
+
+.accordion-button-gagal {
     background-color: #ffe1e1 !important;
 }
+
 #transaksi button {
     box-shadow: none !important;
 }
@@ -1057,86 +1055,81 @@ footer .copyright span {
 
 
 /* gelombang */
-@keyframes move_wave {
-    0% {
-        transform: translateX(0) translateZ(0) scaleY(1)
-    }
+.body-footer{
+    margin-top: 0.43rem;
+    padding-top: 3rem;
+    background: rgba(80, 184, 46, 1);
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(80, 184, 46, 1));
+}
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+}
 
-    50% {
-        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+.content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: rgb(33, 255, 85);
+}
+
+/* Animation */
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
     }
 
     100% {
-        transform: translateX(-50%) translateZ(0) scaleY(1)
+        transform: translate3d(85px, 0, 0);
     }
 }
 
-.waveWrapper {
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    margin: auto;
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    .content {
+        height: 30vh;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
 }
 
-.waveWrapperInner {
-    position: absolute;
-    width: 100%;
-    overflow: hidden;
-    height: 100%;
-    bottom: -1px;
-    background-image: linear-gradient(to top, #b7977b 20%, #036564 80%);
-}
-
-.bgTop {
-    z-index: 15;
-    opacity: 0.5;
-}
-
-.bgMiddle {
-    z-index: 10;
-    opacity: 0.75;
-}
-
-.bgBottom {
-    z-index: 5;
-}
-
-.wave {
-    position: absolute;
-    left: 0;
-    width: 200%;
-    height: 100%;
-    background-repeat: repeat no-repeat;
-    background-position: 0 bottom;
-    transform-origin: center bottom;
-}
-
-.waveTop {
-    background-size: 50% 100px;
-}
-
-.waveAnimation .waveTop {
-    animation: move-wave 3s;
-    -webkit-animation: move-wave 3s;
-    -webkit-animation-delay: 1s;
-    animation-delay: 1s;
-}
-
-.waveMiddle {
-    background-size: 50% 120px;
-}
-
-.waveAnimation .waveMiddle {
-    animation: move_wave 10s linear infinite;
-}
-
-.waveBottom {
-    background-size: 50% 100px;
-}
-
-.waveAnimation .waveBottom {
-    animation: move_wave 15s linear infinite;
+footer {
+    position: relative;
+    z-index: 1;
 }

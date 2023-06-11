@@ -69,7 +69,8 @@ if (!isset($_SESSION['access_token'])) {
 
 </head>
 
-<body id="<? //$body ?>">
+<body id="<? //$body 
+            ?>">
     <!-- navigasi start -->
     <header id="navbar" class="navbar">
         <div class="container">
@@ -181,47 +182,63 @@ if (!isset($_SESSION['access_token'])) {
 
     <!-- footer start -->
     <footer>
-        <div class="container">
-            <div class="row justify-content-evenly">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(80, 184, 46,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(80, 184, 46,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(80, 184, 46,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="rgba(80, 184, 46,0.1)" />
+            </g>
+        </svg>
+        <div class="body-footer">
 
-                <div class="col-12 col-md-4 col-lg-3 text-center text-md-start mb-5 mb-md-0">
-                    <h5 class="text-white">Jam Buka</h5>
-                    <span class="d-block text-white">Senin - Kamis : 08.00 - 16.00</span>
-                    <span class="d-block text-white">Jumat : 13.00 - 16.00</span>
-                    <span class="d-block text-white">Minggu : Libur</span>
-                </div>
-                <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                    <h5 class="text-center text-white">Sosial Media</h5>
-                    <div class="d-flex justify-content-center">
-                        <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
-                            <i class="d-block fa-brands fa-instagram text-white fs-3 mb-2"></i>
-                            <span class="d-block text-white">Instagram</span>
-                        </a>
-                        <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
-                            <i class="d-block fa-brands fa-facebook text-white fs-3 mb-2"></i>
-                            <span class="d-block text-white">Facebook</span>
-                        </a>
-                        <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
-                            <i class="d-block fa-brands fa-whatsapp text-white fs-3 mb-2"></i>
-                            <span class="d-block text-white">Whatsapp</span>
-                        </a>
+            <div class="container">
+                <div class="row justify-content-evenly">
+
+                    <div class="col-12 col-md-4 col-lg-3 text-center text-md-start mb-5 mb-md-0">
+                        <h5 class="text-white">Jam Buka</h5>
+                        <span class="d-block text-white">Senin - Kamis : 08.00 - 16.00</span>
+                        <span class="d-block text-white">Jumat : 13.00 - 16.00</span>
+                        <span class="d-block text-white">Minggu : Libur</span>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+                        <h5 class="text-center text-white">Sosial Media</h5>
+                        <div class="d-flex justify-content-center">
+                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                                <i class="d-block fa-brands fa-instagram text-white fs-3 mb-2"></i>
+                                <span class="d-block text-white">Instagram</span>
+                            </a>
+                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                                <i class="d-block fa-brands fa-facebook text-white fs-3 mb-2"></i>
+                                <span class="d-block text-white">Facebook</span>
+                            </a>
+                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                                <i class="d-block fa-brands fa-whatsapp text-white fs-3 mb-2"></i>
+                                <span class="d-block text-white">Whatsapp</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 text-center text-md-start">
+                        <h5 class="text-center text-white">Alamat Toko</h5>
+                        <p class=" text-white mb-2" style="font-size: 0.9rem;">
+                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, harum.
+                        </p>
+                        <i class="fa-solid fa-location-dot text-warning"></i>
+                        <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-warning text-decoration-none">Lihat Lokasi</a>
                     </div>
                 </div>
-                <div class="col-12 col-md-4 col-lg-3 text-center text-md-start">
-                    <h5 class="text-center text-white">Alamat Toko</h5>
-                    <p class=" text-white mb-2" style="font-size: 0.9rem;">
-                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, harum.
-                    </p>
-                    <i class="fa-solid fa-location-dot text-warning"></i>
-                    <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-warning text-decoration-none">Lihat Lokasi</a>
+
+                <div class="copyright text-center">
+                    <span class="text-white">by Saiful Rahman 2023</span>
                 </div>
             </div>
-
-            <div class="copyright text-center">
-                <span class="text-white">by Saiful Rahman 2023</span>
-            </div>
         </div>
+
     </footer>
+
     <!-- footer end -->
 
     <!-- popup add keranjang -->
