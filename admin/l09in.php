@@ -46,7 +46,9 @@ require 'assets/komponen/css.php';
                     <form action="login-control" method="post" id="form-login" class="py-4 border rounded p-3 shadow-sm position-relative">
                         <input type="text" name="login" hidden>
                         <div class="brand-login text-center">
-                            <img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="" style="width: 100px;">
+                            <a href="../">
+                                <img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="" style="width: 100px;">
+                            </a>
                         </div>
                         <div class="form-floating my-4">
                             <input type="text" name="username" class="form-control" id="floatingUsername" placeholder="Username" required>

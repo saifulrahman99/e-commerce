@@ -69,15 +69,15 @@ $item_details = array();
 
 $belanjaan_decode = json_decode($belanjaan);
 
-foreach ($belanjaan_decode as $id_item => $jml_item) {
+foreach ($belanjaan_decode as $id_item => $ket_item) {
     $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
     $nmProduk = $produk['nm_produk'];
     $harga = $produk['harga'];
     
     $item_array = array(
         'id' => $id_item,
-        'price' => $harga,
-        'quantity' => $jml_item,
+        'price' => $ket_item[1],
+        'quantity' => $ket_item[0],
         'name' => $nmProduk
     );
     array_push($item_details,$item_array);
