@@ -151,27 +151,27 @@
 
         var data = [
             {
-                label: " Data 1",
+                label: " Android",
                 data: 2,
                 color: "#8fc9fb"
             },
             {
-                label: " Data 2",
+                label: " Dekstop",
                 data: 4,
                 color: "#007BFF"
             },
             {
-                label: " Data 3",
+                label: " iPhone",
                 data: 7,
                 color: "#00c292"
             },
             {
-                label: " Data 4",
+                label: " Tab",
                 data: 15,
                 color: "#F44336"
             },
             {
-                label: " Data 5",
+                label: " OS Lain",
                 data: 10,
                 color: "#32c39f"
             }

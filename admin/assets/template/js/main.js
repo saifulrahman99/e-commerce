@@ -11,20 +11,6 @@ jQuery(document).ready(function($) {
 	jQuery('.selectpicker').selectpicker;
 
 
-	
-
-	$('.search-trigger').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').addClass('open');
-	});
-
-	$('.search-close').on('click', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$('.search-trigger').parent('.header-left').removeClass('open');
-	});
-
 	$('.equal-height').matchHeight({
 		property: 'max-height'
 	});

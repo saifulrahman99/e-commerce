@@ -133,7 +133,7 @@
                                  <div class="col-12 col-md-4 item-produk my-1 pb-1 border-bottom">
                                      <div class="d-flex align-items-center">
                                          <a href="<?= base_url('produk/lihat/' . $id_item) ?>" class="text-decoration-none">
-                                             <img src="<?= $produk['gambar'] ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
+                                             <img src="<?= base_url('assets/img/produk/'.$produk['gambar']) ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
                                          </a>
                                          <h6 class="ms-2 me-1 mb-0"><?= $produk['nm_produk'] ?></h6>
                                          <i data-feather="x" class="me-1" style="width: 0.8rem;"></i>

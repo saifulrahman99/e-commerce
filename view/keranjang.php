@@ -12,7 +12,7 @@
                     <h1 class="judul-section">Keranjang Belanja</h1>
                     <div class="col-12 col-md-9 mb-3">
                         <?php
-                        
+
                         $keranjang = $_SESSION['keranjang'];
 
                         $idItem = "";
@@ -31,7 +31,7 @@
                         $total = 0;
                         $i = 0;
                         foreach ($select as  $produk) {
-                            $total += $produk['harga'] * $_SESSION['keranjang'][$produk['id_produk']][0];
+                            $total += $produk['harga_jual'] * $_SESSION['keranjang'][$produk['id_produk']][0];
                         ?>
                             <!-- item cart -->
                             <div class="list-item py-3 mb-3">
@@ -40,7 +40,7 @@
 
                                     <div class="col-5 col-md-2">
                                         <a href="produk/lihat/<?= $produk['id_produk'] ?>">
-                                            <img src="<?= $produk['gambar'] ?>" class="item-img" alt="..." style="aspect-ratio: 2/1.5;">
+                                            <img id="gmbr-prdk-keranjang" src="<?= '../assets/img/produk/' . $produk['gambar'] ?>" class="item-img" alt="..." style="aspect-ratio: 2/1.5;">
                                         </a>
                                     </div>
 
@@ -50,7 +50,7 @@
                                             <span class="nama_produk mb-2"><?= $produk['nm_produk'] ?></span>
                                         </div>
                                         <div class="col-12 col-md-4 text-start text-md-center">
-                                            <span class="harga" style="font-weight: 800 !important;"><?= rupiah($produk['harga']) ?></span>
+                                            <span class="harga" style="font-weight: 800 !important;"><?= rupiah($produk['harga_jual']) ?></span>
                                         </div>
 
                                     </div>

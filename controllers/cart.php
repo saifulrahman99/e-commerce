@@ -7,7 +7,7 @@ if ($_POST['opsi'] == 'direct') {
     $qty = 1;
     $id_produk = $_POST['id_produk'];
 
-    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga FROM produk WHERE id_produk = '$id_produk'"));
+    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga_pokok,harga_jual FROM produk WHERE id_produk = '$id_produk'"));
 
     if (isset($_POST['qty'])) {
         $qty = max($_POST['qty'], 1);
@@ -19,7 +19,7 @@ if ($_POST['opsi'] == 'direct') {
 
     if (!isset($_SESSION['keranjang'][$id_produk])) {
         $_SESSION['keranjang'][$id_produk][0] = $qty;
-        $_SESSION['keranjang'][$id_produk][1] = $harga['harga'];
+        $_SESSION['keranjang'][$id_produk][1] = $harga['harga_jual'];
     } else {
         $_SESSION['keranjang'][$id_produk][0] += $qty;
     }
@@ -33,21 +33,21 @@ if ($_POST['opsi'] == 'direct') {
     $qty = $_POST['jml-item'];
     $id_produk = $_POST['id_produk'];
 
-    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga FROM produk WHERE id_produk = '$id_produk'"));
+    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga_pokok,harga_jual FROM produk WHERE id_produk = '$id_produk'"));
 
     if (!isset($_SESSION['keranjang'][$id_produk])) {
         $_SESSION['keranjang'][$id_produk][0] = $qty;
-        $_SESSION['keranjang'][$id_produk][1] = $harga['harga'];
+        $_SESSION['keranjang'][$id_produk][1] = $harga['harga_jual'];
     } else {
 
         $_SESSION['keranjang'][$id_produk][0] += $qty;
 
-        $jumlah_item = $_SESSION['keranjang'][$id_produk];
+        $jumlah_item = $_SESSION['keranjang'][$id_produk][0];
 
         $stok = mysqli_fetch_assoc(mysqli_query($db, "SELECT stok FROM produk WHERE id_produk = '$id_produk'"));
 
         if ($jumlah_item > $stok['stok']) {
-            $_SESSION['keranjang'][$id_produk] = $stok['stok'];
+            $_SESSION['keranjang'][$id_produk][0] = $stok['stok'];
         }
     }
 } elseif ($_POST['opsi'] == 'update') {

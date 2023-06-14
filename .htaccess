@@ -21,6 +21,7 @@ RewriteRule ^transaksi/bayarlagi/([a-zA-Z0-9_-]+) controllers/bayar-lagi.php?sna
 
 RewriteRule ^transaksi/batalkanbayar/([a-zA-Z0-9_-]+) controllers/batalkan-bayar.php?orderId=$1
 
+RewriteRule ^transaksi/notif controllers/notification-handler.php
 
 
 

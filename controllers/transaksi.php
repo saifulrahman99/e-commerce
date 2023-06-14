@@ -25,6 +25,7 @@ if ($cookie_nama != $nm_pembeli || $cookie_nama == '') {
     setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 7), '/');
 }
 
+
 require_once '../vendor/payment/Midtrans.php';
 
 //Set Your server key
@@ -72,7 +73,7 @@ $belanjaan_decode = json_decode($belanjaan);
 foreach ($belanjaan_decode as $id_item => $ket_item) {
     $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
     $nmProduk = $produk['nm_produk'];
-    $harga = $produk['harga'];
+    $harga = $produk['harga_jual'];
     
     $item_array = array(
         'id' => $id_item,
@@ -82,7 +83,6 @@ foreach ($belanjaan_decode as $id_item => $ket_item) {
     );
     array_push($item_details,$item_array);
 }
-
 
 // Optional
 $billing_address = array(

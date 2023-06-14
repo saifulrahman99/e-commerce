@@ -1,6 +1,7 @@
 <?php
 $id = $_GET['id_produk'];
 $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE id_produk = $id"));
+$gambar_produk = $select['gambar'];
 ?>
 <div class="bar-navigasi shadow-sm bg-light"></div>
 <div class="spasi-header"></div>
@@ -16,34 +17,38 @@ $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN 
 
                 <!-- slide galeri -->
                 <div class="mySlides">
-                    <div class="numbertext">1 / 3</div>
-                    <img src="<?= $select['gambar'] ?>">
+                    <img src="<?= base_url('assets/img/produk/' . $gambar_produk) ?>">
                 </div>
+                <?php
+                $galeri = explode(',', $select['galeri']);
 
-                <div class="mySlides">
-                    <div class="numbertext">2 / 3</div>
-                    <img src="https://img.freepik.com/free-photo/two-red-apples-isolated-white_114579-73124.jpg?w=996&t=st=1684136762~exp=1684137362~hmac=2122a0c51653bd8172d965cff68ea77c54e76e7bc30cbadbb7fbd750d9c650ee">
-                </div>
+                if ($select['galeri'] != '') {
 
-                <div class="mySlides">
-                    <div class="numbertext">3 / 3</div>
-                    <img src="https://img.freepik.com/free-photo/apple-red-mellow-juicy-fresh-ripe-half-cut-isolated_179666-163.jpg?w=996&t=st=1684136779~exp=1684137379~hmac=09d87b48af45c8f5b51f6ebd45cccb0f121b10900587343979fa366131ac050c">
-                </div>
-
+                    foreach ($galeri as $g) {
+                ?>
+                        <div class="mySlides">
+                            <img src="<?= base_url('assets/img/produk/' . $g) ?>">
+                        </div>
+                <?php }
+                } ?>
 
                 <a class="prev" onclick="plusSlides(-1)">❮</a>
                 <a class="next" onclick="plusSlides(1)">❯</a>
 
                 <div class="row row-navigator mb-2">
                     <div class="column">
-                        <img class="demo cursor" src="https://img.freepik.com/free-photo/delicious-red-apples-isolated-white-table_114579-67401.jpg?w=740&t=st=1684136573~exp=1684137173~hmac=c08abb88f2dd0652d1f759129494a645377c769b151bc7aa9fdc2014001dcc56" onclick="currentSlide(1)" alt="The Woods">
+                        <img class="demo cursor" src="<?= base_url('assets/img/produk/' . $gambar_produk) ?>" onclick="currentSlide(1)" alt="The Woods">
                     </div>
-                    <div class="column">
-                        <img class="demo cursor" src="https://img.freepik.com/free-photo/two-red-apples-isolated-white_114579-73124.jpg?w=996&t=st=1684136762~exp=1684137362~hmac=2122a0c51653bd8172d965cff68ea77c54e76e7bc30cbadbb7fbd750d9c650ee" onclick="currentSlide(2)" alt="Cinque Terre">
-                    </div>
-                    <div class="column">
-                        <img class="demo cursor" src="https://img.freepik.com/free-photo/apple-red-mellow-juicy-fresh-ripe-half-cut-isolated_179666-163.jpg?w=996&t=st=1684136779~exp=1684137379~hmac=09d87b48af45c8f5b51f6ebd45cccb0f121b10900587343979fa366131ac050c" onclick="currentSlide(3)" alt="Mountains and fjords">
-                    </div>
+                    <?php
+                    if ($select['galeri'] != '') {
+                        foreach ($galeri as $g) {
+                    ?>
+                            <div class="column">
+                                <img class="demo cursor" src="<?= base_url('assets/img/produk/' . $g) ?>" onclick="currentSlide(2)" alt="Cinque Terre">
+                            </div>
+                    <?php }
+                    } ?>
+
 
                 </div>
 
@@ -53,15 +58,15 @@ $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN 
             </dizv>
             <div class="deskripsi col-12 col-lg-5 px-2">
                 <div class="rounded bg-white">
-                    <span class="nama-produk d-block mb-3"><?= ucfirst($select['nm_produk']) ?></span>
-                    <span class="harga-produk d-block mb-3"><?= rupiah($select['harga']) ?>
-                        <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga'] ?></span>
+                    <span class="nama-produk d-block mb-3"><?= ucwords(strtolower($select['nm_produk'])) ?></span>
+                    <span class="harga-produk d-block mb-3"><?= rupiah($select['harga_jual']) ?> /<?= strtolower($select['satuan']) ?>
+                        <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga_jual'] ?></span>
                     </span>
 
                     <h3 class="keterangan-produk d-block mb-3 text-ijo py-2">Keterangan Produk</h3>
                     <ul>
                         <li>Kategori : <b><?= ucfirst($select['kategori']) ?></b></li>
-                        <li>Berat Satuan : <b><?= $select['satuan'] ?></b></li>
+                        <li>Satuan : <b><?= strtolower($select['satuan']) ?></b></li>
                         <li>Stok : <b id="stok-lihat"><?= $select['stok'] ?></b></li>
                     </ul>
                     <p>

@@ -3,12 +3,24 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 function get_client_ip_env()
 {
+    $ipaddress = '';
+    if (getenv('HTTP_CLIENT_IP'))
+        $ipaddress = getenv('HTTP_CLIENT_IP');
+    else if (getenv('HTTP_X_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+    else if (getenv('HTTP_X_FORWARDED'))
+        $ipaddress = getenv('HTTP_X_FORWARDED');
+    else if (getenv('HTTP_FORWARDED_FOR'))
+        $ipaddress = getenv('HTTP_FORWARDED_FOR');
+    else if (getenv('HTTP_FORWARDED'))
+        $ipaddress = getenv('HTTP_FORWARDED');
+    else if (getenv('REMOTE_ADDR'))
         $ipaddress = getenv('REMOTE_ADDR');
     else
-        $ipaddress = 'UNKNOWN IP Address';
-
+        $ipaddress = 'IP tidak dikenali';
     return $ipaddress;
 }
+
 
 function get_os()
 {
@@ -80,7 +92,7 @@ $today = date('Y-m-d');
 // echo php_uname();
 
 // echo " $user_os $user_browser $ip_user";
-$q_user = "SELECT * FROM pengunjung WHERE ip_address = '$ip_user' AND browser = '$user_browser' AND os = '$user_os'";
+$q_user = "SELECT * FROM pengunjung WHERE ip_address = '$ip_user' AND os = '$user_os'";
 $select = mysqli_num_rows(mysqli_query($db, "$q_user"));
 
 if ($select < 1) {

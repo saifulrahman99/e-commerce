@@ -229,6 +229,9 @@ if (!isset($_SESSION['access_token'])) {
                         <i class="fa-solid fa-location-dot text-warning"></i>
                         <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-warning text-decoration-none">Lihat Lokasi</a>
                     </div>
+                    <div class="mt-1 text-center text-white">
+                        IP Adress Anda : <?= get_client_ip_env()?>
+                    </div>
                 </div>
 
                 <div class="copyright text-center">

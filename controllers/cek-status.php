@@ -6,7 +6,7 @@ require '../function.php';
 require_once '../vendor/payment/Midtrans.php';
 Config::$serverKey = 'SB-Mid-server-z-__Mmo5avW30d27vWSREhKd';
 
-$orderId = 'order-1006202378-PN3XG';
+$orderId = 'order-1306202394-SIZDY';
 
 $status = \Midtrans\Transaction::status($orderId);
 
