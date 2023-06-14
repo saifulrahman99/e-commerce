@@ -3,10 +3,6 @@ $user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 function get_client_ip_env()
 {
-    $ipaddress = '';
-    if (getenv('HTTP_CLIENT_IP'))
-        $ipaddress = getenv('HTTP_CLIENT_IP');
-    else if (getenv('REMOTE_ADDR'))
         $ipaddress = getenv('REMOTE_ADDR');
     else
         $ipaddress = 'UNKNOWN IP Address';
