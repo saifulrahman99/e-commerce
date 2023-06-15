@@ -1,9 +1,15 @@
 // ======== filter angka ==============
 function hanyaAngka(evt) {
     var charCode = (evt.which) ? evt.which : event.keyCode
-    if (charCode > 31 && (charCode < 48 || charCode > 57))
+    if (charCode == 46) {
+        if (!(evt.indexOf(".") > -1)) {
 
+            return true;
+        }
+    }
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
         return false;
+
     return true;
 }
 // ======== filter angka ==============
@@ -151,14 +157,14 @@ function tambah(i) {
     if (jml == "") {
         jml = 0;
     } else {
-        jml = parseInt(jml);
+        jml = parseFloat(jml);
     }
 
-    if (jml < 0) {
+    if (jml < 0.1) {
         document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item" + i).value = jml + 1;
+        document.getElementById("jml-item" + i).value = jml + 0.5
     }
 }
 function kurang(i) {
@@ -170,11 +176,11 @@ function kurang(i) {
         jml = parseInt(jml);
     }
 
-    if (jml < 2) {
+    if (jml < 0.1) {
         document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item" + i).value = jml - 1;
+        document.getElementById("jml-item" + i).value = jml - 0.5;
     }
 }
 
@@ -192,14 +198,14 @@ function tambahV() {
     if (jml == "") {
         jml = 0;
     } else {
-        jml = parseInt(jml);
+        jml = parseFloat(jml);
     }
 
-    if (jml < 0) {
+    if (jml < 0.1) {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml + 1;
+        document.getElementById("jml-item").value = jml + 0.5;
     }
 }
 function kurangV() {
@@ -211,11 +217,11 @@ function kurangV() {
         jml = parseInt(jml);
     }
 
-    if (jml < 2) {
+    if (jml < 0.1) {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml - 1;
+        document.getElementById("jml-item").value = jml - 0.5;
     }
 }
 
@@ -223,13 +229,13 @@ function kurangV() {
 // ======== tombol tambah kurang keranjang lihat produk ==============
 
 function subTotalLihat() {
-    var jmlItem = document.getElementById("jml-item").value;
+    var jmlItem = document.getElementById("jml-item").value.replace(/,/g, ".");
     var price = document.getElementById("harga-produk-lihat").innerHTML;
 
     const rupiah = (number) => {
         return new Intl.NumberFormat("id-ID", {
             style: "currency",
-            currency: "IDR", 
+            currency: "IDR",
             minimumFractionDigits: 0
         }).format(number);
     }
@@ -247,13 +253,13 @@ function disableTambah() {
     var id = document.getElementById("id-item").value;
     var jmlitem = document.getElementById("jml-item").value;
 
-    if (jmlitem == ''|| jmlitem == 0) {
-        
+    if (isNaN(jmlitem) || jmlitem == '' || jmlitem == 0) {
+
         addCart.style.background = 'gray';
         addCart.setAttribute('onclick', '')
-    }else{
+    } else {
         var jmlItemLihat = parseInt(jmlitem);
-        addCart.setAttribute('onclick', "addCartLihat("+id+",'lihat')")
+        addCart.setAttribute('onclick', "addCartLihat(" + id + ",'lihat')")
         addCart.style.background = '#198754';
     }
 

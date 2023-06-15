@@ -52,7 +52,7 @@ if ($_POST['opsi'] == 'direct') {
     }
 } elseif ($_POST['opsi'] == 'update') {
     foreach ($_POST['qty'] as $id => $jumlah) {
-        $_SESSION['keranjang'][$id][0] = max($jumlah, 1);
+        $_SESSION['keranjang'][$id][0] = $jumlah;
     }
 ?>
     <script type="text/javascript">

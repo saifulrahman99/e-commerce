@@ -1,6 +1,7 @@
 <?php
 $id = $_GET['id_produk'];
 $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE id_produk = $id"));
+
 $gambar_produk = $select['gambar'];
 ?>
 <div class="bar-navigasi shadow-sm bg-light"></div>
@@ -83,7 +84,7 @@ $gambar_produk = $select['gambar'];
                             <button class="page-link" onclick="kurangV()"><i class="fa-solid fa-minus"></i></button>
                         </li>
                         <li class="page-item" style="max-width:20%;">
-                            <input type="number" id="jml-item" class="form-control text-center" min="1" value="1" onkeypress="return hanyaAngka(event)" required></input>
+                            <input type="text" id="jml-item" class="form-control text-center" min="0" value="1" onkeypress="return hanyaAngka(event)" required></input>
                         </li>
                         <li class="page-item">
                             <button id="tambahV" class="page-link" onclick="tambahV()"><i class="fa-solid fa-plus"></i></button>
@@ -111,21 +112,28 @@ $gambar_produk = $select['gambar'];
         <div class="produk-sejenis pt-3 pb-4 d-inline d-flex scroll-efek-x">
 
             <!-- produk -->
-            <?php for ($i = 0; $i < 10; $i++) { ?>
+            <?php 
+            $kategori = $select['kategori'];
+            $query = mysqli_query($db,"SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE kategori = '$kategori'");
+            foreach ($query as $sejenis) { 
+                if ($sejenis['kode_produk'] != $select['kode_produk']) {
+                ?>
                 <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
                     <div class="card shadow-sm">
-                        <img src="https://img.freepik.com/free-photo/apples-red-fresh-mellow-juicy-perfect-whole-white-desk_179666-271.jpg?w=1060&t=st=1683580806~exp=1683581406~hmac=c6b9b26cf2f9142a8bc7111f3419be12c6c2d8d9676997039cdf970d3ed49196" alt="..." style="aspect-ratio: 2/1.5;">
+                        <img src="<?= base_url('assets/img/produk/' . $sejenis['gambar']) ?>" alt="..." style="aspect-ratio: 2/1.5;">
                         <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk m-0">Buah Apel</h5>
-                            <span style="font-weight: 800;">Rp 10.000 /Kg</span>
+                            <h5 class="card-title nama-produk m-0"><?= ucwords(strtolower($sejenis['nm_produk'])) ?></h5>
+                            <span style="font-weight: 800;"><?= rupiah($sejenis['harga_jual']) ?> /Kg</span>
                         </div>
                         <div class="cart-button text-center">
                             <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                            <a href="<?= $i ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                            <a href="<?= $sejenis['id_produk'] ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php 
+            }
+        } ?>
             <!-- end produk -->
 
             <div class="col-4 col-md-2 col-lg-1 p-1 item-scroll">

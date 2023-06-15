@@ -66,23 +66,23 @@ $transaction_details = array(
     'gross_amount' => intval($biaya), // no decimal allowed for creditcard
 );
 
-$item_details = array();
+// $item_details = array();
 
-$belanjaan_decode = json_decode($belanjaan);
+// $belanjaan_decode = json_decode($belanjaan);
 
-foreach ($belanjaan_decode as $id_item => $ket_item) {
-    $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
-    $nmProduk = $produk['nm_produk'];
-    $harga = $produk['harga_jual'];
+// foreach ($belanjaan_decode as $id_item => $ket_item) {
+//     $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
+//     $nmProduk = $produk['nm_produk'];
+//     $harga = $produk['harga_jual'];
     
-    $item_array = array(
-        'id' => $id_item,
-        'price' => $ket_item[1],
-        'quantity' => $ket_item[0],
-        'name' => $nmProduk
-    );
-    array_push($item_details,$item_array);
-}
+//     $item_array = array(
+//         'id' => $id_item,
+//         'price' => $ket_item[1],
+//         'quantity' => round($ket_item[0]),
+//         'name' => $nmProduk
+//     );
+//     array_push($item_details,$item_array);
+// }
 
 // Optional
 $billing_address = array(
@@ -107,12 +107,12 @@ $customer_details = array(
 $transaction = array(
     // 'enabled_payments' => $enable_payments,
     'transaction_details' => $transaction_details,
-    'customer_details' => $customer_details,
-    'item_details' => $item_details,
+    'customer_details' => $customer_details
+    // 'item_details' => $item_details,
 );
 
-$snapToken = Snap::getSnapToken($transaction);
 
+$snapToken = Snap::getSnapToken($transaction);
 
 if ($_POST['opsi'] == "add") {
 

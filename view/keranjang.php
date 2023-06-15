@@ -62,7 +62,7 @@
                                                     <button type="button" class="page-link" onclick="kurang(<?= $i ?>)"><i class="fa-solid fa-minus"></i></button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <input type="number" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)"></input>
+                                                    <input type="text" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control text-center" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)"></input>
                                                 </li>
                                                 <li class=" page-item">
                                                     <button type="button" class="page-link" onclick="tambah(<?= $i ?>)"><i class="fa-solid fa-plus"></i></button>
