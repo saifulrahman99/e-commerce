@@ -1,24 +1,28 @@
 $(document).ready(function () {
     $('.klik_menu').click(function () {
         var menu = $(this).attr('id');
+        var base_url = window.location.origin + '/admin/';
+        
+        console.log(base_url);
+
         if (menu == "dashboard") {
-            $('#isi-content-halaman').load('view/dashboard.php');
+            $('#isi-content-halaman').load(base_url+'view/dashboard.php');
         } else if (menu == "promo") {
-            $('#isi-content-halaman').load('view/promo.php');
+            $('#isi-content-halaman').load(base_url+'view/promo.php');
         } else if (menu == "pesan") {
-            $('#isi-content-halaman').load('view/pesan.php');
+            $('#isi-content-halaman').load(base_url+'view/pesan.php');
         } else if (menu == "produk") {
-            $('#isi-content-halaman').load('view/produk.php');
+            $('#isi-content-halaman').load(base_url+'view/produk.php');
         } else if (menu == "kategori") {
-            $('#isi-content-halaman').load('view/kategori.php');
+            $('#isi-content-halaman').load(base_url+'view/kategori.php');
         } else if (menu == "transaksi") {
-            $('#isi-content-halaman').load('view/transaksi.php');
+            $('#isi-content-halaman').load(base_url+'view/transaksi.php');
         } else if (menu == "pengaturan") {
-            $('#isi-content-halaman').load('view/pengaturan.php');
+            $('#isi-content-halaman').load(base_url+'view/pengaturan.php');
         } else if (menu == "notifikasi") {
-            $('#isi-content-halaman').load('view/notifikasi.php');
+            $('#isi-content-halaman').load(base_url+'view/notifikasi.php');
         } else if (menu == "toko") {
-            $('#isi-content-halaman').load('view/toko.php');
+            $('#isi-content-halaman').load(base_url+'view/toko.php');
         }
 
         $('.klik_menu.active').removeClass('active');
@@ -26,13 +30,10 @@ $(document).ready(function () {
         
     });
     
+    var base_url = window.location.origin+'/admin/';
     $('#dashboard').addClass('active');
     // halaman yang di load default pertama kali
-    // $('#isi-content-halaman').load('view/dashboard.php');
-    $('#isi-content-halaman').load('view/produk.php');
-    
-    $('#reload-produk').click(function () { 
-        $('#isi-content-halaman').load('view/produk.php');
-    });
+    $('#isi-content-halaman').load(base_url+'view/dashboard.php');
+    // $('#isi-content-halaman').load('view/produk.php');
 
 });

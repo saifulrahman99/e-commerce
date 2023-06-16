@@ -29,8 +29,14 @@ RewriteRule ^transaksi/notif controllers/notification-handler.php
 # ADMIN
 
 RewriteRule ^admin/login$ admin/l09in.php
+
 RewriteRule ^admin/control$ admin/index.php
+RewriteRule ^admin/control/$ admin/index.php
+
+RewriteRule ^admin/control/([a-zA-Z0-9_-]+)$ admin/index.php?halaman=$1
+RewriteRule ^admin/tes/([a-zA-Z0-9_-]+)$ admin/tes.php?id=$1
 
 
 RewriteRule ^admin/logout$ admin/controllers/logout.php
 RewriteRule ^admin/login-control$ admin/controllers/login.php
+

@@ -6,6 +6,8 @@
     // $id_pengunjung = $_SESSION['id_pengunjung'];
     $id_pengunjung = $_COOKIE['id_pengunjung'];
 
+    // echo $id_pengunjung;
+
 
     $select_transaksi = mysqli_query($db, "SELECT * FROM transaksi WHERE id_pengunjung='$id_pengunjung' ORDER BY id_transaksi DESC");
     $jml_data_transaksi = mysqli_num_rows($select_transaksi);

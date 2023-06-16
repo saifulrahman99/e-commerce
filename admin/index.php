@@ -16,7 +16,8 @@ require 'function/base_url.php';
     <link rel="apple-touch-icon" href="<?= base_url('../assets/img/brand/adastra.png') ?>">
     <link rel="shortcut icon" href="<?= base_url('../assets/img/brand/adastra.png') ?>">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
@@ -44,20 +45,20 @@ require 'function/base_url.php';
                 <ul class="nav navbar-nav">
 
                     <li>
-                        <a class="klik_menu active" id="dashboard"><i class="menu-icon fa fa-laptop"></i>Dashboard </a>
+                        <a class="klik_menu active" id="dashboard"><i class="menu-icon ti-home"></i>Dashboard </a>
                     </li>
 
 
                     <li class="menu-title">Data</li><!-- /.menu-title -->
                     <li class="klik_menu menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-cogs"></i>Produk</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-bag"></i>Produk</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li><i class="ti-direction"></i><a class="klik_menu" id="produk">Produk</a></li>
-                            <li><i class="ti-direction"></i><a class="klik_menu" id="kategori">Kategori</a></li>
+                            <li class="pt-2 pb-1"><i class="ti-direction pt-2"></i><a class="klik_menu" id="produk">Produk</a></li>
+                            <li class="pt-2 pb-1"><i class="ti-direction pt-2"></i><a class="klik_menu" id="kategori">Kategori</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a class="klik_menu" id="promo"><i class="menu-icon fa fa-laptop"></i>Promo </a>
+                        <a class="klik_menu" id="promo"><i class="menu-icon fa fa-gift"></i>Promo </a>
                     </li>
                     <li>
                         <a class="klik_menu" id="toko"><i class="menu-icon fa fa-laptop"></i>Toko </a>
@@ -65,7 +66,7 @@ require 'function/base_url.php';
 
                     <li class="menu-title">Informasi</li><!-- /.menu-title -->
                     <li>
-                        <a class="klik_menu" id="transaksi"><i class="menu-icon fa fa-laptop"></i>Transaksi </a>
+                        <a class="klik_menu" id="transaksi"><i class="menu-icon ti-receipt"></i>Transaksi </a>
                     </li>
                     <li>
                         <a class="klik_menu" id="pesan"><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
@@ -92,7 +93,7 @@ require 'function/base_url.php';
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="./"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
+                    <a class="navbar-brand" href="<?= base_url('control')?>"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -181,7 +182,8 @@ require 'function/base_url.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
@@ -207,8 +209,24 @@ require 'function/base_url.php';
 
     <script src="<?= base_url('assets/template/js/init/fullcalendar-init.js') ?>"></script>
     <script src="<?= base_url('assets/js/admin-script.js') ?>"></script>
+    <script src="<?= base_url('assets/js/ajax-admin.js') ?>"></script>
 
     <script src="<?= base_url('assets/template/js/init/flot-chart-init.js') ?>"></script>
+    
+    <?php
+    $hlm = (isset($_GET['halaman'])) ? $_GET['halaman'] : "";
+    ?>
+    <script>
+       
+        $(document).ready(function() {
+            var hlm = "<?= $hlm ?>";
+
+            if (hlm != '') {
+                var page = "../view/" + hlm + ".php";
+                $('#isi-content-halaman').load(page);
+            }
+        });
+    </script>
 </body>
 
 </html>

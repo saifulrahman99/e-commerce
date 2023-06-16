@@ -84,6 +84,9 @@ table tbody td {
     font-size: 0.9em;
 }
 
+.form-group label {
+    font-size: 0.9rem !important;
+}
 
 @media (max-width:992px) {
 
@@ -92,7 +95,31 @@ table tbody td {
     }
 }
 
+.btn {
+    border-radius: 30px !important;
+}
 
+#form-tambah-data-produk .modal-body,
+#form-edit-data-produk .modal-body{
+    max-height: 60vh;
+    overflow-y: auto;
+    width: 102%;
+    padding-right: 0;
+}
+
+.modal-footer button {
+    width: 100% !important;
+}
+
+.content {
+    margin-right: -5px;
+    background-color: #f1f2f7 !important;
+    z-index: 2;
+}
+
+form textarea {
+    font-size: 0.9rem !important;
+}
 
 @media (max-width:768px) {
     #right-panel {
@@ -103,6 +130,10 @@ table tbody td {
     #left-panel {
         max-width: 100%;
         width: 70vw !important;
+    }
+
+    .top-right {
+        margin-top: 3.5rem;
     }
 }
 
