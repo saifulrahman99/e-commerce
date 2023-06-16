@@ -6,11 +6,13 @@ function rupiah($angka)
 }
 
 require('../assets/basis/kon.php');
-if (isset($_POST["query"])) {
+if (isset($_POST["nama"]) || isset($_POST["kategori"])) {
 
-    $search = mysqli_real_escape_string($db, $_POST["query"]);
+    $nama = $_POST["nama"];
+    $kategori = ($_POST["kategori"] == 'All') ? '' : $_POST["kategori"];
 
-    $sql = "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE nm_produk LIKE '%" . $search . "%' OR kategori LIKE '%" . $search . "%' ";
+    $sql = "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE nm_produk LIKE '%" . $nama . "%' AND kategori LIKE '%" . $kategori . "%' ORDER BY id_produk DESC";
+    
     $query = mysqli_query($db, $sql);
 } else {
     $query = mysqli_query($db, "SELECT * FROM produk ORDER BY id_produk DESC");

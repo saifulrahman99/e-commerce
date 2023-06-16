@@ -28,18 +28,20 @@
 
         <div class="filter bg-white p-4 text-center shadow position-relative rounded m-auto">
             <div class="input-group">
-                <span class="input-group-text bg-white" id="inputGroup-sizing-default"> <i data-feather="search"></i> </span>
+                <button class="filter-search input-group-text bg-white" id="inputGroup-sizing-default" onclick="open_filter()">
+                    <i data-feather="sliders"></i>
+                </button>
 
                 <input type="text" name="search_produk" id="search_show_produk" placeholder="Cari produk..." class="form-control">
 
-                <button class="filter-search input-group-text bg-white" id="inputGroup-sizing-default" onclick="open_filter()">
-                    <i data-feather="sliders"></i>
+                <button class="input-group-text btn btn-light border" id="search-button">
+                    <i data-feather="search"></i>
                 </button>
 
                 <div id="filter-melayang" class="filter-melayang position-absolute bg-white p-3 shadow start-0 text-start" style="z-index: 1; top: 3rem; width: 100%;">
                     <span class="d-block fw-bolder mb-2">Filter Kategori</span>
                     <select id="filter-value" class="form-select" aria-label="Default select example">
-                        <option selected>-Pilih</option>
+                        <option selected>All</option>
                         <?php
                         $kategori = mysqli_query($db, "SELECT * FROM kategori");
                         foreach ($kategori as $k) { ?>

@@ -101,6 +101,8 @@ if ($select < 1) {
     $insert = mysqli_query($db, $query);
 }
 
+// update waktu kunjungan
+
 
 $sessionPengunjung = (isset($_SESSION['id_pengunjung'])) ? $_SESSION['id_pengunjung'] : '';
 $coockiePengunjung = (isset($_COOKIE['id_pengunjung'])) ? $_COOKIE['id_pengunjung'] : '';
@@ -120,4 +122,6 @@ if (isset($_COOKIE['id_pengunjung'])) {
     if ($_COOKIE['id_pengunjung'] != $sessionPengunjung) {
         setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 1), '/');
     }
+    $id_pengunjung = $select_id['id_pengunjung'];
+    mysqli_query($db,"UPDATE pengunjung SET waktu = '$today' WHERE id_pengunjung = '$id_pengunjung'") ;
 }

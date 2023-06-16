@@ -5,37 +5,29 @@ $(document).ready(function () {
 
 
     // produk
-    function show_produk(query) {
+    function show_produk() {
         $.ajax({
             url: "data/show-produk.php",
             method: "POST",
-            data: { query: query },
             success: function (data) {
                 $('#show-produk').html(data);
             }
         });
     }
-
-    $('#search_show_produk').keyup(function () {
-        var search = $(this).val();
-        if (search != '') {
-            show_produk(search);
-        }
-        else {
-            show_produk();
-        }
+    
+    // pencarian data produk
+    $("#search-button").click(function () {
+        var nama = $('#search_show_produk').val();
+        var kategori = $('#filter-value').val();
+        $.ajax({
+            url: "data/show-produk.php",
+            method: "POST",
+            data: { nama: nama, kategori: kategori },
+            success: function (data) {
+                $('#show-produk').html(data);
+            }
+        });
     });
-
-    $('#filter-value').change(function () {
-        var query = $('#filter-value').val();
-
-        if (query === '-Pilih') {
-            show_produk();
-        } else {
-            show_produk(query);
-        }
-    });
-
 
 
     // transaksi

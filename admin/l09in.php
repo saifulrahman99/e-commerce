@@ -21,7 +21,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
 }
 
 if ($_SESSION['status_login'] == true) {
-    header('location: dashboard');
+    header('location: control');
 }
 ?>
 <!DOCTYPE html>

@@ -29,7 +29,7 @@ RewriteRule ^transaksi/notif controllers/notification-handler.php
 # ADMIN
 
 RewriteRule ^admin/login$ admin/l09in.php
-RewriteRule ^admin/dashboard$ admin/index.php
+RewriteRule ^admin/control$ admin/index.php
 
 
 RewriteRule ^admin/logout$ admin/controllers/logout.php
