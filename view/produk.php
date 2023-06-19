@@ -34,7 +34,7 @@
 
                 <input type="text" name="search_produk" id="search_show_produk" placeholder="Cari produk..." class="form-control">
 
-                <button class="input-group-text btn btn-light border" id="search-button">
+                <button class="input-group-text btn btn-light border" id="search-button" style="z-index: 0;">
                     <i data-feather="search"></i>
                 </button>
 

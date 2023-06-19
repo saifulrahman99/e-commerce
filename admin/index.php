@@ -44,8 +44,8 @@ require 'function/base_url.php';
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
 
-                    <li>
-                        <a class="klik_menu active" id="dashboard"><i class="menu-icon ti-home"></i>Dashboard </a>
+                    <li class="klik_menu active" id="dashboard">
+                        <a><i class="menu-icon ti-home"></i>Dashboard </a>
                     </li>
 
 
@@ -53,32 +53,32 @@ require 'function/base_url.php';
                     <li class="klik_menu menu-item-has-children dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon ti-bag"></i>Produk</a>
                         <ul class="sub-menu children dropdown-menu">
-                            <li class="pt-2 pb-1"><i class="ti-direction pt-2"></i><a class="klik_menu" id="produk">Produk</a></li>
-                            <li class="pt-2 pb-1"><i class="ti-direction pt-2"></i><a class="klik_menu" id="kategori">Kategori</a></li>
+                            <li class="pt-2 pb-1 klik_menu" id="produk"><i class="ti-direction pt-2"></i><a>Produk</a></li>
+                            <li class="pt-2 pb-1 klik_menu" id="kategori"><i class="ti-direction pt-2"></i><a>Kategori</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="klik_menu" id="promo"><i class="menu-icon fa fa-gift"></i>Promo </a>
+                    <li class="klik_menu" id="promo">
+                        <a><i class="menu-icon fa fa-gift"></i>Promo </a>
                     </li>
-                    <li>
-                        <a class="klik_menu" id="toko"><i class="menu-icon fa fa-laptop"></i>Toko </a>
+                    <li class="klik_menu" id="toko">
+                        <a><i class="menu-icon fa fa-laptop"></i>Toko </a>
                     </li>
 
                     <li class="menu-title">Informasi</li><!-- /.menu-title -->
-                    <li>
-                        <a class="klik_menu" id="transaksi"><i class="menu-icon ti-receipt"></i>Transaksi </a>
+                    <li class="klik_menu" id="transaksi">
+                        <a><i class="menu-icon ti-receipt"></i>Transaksi </a>
                     </li>
-                    <li>
-                        <a class="klik_menu" id="pesan"><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
+                    <li class="klik_menu" id="pesan">
+                        <a><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
                     </li>
-                    <li>
-                        <a class="klik_menu" id="notifikasi"><i class="menu-icon ti-bell"></i>Notifikasi </a>
+                    <li class="klik_menu" id="notifikasi">
+                        <a><i class="menu-icon ti-bell"></i>Notifikasi </a>
                     </li>
 
                     <li class="menu-title">Pengaturan</li><!-- /.menu-title -->
 
-                    <li>
-                        <a class="klik_menu" id="pengaturan"><i class="menu-icon ti-settings"></i>Pengaturan </a>
+                    <li class="klik_menu" id="pengaturan">
+                        <a><i class="menu-icon ti-settings"></i>Pengaturan </a>
                     </li>
 
                 </ul>
@@ -93,7 +93,7 @@ require 'function/base_url.php';
         <header id="header" class="header">
             <div class="top-left">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<?= base_url('control')?>"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
+                    <a class="navbar-brand" href="<?= base_url('control') ?>"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
                     <a class="navbar-brand hidden" href="./"><img src="<?= base_url('../assets/img/brand/adastra.png') ?>" alt="Logo"></a>
                     <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
                 </div>
@@ -152,6 +152,8 @@ require 'function/base_url.php';
         <!-- Content -->
         <div id="isi-content-halaman">
 
+
+
         </div>
         <!-- /.content -->
         <div class="clearfix"></div>
@@ -163,9 +165,6 @@ require 'function/base_url.php';
                 <div class="row">
                     <div class="col-sm-6">
                         Copyright &copy; 2023 Saiful Rahman
-                    </div>
-                    <div class="col-sm-6 text-right">
-                        Designed by <a href="https://colorlib.com">Colorlib</a>
                     </div>
                 </div>
             </div>
@@ -212,12 +211,11 @@ require 'function/base_url.php';
     <script src="<?= base_url('assets/js/ajax-admin.js') ?>"></script>
 
     <script src="<?= base_url('assets/template/js/init/flot-chart-init.js') ?>"></script>
-    
+
     <?php
     $hlm = (isset($_GET['halaman'])) ? $_GET['halaman'] : "";
     ?>
     <script>
-       
         $(document).ready(function() {
             var hlm = "<?= $hlm ?>";
 

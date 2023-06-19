@@ -17,7 +17,7 @@
      </div>
  </div>
 
- <div class="content">
+ <div class="content pb-1">
      <!-- Animated -->
      <div class="row">
          <div class="col-12">
@@ -32,7 +32,20 @@
                              tambah data
                          </button>
 
+
+                         <div class="dropdown mx-1 d-inline-block">
+                             <button type="button" class="btn btn-success px-3  btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-offset="10,20">
+                                 Excel
+                             </button>
+                             <div class="dropdown-menu">
+                                 <a class="dropdown-item" data-toggle="modal" href="#imporExcel">Impor Excel (.CSV)</a>
+
+                                 <a class="dropdown-item" href="<?= base_url('produk-control/ekspor') ?>">Ekspor Excel</a>
+                             </div>
+                         </div>
+
                          <button id="reload-produk" class="btn btn-success btn-sm mx-4"><i class="ti-reload"></i> Refrash</button>
+
                      </div>
                      <!-- /button trigger -->
 
@@ -90,7 +103,7 @@
  <div class="modal fade" id="tambahProduk" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="tambahProdukLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg">
          <div class="modal-content">
-             <form id="form-tambah-data-produk" method="post" enctype="multipart/form-data" onsubmit="produk()">
+             <form action="<?= base_url('produk-control') ?>" id="form-tambah-data-produk" method="post" enctype="multipart/form-data">
 
                  <div class="modal-header">
                      <h5 class="modal-title" id="tambahProdukLabel">Tambah Data Produk</h5>
@@ -156,20 +169,20 @@
                      </div>
                      <div class="form-group mb-2 col-12 mt-3">
                          <label class="mb-1" for="gambar">Gambar Produk</label>
-                         <input type="file" name="gambar" class="form-control" id="gambar" required>
+                         <input type="file" name="gambar" class="form-control" id="gambar" accept=".png, .jpg, .jpeg" required>
                      </div>
                      <div class="form-group mb-2 col-12 mt-3">
                          <label class="mb-1" for="galeri">Galeri Gambar Produk</label>
-                         <input type="file" name="galeri" class="form-control" id="galeri" multiple>
+                         <input type="file" name="galeri[]" class="form-control" id="galeri" accept=".png, .jpg, .jpeg" multiple>
                      </div>
                  </div>
 
-                 <div class="modal-footer d-flex justify-content-center">
-                     <div class="col-12 col-md-8 mb-3">
-                         <button type="submit" class="btn btn-success m-0">Simpan</button>
-                     </div>
-                     <div class="col-12 col-md-8 mb-2">
+                 <div class="modal-footer">
+                     <div class="col-12 col-md-5 mb-2">
                          <button type="button" class="btn btn-secondary m-0" data-dismiss="modal">Kembali</button>
+                     </div>
+                     <div class="col-12 col-md-5 mb-3">
+                         <button type="submit" class="btn btn-success m-0">Simpan</button>
                      </div>
                  </div>
              </form>
@@ -186,13 +199,14 @@
      <div class="modal fade" id="editProduk<?= $modal['id_produk'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
          <div class="modal-dialog modal-dialog-scrollable modal-lg">
              <div class="modal-content">
-                 <form id="form-edit-data-produk" method="post" enctype="multipart/form-data" onsubmit="produk()">
+                 <form action="<?= base_url('produk-control') ?>" id="form-edit-data-produk" method="post" enctype="multipart/form-data">
                      <div class="modal-header">
                          <h5 class="modal-title" id="editProduk<?= $modal['id_produk'] ?>Label">Edit Data Produk</h5>
                      </div>
 
                      <div class="modal-body row">
                          <input type="text" name="opsi" value="update" hidden>
+                         <input type="text" name="id_produk" value="<?= $modal['id_produk'] ?>" hidden>
                          <div class="form-group mb-2 col-12 col-md-6">
                              <label for="kode" class="mb-1">Kode Produk</label>
                              <input type="text" name="kode" class="form-control" id="kode" value="<?= $modal['kode_produk'] ?>" required />
@@ -250,19 +264,19 @@
                          </div>
                          <div class="form-group mb-2 col-12 mt-3">
                              <label class="mb-1" for="gambar">Gambar Produk</label>
-                             <input type="file" name="gambar" class="form-control" id="gambar">
+                             <input type="file" name="gambar" class="form-control" id="gambar" accept=".png, .jpg, .jpeg">
                          </div>
                          <div class="form-group mb-2 col-12 mt-3">
                              <label class="mb-1" for="galeri">Galeri Gambar Produk</label>
-                             <input type="file" name="galeri" class="form-control" id="galeri" multiple>
+                             <input type="file" name="galeri[]" class="form-control" id="galeri" accept=".png, .jpg, .jpeg" multiple>
                          </div>
                      </div>
-                     <div class="modal-footer d-flex justify-content-center">
-                         <div class="col-12 col-md-8 mb-3">
-                             <button type="submit" class="btn btn-info m-0">Simpan Perubahan</button>
-                         </div>
-                         <div class="col-12 col-md-8 mb-2">
+                     <div class="modal-footer">
+                         <div class="col-12 col-md-5 mb-2">
                              <button type="button" class="btn btn-secondary m-0 " data-dismiss="modal">Kembali</button>
+                         </div>
+                         <div class="col-12 col-md-5 mb-3">
+                             <button type="submit" class="btn btn-info m-0">Simpan Perubahan</button>
                          </div>
                      </div>
                  </form>
@@ -271,7 +285,7 @@
      </div>
 
      <!-- Modal -->
-     <div class="modal fade" id="hapusProduk<?= $modal['id_produk'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="hapusProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
+     <div class="modal fade" id="hapusProduk<?= $modal['id_produk'] ?>" tabindex="-1" aria-labelledby="hapusProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
          <div class="modal-dialog modal-dialog-centered">
              <div class="modal-content">
                  <div class="modal-header">
@@ -284,15 +298,36 @@
                          Yakin Untuk Menghapus Data Produk <?= $modal['nm_produk'] ?> ?
                      </p>
                  </div>
-                 <div class="modal-footer d-flex flex-row justify-content-center">
-                     <button type="button" class="btn btn-secondary col-4 col-md-4" data-dismiss="modal">Tidak</button>
-                     <a href='<?=base_url('tes/'.$modal['id_produk']) ?>' class="btn btn-danger col-4 col-md-4">Ya</a>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
+                     <a href='<?= base_url('produk-control/' . $modal['id_produk'] . '/delete') ?>' class="btn btn-danger col-4">Ya</a>
                  </div>
              </div>
          </div>
      </div>
  <?php } ?>
 
+
+ <!-- Modal -->
+ <div class="modal fade" id="imporExcel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="imporExcelLabel" aria-hidden="true">
+     <div class="modal-dialog">
+         <div class="modal-content">
+             <form action="<?= base_url('produk-control') ?>" method="post">
+                 <div class="modal-body">
+                     <input type="text" name="opsi" value="impor" hidden>
+                     <div class="form-group mb-2">
+                         <label for="file_excel" class="mb-1">Impor File Excel (.CSV)</label>
+                         <input type="file" name="file_excel" class="form-control" id="file_excel" required />
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Batal</button>
+                     <button type="submit" class="btn btn-success col-4">Impor Data</button>
+                 </div>
+             </form>
+         </div>
+     </div>
+ </div>
 
 
 
@@ -301,9 +336,9 @@
          $('#tabel-produk').DataTable({
              responsive: true
          });
-
+         var base_url = window.location.origin + '/admin/';
          $('#reload-produk').click(function() {
-             $('#isi-content-halaman').load('view/produk.php');
+             $('#isi-content-halaman').load(base_url + 'view/produk.php');
          });
      });
  </script>

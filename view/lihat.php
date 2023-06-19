@@ -28,7 +28,7 @@ $gambar_produk = $select['gambar'];
                     foreach ($galeri as $g) {
                 ?>
                         <div class="mySlides">
-                            <img src="<?= base_url('assets/img/produk/' . $g) ?>">
+                            <img src="<?= base_url('assets/img/produk/galeri/' . $g) ?>">
                         </div>
                 <?php }
                 } ?>
@@ -41,11 +41,12 @@ $gambar_produk = $select['gambar'];
                         <img class="demo cursor" src="<?= base_url('assets/img/produk/' . $gambar_produk) ?>" onclick="currentSlide(1)" alt="The Woods">
                     </div>
                     <?php
+                    $urutanSlide = 2;
                     if ($select['galeri'] != '') {
                         foreach ($galeri as $g) {
                     ?>
                             <div class="column">
-                                <img class="demo cursor" src="<?= base_url('assets/img/produk/' . $g) ?>" onclick="currentSlide(2)" alt="Cinque Terre">
+                                <img class="demo cursor" src="<?= base_url('assets/img/produk/galeri/' . $g) ?>" onclick="currentSlide(<?=$urutanSlide++?>)" alt="Cinque Terre">
                             </div>
                     <?php }
                     } ?>

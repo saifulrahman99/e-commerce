@@ -1,18 +1,27 @@
-function addCart(id, opsi) {
-    var id_produk = $("#id_produk" + id).val();
-    var opsi_cart = opsi;
+// function produk(id, opsi) {
+//     var id_produk = id;
+//     var opsi_control = opsi;
+//     var base_url = window.location.origin + '/admin/';
 
-    $.ajax({
-        url: "controllers/cart.php",
-        method: "POST",
-        data: { "id_produk": id_produk, "opsi": opsi_cart },
-        success: function () {
+//     $.ajax({
+//         url: base_url + "controllers/produk.php",
+//         method: "POST",
+//         data: { "id_produk": id_produk, "opsi": opsi_control },
+//         success: function (data) {
+//             window.location.href= base_url+'control/produk';
 
-            const cartToast = document.getElementById('cartToast')
+//             if (data == 'hapus') {
+//                 $('#hapusProduk' + id_produk).modal('hide');
+//                 $('.modal-backdrop.fade').remove();
+                
+//             } else if (data == 'edit') {
+//                 $('#isi-content-halaman').load(base_url + 'view/produk.php');
+//             }
 
-            const toast = new bootstrap.Toast(cartToast)
+//             // $('#modalSukses').modal('show');
+//             // $('.modal-backdrop.fade.show').addClass('hide');
 
-            toast.show()
-        }
-    });
-}
+
+//         }
+//     });
+// }

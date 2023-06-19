@@ -67,10 +67,16 @@ option:focus {
     cursor: pointer;
 }
 
-.active,
-.active>i {
-    color: #03a9f3 !important;
+.modal-footer{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
 }
+/* #main-menu .active,
+#main-menu .active>a {
+    color: #03a9f3 !important;
+    background-color: #9b9a9a;
+} */
 
 
 

@@ -34,9 +34,15 @@ RewriteRule ^admin/control$ admin/index.php
 RewriteRule ^admin/control/$ admin/index.php
 
 RewriteRule ^admin/control/([a-zA-Z0-9_-]+)$ admin/index.php?halaman=$1
-RewriteRule ^admin/tes/([a-zA-Z0-9_-]+)$ admin/tes.php?id=$1
+# RewriteRule ^admin/tes/([a-zA-Z0-9_-]+)$ admin/tes.php?id=$1
 
 
 RewriteRule ^admin/logout$ admin/controllers/logout.php
 RewriteRule ^admin/login-control$ admin/controllers/login.php
+
+
+
+RewriteRule ^admin/produk-control$ admin/controllers/produk.php
+RewriteRule ^admin/produk-control/([a-zA-Z0-9_-]+)$ admin/controllers/produk.php?opsi=$1
+RewriteRule ^admin/produk-control/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)$ admin/controllers/produk.php?id_produk=$1&opsi=$2
 

@@ -3,8 +3,6 @@ $(document).ready(function () {
         var menu = $(this).attr('id');
         var base_url = window.location.origin + '/admin/';
         
-        console.log(base_url);
-
         if (menu == "dashboard") {
             $('#isi-content-halaman').load(base_url+'view/dashboard.php');
         } else if (menu == "promo") {
