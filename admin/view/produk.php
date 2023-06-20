@@ -290,7 +290,7 @@
                  </div>
                  <div class="modal-body">
                      <p class="text-dark">
-                         Yakin Untuk Menghapus Data Produk <?= $modal['nm_produk'] ?> ?
+                         Yakin Untuk Menghapus Data Produk <b><?= $modal['nm_produk'] ?></b> ?
                      </p>
                  </div>
                  <div class="modal-footer">

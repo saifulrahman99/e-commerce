@@ -195,11 +195,11 @@ if ($opsi == 'add') {
 
     $allowedFileType = ['application/vnd.ms-excel', 'text/xls', 'text/xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'];
     // fungsi in_array adalah untuk cek apakah nilainya false or true dengan sesuai kondisi yang telah ditentukan
-    if (in_array($_FILES["file"]["type"], $allowedFileType)) {
+    if (in_array($_FILES["file_excel"]["type"], $allowedFileType)) {
 
         // piindahkan file ke folder uploads pada projek
-        $targetPath = '../' . $_FILES['file']['name'];
-        move_uploaded_file($_FILES['file']['tmp_name'], $targetPath);
+        $targetPath = '../' . $_FILES['file_excel']['name'];
+        move_uploaded_file($_FILES['file_excel']['tmp_name'], $targetPath);
 
         $reader = new SpreadsheetReader($targetPath);
 

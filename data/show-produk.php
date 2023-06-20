@@ -24,7 +24,7 @@ if (mysqli_num_rows($query) > 0) {
 ?>
         <div class="col-6 col-md-3 col-lg-2 mb-5">
             <div class="card cssanimation fadeInBottom">
-                <img src="<?= '../assets/img/produk/' . $gambar_produk ?>" alt="..." style="aspect-ratio: 1/1;" class="rounded-top">
+                <img src="<?=(!empty($gambar_produk)) ? '../assets/img/produk/' . $gambar_produk : '../assets/img/produk/default-produk.jpg' ?>" alt="..." style="aspect-ratio: 1/1;" class="rounded-top">
                 <div class="card-body px-3 py-3">
                     <h5 class="card-title nama-produk m-0"><?= ucwords(strtolower($produk['nm_produk'])) ?></h5>
                     <span style="font-weight: 800;"><?= rupiah($produk['harga_jual']) ?></span>

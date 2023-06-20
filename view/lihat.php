@@ -18,7 +18,7 @@ $gambar_produk = $select['gambar'];
 
                 <!-- slide galeri -->
                 <div class="mySlides">
-                    <img src="<?= base_url('assets/img/produk/' . $gambar_produk) ?>">
+                    <img src="<?= (!empty($gambar_produk)) ? base_url('/assets/img/produk/' . $gambar_produk) : base_url('/assets/img/produk/default-produk.jpg') ?>">
                 </div>
                 <?php
                 $galeri = explode(',', $select['galeri']);
@@ -38,7 +38,7 @@ $gambar_produk = $select['gambar'];
 
                 <div class="row row-navigator mb-2">
                     <div class="column">
-                        <img class="demo cursor" src="<?= base_url('assets/img/produk/' . $gambar_produk) ?>" onclick="currentSlide(1)" alt="The Woods">
+                        <img class="demo cursor" src="<?= (!empty($gambar_produk)) ? base_url('/assets/img/produk/' . $gambar_produk) : base_url('/assets/img/produk/default-produk.jpg') ?>" onclick="currentSlide(1)" alt="The Woods">
                     </div>
                     <?php
                     $urutanSlide = 2;
@@ -46,7 +46,7 @@ $gambar_produk = $select['gambar'];
                         foreach ($galeri as $g) {
                     ?>
                             <div class="column">
-                                <img class="demo cursor" src="<?= base_url('assets/img/produk/galeri/' . $g) ?>" onclick="currentSlide(<?=$urutanSlide++?>)" alt="Cinque Terre">
+                                <img class="demo cursor" src="<?= base_url('assets/img/produk/galeri/' . $g) ?>" onclick="currentSlide(<?= $urutanSlide++ ?>)" alt="Cinque Terre">
                             </div>
                     <?php }
                     } ?>
@@ -71,9 +71,9 @@ $gambar_produk = $select['gambar'];
                         <li>Satuan : <b><?= strtolower($select['satuan']) ?></b></li>
                         <li>Stok : <b id="stok-lihat"><?= $select['stok'] ?></b></li>
                     </ul>
-                    <p>
-                        <?= $select['deskripsi'] ?>
-                    </p>
+                    <div class="deskripsi">
+                        <?= (!empty($select['deskripsi'])) ? $select['deskripsi'] : "<p class='text-justify'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit quos incidunt earum eligendi quisquam, tempore minus fugit magnam eos, quo dolorum. Autem at consectetur porro beatae aliquam similique ut quo!</p>" ?>
+                    </div>
 
                 </div>
             </div>
@@ -113,28 +113,38 @@ $gambar_produk = $select['gambar'];
         <div class="produk-sejenis pt-3 pb-4 d-inline d-flex scroll-efek-x">
 
             <!-- produk -->
-            <?php 
+            <?php
+            $dataNama = $select['nm_produk'];
+            $array_nm_produk = explode(' ', $dataNama);
+            $key_sejenis = '';
+            foreach ($array_nm_produk as $key => $value) {
+                $key_sejenis .= "nm_produk LIKE '%$value%' OR ";
+            }
+            $key_sejenis = substr($key_sejenis, 0, -4);
+
             $kategori = $select['kategori'];
-            $query = mysqli_query($db,"SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE kategori = '$kategori'");
-            foreach ($query as $sejenis) { 
+
+            $query = mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE $key_sejenis ORDER BY nm_produk ASC");
+
+            foreach ($query as $sejenis) {
                 if ($sejenis['kode_produk'] != $select['kode_produk']) {
-                ?>
-                <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
-                    <div class="card shadow-sm">
-                        <img src="<?= base_url('assets/img/produk/' . $sejenis['gambar']) ?>" alt="..." style="aspect-ratio: 2/1.5;">
-                        <div class="card-body px-3 py-3">
-                            <h5 class="card-title nama-produk m-0"><?= ucwords(strtolower($sejenis['nm_produk'])) ?></h5>
-                            <span style="font-weight: 800;"><?= rupiah($sejenis['harga_jual']) ?> /Kg</span>
-                        </div>
-                        <div class="cart-button text-center">
-                            <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                            <a href="<?= $sejenis['id_produk'] ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+            ?>
+                    <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
+                        <div class="card shadow-sm">
+                            <img src="<?= (!empty($sejenis['gambar'])) ? base_url('/assets/img/produk/' . $sejenis['gambar']) : base_url('/assets/img/produk/default-produk.jpg') ?>" alt="..." style="aspect-ratio: 2/1.5;">
+                            <div class="card-body px-3 py-3">
+                                <h5 class="card-title nama-produk m-0"><?= ucwords(strtolower($sejenis['nm_produk'])) ?></h5>
+                                <span style="font-weight: 800;"><?= rupiah($sejenis['harga_jual']) ?> /Kg</span>
+                            </div>
+                            <div class="cart-button text-center">
+                                <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
+                                <a href="<?= $sejenis['id_produk'] ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php 
-            }
-        } ?>
+            <?php
+                }
+            } ?>
             <!-- end produk -->
 
             <div class="col-4 col-md-2 col-lg-1 p-1 item-scroll">
