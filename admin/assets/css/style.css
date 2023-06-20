@@ -7,7 +7,9 @@ textarea:focus,
 option:focus {
     box-shadow: none !important;
 }
-
+.tebal-700{
+    font-weight: 700 !important;
+}
 /*=========== Bagian Login ========= */
 #body-login {
     font-family: 'Roboto', sans-serif;
@@ -67,11 +69,12 @@ option:focus {
     cursor: pointer;
 }
 
-.modal-footer{
+.modal-footer {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: row;
     justify-content: center !important;
 }
+
 /* #main-menu .active,
 #main-menu .active>a {
     color: #03a9f3 !important;
@@ -94,19 +97,8 @@ table tbody td {
     font-size: 0.9rem !important;
 }
 
-@media (max-width:992px) {
-
-    .gambar-login {
-        display: none;
-    }
-}
-
-.btn {
-    border-radius: 30px !important;
-}
-
 #form-tambah-data-produk .modal-body,
-#form-edit-data-produk .modal-body{
+#form-edit-data-produk .modal-body {
     max-height: 60vh;
     overflow-y: auto;
     width: 102%;
@@ -125,6 +117,32 @@ table tbody td {
 
 form textarea {
     font-size: 0.9rem !important;
+}
+
+.right-panel .breadcrumbs {
+    margin-top: 0 !important;
+    padding-top: 30px !important;
+    background-color: #f1f2f7 !important;
+}
+
+
+
+
+
+
+
+
+
+
+@media (max-width:992px) {
+
+    .gambar-login {
+        display: none;
+    }
+}
+
+.btn {
+    border-radius: 30px !important;
 }
 
 @media (max-width:768px) {

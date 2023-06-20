@@ -3,7 +3,7 @@
     require '../function/base_url.php';
     $select = mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori ORDER BY id_produk DESC");
     ?>
- <div class=" breadcrumbs">
+ <div class="breadcrumbs">
      <div class="breadcrumbs-inner">
          <div class="row m-0">
              <div class="col-12">
@@ -24,27 +24,19 @@
              <div class="card">
                  <div class="card-body">
                      <!-- button trigger -->
-                     <div class="button mb-3">
+                     <div class="button mb-3 d-flex flex-wrap">
 
                          <!-- Button trigger modal -->
-                         <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#tambahProduk">
+                         <button type="button" class="btn btn-success btn-sm mr-1 my-1" data-toggle="modal" data-target="#tambahProduk">
                              <i class="ti-plus"></i>
                              tambah data
                          </button>
 
+                         <a class="btn btn-success btn-sm mx-1 my-1" data-toggle="modal" href="#imporExcel">Impor Excel</a>
 
-                         <div class="dropdown mx-1 d-inline-block">
-                             <button type="button" class="btn btn-success px-3  btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" data-offset="10,20">
-                                 Excel
-                             </button>
-                             <div class="dropdown-menu">
-                                 <a class="dropdown-item" data-toggle="modal" href="#imporExcel">Impor Excel (.CSV)</a>
+                         <a class="btn btn-success btn-sm mx-1 my-1" href="<?= base_url('produk-control/ekspor') ?>" target="_blank">Ekspor Excel</a>
 
-                                 <a class="dropdown-item" href="<?= base_url('produk-control/ekspor') ?>">Ekspor Excel</a>
-                             </div>
-                         </div>
-
-                         <button id="reload-produk" class="btn btn-success btn-sm mx-4"><i class="ti-reload"></i> Refrash</button>
+                         <button id="reload-produk" class="btn btn-success btn-sm ml-2 my-1"><i class="ti-reload"></i> Refrash</button>
 
                      </div>
                      <!-- /button trigger -->
@@ -65,7 +57,7 @@
                              <?php $no = 1;
                                 foreach ($select as $p) { ?>
                                  <tr>
-                                     <td><?= $no++ ?>&nbsp.</td>
+                                     <td><?= $no++ ?></td>
                                      <td><?= $p['nm_produk'] ?></td>
                                      <td><?= $p['kode_produk'] ?></td>
                                      <td><?= $p['merek'] ?></td>
@@ -103,7 +95,7 @@
  <div class="modal fade" id="tambahProduk" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="tambahProdukLabel" aria-hidden="true">
      <div class="modal-dialog modal-lg">
          <div class="modal-content">
-             <form action="<?= base_url('produk-control') ?>" id="form-tambah-data-produk" method="post" enctype="multipart/form-data">
+             <form id="form-tambah-data-produk" method="post" enctype="multipart/form-data" onsubmit="produk('','add');return false;">
 
                  <div class="modal-header">
                      <h5 class="modal-title" id="tambahProdukLabel">Tambah Data Produk</h5>
@@ -177,7 +169,7 @@
                      </div>
                  </div>
 
-                 <div class="modal-footer">
+                 <div class="modal-footer flex-column-reverse flex-md-row">
                      <div class="col-12 col-md-5 mb-2">
                          <button type="button" class="btn btn-secondary m-0" data-dismiss="modal">Kembali</button>
                      </div>
@@ -199,7 +191,9 @@
      <div class="modal fade" id="editProduk<?= $modal['id_produk'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
          <div class="modal-dialog modal-dialog-scrollable modal-lg">
              <div class="modal-content">
-                 <form action="<?= base_url('produk-control') ?>" id="form-edit-data-produk" method="post" enctype="multipart/form-data">
+                 <form id="form-edit-data-produk" method="post" enctype="multipart/form-data" onsubmit="produk('<?= $modal['id_produk'] ?>','update');return false;">
+
+
                      <div class="modal-header">
                          <h5 class="modal-title" id="editProduk<?= $modal['id_produk'] ?>Label">Edit Data Produk</h5>
                      </div>
@@ -207,6 +201,7 @@
                      <div class="modal-body row">
                          <input type="text" name="opsi" value="update" hidden>
                          <input type="text" name="id_produk" value="<?= $modal['id_produk'] ?>" hidden>
+
                          <div class="form-group mb-2 col-12 col-md-6">
                              <label for="kode" class="mb-1">Kode Produk</label>
                              <input type="text" name="kode" class="form-control" id="kode" value="<?= $modal['kode_produk'] ?>" required />
@@ -271,7 +266,7 @@
                              <input type="file" name="galeri[]" class="form-control" id="galeri" accept=".png, .jpg, .jpeg" multiple>
                          </div>
                      </div>
-                     <div class="modal-footer">
+                     <div class="modal-footer flex-column-reverse flex-md-row">
                          <div class="col-12 col-md-5 mb-2">
                              <button type="button" class="btn btn-secondary m-0 " data-dismiss="modal">Kembali</button>
                          </div>
@@ -300,7 +295,7 @@
                  </div>
                  <div class="modal-footer">
                      <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
-                     <a href='<?= base_url('produk-control/' . $modal['id_produk'] . '/delete') ?>' class="btn btn-danger col-4">Ya</a>
+                     <button type="button" class="btn btn-danger col-4" onclick="produk(<?= $modal['id_produk'] ?>,'delete')">Ya </button>
                  </div>
              </div>
          </div>
@@ -308,16 +303,16 @@
  <?php } ?>
 
 
- <!-- Modal -->
+ <!-- Modal impor-->
  <div class="modal fade" id="imporExcel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="imporExcelLabel" aria-hidden="true">
      <div class="modal-dialog">
          <div class="modal-content">
-             <form action="<?= base_url('produk-control') ?>" method="post">
+             <form id="form-impor-produk" method="post" onsubmit="produk('','impor');return false;" enctype="multipart/form-data">
                  <div class="modal-body">
                      <input type="text" name="opsi" value="impor" hidden>
                      <div class="form-group mb-2">
-                         <label for="file_excel" class="mb-1">Impor File Excel (.CSV)</label>
-                         <input type="file" name="file_excel" class="form-control" id="file_excel" required />
+                         <label for="file_excel" class="mb-1">Impor File Excel</label>
+                         <input type="file" name="file_excel" class="form-control" id="file_excel" accept=".xls,.xlsx" required />
                      </div>
                  </div>
                  <div class="modal-footer">
@@ -342,3 +337,5 @@
          });
      });
  </script>
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
