@@ -32,9 +32,9 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
                             <form id="form-kategori" class="border rounded p-3 mt-3">
                                 <div class="form-group mb-2">
                                     <label for="nm_kategori" class="mb-1">Nama Kategori</label>
-                                    <input type="text" name="nm_kategori" class="form-control" id="nm_kategori"  />
+                                    <input type="text" name="nm_kategori" class="form-control" id="nm_kategori" />
                                     <label for="kode_kategori" class="mb-1">Kode Kategori</label>
-                                    <input type="text" name="kode_kategori" class="form-control" id="kode_kategori"  />
+                                    <input type="text" name="kode_kategori" class="form-control" id="kode_kategori" />
                                 </div>
                                 <div class="mt-3">
                                     <button type="button" class="btn btn-info" onclick="kategori('','add')">Simpan</button>
@@ -105,6 +105,9 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
 <script>
     $(document).ready(function() {
         $('#tabel-kategori').DataTable({
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
             responsive: true
         });
         var base_url = window.location.origin + '/admin/';

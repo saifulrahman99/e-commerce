@@ -51,7 +51,7 @@
                              <th>Harga Jual</th>
                              <th>Stok</th>
                              <th>Kategori</th>
-                             <th>Aksi</th>
+                             <th style="min-width: 200px;">Aksi</th>
                          </thead>
                          <tbody>
                              <?php $no = 1;
@@ -330,7 +330,9 @@
      $(document).ready(function() {
          $('#tabel-produk').DataTable({
              responsive: true
+            //  "pagingType": "simple"
          });
+
          var base_url = window.location.origin + '/admin/';
          $('#reload-produk').click(function() {
              $('#isi-content-halaman').load(base_url + 'view/produk.php');

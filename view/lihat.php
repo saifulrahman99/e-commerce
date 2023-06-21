@@ -131,14 +131,14 @@ $gambar_produk = $select['gambar'];
             ?>
                     <div class="col-6 col-md-3 col-lg-2 p-1 me-1 item-scroll">
                         <div class="card shadow-sm">
-                            <img src="<?= (!empty($sejenis['gambar'])) ? base_url('/assets/img/produk/' . $sejenis['gambar']) : base_url('/assets/img/produk/default-produk.jpg') ?>" alt="..." style="aspect-ratio: 2/1.5;">
+                            <img src="<?= (!empty($sejenis['gambar'])) ? base_url('/assets/img/produk/' . $sejenis['gambar']) : base_url('/assets/img/produk/default-produk.jpg') ?>" alt="..." style="aspect-ratio: 1/1;">
                             <div class="card-body px-3 py-3">
                                 <h5 class="card-title nama-produk m-0"><?= ucwords(strtolower($sejenis['nm_produk'])) ?></h5>
                                 <span style="font-weight: 800;"><?= rupiah($sejenis['harga_jual']) ?> /Kg</span>
                             </div>
                             <div class="cart-button text-center">
-                                <a href="#" class="btn bg-ijo btn-cart"><i class="fa-solid fa-cart-plus"></i></a>
-                                <a href="<?= $sejenis['id_produk'] ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                                <a href="#" class="btn bg-ijo btn-cart py-2 rounded-circle"><i class="fa-solid fa-cart-plus"></i></a>
+                                <a href="<?= $sejenis['id_produk'] ?>" class="btn bg-ijo btn-cart py-2 rounded-circle"><i class="fa-regular fa-eye"></i></a>
                             </div>
                         </div>
                     </div>

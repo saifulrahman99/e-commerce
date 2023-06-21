@@ -38,9 +38,9 @@
 
                                 <div class="item row align-items-center">
 
-                                    <div class="col-5 col-md-2">
+                                    <div class="col-5 col-md-2 p-4">
                                         <a href="produk/lihat/<?= $produk['id_produk'] ?>">
-                                            <img id="gmbr-prdk-keranjang" src="<?= '../assets/img/produk/' . $produk['gambar'] ?>" class="item-img" alt="..." style="aspect-ratio: 2/1.5;">
+                                            <img id="gmbr-prdk-keranjang" src="<?= (!empty($produk['gambar'])) ? base_url('assets/img/produk/' . $produk['gambar']) : base_url('assets/img/produk/default-produk.jpg') ?>" class="item-img" alt="..." style="aspect-ratio: 1/1;">
                                         </a>
                                     </div>
 

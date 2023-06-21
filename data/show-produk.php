@@ -34,10 +34,10 @@ if (mysqli_num_rows($query) > 0) {
 
                     <?php
                     if ($produk['stok'] > 0) { ?>
-                        <a class="btn bg-ijo btn-cart" onclick="addCart(<?= $produk['id_produk'] ?>,'direct')"><i class="fa-solid fa-cart-plus"></i></a>
+                        <a class="btn bg-ijo btn-cart rounded-circle py-2 mx-1" onclick="addCart(<?= $produk['id_produk'] ?>,'direct')"><i class="fa-solid fa-cart-plus"></i></a>
                     <?php } ?>
 
-                    <a href="produk/lihat/<?= $produk['id_produk'] ?>" class="btn bg-ijo btn-cart"><i class="fa-regular fa-eye"></i></a>
+                    <a href="produk/lihat/<?= $produk['id_produk'] ?>" class="btn bg-ijo btn-cart rounded-circle py-2 mx-1"><i class="fa-regular fa-eye"></i></a>
 
                 </div>
             </div>
