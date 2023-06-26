@@ -86,43 +86,34 @@ function getting_browser()
 }
 $user_os        =   get_os();
 $user_browser   =   getting_browser();
-$ip_user  = get_client_ip_env();
+$ip_user        = get_client_ip_env();
 
 $today = date('Y-m-d');
-// echo php_uname();
 
-// echo " $user_os $user_browser $ip_user";
 $q_user = "SELECT * FROM pengunjung WHERE ip_address = '$ip_user' AND os = '$user_os'";
-$select = mysqli_num_rows(mysqli_query($db, "$q_user"));
 
-if ($select < 1) {
-    $query = "INSERT INTO pengunjung(ip_address, browser, os, waktu) VALUES ('$ip_user','$user_browser','$user_os','$today')";
-
-    $insert = mysqli_query($db, $query);
-}
-
-// update waktu kunjungan
-
-
-$sessionPengunjung = (isset($_SESSION['id_pengunjung'])) ? $_SESSION['id_pengunjung'] : '';
 $coockiePengunjung = (isset($_COOKIE['id_pengunjung'])) ? $_COOKIE['id_pengunjung'] : '';
 
-$select_id = mysqli_fetch_assoc(mysqli_query($db, "$q_user"));
-
-if (empty($sessionPengunjung)) {
-
-    $_SESSION['id_pengunjung'] = $select_id['id_pengunjung'];
-}
 
 if (empty($coockiePengunjung)) {
-    setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 365), '/');
+
+    $select = mysqli_num_rows(mysqli_query($db, "$q_user"));
+
+    if ($select < 1) {
+        $query = "INSERT INTO pengunjung(ip_address, browser, os, waktu) VALUES ('$ip_user','$user_browser','$user_os','$today')";
+
+        $insert = mysqli_query($db, $query);
+    } else {
+        $select_id = mysqli_fetch_assoc(mysqli_query($db, "$q_user"));
+        setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 365), '/');
+    }
 }
 
 if (isset($_COOKIE['id_pengunjung'])) {
-    
+
+    // update waktu kunjungan
     $id_pengunjung = $_COOKIE['id_pengunjung'];
-    mysqli_query($db,"UPDATE pengunjung SET waktu = '$today' WHERE id_pengunjung = '$id_pengunjung'") ;
+    mysqli_query($db, "UPDATE pengunjung SET waktu = '$today' WHERE id_pengunjung = '$id_pengunjung'");
 }
 
 // $d_pengunjung = mysqli_query($db, "SELECT DISTINCT transaksi.id_pengunjung as id FROM `transaksi` INNER JOIN pengunjung ON transaksi.id_pengunjung = pengunjung.id_pengunjung");
-
