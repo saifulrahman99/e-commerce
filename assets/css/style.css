@@ -71,7 +71,16 @@ input {
 .jenis-pembayaran {
     overflow: hidden;
 }
-
+.coret-text{
+    text-decoration: line-through !important;
+    font-size: 0.7em;
+}
+.label-diskon{
+    color: #f94d63;
+    background-color: #ffdbe2;
+    font-size: 0.7em;
+    font-weight: 600;
+}
 /* end custom */
 
 /* ============== CSS All ============== */
@@ -700,6 +709,11 @@ footer .copyright span {
 #lihat-produk .deskripsi .harga-produk {
     font-size: 2rem !important;
     font-weight: 700 !important;
+
+}
+#lihat-produk .deskripsi .harga-coret {
+    font-size: 1.2rem !important;
+    font-weight: 600 !important;
 
 }
 

@@ -14,7 +14,7 @@ $(document).ready(function () {
             }
         });
     }
-    
+
     // pencarian data produk
     $("#search-button").click(function () {
         var nama = $('#search_show_produk').val();
@@ -48,14 +48,15 @@ $(document).ready(function () {
 
 
 // tambah ke keranjnag dengan kuantitas 1
-function addCart(id, opsi) {
+function addCart(id, harga, opsi) {
     var id_produk = $("#id_produk" + id).val();
     var opsi_cart = opsi;
+    var harga_produk = harga;
 
     $.ajax({
         url: "controllers/cart.php",
         method: "POST",
-        data: { "id_produk": id_produk, "opsi": opsi_cart },
+        data: { "id_produk": id_produk, "opsi": opsi_cart ,"harga": harga_produk},
         success: function () {
 
             const cartToast = document.getElementById('cartToast')

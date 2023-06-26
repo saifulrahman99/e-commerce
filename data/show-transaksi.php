@@ -27,6 +27,7 @@
         foreach ($select_transaksi as $sk) {
             $belanjaan = $sk['belanjaan'];
             $belanjaan = json_decode($belanjaan);
+            
             // $convert_obj = (array)$belanjaan;
             foreach ($belanjaan as $k => $v) {
                 $data_belanja = $v;
@@ -78,7 +79,7 @@
                 if ($label_tanggal != $label_tgl_sebelumnya) {
 
         ?>
-                 <label class="tebal-700 mt-5 mb-2">
+                 <label class="tebal-700 mt-3 mb-2">
                      <?= "$label_tanggal_hari $label_tanggal" ?>
                  </label>
              <?php
@@ -104,7 +105,7 @@
                          </div>
                          <div class="p-0">
                              <i data-feather="clock" style="width: 0.8rem;"> </i>
-                             <span style="font-size: 0.7rem;"> <?= $sk['waktu_bayar'] ?> </span>
+                             <span style="font-size: 0.7rem;"> <?= substr($sk['waktu_bayar'],0,-3) ?> </span>
                          </div>
                          <?php
 

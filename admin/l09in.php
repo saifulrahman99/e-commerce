@@ -10,7 +10,7 @@ if (isset($_COOKIE['username']) && isset($_COOKIE['password'])) {
     $coockie_password = $_COOKIE['password'];
     $key_coockie = hash('sha256', "$coockie_password$coockie_username");
 
-    $key = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM admin"));
+    $key = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM akun"));
     $key = $key['key'];
 
     if ($key_coockie === $key) {

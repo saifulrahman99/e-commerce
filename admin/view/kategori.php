@@ -18,56 +18,51 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
 </div>
 
 <div id="kategori" class="content pb-1">
-    <!-- Animated -->
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <button id="reload-kategori" class="btn btn-success btn-sm">
-                        <i class="ti-reload"></i>
-                        Refrash
-                    </button>
-                    <div class="row">
-                        <div class="col-12 col-md-3 mb-4 mb-md-0">
-                            <form id="form-kategori" class="border rounded p-3 mt-3">
-                                <div class="form-group mb-2">
-                                    <label for="nm_kategori" class="mb-1">Nama Kategori</label>
-                                    <input type="text" name="nm_kategori" class="form-control" id="nm_kategori" />
-                                    <label for="kode_kategori" class="mb-1">Kode Kategori</label>
-                                    <input type="text" name="kode_kategori" class="form-control" id="kode_kategori" />
-                                </div>
-                                <div class="mt-3">
-                                    <button type="button" class="btn btn-info" onclick="kategori('','add')">Simpan</button>
-                                </div>
-                            </form>
+    <div class="card">
+        <div class="card-body">
+            <button id="reload-kategori" class="btn btn-success btn-sm">
+                <i class="ti-reload"></i>
+                Refrash
+            </button>
+            <div class="row">
+                <div class="col-12 col-md-3 mb-4 mb-md-0">
+                    <form id="form-kategori" class="border rounded p-3 mt-3">
+                        <div class="form-group mb-2">
+                            <label for="nm_kategori" class="mb-1">Nama Kategori</label>
+                            <input type="text" name="nm_kategori" class="form-control" id="nm_kategori" />
+                            <label for="kode_kategori" class="mb-1">Kode Kategori</label>
+                            <input type="text" name="kode_kategori" class="form-control" id="kode_kategori" />
                         </div>
-                        <div class="col-12 col-md-9">
-                            <table id="tabel-kategori" class="table table-striped">
-                                <thead>
-                                    <th style="max-width: 40px;">#</th>
-                                    <th style="max-width: 240px;">Nama Kategori</th>
-                                    <th>Kode Kategori</th>
-                                    <th>Aksi</th>
-                                </thead>
-                                <tbody>
-                                    <?php $no = 1;
-                                    foreach ($select as $k) { ?>
-                                        <tr>
-                                            <td><?= $no++ ?></td>
-                                            <td><?= $k['kategori'] ?></td>
-                                            <td><?= $k['kode_kategori'] ?></td>
-                                            <td>
-                                                <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusKategori<?= $k['id_kategori'] ?>">
-                                                    <i class="ti-trash"></i>
-                                                    hapus
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    <?php } ?>
-                                </tbody>
-                            </table>
+                        <div class="mt-3">
+                            <button type="button" class="btn btn-info" onclick="kategori('','add')">Simpan</button>
                         </div>
-                    </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-9">
+                    <table id="tabel-kategori" class="table table-striped">
+                        <thead>
+                            <th style="max-width: 40px;">#</th>
+                            <th style="max-width: 240px;">Nama Kategori</th>
+                            <th>Kode Kategori</th>
+                            <th>Aksi</th>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1;
+                            foreach ($select as $k) { ?>
+                                <tr>
+                                    <td><?= $no++ ?></td>
+                                    <td><?= $k['kategori'] ?></td>
+                                    <td><?= $k['kode_kategori'] ?></td>
+                                    <td>
+                                        <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusKategori<?= $k['id_kategori'] ?>">
+                                            <i class="ti-trash"></i>
+                                            hapus
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

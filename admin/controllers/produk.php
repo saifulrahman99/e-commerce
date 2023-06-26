@@ -245,9 +245,6 @@ if ($opsi == 'add') {
             }
         }
     }
-} elseif ($opsi == 'ekspor') {
-
-    # code...
 }
 
 echo $opsi;

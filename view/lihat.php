@@ -3,13 +3,16 @@ $id = $_GET['id_produk'];
 $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori WHERE id_produk = $id"));
 
 $gambar_produk = $select['gambar'];
+
+$harga_promo = cek_diskon($id);
+
 ?>
 <div class="bar-navigasi shadow-sm bg-light"></div>
 <div class="spasi-header"></div>
 
 <section id="lihat-produk" class="lihat-produk pb-5">
     <div class="container">
-        <button class="btn btn-light rounded-circle border border-secondary shadow-sm mb-3" onclick="history.go(-1);">
+        <button class="btn btn-light rounded-circle border border-secondary mb-3" onclick="history.go(-1);">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 
@@ -50,8 +53,6 @@ $gambar_produk = $select['gambar'];
                             </div>
                     <?php }
                     } ?>
-
-
                 </div>
 
                 <!-- slide galeri end -->
@@ -61,9 +62,46 @@ $gambar_produk = $select['gambar'];
             <div class="deskripsi col-12 col-lg-5 px-2">
                 <div class="rounded bg-white">
                     <span class="nama-produk d-block mb-3"><?= ucwords(strtolower($select['nm_produk'])) ?></span>
-                    <span class="harga-produk d-block mb-3"><?= rupiah($select['harga_jual']) ?> /<?= strtolower($select['satuan']) ?>
-                        <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga_jual'] ?></span>
-                    </span>
+
+                    <?php
+                    if (!empty($harga_promo)) {
+                        $diskon = number_format((($harga_promo / $select['harga_jual']) * 100), 2);
+                        $arr_diskon = explode('.', $diskon);
+                        $diskon = ($arr_diskon[1] == '00') ? $arr_diskon[0] : $diskon;
+
+                        $diskon = 100 - $diskon;
+
+
+                        if ($diskon == 0) { ?>
+
+                            <span class="harga-produk d-block mb-3"><?= rupiah($select['harga_jual']) ?> /<?= strtolower($select['satuan']) ?>
+                                <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga_jual'] ?></span>
+                            </span>
+
+                        <?php
+                            $harga_cart = $select['harga_jual'];
+                        } else { ?>
+
+                            <span class="harga-coret coret-text mb-3"><?= rupiah($select['harga_jual']) ?> /<?= strtolower($select['satuan']) ?> </span>
+
+                            <span class="label-diskon rounded p-1 ms-2">-<?= $diskon ?>%</span>
+
+                            <span class="harga-produk d-block mb-3"><?= rupiah($harga_promo) ?> /<?= strtolower($select['satuan']) ?>
+                                <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $harga_promo ?></span>
+                            </span>
+
+                        <?php
+                            $harga_cart = $harga_promo;
+                        }
+                    } else { ?>
+
+                        <span class="harga-produk d-block mb-3"><?= rupiah($select['harga_jual']) ?> /<?= strtolower($select['satuan']) ?>
+                            <span id="harga-produk-lihat" class="harga-produk" style="display: none;"><?= $select['harga_jual'] ?></span>
+                        </span>
+
+                    <?php
+                        $harga_cart = $select['harga_jual'];
+                    } ?>
 
                     <h3 class="keterangan-produk d-block mb-3 text-ijo py-2">Keterangan Produk</h3>
                     <ul>
@@ -85,7 +123,7 @@ $gambar_produk = $select['gambar'];
                             <button class="page-link" onclick="kurangV()"><i class="fa-solid fa-minus"></i></button>
                         </li>
                         <li class="page-item" style="max-width:20%;">
-                            <input type="text" id="jml-item" class="form-control text-center" min="0" value="1" onkeypress="return hanyaAngka(event)" required></input>
+                            <input type="text" id="jml-item" class="form-control text-center" value="0" onkeypress="return hanyaAngka(event)" required></input>
                         </li>
                         <li class="page-item">
                             <button id="tambahV" class="page-link" onclick="tambahV()"><i class="fa-solid fa-plus"></i></button>
@@ -101,6 +139,7 @@ $gambar_produk = $select['gambar'];
                         Tambah ke Keranjang
                     </button>
                     <input id="id-item" type="text" value="<?= $id ?>" hidden>
+                    <input id="harga-item" type="text" value="<?= $harga_cart ?>" hidden>
                 </div>
             </div>
         </div>

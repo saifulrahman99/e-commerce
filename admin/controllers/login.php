@@ -8,7 +8,7 @@ if (isset($_POST['login'])) {
     $password = hash('sha256', $_POST['password']);
 
     
-    $s_admin = mysqli_num_rows(mysqli_query($db, "SELECT * FROM admin WHERE username = '$username' AND password = '$password'"));
+    $s_admin = mysqli_num_rows(mysqli_query($db, "SELECT * FROM akun WHERE username = '$username' AND password = '$password'"));
 
     if ($s_admin > 0) {
         

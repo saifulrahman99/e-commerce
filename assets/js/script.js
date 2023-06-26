@@ -153,6 +153,8 @@ function geserKanan() {
 
 function tambah(i) {
     var jml = document.getElementById("jml-item" + i).value;
+    var stok = document.getElementById("stok" + i).value;
+
 
     if (jml == "") {
         jml = 0;
@@ -160,11 +162,18 @@ function tambah(i) {
         jml = parseFloat(jml);
     }
 
+    // console.log(stok);
+
     if (jml < 0.1) {
         document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item" + i).value = jml + 0.5
+        if (jml >= stok) {
+            document.getElementById("jml-item" + i).value = stok;
+            alert("Jumlah Melebihi Stok");
+        } else {
+            document.getElementById("jml-item" + i).value = jml + 0.5;
+        }
     }
 }
 function kurang(i) {
@@ -248,22 +257,24 @@ function subTotalLihat() {
 }
 
 function disableTambah() {
-    var stok = parseInt(document.getElementById("stok-lihat").innerHTML);
+    var stok = parseFloat(document.getElementById("stok-lihat").innerHTML);
     var addCart = document.getElementById("tambah-keranjang");
     var id = document.getElementById("id-item").value;
-    var jmlitem = document.getElementById("jml-item").value;
+    var jmlItem = document.getElementById("jml-item").value;
+    var hargaItem = document.getElementById("harga-item").value;
 
-    if (isNaN(jmlitem) || jmlitem == '' || jmlitem == 0) {
+    if (isNaN(jmlItem) || jmlItem == '' || jmlItem == 0) {
 
         addCart.style.background = 'gray';
         addCart.setAttribute('onclick', '')
     } else {
-        var jmlItemLihat = parseInt(jmlitem);
-        addCart.setAttribute('onclick', "addCartLihat(" + id + ",'lihat')")
+        var jmlItemLihat = parseFloat(jmlItem);
+        addCart.setAttribute('onclick', "addCartLihat(" + id + "," + hargaItem + ",'lihat')")
         addCart.style.background = '#198754';
     }
 
     if (jmlItemLihat > stok) {
+        alert("Melebihi Stok");
         document.getElementById("jml-item").value = stok;
     }
 }
@@ -289,10 +300,3 @@ $(".jenis-pembayaran label").click(function () {
     // $(this).toggleClass("payment-aktif");
     $(".jenis-pembayaran label").addClass("payment-aktif");
 });
-// $('body').click(function () {
-
-//     if ($(".jenis-pembayaran label").hasClass("payment-aktif")) {
-//         $(".jenis-pembayaran label").removeClass("payment-aktif");
-
-//     };
-// });

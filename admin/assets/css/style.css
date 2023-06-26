@@ -7,10 +7,12 @@ textarea:focus,
 option:focus {
     box-shadow: none !important;
 }
-.modal-header h5{
+
+.modal-header h5 {
     font-family: 'Roboto', sans-serif !important;
     font-weight: 700 !important;
 }
+
 /*=========== Bagian Login ========= */
 #body-login {
     font-family: 'Roboto', sans-serif;
@@ -76,14 +78,6 @@ option:focus {
     justify-content: center !important;
 }
 
-/* #main-menu .active,
-#main-menu .active>a {
-    color: #03a9f3 !important;
-    background-color: #9b9a9a;
-} */
-
-
-
 table thead th {
     font-weight: 600 !important;
     padding: 0.5rem !important;
@@ -99,12 +93,17 @@ table tbody td {
 }
 
 #form-tambah-data-produk .modal-body,
-#form-edit-data-produk .modal-body {
+#form-tambah-data-promo .modal-body,
+#form-edit-data-promo .modal-content .modal-body,
+#form-edit-data-produk .modal-content .modal-body {
     max-height: 60vh;
     overflow-y: auto;
-    width: 102%;
+    width: 101.5%;
     padding-right: 0;
 }
+/* #form-edit-data-promo .modal-content .modal-body::-webkit-scrollbar{
+    display: block !important;
+} */
 
 .modal-footer button {
     width: 100% !important;
@@ -126,11 +125,17 @@ form textarea {
     background-color: #f1f2f7 !important;
 }
 
+#list-group-form-promo {
+    cursor: pointer;
+}
 
+#list-group-form-promo:hover {
+    background-color: chartreuse !important;
+}
 
-
-
-
+.card-body .button {
+    cursor: default !important;
+}
 
 
 

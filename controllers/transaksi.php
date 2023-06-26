@@ -4,7 +4,7 @@ session_start();
 require('../assets/basis/kon.php');
 require('../function.php');
 
-$id_pengunjung = $_SESSION['id_pengunjung'];
+$id_pengunjung = $_COOKIE['id_pengunjung'];
 
 $waktu_bayar = date('Y-m-d H:i:s');
 $satatus_bayar = 0;
@@ -20,9 +20,9 @@ $pengiriman = $_POST['ambil_barang'];
 $cookie_nama = (isset($_COOKIE['nama'])) ? $_COOKIE['nama'] : '';
 
 if ($cookie_nama != $nm_pembeli || $cookie_nama == '') {
-    setcookie('nama', $nm_pembeli, time() + (60 * 60 * 24 * 7), '/');
-    setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 7), '/');
-    setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 7), '/');
+    setcookie('nama', $nm_pembeli, time() + (60 * 60 * 24 * 365), '/');
+    setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 365), '/');
+    setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 365), '/');
 }
 
 

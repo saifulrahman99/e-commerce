@@ -115,13 +115,14 @@ if (empty($sessionPengunjung)) {
 }
 
 if (empty($coockiePengunjung)) {
-    setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 1), '/');
+    setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 365), '/');
 }
 
 if (isset($_COOKIE['id_pengunjung'])) {
-    if ($_COOKIE['id_pengunjung'] != $sessionPengunjung) {
-        setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 1), '/');
-    }
-    $id_pengunjung = $select_id['id_pengunjung'];
+    
+    $id_pengunjung = $_COOKIE['id_pengunjung'];
     mysqli_query($db,"UPDATE pengunjung SET waktu = '$today' WHERE id_pengunjung = '$id_pengunjung'") ;
 }
+
+// $d_pengunjung = mysqli_query($db, "SELECT DISTINCT transaksi.id_pengunjung as id FROM `transaksi` INNER JOIN pengunjung ON transaksi.id_pengunjung = pengunjung.id_pengunjung");
+

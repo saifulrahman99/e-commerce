@@ -4,15 +4,16 @@ setInterval(function () {
     disableTambah();
 }, 500);
 
-function addCartLihat(id, opsi) {
+function addCartLihat(id, harga, opsi) {
     var id_produk = id;
     var jmlItem = $("#jml-item").val();
     var opsi_cart = opsi;
+    var harga_produk = harga;
 
     $.ajax({
         url: "../../controllers/cart.php",
         method: "POST",
-        data: { "id_produk": id_produk, "opsi": opsi_cart, "jml-item": jmlItem },
+        data: { "id_produk": id_produk, "opsi": opsi_cart, "jml-item": jmlItem, "harga": harga_produk },
         success: function () {
             document.getElementById("jml-item").value = 1;
 

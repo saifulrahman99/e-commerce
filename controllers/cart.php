@@ -6,8 +6,7 @@ if ($_POST['opsi'] == 'direct') {
 
     $qty = 1;
     $id_produk = $_POST['id_produk'];
-
-    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga_pokok,harga_jual FROM produk WHERE id_produk = '$id_produk'"));
+    $harga = $_POST['harga'];
 
     if (isset($_POST['qty'])) {
         $qty = max($_POST['qty'], 1);
@@ -19,7 +18,7 @@ if ($_POST['opsi'] == 'direct') {
 
     if (!isset($_SESSION['keranjang'][$id_produk])) {
         $_SESSION['keranjang'][$id_produk][0] = $qty;
-        $_SESSION['keranjang'][$id_produk][1] = $harga['harga_jual'];
+        $_SESSION['keranjang'][$id_produk][1] = $harga;
     } else {
         $_SESSION['keranjang'][$id_produk][0] += $qty;
     }
@@ -32,12 +31,11 @@ if ($_POST['opsi'] == 'direct') {
 
     $qty = $_POST['jml-item'];
     $id_produk = $_POST['id_produk'];
-
-    $harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT harga_pokok,harga_jual FROM produk WHERE id_produk = '$id_produk'"));
+    $harga = $_POST['harga'];
 
     if (!isset($_SESSION['keranjang'][$id_produk])) {
         $_SESSION['keranjang'][$id_produk][0] = $qty;
-        $_SESSION['keranjang'][$id_produk][1] = $harga['harga_jual'];
+        $_SESSION['keranjang'][$id_produk][1] = $harga;
     } else {
 
         $_SESSION['keranjang'][$id_produk][0] += $qty;

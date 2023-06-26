@@ -3,13 +3,17 @@
 
 <section id="keranjang" class="keranjang">
     <div class="container">
+        <button class="btn btn-light rounded-circle border border-secondary mt-2" onclick="history.go(-1);">
+            <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
         <?php if (isset($_SESSION['keranjang']) && !empty($_SESSION['keranjang'])) { ?>
 
             <form action="<?= base_url('controllers/cart.php') ?>" method="POST">
                 <input type="text" name="opsi" value="update" hidden>
                 <div class="row g-2 p-4 bg-white">
 
-                    <h1 class="judul-section">Keranjang Belanja</h1>
+                    <h1 class="judul-section mb-0">Keranjang Belanja</h1>
                     <div class="col-12 col-md-9 mb-3">
                         <?php
 
@@ -31,7 +35,8 @@
                         $total = 0;
                         $i = 0;
                         foreach ($select as  $produk) {
-                            $total += $produk['harga_jual'] * $_SESSION['keranjang'][$produk['id_produk']][0];
+                            $total += $_SESSION['keranjang'][$produk['id_produk']][1] * $_SESSION['keranjang'][$produk['id_produk']][0];
+
                         ?>
                             <!-- item cart -->
                             <div class="list-item py-3 mb-3">
@@ -50,7 +55,7 @@
                                             <span class="nama_produk mb-2"><?= $produk['nm_produk'] ?></span>
                                         </div>
                                         <div class="col-12 col-md-4 text-start text-md-center">
-                                            <span class="harga" style="font-weight: 800 !important;"><?= rupiah($produk['harga_jual']) ?></span>
+                                            <span class="harga" style="font-weight: 800 !important;"><?= rupiah($_SESSION['keranjang'][$produk['id_produk']][1]) ?></span>
                                         </div>
 
                                     </div>
@@ -62,7 +67,8 @@
                                                     <button type="button" class="page-link" onclick="kurang(<?= $i ?>)"><i class="fa-solid fa-minus"></i></button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <input type="text" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control text-center" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)"></input>
+                                                    <input type="text" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control text-center" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)" readonly></input>
+                                                    <input type="text" id="stok<?= $i ?>" value="<?= $produk['stok'] ?>" hidden>
                                                 </li>
                                                 <li class=" page-item">
                                                     <button type="button" class="page-link" onclick="tambah(<?= $i ?>)"><i class="fa-solid fa-plus"></i></button>

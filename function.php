@@ -23,11 +23,63 @@ function kodeRandom($panjang)
     $string = '';
     for ($i = 0; $i < $panjang; $i++) {
         $pos = rand(0, strlen($karakter) - 1);
-        $string .= $karakter{ $pos};
+        $string .= $karakter{$pos};
     }
     return $string;
 }
 
+function cek_diskon($id)
+{
+    $db = mysqli_connect("localhost", "saiz5787_yusuf", "yusuf5787", "saiz5787_yusuf");
+    
+    $harga_jual = '';
+
+    $query_promoAll = "SELECT * FROM promo WHERE id_produk = '0' AND status = '1'";
+    // cek promo untuk all produk
+    $promoAll = mysqli_num_rows(mysqli_query($db, $query_promoAll));
+
+    if ($promoAll > 0) {
+        // promo kembali ke harga pokok
+        $data_harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id'"));
+
+        $data_waktu = mysqli_fetch_assoc(mysqli_query($db, $query_promoAll));
+        $waktu_mulai = strtotime($data_waktu['waktu_mulai']);
+        $waktu_selesai = strtotime($data_waktu['waktu_selesai']);
+
+        $timeNow = strtotime(date("Y-m-d H:i"));
+
+        if ($waktu_mulai <= $timeNow && $waktu_selesai >= $timeNow) {
+            // tentukan harga
+            $harga_jual = $data_harga['harga_pokok'];
+        }
+    }
+
+    $query_promo = "SELECT * FROM promo INNER JOIN produk ON promo.id_produk = produk.id_produk WHERE promo.id_produk = '$id' AND status ='1'";
+
+    $promoPerProduk = mysqli_num_rows(mysqli_query($db, $query_promo));
+
+    if ($promoPerProduk > 0) {
+        // promo spesial
+        $data_harga = mysqli_fetch_assoc(mysqli_query($db, $query_promo));
+
+        $waktuP_mulai = strtotime($data_harga['waktu_mulai']);
+        $waktuP_selesai = strtotime($data_harga['waktu_selesai']);
+        $timeNow = strtotime(date("Y-m-d H:i"));
+
+
+        if ($waktuP_mulai <= $timeNow && $waktuP_selesai >= $timeNow) {
+            // tentukan harga
+            $harga_jual = $data_harga['harga_promo'];
+
+            if ($harga_jual == 0) {
+                $data_harga = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id'"));
+                $harga_jual = $data_harga['harga_pokok'];
+            }
+        }
+    }
+
+    return $harga_jual;
+}
 
 $halaman = ucfirst(isset($_GET['halaman']) ? $_GET['halaman'] : "home");
 

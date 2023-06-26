@@ -18,74 +18,67 @@
  </div>
 
  <div class="content pb-1">
-     <!-- Animated -->
-     <div class="row">
-         <div class="col-12">
-             <div class="card">
-                 <div class="card-body">
-                     <!-- button trigger -->
-                     <div class="button mb-3 d-flex flex-wrap">
+     <div class="card">
+         <div class="card-body">
+             <!-- button trigger -->
+             <div class="button mb-3 d-flex flex-wrap">
 
-                         <!-- Button trigger modal -->
-                         <button type="button" class="btn btn-success btn-sm mr-1 my-1" data-toggle="modal" data-target="#tambahProduk">
-                             <i class="ti-plus"></i>
-                             tambah data
-                         </button>
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-success btn-sm mr-1 my-1" data-toggle="modal" data-target="#tambahProduk">
+                     <i class="ti-plus"></i>
+                     tambah data
+                 </button>
 
-                         <a class="btn btn-success btn-sm mx-1 my-1" data-toggle="modal" href="#imporExcel">Impor Excel</a>
+                 <a class="btn btn-success btn-sm mx-1 my-1" data-toggle="modal" href="#imporExcel">Impor Excel</a>
 
-                         <a class="btn btn-success btn-sm mx-1 my-1" href="<?= base_url('produk-control/ekspor') ?>" target="_blank">Ekspor Excel</a>
+                 <a class="btn btn-success btn-sm mx-1 my-1" href="<?= base_url('produk-control/ekspor') ?>" target="_blank">Ekspor Excel</a>
 
-                         <button id="reload-produk" class="btn btn-success btn-sm ml-2 my-1"><i class="ti-reload"></i> Refrash</button>
+                 <button id="reload-produk" class="btn btn-success btn-sm ml-2 my-1"><i class="ti-reload"></i> Refrash</button>
 
-                     </div>
-                     <!-- /button trigger -->
-
-                     <table id="tabel-produk" class="table table-striped">
-                         <thead>
-                             <th>#</th>
-                             <th>Nama</th>
-                             <th>Kode</th>
-                             <th>Merk</th>
-                             <th>Harga Pokok</th>
-                             <th>Harga Jual</th>
-                             <th>Stok</th>
-                             <th>Kategori</th>
-                             <th style="min-width: 200px;">Aksi</th>
-                         </thead>
-                         <tbody>
-                             <?php $no = 1;
-                                foreach ($select as $p) { ?>
-                                 <tr>
-                                     <td><?= $no++ ?></td>
-                                     <td><?= $p['nm_produk'] ?></td>
-                                     <td><?= $p['kode_produk'] ?></td>
-                                     <td><?= $p['merek'] ?></td>
-                                     <td><?= $p['harga_pokok'] ?></td>
-                                     <td><?= $p['harga_jual'] ?></td>
-                                     <td><?= $p['stok'] ?></td>
-                                     <td><?= $p['kategori'] ?></td>
-                                     <td>
-                                         <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#editProduk<?= $p['id_produk'] ?>">
-                                             <i class="ti-pencil"></i>
-                                             edit
-                                         </button>
-
-                                         <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusProduk<?= $p['id_produk'] ?>">
-                                             <i class="ti-trash"></i>
-                                             hapus
-                                         </button>
-                                     </td>
-                                 </tr>
-                             <?php } ?>
-                         </tbody>
-                     </table>
-                 </div>
              </div>
-         </div>
+             <!-- /button trigger -->
 
+             <table id="tabel-produk" class="table table-striped">
+                 <thead>
+                     <th>#</th>
+                     <th>Nama</th>
+                     <th>Kode</th>
+                     <th>Merk</th>
+                     <th>Harga Pokok</th>
+                     <th>Harga Jual</th>
+                     <th>Stok</th>
+                     <th>Kategori</th>
+                     <th style="min-width: 200px;">Aksi</th>
+                 </thead>
+                 <tbody>
+                     <?php $no = 1;
+                        foreach ($select as $p) { ?>
+                         <tr>
+                             <td><?= $no++ ?></td>
+                             <td><?= $p['nm_produk'] ?></td>
+                             <td><?= $p['kode_produk'] ?></td>
+                             <td><?= $p['merek'] ?></td>
+                             <td><?= $p['harga_pokok'] ?></td>
+                             <td><?= $p['harga_jual'] ?></td>
+                             <td><?= $p['stok'] ?></td>
+                             <td><?= $p['kategori'] ?></td>
+                             <td>
+                                 <button type="button" class="btn btn-sm btn-info" data-toggle="modal" data-target="#editProduk<?= $p['id_produk'] ?>">
+                                     <i class="ti-pencil"></i>
+                                     edit
+                                 </button>
+
+                                 <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusProduk<?= $p['id_produk'] ?>">
+                                     <i class="ti-trash"></i>
+                                     hapus
+                                 </button>
+                             </td>
+                         </tr>
+                     <?php } ?>
+                 </tbody>
+             </table>
+         </div>
      </div>
-     <!-- .animated -->
  </div>
 
 
@@ -173,7 +166,7 @@
                      <div class="col-12 col-md-5 mb-2">
                          <button type="button" class="btn btn-secondary m-0" data-dismiss="modal">Kembali</button>
                      </div>
-                     <div class="col-12 col-md-5 mb-3">
+                     <div class="col-12 col-md-5 mb-3 mb-md-2">
                          <button type="submit" class="btn btn-success m-0">Simpan</button>
                      </div>
                  </div>
@@ -189,14 +182,14 @@
     foreach ($select as $modal) { ?>
      <!-- Modal -->
      <div class="modal fade" id="editProduk<?= $modal['id_produk'] ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="editProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-scrollable modal-lg">
-             <div class="modal-content">
-                 <form id="form-edit-data-produk" method="post" enctype="multipart/form-data" onsubmit="produk('<?= $modal['id_produk'] ?>','update');return false;">
-
+         <div id="form-edit-data-produk" class="modal-dialog modal-dialog-scrollable modal-lg">
+             <form id="form-edit-data-produk<?= $modal['id_produk']; ?>" method="post" enctype="multipart/form-data" onsubmit="produk('<?= $modal['id_produk'] ?>','update');return false;">
+                 <div class="modal-content">
 
                      <div class="modal-header">
                          <h5 class="modal-title" id="editProduk<?= $modal['id_produk'] ?>Label">Edit Data Produk</h5>
                      </div>
+
 
                      <div class="modal-body row">
                          <input type="text" name="opsi" value="update" hidden>
@@ -270,14 +263,16 @@
                          <div class="col-12 col-md-5 mb-2">
                              <button type="button" class="btn btn-secondary m-0 " data-dismiss="modal">Kembali</button>
                          </div>
-                         <div class="col-12 col-md-5 mb-3">
+                         <div class="col-12 col-md-5 mb-3 mb-md-2">
                              <button type="submit" class="btn btn-info m-0">Simpan Perubahan</button>
                          </div>
                      </div>
-                 </form>
-             </div>
+                 </div>
+             </form>
          </div>
      </div>
+
+
 
      <!-- Modal -->
      <div class="modal fade" id="hapusProduk<?= $modal['id_produk'] ?>" tabindex="-1" aria-labelledby="hapusProduk<?= $modal['id_produk'] ?>Label" aria-hidden="true">
@@ -329,8 +324,8 @@
  <script>
      $(document).ready(function() {
          $('#tabel-produk').DataTable({
-             responsive: true
-            //  "pagingType": "simple"
+             responsive: true,
+             "pagingType": "simple"
          });
 
          var base_url = window.location.origin + '/admin/';
