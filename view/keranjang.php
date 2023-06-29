@@ -16,7 +16,6 @@
                     <h1 class="judul-section mb-0">Keranjang Belanja</h1>
                     <div class="col-12 col-md-9 mb-3">
                         <?php
-
                         $keranjang = $_SESSION['keranjang'];
 
                         $idItem = "";

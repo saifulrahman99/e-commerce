@@ -1,3 +1,9 @@
+<?php
+if (isset($_GET['order_id']) && !empty($_GET['order_id'])) {
+    $order_id = $_GET['order_id'];
+    header('locoation:transaksi/notif?order_id=' . $order_id);
+}
+?>
 <div class="bar-navigasi shadow-sm bg-light"></div>
 <div class="spasi-header"></div>
 

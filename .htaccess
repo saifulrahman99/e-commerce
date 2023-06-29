@@ -19,6 +19,8 @@ RewriteRule ^produk/([a-zA-Z_-]+)/([0-9]+) index.php?halaman=$1&id_produk=$2
 
 RewriteRule ^transaksi/bayarlagi/([a-zA-Z0-9_-]+) controllers/bayar-lagi.php?snapToken=$1
 
+RewriteRule ^transaksi/status/([a-zA-Z0-9_-]+) controllers/cek-status.php?orderId=$1
+
 RewriteRule ^transaksi/batalkanbayar/([a-zA-Z0-9_-]+) controllers/batalkan-bayar.php?orderId=$1
 
 RewriteRule ^transaksi/notif controllers/notification-handler.php
@@ -33,7 +35,8 @@ RewriteRule ^admin/login$ admin/l09in.php
 RewriteRule ^admin/adastra$ admin/index.php
 RewriteRule ^admin/adastra/$ admin/index.php
 
-# RewriteRule ^admin/adastra/([a-zA-Z0-9_-]+)$ admin/index.php?halaman=$1
+RewriteRule ^admin/adastra/([a-zA-Z0-9_-]+)$ admin/index.php?halaman=$1
+
 # RewriteRule ^admin/tes/([a-zA-Z0-9_-]+)$ admin/tes.php?id=$1
 
 

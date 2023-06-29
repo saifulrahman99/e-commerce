@@ -19,6 +19,22 @@ Config::$is3ds = true;
 
 $snapToken = $_GET['snapToken'];
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bayar</title>
+</head>
+<style>
+    .container{
+        max-width: 800px;
+    }
+</style>
+<body>
+    <div class="container"></div>
+</body>
+</html>
 
 <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
 <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-j1UwFlBeVMen-Fxd"></script>

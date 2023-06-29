@@ -165,6 +165,7 @@
                              <div class="tombol-aksi-transaksi py-2 text-end border-top">
 
                                  <a href="transaksi/bayarlagi/<?= $sk['snap_token'] ?>" type="button" class="btn btn-ijo text-white me-2">Bayar</a>
+                                 <a href="transaksi/status/<?= $sk['order_id'] ?>" type="button" class="btn btn-info text-white me-2">Refrash pembayaran</a>
 
                                  <?php
                                     if (!empty($sk['metode_bayar'])) { ?>

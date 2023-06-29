@@ -47,6 +47,7 @@ if (!isset($_SESSION['access_token'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+    <meta property="og:image" content="<?= base_url('assets/img/brand/adastra.png') ?>">
     <title>
         <?php
         if ($nm_halaman == "Home") {
@@ -69,8 +70,7 @@ if (!isset($_SESSION['access_token'])) {
 
 </head>
 
-<body id="<? //$body 
-            ?>">
+<body>
     <!-- navigasi start -->
     <header id="navbar" class="navbar">
         <div class="container">
@@ -277,6 +277,7 @@ if (!isset($_SESSION['access_token'])) {
     <script>
         feather.replace()
     </script>
+
 </body>
 
 </html>
