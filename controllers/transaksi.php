@@ -1,5 +1,7 @@
 <?php
+
 namespace Midtrans;
+
 session_start();
 require('../assets/basis/kon.php');
 require('../function.php');
@@ -18,11 +20,16 @@ $pengiriman = $_POST['ambil_barang'];
 
 
 $cookie_nama = (isset($_COOKIE['nama'])) ? $_COOKIE['nama'] : '';
+$cookie_alamat = (isset($_COOKIE['alamat'])) ? $_COOKIE['alamat'] : '';
+$cookie_telepon = (isset($_COOKIE['telepon'])) ? $_COOKIE['telepon'] : '';
 
 if ($cookie_nama != $nm_pembeli || $cookie_nama == '') {
     setcookie('nama', $nm_pembeli, time() + (60 * 60 * 24 * 365), '/');
+} elseif ($cookie_alamat != $alamat || $cookie_alamat == '') {
     setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 365), '/');
+} elseif ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
     setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 365), '/');
+
 }
 
 
@@ -62,7 +69,7 @@ $order_id = "order-$susunan_2$susunan_3-$kodeRandom";
 
 $transaction_details = array(
     'order_id' => $order_id,
-    
+
     'gross_amount' => intval($biaya), // no decimal allowed for creditcard
 );
 
@@ -74,7 +81,7 @@ $transaction_details = array(
 //     $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
 //     $nmProduk = $produk['nm_produk'];
 //     $harga = $produk['harga_jual'];
-    
+
 //     $item_array = array(
 //         'id' => $id_item,
 //         'price' => $ket_item[1],

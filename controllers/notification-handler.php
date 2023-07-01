@@ -32,7 +32,10 @@ if ($transaction == 'settlement') {
 
         $nm_produk = $stok['nm_produk'];
         $satuan = $stok['satuan'];
-        if ($i == $jml_arr) {
+        if ($jml_arr == 1) {
+            $text .= "*".$nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.")";
+        }
+        elseif ($i == $jml_arr) {
             $text .= "dan *" . $nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.") ";
         } elseif ($i == ($jml_arr - 1)) {
             $text .= "*".$nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.") ";
@@ -80,7 +83,7 @@ if ($transaction == 'settlement') {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
-            'target' => "085156980936|" . $nama_pembeli,
+            'target' => "081998282879|" . $nama_pembeli,
             'message' => '*Notifikasi Pemesanan*
 
 Pesanan atas nama *{name}* dengan belanjaan :

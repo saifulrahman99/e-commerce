@@ -47,7 +47,18 @@ if (!isset($_SESSION['access_token'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <meta property="og:image" content="<?= base_url('assets/img/brand/adastra.png') ?>">
+    <?php
+    if ($nm_halaman == 'Lihat') {
+        $get_id = (isset($_GET['id_produk']) && !empty($_GET['id_produk']) ? $_GET['id_produk'] : '');
+        $tumbnail = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$get_id'"));
+        $tumbnail = $tumbnail['gambar'];
+    ?>
+
+        <meta property="og:image" content="<?= base_url('assets/img/produk/' . $tumbnail) ?>">
+
+    <?php } else { ?>
+        <meta property="og:image" content="<?= base_url('assets/img/brand/adastra.png') ?>">
+    <?php } ?>
     <title>
         <?php
         if ($nm_halaman == "Home") {
@@ -84,10 +95,6 @@ if (!isset($_SESSION['access_token'])) {
                     <li><a href="<?= base_url('home') ?>" class="menu menu-nav">Home</a></li>
                     <li><a href="<?= base_url('produk') ?>" class="menu menu-nav">Produk</a></li>
                     <li><a href="#" class="menu menu-nav">About Us</a></li>
-                    <!-- <li class="search-box">
-                        <input type="text" class="search-input" placeholder="Search...">
-                        <a> <i data-feather="search"></i> </a>
-                    </li> -->
                     <li class="px-2">
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="menu-nav-extra position-relative">
                             <i data-feather="shopping-cart"></i>
@@ -140,10 +147,7 @@ if (!isset($_SESSION['access_token'])) {
 
             <nav class="navbar-nav-extra-menu">
                 <ul class="p-0">
-                    <!-- <li class="search-box">
-                        <input type="text" class="search-input" placeholder="Search...">
-                        <a> <i data-feather="search"></i> </a>
-                    </li> -->
+                   
                     <li>
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="position-relative">
                             <i data-feather="shopping-cart"></i>
@@ -260,10 +264,16 @@ if (!isset($_SESSION['access_token'])) {
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- push notif jS -->
+    <script src="node_modules/push.js/bin/push.min.js"></script>
+
     <!-- jquery js -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
     <!-- js costum -->
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
     <?php
@@ -276,6 +286,51 @@ if (!isset($_SESSION['access_token'])) {
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
         feather.replace()
+    </script>
+
+    <script type="text/javascript">
+        let permission = Notification.permission;
+
+        var halaman = '<?= $halaman ?>';
+
+        // start push notifikasi
+        if (permission === "granted") {
+            if (halaman == 'Home') {
+                showNotification();
+            }
+        }
+        if (permission === "default") {
+            requestAndShowPermission();
+        }
+        if (permission === "denied") {
+            requestAndShowPermission();
+        }
+
+        function showNotification() {
+            var base_url = window.location.origin;
+
+            Push.create("Butik Buah Adastra", {
+                body: "Kami Ada Penawaran baru untuk buah buahan segar, lihat penawarannya sekarang.",
+                icon: '<?= base_url('assets/img/brand/adastra.png') ?>',
+                timeout: 60000,
+                onClick: function() {
+                    window.open(base_url + '/produk');
+                    this.close();
+                }
+            });
+        }
+
+        function requestAndShowPermission() {
+
+            // dapatkan permission
+            Notification.requestPermission(function(permission) {
+                if (permission === "granted") {
+                    showNotification();
+                    document.getElementById("permission").innerHTML = permission;
+                }
+            });
+        }
+        // end push notifikasi
     </script>
 
 </body>

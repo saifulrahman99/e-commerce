@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="carousel-buah col-12 col-sm-6 d-flex flex-column justify-content-center bounce" style="z-index: 1;">
-                <div class="buah">
+                <div class="buah cssanimation pushRelease">
                     <img src="<?= base_url('assets/img/home-buah.png') ?>" alt="...">
                 </div>
             </div>

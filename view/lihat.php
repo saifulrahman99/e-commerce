@@ -148,7 +148,7 @@ $harga_promo = cek_diskon($id);
 
 <section id="sejenis" class="sejenis">
     <div class="container container-section">
-        <h2 class="judul-section">Produk <span class="text-light judul-section bg-ijo px-2">Sejenis</span></h2>
+        <h2 class="judul-section">Produk <span class="text-light judul-section bg-ijo px-2">Terkait</span></h2>
         <div class="produk-sejenis pt-3 pb-4 d-inline d-flex scroll-efek-x">
 
             <!-- produk -->
