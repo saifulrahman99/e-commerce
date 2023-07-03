@@ -13,7 +13,6 @@
 </div>
 
 <div class="content pb-1">
-    <!-- Animated -->
     <div class="card">
         <div class="card-body">
         </div>

@@ -1,7 +1,6 @@
  <?php
     require_once '../../assets/basis/kon.php';
     require '../function/base_url.php';
-    // $select = mysqli_query($db, "SELECT * FROM promo INNER JOIN produk ON produk.id_produk = promo.id_produk ORDER BY id_promo DESC");
     $select = mysqli_query($db, "SELECT * FROM promo ORDER BY id_promo DESC");
     ?>
  <div class=" breadcrumbs">
@@ -46,7 +45,7 @@
                              <th>Waktu</th>
                              <th>Gambar Promo</th>
                              <th>Status</th>
-                             <th style="min-width: 200px;">Aksi</th>
+                             <th>Aksi</th>
                          </thead>
                          <tbody>
                              <?php $no = 1;
@@ -73,9 +72,13 @@
                                              edit
                                          </button>
 
-                                         <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusPromo<?= $p['id_promo'] ?>">
+                                         <button type="button" class="btn btn-sm btn-danger mx-1" data-toggle="modal" data-target="#hapusPromo<?= $p['id_promo'] ?>">
                                              <i class="ti-trash"></i>
                                              hapus
+                                         </button>
+                                         <button type="button" class="btn btn-sm btn-warning text-white ms-1 my-1" onclick="notif(<?= $p['id_promo'] ?>)">
+                                             <i class="ti-bell"></i>
+                                             Push Notif
                                          </button>
                                      </td>
                                  </tr>
@@ -143,6 +146,11 @@
                          </div>
                      </div>
 
+                     <div class="form-group mb-2 col-12">
+                         <label for="keterangan">Keterangan</label>
+                         <textarea name="keterangan" id="keterangan" rows="6" class="form-control"></textarea>
+                     </div>
+
                      <div class="form-group mb-2 col-12 mt-3">
                          <label class="mb-1" for="gambar">Gambar Promo</label>
                          <input type="file" name="gambar" class="form-control" id="gambar" accept=".png, .jpg, .jpeg" required>
@@ -163,6 +171,23 @@
      </div>
  </div>
  <!-- /Modal tambah promo -->
+
+
+ <!-- Modal sukses -->
+ <div class="modal fade" id="suksesModal" tabindex="-1" aria-labelledby="suksesModalLabel" aria-hidden="true">
+     <div class="modal-dialog modal-dialog-centered">
+         <div class="modal-content text-center p-3 pb-4">
+             <div class="modal-body" style="height: 250px;">
+                 <h2 style="font-weight: 700 !important;">Push Notif Berhasil</h2>
+                 <img src="<?=  base_url('assets/img/notif-success.gif')?>" alt="">
+                 <div class="d-block text-center">
+                     <button type="button" class="btn btn-info btn-lg px-4 fs-3" data-dismiss="modal">OK</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+ <!-- /Modal sukses -->
 
 
  <?php
@@ -209,6 +234,7 @@
 
                              </div>
                          </div>
+
                          <div class="form-group mb-2 col-12">
                              <label class="d-block">Status Promo</label>
                              <div class="form-check form-check-inline">
@@ -221,9 +247,14 @@
                              </div>
                          </div>
 
+                         <div class="form-group mb-2 col-12">
+                             <label for="keterangan">Keterangan</label>
+                             <textarea name="keterangan" id="keterangan" rows="6" class="form-control"><?= $modal['keterangan'] ?></textarea>
+                         </div>
+
                          <div class="form-group mb-2 col-12 mt-3">
                              <div class="preview mb-2 text-center">
-                                <label class="d-block">Preview Gambar</label>
+                                 <label class="d-block">Preview Gambar</label>
                                  <img src="<?= base_url('../../assets/img/promo/' . $modal['gambar']) ?>" alt="" style="width: 80%;">
                              </div>
                              <label class="mb-1 d-block" for="gambar">Ganti Gambar Promo</label>
@@ -254,7 +285,8 @@
                          <i class="ti-alert"></i> Peringatan !
                      </h5>
                  </div>
-                 <div class="modal-body">
+                 <div class="modal-body text-center">
+                    <img src="<?=base_url('assets/img/warning.gif')?>" alt="">
                      <p class="text-dark">
                          Yakin Untuk Menghapus Data Promo <b><?= $modal['nm_promo'] ?></b> ?
                      </p>

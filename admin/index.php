@@ -3,6 +3,7 @@ session_start();
 require_once '../assets/basis/kon.php';
 require 'function/cek-login.php';
 require 'function/base_url.php';
+require 'controllers/off-promo.php';
 
 ?>
 <!DOCTYPE html>
@@ -25,9 +26,12 @@ require 'function/base_url.php';
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
 
     <!-- data table -->
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.3.3/css/rowReorder.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css"> -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+
+
 
     <!-- data table -->
 
@@ -64,6 +68,9 @@ require 'function/base_url.php';
                     <li class="klik_menu" id="toko">
                         <a><i class="menu-icon fa fa-laptop"></i>Toko </a>
                     </li>
+                    <li class="klik_menu" id="pengunjung">
+                        <a><i class="menu-icon fa fa-users"></i>Pengunjung </a>
+                    </li>
 
                     <li class="menu-title">Informasi</li><!-- /.menu-title -->
                     <li class="klik_menu" id="transaksi">
@@ -72,10 +79,6 @@ require 'function/base_url.php';
                     <li class="klik_menu" id="pesan">
                         <a><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
                     </li>
-                    <li class="klik_menu" id="notifikasi">
-                        <a><i class="menu-icon ti-bell"></i>Notifikasi </a>
-                    </li>
-
                     <li class="menu-title">Pengaturan</li><!-- /.menu-title -->
 
                     <li class="klik_menu" id="pengaturan">
@@ -187,9 +190,11 @@ require 'function/base_url.php';
     <script src="<?= base_url('assets/template/js/main.js') ?>"></script>
 
     <!-- data table -->
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+
     <!-- /data table -->
 
     <!--Chartist Chart-->

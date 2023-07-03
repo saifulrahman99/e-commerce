@@ -487,6 +487,9 @@ footer .copyright {
 footer .copyright span {
     font-size: 0.8rem;
 }
+.sosial-media,.sosial-media>i{
+    font-size: 0.8em;
+}
 
 /* ============== footer end ============== */
 
@@ -543,7 +546,7 @@ footer .copyright span {
 }
 
 .keranjang-kosong {
-    padding-top: 5vh;
+    padding-top: 0vh;
 }
 
 .keranjang-kosong img {

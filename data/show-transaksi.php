@@ -50,7 +50,7 @@
                     $btnStatus = "accordion-button-gagal";
                     $ketBayar = "Dibatalkan";
                 }
-                $tgl_bayar = explode(' ', $sk['waktu_bayar']);
+                $tgl_bayar = explode(' ', $sk['waktu_transaksi']);
                 $tgl_hari = $tgl_bayar[0];
 
                 $tgl_bayar = explode('-', $tgl_bayar[0]);
@@ -105,7 +105,7 @@
                          </div>
                          <div class="p-0">
                              <i data-feather="clock" style="width: 0.8rem;"> </i>
-                             <span style="font-size: 0.7rem;"> <?= substr($sk['waktu_bayar'],0,-3) ?> </span>
+                             <span style="font-size: 0.7rem;"> <?= substr($sk['waktu_transaksi'],0,-3) ?> </span>
                          </div>
                          <?php
 

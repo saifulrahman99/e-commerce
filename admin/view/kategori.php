@@ -100,10 +100,8 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
 <script>
     $(document).ready(function() {
         $('#tabel-kategori').DataTable({
-            rowReorder: {
-                selector: 'td:nth-child(2)'
-            },
-            responsive: true
+            responsive: true,
+            "pagingType": "simple"
         });
         var base_url = window.location.origin + '/admin/';
         $('#reload-kategori').click(function() {

@@ -12,6 +12,7 @@ if ($opsi == 'add') {
     $harga_promo = empty($harga_promo) ? 0 : $harga_promo;
     $waktu_mulai = isset($_POST['waktu_mulai']) ? $_POST['waktu_mulai'] : '';
     $waktu_selesai = isset($_POST['waktu_selesai']) ? $_POST['waktu_selesai'] : '';
+    $keterangan = isset($_POST['keterangan']) ? $_POST['keterangan'] : '';
     $status = 1;
     $pathPromo = "../../assets/img/promo/";
 
@@ -31,7 +32,7 @@ if ($opsi == 'add') {
         $gambar = $gambar['name'];
     }
 
-    $query = "INSERT INTO promo(nm_promo, harga_promo, waktu_mulai, waktu_selesai, gambar, status, id_produk) VALUES ('$nm_promo', '$harga_promo', '$waktu_mulai', '$waktu_selesai', '$gambar', '$status', '$id_produk')";
+    $query = "INSERT INTO promo(nm_promo, harga_promo, waktu_mulai, waktu_selesai, gambar, status,keterangan, id_produk) VALUES ('$nm_promo', '$harga_promo', '$waktu_mulai', '$waktu_selesai', '$gambar', '$status', '$keterangan', '$id_produk')";
     $eksekusi = mysqli_query($db, $query);
 } elseif ($opsi == 'update') {
 
@@ -41,7 +42,8 @@ if ($opsi == 'add') {
     $harga_promo = empty($harga_promo) ? 0 : $harga_promo;
     $waktu_mulai = isset($_POST['waktu_mulai']) ? $_POST['waktu_mulai'] : '';
     $waktu_selesai = isset($_POST['waktu_selesai']) ? $_POST['waktu_selesai'] : '';
-    $status = $_POST['status'];
+    $keterangan = isset($_POST['keterangan']) ? $_POST['keterangan'] : '';
+    $status = isset($_POST['keterangan']) ? $_POST['keterangan'] : '';
 
     $pathPromo = "../../assets/img/promo/";
 
@@ -62,12 +64,11 @@ if ($opsi == 'add') {
         }
         $gambar = $gambar['name'];
 
-        $query = "UPDATE promo SET nm_promo='$nm_promo',harga_promo='$harga_promo',waktu_mulai='$waktu_mulai',waktu_selesai='$waktu_selesai',gambar='$gambar',status='$status' WHERE id_promo = '$id_promo'";
+        $query = "UPDATE promo SET nm_promo='$nm_promo',harga_promo='$harga_promo',waktu_mulai='$waktu_mulai',waktu_selesai='$waktu_selesai',gambar='$gambar',status='$status',ketterangan = '$keterangan' WHERE id_promo = '$id_promo'";
     } else {
-        $query = "UPDATE promo SET nm_promo='$nm_promo',harga_promo='$harga_promo',waktu_mulai='$waktu_mulai',waktu_selesai='$waktu_selesai',status='$status' WHERE id_promo = '$id_promo'";
+        $query = "UPDATE promo SET nm_promo='$nm_promo',harga_promo='$harga_promo',waktu_mulai='$waktu_mulai',waktu_selesai='$waktu_selesai',status='$status',keterangan = '$keterangan' WHERE id_promo = '$id_promo'";
     }
     $eksekusi = mysqli_query($db, $query);
-
 } elseif ($opsi == 'delete') {
     $id = $_POST['id_promo'];
     $query = "DELETE FROM promo WHERE id_promo = '$id'";

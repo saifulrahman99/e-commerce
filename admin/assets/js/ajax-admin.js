@@ -219,4 +219,20 @@ function promo(id, opsi) {
 // /promo
 
 
+// push notif
 
+function notif(id) {
+    var id_promo = id;
+    var base_url = window.location.origin + '/admin/';
+
+    $.ajax({
+        url: base_url + "controllers/push-notif.php",
+        method: "POST",
+        data: { "id_promo": id_promo },
+        success: function () {
+            $('#suksesModal').modal('show');
+        }
+    });
+}
+
+// push notif

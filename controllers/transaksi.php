@@ -8,7 +8,7 @@ require('../function.php');
 
 $id_pengunjung = $_COOKIE['id_pengunjung'];
 
-$waktu_bayar = date('Y-m-d H:i:s');
+$waktu_transaksi = date('Y-m-d H:i:s');
 $satatus_bayar = 0;
 
 $nm_pembeli = $_POST['nama'];
@@ -123,7 +123,7 @@ $snapToken = Snap::getSnapToken($transaction);
 
 if ($_POST['opsi'] == "add") {
 
-    $insert = mysqli_query($db, "INSERT INTO transaksi(nm_pembeli, belanjaan, pengiriman, waktu_bayar, status_bayar, alamat, nomor_hp, biaya, id_pengunjung, order_id, snap_token) VALUES ('$nm_pembeli', '$belanjaan', '$pengiriman', '$waktu_bayar', '$satatus_bayar', '$alamat', '$nomor_hp', '$biaya', '$id_pengunjung', '$order_id', '$snapToken')");
+    $insert = mysqli_query($db, "INSERT INTO transaksi(nm_pembeli, belanjaan, pengiriman, waktu_transaksi, status_bayar, alamat, nomor_hp, biaya, id_pengunjung, order_id, snap_token) VALUES ('$nm_pembeli', '$belanjaan', '$pengiriman', '$waktu_transaksi', '$satatus_bayar', '$alamat', '$nomor_hp', '$biaya', '$id_pengunjung', '$order_id', '$snapToken')");
 
     if ($insert) {
         unset($_SESSION['keranjang']);

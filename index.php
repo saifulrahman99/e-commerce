@@ -147,7 +147,7 @@ if (!isset($_SESSION['access_token'])) {
 
             <nav class="navbar-nav-extra-menu">
                 <ul class="p-0">
-                   
+
                     <li>
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="position-relative">
                             <i data-feather="shopping-cart"></i>
@@ -210,16 +210,16 @@ if (!isset($_SESSION['access_token'])) {
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                         <h5 class="text-center text-white">Sosial Media</h5>
-                        <div class="d-flex justify-content-center">
-                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                        <div class="row justify-content-center">
+                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-instagram text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Instagram</span>
                             </a>
-                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-facebook text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Facebook</span>
                             </a>
-                            <a href="#" target="_blank" class="sosial-media text-decoration-none text-center mx-3">
+                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-whatsapp text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Whatsapp</span>
                             </a>
@@ -239,6 +239,7 @@ if (!isset($_SESSION['access_token'])) {
                 </div>
 
                 <div class="copyright text-center">
+                    <!-- <span id="token-notif" class="d-block"></span> -->
                     <span class="text-white">by Saiful Rahman 2023</span>
                 </div>
             </div>
@@ -268,9 +269,6 @@ if (!isset($_SESSION['access_token'])) {
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- push notif jS -->
-    <script src="node_modules/push.js/bin/push.min.js"></script>
-
     <!-- jquery js -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
@@ -288,49 +286,79 @@ if (!isset($_SESSION['access_token'])) {
         feather.replace()
     </script>
 
-    <script type="text/javascript">
-        let permission = Notification.permission;
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.14.0/firebase-messaging-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            // firebaseConfig here
+            apiKey: "AIzaSyByc2HkXpLxwZVtDwHPU4DynFGxmLCTgKI",
 
-        var halaman = '<?= $halaman ?>';
+            authDomain: "adastra-project.firebaseapp.com",
 
-        // start push notifikasi
-        if (permission === "granted") {
-            if (halaman == 'Home') {
-                showNotification();
+            projectId: "adastra-project",
+
+            storageBucket: "adastra-project.appspot.com",
+
+            messagingSenderId: "860097321121",
+
+            appId: "1:860097321121:web:f150953edc8058a80978e0",
+
+            measurementId: "G-ZPRZV7F405"
+
+        };
+        const app = firebase.initializeApp(firebaseConfig)
+        const messaging = firebase.messaging();
+
+        messaging.getToken({
+            vapidKey: 'BPizGrwx-iIJb4lZaBNP7JM7m4wytFBMinZ9Cw4RW8fXaI5gos_Pt_98ixZg0N4qTDQW7Apovp3elAjmr0uEdT4'
+        }).then((currentToken) => {
+            // app token used for sending notifications
+            if (currentToken) {
+                console.log(currentToken);
+                // document.getElementById('token-notif').innerHTML = currentToken;
+
+                var id_pengunjung = '<?= $id_pengunjung ?>';
+                var token = currentToken;
+                $.ajax({
+                    url: "controllers/add-token-notif.php",
+                    method: "POST",
+                    data: {
+                        "id_pengunjung": id_pengunjung,
+                        "token": token
+                    },
+                    success: function(data) {
+                        console.log('save sukses');
+                    }
+                });
+
+                sendTokenToServer(currentToken)
+            } else {
+                setTokenSentToServer(false);
+            }
+        }).catch((err) => {
+            // notifications are manually blocked, you can ask for unblock here
+            console.log('An error occurred while retrieving token. ', err);
+            setTokenSentToServer(false);
+        });
+
+        function sendTokenToServer(currentToken) {
+            if (!isTokenSentToServer()) {
+                console.log('Sending token to server...');
+                // TODO(developer): Send the current token to your server.
+                setTokenSentToServer(true);
+            } else {
+                setTokenSentToServer(true);
+                console.log('Token already available in the server');
             }
         }
-        if (permission === "default") {
-            requestAndShowPermission();
-        }
-        if (permission === "denied") {
-            requestAndShowPermission();
+
+        function isTokenSentToServer() {
+            return window.localStorage.getItem('sentToServer') === '1';
         }
 
-        function showNotification() {
-            var base_url = window.location.origin;
-
-            Push.create("Butik Buah Adastra", {
-                body: "Kami Ada Penawaran baru untuk buah buahan segar, lihat penawarannya sekarang.",
-                icon: '<?= base_url('assets/img/brand/adastra.png') ?>',
-                timeout: 60000,
-                onClick: function() {
-                    window.open(base_url + '/produk');
-                    this.close();
-                }
-            });
+        function setTokenSentToServer(sent) {
+            window.localStorage.setItem('sentToServer', sent ? '1' : '0');
         }
-
-        function requestAndShowPermission() {
-
-            // dapatkan permission
-            Notification.requestPermission(function(permission) {
-                if (permission === "granted") {
-                    showNotification();
-                    document.getElementById("permission").innerHTML = permission;
-                }
-            });
-        }
-        // end push notifikasi
     </script>
 
 </body>

@@ -115,5 +115,3 @@ if (isset($_COOKIE['id_pengunjung'])) {
     $id_pengunjung = $_COOKIE['id_pengunjung'];
     mysqli_query($db, "UPDATE pengunjung SET waktu = '$today' WHERE id_pengunjung = '$id_pengunjung'");
 }
-
-// $d_pengunjung = mysqli_query($db, "SELECT DISTINCT transaksi.id_pengunjung as id FROM `transaksi` INNER JOIN pengunjung ON transaksi.id_pengunjung = pengunjung.id_pengunjung");
