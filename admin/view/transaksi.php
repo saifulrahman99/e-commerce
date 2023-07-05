@@ -30,10 +30,9 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
             <div class="button mb-3 d-flex flex-wrap">
 
                 <!-- Button trigger modal -->
-                <!-- <button type="button" class="btn btn-success btn-sm mr-1 my-1" data-toggle="modal" data-target="#tambahTransa">
-                    <i class="ti-plus"></i>
-                    tambah promo
-                </button> -->
+                <button type="button" class="btn btn-success btn-sm mr-1 my-1">
+                    Ekspor (excel)
+                </button>
 
                 <button id="reload-transaksi" class="btn btn-success btn-sm ml-2 my-1"><i class="ti-reload"></i> Refrash</button>
                 <!-- /button trigger -->
@@ -45,14 +44,15 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                 <table id="tabel-transaksi" class="table table-striped">
                     <thead>
                         <th style="max-width: 40px;">#</th>
+                        <th>ID Order</th>
                         <th>Nama Pembeli</th>
                         <th>Belanjaan</th>
+                        <th>Catatan</th>
                         <th>Alamat</th>
                         <th>Nomor</th>
                         <th>Total Harga pesanan</th>
                         <th>Waktu</th>
                         <th>Metode Pembayaran</th>
-                        <th>Metode Pengiriman</th>
                         <th>Status Pembayaran</th>
                         <th>Status Pengiriman</th>
                         <th>Aksi</th>
@@ -64,7 +64,7 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                             // status Pembayaran
                             switch ($t['status_bayar']) {
                                 case 0:
-                                    $status_bayar = "<span class='badge badge-secondary'>Pending/Belum Dibayar</span>";
+                                    $status_bayar = "<span class='badge badge-secondary'>Belum Dibayar</span>";
                                     break;
                                 case 1:
                                     $status_bayar = "<span class='badge badge-success'>Sudah Dibayar</span>";
@@ -73,32 +73,76 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                                     $status_bayar = "<span class='badge badge-danger'>Dibatalkan</span>";
                                     break;
                             }
+
+                            switch ($t['status_terkirim']) {
+                                case 0:
+                                    $status_terkirim = "<span class='badge badge-secondary'>Diproses</span>";
+                                    break;
+                                case 1:
+                                    $status_terkirim = "<span class='badge badge-info'>Dikirim</span>";
+                                    break;
+                                case 2:
+                                    $status_terkirim = "<span class='badge badge-success'>Diterima</span>";
+                                    break;
+                            }
                         ?>
                             <tr>
                                 <td><?= $no++ ?></td>
+                                <td><?= $t['order_id'] ?></td>
                                 <td><?= $t['nm_pembeli'] ?></td>
                                 <td>
                                     <button type="button" data-toggle="modal" data-target="#detailModal<?= $t['id_transaksi'] ?>" class="btn btn-sm btn-light shadow-sm text-secondary">Lihat</button>
                                 </td>
-                                <td><?= $t['alamat'] ?></td>
+                                <td>
+                                    <button type="button" data-toggle="modal" data-target="#catatanModal<?= $t['id_transaksi'] ?>" class="btn btn-sm btn-light shadow-sm text-secondary">Lihat</button>
+                                </td>
+                                <td>
+                                    <button type="button" data-toggle="modal" data-target="#alamatModal<?= $t['id_transaksi'] ?>" class="btn btn-sm btn-light shadow-sm text-secondary">Lihat</button>
+                                </td>
                                 <td><?= $t['nomor_hp'] ?></td>
                                 <td><?= rupiah($t['biaya']) ?></td>
                                 <td><?= $t['waktu_transaksi'] ?></td>
                                 <td><?= $t['metode_bayar'] ?></td>
-                                <td><?= $t['pengiriman'] ?></td>
                                 <td><?= $status_bayar ?></td>
-                                <td><?= $t['status_terkirim'] ?></td>
+                                <td><?= $status_terkirim ?></td>
                                 <td>
                                     <?php
                                     if ($t['status_bayar'] == 0) { ?>
-                                        <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#konfirmasiPembayaran<?= $t['id_pengunjung'] ?>">
-                                            <i class="ti-trash"></i>
+                                        <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#konfirmasiPembayaran<?= $t['order_id'] ?>">
                                             Konfirmasi Bayar
                                         </button>
-                                    <?php } ?>
+                                        <?php } else {
+                                        if ($t['status_terkirim'] == 0 || empty($t['status_terkirim'])) {
+                                            if ($t['status_bayar'] != 2) {
+                                        ?>
+                                                <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#kirimPesanan<?= $t['order_id'] ?>">
+                                                    Kirim Pesanan
+                                                </button>
+                                    <?php }
+                                        }
+                                    } ?>
                                 </td>
+                                <!-- modal kirim pesanan -->
+                                <div class="modal fade" id="kirimPesanan<?= $t['order_id'] ?>" tabindex="-1" aria-labelledby="kirimPesanan<?= $t['order_id'] ?>Label" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p class="text-dark">
+                                                    Yakin Untuk Kirim Pesanan Atas Nama <b><?= $t['nm_pembeli'] ?></b> ?
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
+                                                <button type="button" class="btn btn-danger col-4" onclick="transaksi('<?= $t['order_id'] ?>','kirim')">Ya </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /modal kirim pesanan -->
 
-                                <div class="modal fade" id="konfirmasiPembayaran<?= $t['id_pengunjung'] ?>" tabindex="-1" aria-labelledby="konfirmasiPembayaran<?= $t['id_pengunjung'] ?>Label" aria-hidden="true">
+
+                                <!-- modal konfirmasi pembayaran -->
+                                <div class="modal fade" id="konfirmasiPembayaran<?= $t['order_id'] ?>" tabindex="-1" aria-labelledby="konfirmasiPembayaran<?= $t['order_id'] ?>Label" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
@@ -108,12 +152,16 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
-                                                <button type="button" class="btn btn-danger col-4" onclick="pengunjung(<?= $t['id_pengunjung'] ?>,'delete')">Ya </button>
+                                                <button type="button" class="btn btn-danger col-4" onclick="transaksi('<?= $t['order_id'] ?>','konfirmasi')">Ya </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /modal konfirmasi pembayaran -->
+
                             </tr>
+
+
                             <!-- Detail Belanjaan -->
                             <div class="modal fade" id="detailModal<?= $t['id_transaksi'] ?>" tabindex="-1" aria-labelledby="detailModal<?= $t['id_transaksi'] ?>Label" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
@@ -132,8 +180,9 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                                                             <img src="<?= (!empty($produk['gambar'])) ? base_url('../assets/img/produk/' . $produk['gambar']) : base_url('../assets/img/produk/default-produk.jpg') ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
                                                         </a>
                                                         <h6 class="ml-2 mr-1 mb-0"><?= $produk['nm_produk'] ?></h6>
-                                                        <i data-feather="x" class="ms-1" style="width: 0.8rem;"></i>
+                                                        <i class="ti-close mx-1" style="font-size: 0.5em;"></i>
                                                         <span style="font-weight: 600;"><?= $ket_item[0] ?></span>
+                                                        <span>&nbsp<?= $produk['satuan'] ?></span>
                                                     </div>
                                                     <div class="text-end mt-2">
                                                         <?php
@@ -152,6 +201,41 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                             </div>
                             <!-- /Detail Belanjaan -->
 
+                            <!-- catatan -->
+                            <div class="modal fade" id="catatanModal<?= $t['id_transaksi'] ?>" tabindex="-1" aria-labelledby="catatanModal<?= $t['id_transaksi'] ?>Label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5> <i class="ti-tag me-2"></i> Catatan </h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?= $t['catatan'] ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /catatan -->
+
+                            <!-- alamat -->
+                            <div class="modal fade" id="alamatModal<?= $t['id_transaksi'] ?>" tabindex="-1" aria-labelledby="alamatModal<?= $t['id_transaksi'] ?>Label" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5> <i class="ti-pin me-2"></i> alamat </h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?= $t['alamat'] ?>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /alamat -->
                         <?php } ?>
                     </tbody>
                 </table>
@@ -159,12 +243,6 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
         </div>
     </div>
 </div>
-
-
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-    feather.replace()
-</script>
 
 <script>
     $(document).ready(function() {

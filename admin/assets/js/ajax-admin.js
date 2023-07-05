@@ -32,7 +32,7 @@ function produk(id, opsi) {
                 } else if (data == 'impor') {
                     $('#imporExcel').modal('hide');
                 }
-                $('.modal-backdrop.fade').removeClass("modal-backdrop");
+                $('.modal-backdrop.fade.show').remove();
                 $('#isi-content-halaman').load(base_url + 'view/produk.php');
 
                 // console.log(data + " bukan delete");
@@ -49,7 +49,7 @@ function produk(id, opsi) {
             success: function () {
 
                 $('#hapusProduk' + id_produk).modal('hide');
-                $('.modal-backdrop.fade').removeClass("modal-backdrop");
+                $('.modal-backdrop.fade.show').remove();
                 $('#isi-content-halaman').load(base_url + 'view/produk.php');
 
             }
@@ -88,7 +88,7 @@ function kategori(id, opsi) {
 
                 $('#hapusKategori' + id_kategori).modal('hide');
                 $('#isi-content-halaman').load(base_url + 'view/kategori.php');
-                $('.modal-backdrop.fade').removeClass("modal-backdrop");
+                $('.modal-backdrop.fade.show').remove();
 
             } else if (data == 'add') {
                 $('#isi-content-halaman').load(base_url + 'view/kategori.php');
@@ -193,7 +193,7 @@ function promo(id, opsi) {
                 } else if (data == 'update') {
                     $('#editPromo' + id_promo).modal('hide');
                 }
-                $('.modal-backdrop.fade').removeClass("modal-backdrop");
+                $('.modal-backdrop.fade.show').remove();
                 $('#isi-content-halaman').load(base_url + 'view/promo.php');
 
             }
@@ -208,7 +208,7 @@ function promo(id, opsi) {
             success: function () {
 
                 $('#hapusPromo' + id_promo).modal('hide');
-                $('.modal-backdrop.fade').removeClass("modal-backdrop");
+                $('.modal-backdrop.fade.show').remove();
                 $('#isi-content-halaman').load(base_url + 'view/promo.php');
             }
         });
@@ -236,3 +236,50 @@ function notif(id) {
 }
 
 // push notif
+
+
+// control transaksi
+function transaksi(order_id, opsi) {
+    var id_order = order_id;
+    var opsi_control = opsi;
+    var base_url = window.location.origin + '/admin/';
+
+    $.ajax({
+        url: base_url + "controllers/transaksi.php",
+        method: "POST",
+        data: { "id_order": id_order, "opsi": opsi_control },
+        success: function (data) {
+
+            if (data == 'kirim') {
+                $('#kirimPesanan' + id_order).modal('hide');
+            }
+            if (data == 'konfirmasi') {
+                $('#konfirmasiPembayaran' + id_order).modal('hide');
+            }
+            $('.modal-backdrop.fade.show').remove();
+            $('#isi-content-halaman').load(base_url + 'view/transaksi.php');
+
+            alert('eksekusi sukses');
+        }
+    });
+}
+
+// control transaksi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

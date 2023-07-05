@@ -43,7 +43,7 @@ if ($opsi == 'add') {
     $waktu_mulai = isset($_POST['waktu_mulai']) ? $_POST['waktu_mulai'] : '';
     $waktu_selesai = isset($_POST['waktu_selesai']) ? $_POST['waktu_selesai'] : '';
     $keterangan = isset($_POST['keterangan']) ? $_POST['keterangan'] : '';
-    $status = isset($_POST['keterangan']) ? $_POST['keterangan'] : '';
+    $status = isset($_POST['status']) ? $_POST['status'] : '';
 
     $pathPromo = "../../assets/img/promo/";
 

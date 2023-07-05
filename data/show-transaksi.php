@@ -27,7 +27,7 @@
         foreach ($select_transaksi as $sk) {
             $belanjaan = $sk['belanjaan'];
             $belanjaan = json_decode($belanjaan);
-            
+
             // $convert_obj = (array)$belanjaan;
             foreach ($belanjaan as $k => $v) {
                 $data_belanja = $v;
@@ -105,7 +105,7 @@
                          </div>
                          <div class="p-0">
                              <i data-feather="clock" style="width: 0.8rem;"> </i>
-                             <span style="font-size: 0.7rem;"> <?= substr($sk['waktu_transaksi'],0,-3) ?> </span>
+                             <span style="font-size: 0.7rem;"> <?= substr($sk['waktu_transaksi'], 0, -3) ?> </span>
                          </div>
                          <?php
 
@@ -119,6 +119,23 @@
 
                          <div>
                              ID Order : <span class="text-ijo tebal-600"><?= $sk['order_id'] ?></span>
+                         </div>
+
+                         <div class="my-1">
+                             <?php
+                                switch ($sk['status_terkirim']) {
+                                    case 0:
+                                        $statusTerkirim = 'Pesanan Diproses';
+                                        break;
+                                    case 1:
+                                        $statusTerkirim = 'Pesanan Dikirim';
+                                        break;
+                                    case 2:
+                                        $statusTerkirim = 'Pesanan Diterima';
+                                        break;
+                                }
+                                ?>
+                             Status Pengiriman : <?= $statusTerkirim ?>
                          </div>
 
                          <div class="my-1">
@@ -159,21 +176,42 @@
                                  <?= rupiah($sk['biaya']) ?>
                              </div>
                          </div>
+                         <div class="tombol-aksi-transaksi py-2 text-end border-top">
 
-                         <?php
-                            if ($ketBayar == "Belum Dibayar") { ?>
-                             <div class="tombol-aksi-transaksi py-2 text-end border-top">
+                             <?php
+                                if ($ketBayar == "Belum Dibayar") {
 
-                                 <a href="transaksi/bayarlagi/<?= $sk['snap_token'] ?>" type="button" class="btn btn-ijo text-white me-2">Bayar</a>
-                                 <a href="transaksi/status/<?= $sk['order_id'] ?>" type="button" class="btn btn-info text-white me-2">Refrash pembayaran</a>
+                                    if ($sk['metode_bayar'] != 'cod') { ?>
 
-                                 <?php
-                                    if (!empty($sk['metode_bayar'])) { ?>
-                                     <a href="transaksi/batalkanbayar/<?= $sk['order_id'] ?>" type="button" class="btn btn-danger">Batalkan Transaksi</a>
+                                     <a href="transaksi/bayarlagi/<?= $sk['snap_token'] ?>" type="button" class="btn btn-sm btn-ijo text-white me-2 mb-2">Bayar</a>
+                                     <a href="transaksi/status/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-info text-white me-2 mb-2">cek Kembali pembayaran</a>
 
-                                 <?php } ?>
-                             </div>
-                         <?php } ?>
+                                     <?php
+                                        if (!empty($sk['metode_bayar'])) { ?>
+                                         <a href="transaksi/batalkanbayar/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-danger mb-2">Batalkan Pesanan</a>
+
+                                     <?php }
+                                    } else {
+
+                                        if ($sk['status_terkirim'] == 0) {
+                                        ?>
+                                         <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/batalkan" type="button" class="btn btn-sm btn-danger mb-2">Batalkan Pesanan</a>
+                                     <?php } elseif ($sk['status_terkirim'] == 1) { ?>
+                                         <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/konfirmasi" type="button" class="btn btn-sm btn-success mb-2">Konfirmasi Barang Diterima</a>
+                                     <?php } elseif ($sk['status_terkirim'] == 2) { ?>
+                                         <a href="transaksi/notapesanan/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-info text-white mb-2">Lihat Resi</a>
+                                     <?php }
+                                    }
+                                } elseif ($ketBayar == "Sudah Dibayar") {
+
+                                    if ($sk['status_terkirim'] == 1) { ?>
+                                     <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/konfirmasi" type="button" class="btn btn-sm btn-success mb-2">Konfirmasi Barang Diterima</a>
+                                 <?php } elseif ($sk['status_terkirim'] == 2) { ?>
+                                     <a href="transaksi/notapesanan/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-info text-white mb-2">Lihat Resi</a>
+                             <?php }
+                                }
+                                ?>
+                         </div>
 
                      </div>
                  </div>

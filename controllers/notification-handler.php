@@ -26,26 +26,24 @@ if ($transaction == 'settlement') {
 
     $text = '';
     $i = 1;
-    foreach ($belanjaan as $id_produk => $jml_item) {
+    foreach ($belanjaan as $id_produk => $isi_item) {
 
         $stok = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_produk'"));
 
         $nm_produk = $stok['nm_produk'];
         $satuan = $stok['satuan'];
         if ($jml_arr == 1) {
-            $text .= "*".$nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.")";
-        }
-        elseif ($i == $jml_arr) {
-            $text .= "dan *" . $nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.") ";
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ")";
+        } elseif ($i == $jml_arr) {
+            $text .= "dan *" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ") ";
         } elseif ($i == ($jml_arr - 1)) {
-            $text .= "*".$nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan.") ";
-            
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ") ";
         } else {
-            $text .= "*".$nm_produk . "* sebanyak " . $jml_item[0] . " ". $satuan. " ( " . rupiah($jml_item[1]) . " /".$satuan."), ";
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . "), ";
         }
 
         $stok = $stok['stok'];
-        $stok = $stok - $jml_item[0];
+        $stok = $stok - $isi_item[0];
 
         mysqli_query($db, "UPDATE produk SET stok = '$stok' WHERE id_produk = '$id_produk'");
 
@@ -56,6 +54,8 @@ if ($transaction == 'settlement') {
     $select_transaksi = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM transaksi WHERE order_id = '$order_id'"));
 
     $nama_pembeli = $select_transaksi['nm_pembeli'];
+    $metode_bayar = $select_transaksi['metode_bayar'];
+    $catatan = (empty($select_transaksi['catatan'])) ? 'tidak ada' : $select_transaksi['catatan'];
 
     $kontak = $select_transaksi['nomor_hp'];
     $kontak_length = strlen("$kontak");
@@ -86,8 +86,15 @@ if ($transaction == 'settlement') {
             'target' => "081998282879|" . $nama_pembeli,
             'message' => '*Notifikasi Pemesanan*
 
-Pesanan atas nama *{name}* dengan belanjaan :
+Pesanan atas nama *{name}*
+ID Order *' . $order_id . '*
+Metode Pembayaran *'.$metode_bayar.'*
+
+Pesanan :
 ' . $text . '
+
+*Catatan*
+'.$catatan.'
 
 *kontak pemesan :* 
 https://wa.me/' . $kontak . '

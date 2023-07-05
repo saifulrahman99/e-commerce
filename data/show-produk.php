@@ -71,7 +71,7 @@ if (mysqli_num_rows($query) > 0) {
         </div>
     <?php  }
 } else { ?>
-    <div class='text-center' style='margin-top:-5rem;'>
+    <div class='text-center' style='margin-top:-5rem; overflow-x: hidden;'>
         <img class='gif-empty-search' src='assets/img/empty-search.gif' alt='...' style='max-width:25rem; margin-bottom: -4rem;'>
         <h4 class='tebal-600 m-0 bg-white text-center'>Hasil Pencarian Tidak Ditemukan</h4>
     </div>

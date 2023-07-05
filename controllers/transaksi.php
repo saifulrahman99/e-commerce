@@ -9,14 +9,16 @@ require('../function.php');
 $id_pengunjung = $_COOKIE['id_pengunjung'];
 
 $waktu_transaksi = date('Y-m-d H:i:s');
-$satatus_bayar = 0;
+$status_bayar = 0;
+$status_terkirim = 0;
 
 $nm_pembeli = $_POST['nama'];
 $belanjaan = $_POST['item_keranjang'];
 $alamat = $_POST['alamat'];
 $nomor_hp = $_POST['telepon'];
+$catatan = $_POST['catatan'];
 $biaya = $_POST['biaya'];
-$pengiriman = $_POST['ambil_barang'];
+$metode_bayar = ($_POST['metode_bayar'] != 'cod') ? '' : $_POST['metode_bayar'];
 
 
 $cookie_nama = (isset($_COOKIE['nama'])) ? $_COOKIE['nama'] : '';
@@ -26,10 +28,9 @@ $cookie_telepon = (isset($_COOKIE['telepon'])) ? $_COOKIE['telepon'] : '';
 if ($cookie_nama != $nm_pembeli || $cookie_nama == '') {
     setcookie('nama', $nm_pembeli, time() + (60 * 60 * 24 * 365), '/');
 } elseif ($cookie_alamat != $alamat || $cookie_alamat == '') {
-    setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 365), '/');
-} elseif ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
     setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 365), '/');
-
+} elseif ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
+    setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 365), '/');
 }
 
 
@@ -123,11 +124,95 @@ $snapToken = Snap::getSnapToken($transaction);
 
 if ($_POST['opsi'] == "add") {
 
-    $insert = mysqli_query($db, "INSERT INTO transaksi(nm_pembeli, belanjaan, pengiriman, waktu_transaksi, status_bayar, alamat, nomor_hp, biaya, id_pengunjung, order_id, snap_token) VALUES ('$nm_pembeli', '$belanjaan', '$pengiriman', '$waktu_transaksi', '$satatus_bayar', '$alamat', '$nomor_hp', '$biaya', '$id_pengunjung', '$order_id', '$snapToken')");
+    $insert = mysqli_query($db, "INSERT INTO transaksi(nm_pembeli, belanjaan, metode_bayar, waktu_transaksi, status_bayar, alamat, catatan, nomor_hp, biaya, id_pengunjung, order_id, snap_token,status_terkirim) VALUES ('$nm_pembeli', '$belanjaan', '$metode_bayar', '$waktu_transaksi', '$status_bayar', '$alamat', '$catatan', '$nomor_hp', '$biaya', '$id_pengunjung', '$order_id', '$snapToken','$status_terkirim')");
 
     if ($insert) {
         unset($_SESSION['keranjang']);
     }
 }
 
-echo $snapToken;
+if ($metode_bayar != 'cod') {
+    echo $snapToken;
+} else {
+
+    $belanjaan = json_decode($belanjaan);
+
+    $jml_arr = count((array)$belanjaan);
+    $text = '';
+    $i = 1;
+    foreach ($belanjaan as $id_produk => $isi_item) {
+
+        $stok = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_produk'"));
+
+        $nm_produk = $stok['nm_produk'];
+        $satuan = $stok['satuan'];
+        if ($jml_arr == 1) {
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ")";
+        } elseif ($i == $jml_arr) {
+            $text .= "dan *" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ") ";
+        } elseif ($i == ($jml_arr - 1)) {
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . ") ";
+        } else {
+            $text .= "*" . $nm_produk . "* sebanyak " . $isi_item[0] . " " . $satuan . " ( " . rupiah($isi_item[1]) . " /" . $satuan . "), ";
+        }
+
+        $i++;
+    }
+
+    $nomor_hp_length = strlen("$nomor_hp");
+    $nomor_hp_length = (1 - $nomor_hp_length);
+
+    $awalan_nomor_hp = substr($nomor_hp, 0, $nomor_hp_length);
+
+    if ($awalan_nomor_hp == '0') {
+        $akhiran_nomor_hp = substr($nomor_hp, 1);
+        $nomor_hp = '62' . $akhiran_nomor_hp;
+    } else {
+        $nomor_hp;
+    }
+
+    $catatan = (empty($catatan)) ? 'tidak ada' : $catatan;
+    // notif ke admin
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.fonnte.com/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array(
+            'target' => "081998282879|" . $nm_pembeli,
+            'message' => '*Notifikasi Pemesanan*
+
+Pesanan atas nama *{name}*
+ID Order *' . $order_id . '*
+Metode Pembayaran *' . strtoupper($metode_bayar) . '*
+
+Pesanan :
+' . $text . '
+
+*Catatan*
+' . $catatan . '
+
+*kontak pemesan :* 
+https://wa.me/' . $nomor_hp . '
+*cek website :*
+https://technoyus.my.id/admin/adastra/transaksi
+',
+            'countryCode' => '62', //optional
+        ),
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: @ec9ZkWrLCRZ-#v51RP0' //change TOKEN to your actual token
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+
+    echo 'cod';
+}

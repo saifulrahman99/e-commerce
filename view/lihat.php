@@ -12,7 +12,7 @@ $harga_promo = cek_diskon($id);
 
 <section id="lihat-produk" class="lihat-produk pb-5">
     <div class="container">
-        <button class="btn btn-light rounded-circle border border-secondary mb-3" onclick="history.go(-1);">
+        <button class="btn mb-3" onclick="history.go(-1);">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 

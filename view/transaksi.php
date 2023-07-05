@@ -9,7 +9,7 @@ if (isset($_GET['order_id']) && !empty($_GET['order_id'])) {
 
 <section id="transaksi" class="transaksi">
     <div class="container-transaksi bg-white">
-        <button class="btn btn-light rounded-circle border border-secondary mt-2 mb-3" onclick="history.go(-1);">
+        <button class="btn mt-2 mb-3" onclick="history.go(-1);">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 

@@ -79,6 +79,9 @@ require 'controllers/off-promo.php';
                     <li class="klik_menu" id="pesan">
                         <a><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
                     </li>
+                    <li class="klik_menu" id="notifikasi">
+                        <a><i class="menu-icon ti-bell"></i>Notifikasi </a>
+                    </li>
                     <li class="menu-title">Pengaturan</li><!-- /.menu-title -->
 
                     <li class="klik_menu" id="pengaturan">

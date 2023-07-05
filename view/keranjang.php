@@ -3,7 +3,7 @@
 
 <section id="keranjang" class="keranjang">
     <div class="container">
-        <button class="btn btn-light rounded-circle border border-secondary mt-2" onclick="history.go(-1);">
+        <button class="btn mt-2" onclick="history.go(-1);">
             <i class="fa-solid fa-arrow-left"></i>
         </button>
 
@@ -149,15 +149,23 @@
                             <input type="tel" name="telepon" class="form-control" id="floatingTelp" placeholder="No Telpon yang dapat dihubungi" value="<?= (isset($_COOKIE['telepon'])) ? $_COOKIE['telepon'] : "" ?>" onkeypress=" return hanyaAngka(event)" required>
                             <label for="floatingTelp">Nomor Telepon/ Nomor Whatsapp</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <textarea name="catatan" class="form-control" placeholder="catatan Anda" id="floatingcatatan" style="height: 100px"></textarea>
+                            <label for="floatingcatatan">Catatan</label>
+                        </div>
 
-                        <div class="pengiriman mb-4">
-                            <label class="fw-bolder d-block mb-3">Pengambilan Barang</label>
+                        <div class="metode-pembayaran mb-4">
+                            <label class="fw-bolder d-block mb-3">Metode Pembayaran</label>
 
-                            <input type="radio" class="btn-check" name="ambil_barang" value="ojol" id="ojek-online" autocomplete="off" checked>
-                            <label class="btn btn-outline-secondary" for="ojek-online">Ojek Online</label>
+                            <input type="radio" class="btn-check" name="metode_bayar" value="online" id="online" autocomplete="off" checked>
+                            <label class="btn" style="box-shadow: 0px 0px 1px 0px gray;" for="online">
+                                <img src="../assets/img/pembayaran/midtrans.png" alt="">
+                            </label>
 
-                            <input type="radio" class="btn-check" name="ambil_barang" value="toko" id="ambil-di-toko" autocomplete="off">
-                            <label class="btn btn-outline-secondary" for="ambil-di-toko">Ambli di Toko</label>
+                            <input type="radio" class="btn-check" name="metode_bayar" value="cod" id="cod" autocomplete="off">
+                            <label class="btn ms-2" style="box-shadow: 0px 0px 1px 0px gray;" for="cod">
+                                <img src="../assets/img/pembayaran/cod.png" alt="..">
+                            </label>
 
                         </div>
 
@@ -165,7 +173,7 @@
                 </div>
 
                 <div class="modal-footer d-flex flex-column">
-                    <button type="button" id="btn-bayar-belanjaan" class="btn btn-ijo text-white col-12">Bayar</button>
+                    <button type="button" id="btn-bayar-belanjaan" class="btn btn-ijo text-white col-12">Buat Pesanan</button>
                     <button type="button" class="btn btn-secondary col-12" data-bs-dismiss="modal">Batal</button>
                 </div>
 
@@ -209,8 +217,13 @@
                     data: $('#form-pembayaran').serialize(),
                     success: function(data) {
                         // document.getElementById("info-error").innerHTML = data;
-                        $('#modalCheckout').modal('hide');
-                        snap.pay(data);
+
+                        if (data != 'cod') {
+                            $('#modalCheckout').modal('hide');
+                            snap.pay(data);
+                        } else {
+                            window.location.href = 'transaksi';
+                        }
                     }
                 });
 

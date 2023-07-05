@@ -62,12 +62,5 @@ curl_setopt_array($curl, $options);
 // Send the HTTP request and get the response
 $response = curl_exec($curl);
 
-// Check for errors
-if ($response === false) {
-    echo 'Error sending message: ' . curl_error($curl);
-} else {
-    echo 'Message sent successfully';
-}
-
 // Close the cURL resource
 curl_close($curl);

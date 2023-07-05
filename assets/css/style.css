@@ -71,16 +71,19 @@ input {
 .jenis-pembayaran {
     overflow: hidden;
 }
-.coret-text{
+
+.coret-text {
     text-decoration: line-through !important;
     font-size: 0.7em;
 }
-.label-diskon{
+
+.label-diskon {
     color: #f94d63;
     background-color: #ffdbe2;
     font-size: 0.7em;
     font-weight: 600;
 }
+
 /* end custom */
 
 /* ============== CSS All ============== */
@@ -487,7 +490,9 @@ footer .copyright {
 footer .copyright span {
     font-size: 0.8rem;
 }
-.sosial-media,.sosial-media>i{
+
+.sosial-media,
+.sosial-media>i {
     font-size: 0.8em;
 }
 
@@ -564,10 +569,19 @@ footer .copyright span {
     background: #f0f0f0a2;
 }
 
-#gmbr-prdk-keranjang:hover{
-  transform: scale(0.95);
+#gmbr-prdk-keranjang:hover {
+    transform: scale(0.95);
 }
-
+.metode-pembayaran label{
+    font-size: 0.8em;
+}
+.form-pembayaran{
+    font-size: 0.8em;
+}
+.metode-pembayaran label img{
+    max-width: 60px;
+    aspect-ratio: 1.2/1;
+}
 /* ============== keranjang end ============== */
 
 
@@ -714,6 +728,7 @@ footer .copyright span {
     font-weight: 700 !important;
 
 }
+
 #lihat-produk .deskripsi .harga-coret {
     font-size: 1.2rem !important;
     font-weight: 600 !important;
@@ -1073,12 +1088,13 @@ footer .copyright span {
 
 
 /* gelombang */
-.body-footer{
+.body-footer {
     margin-top: 0.43rem;
     padding-top: 3rem;
     background: rgba(80, 184, 46, 1);
-    background-image: linear-gradient(rgba(255, 255, 255, 0.1),rgba(80, 184, 46, 1));
+    background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(80, 184, 46, 1));
 }
+
 .waves {
     position: relative;
     width: 100%;
@@ -1130,6 +1146,13 @@ footer .copyright span {
         transform: translate3d(85px, 0, 0);
     }
 }
+
+/* /gelombang */
+
+
+
+
+
 
 /*Shrinking for mobile*/
 @media (max-width: 768px) {
