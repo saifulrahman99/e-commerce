@@ -41,7 +41,7 @@ require 'controllers/off-promo.php';
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
 </head>
 
-<body>
+<body class="p-0">
 
     <!-- Left Panel -->
     <aside id="left-panel" class="left-panel">
@@ -181,6 +181,22 @@ require 'controllers/off-promo.php';
 
     </div>
     <!-- /#right-panel -->
+
+    <!-- Modal sukses-->
+    <div class="modal fade" id="suksesModal" tabindex="-1" aria-labelledby="suksesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <h3 style="font-weight: 700;">Berhasil</h3>
+                    <img src="assets/img/success.gif" alt="..">
+                    <div class="text-center mt-3">
+                        <button type="button" class="btn btn-lg btn-success px-5" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
     <!-- Scripts -->

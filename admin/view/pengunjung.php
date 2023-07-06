@@ -74,7 +74,7 @@ $select = mysqli_query($db, "SELECT * FROM pengunjung ORDER BY id_pengunjung DES
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
-                                                <button type="button" class="btn btn-danger col-4" onclick="pengunjung(<?= $p['id_pengunjung'] ?>,'delete')">Ya </button>
+                                                <button type="button" class="btn btn-danger col-4" onclick="pengunjung(<?= $p['id_pengunjung'] ?>)">Ya </button>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +91,6 @@ $select = mysqli_query($db, "SELECT * FROM pengunjung ORDER BY id_pengunjung DES
     </div>
 </div>
 </div>
-
 
 <script>
     $(document).ready(function() {

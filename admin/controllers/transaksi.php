@@ -23,10 +23,10 @@ if ($opsi == 'konfirmasi') {
 } elseif ($opsi == 'kirim') {
     mysqli_query($db, "UPDATE transaksi SET status_terkirim = '1' WHERE order_id = '$id_order'");
 
-    $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM transaksi INNER JOIN pengunjung ON transaksi.id_pengunjung = pengunjung.id_pengunjung WHERE order_id = '$id_order'"));
+    $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM transaksi JOIN pengunjung ON transaksi.id_pengunjung = pengunjung.id_pengunjung WHERE order_id = '$id_order'"));
 
     // add notif engiriman, web push
-    $token_push = array($select['token']);
+    $token_push = $select['token'];
 
     $belanjaan = $select['belanjaan'];
     $belanjaan = json_decode($belanjaan);
@@ -47,6 +47,7 @@ if ($opsi == 'konfirmasi') {
         } else {
             $pesanan .= "$nmProduk, ";
         }
+        $i++;
     }
 
     // Set the URL of the FCM API endpoint
@@ -64,7 +65,7 @@ if ($opsi == 'konfirmasi') {
             'image' => '',
             'click_action' => 'https://technoyus.my.id/transaksi'
         ),
-        'registration_ids' => $token_push,
+        'registration_ids' => [$token_push],
     );
 
     // Set additional cURL options

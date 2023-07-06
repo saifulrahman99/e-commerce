@@ -25,6 +25,8 @@ function produk(id, opsi) {
             processData: false,
             success: function (data) {
 
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop.fade.show').remove();
                 if (data == 'add') {
                     $('#tambahProduk').modal('hide');
                 } else if (data == 'update') {
@@ -32,10 +34,11 @@ function produk(id, opsi) {
                 } else if (data == 'impor') {
                     $('#imporExcel').modal('hide');
                 }
-                $('.modal-backdrop.fade.show').remove();
-                $('#isi-content-halaman').load(base_url + 'view/produk.php');
 
-                // console.log(data + " bukan delete");
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
+
+                $('#isi-content-halaman').load(base_url + 'view/produk.php');
 
             }
         });
@@ -48,8 +51,13 @@ function produk(id, opsi) {
             data: { "id_produk": id_produk, "opsi": opsi_control, },
             success: function () {
 
-                $('#hapusProduk' + id_produk).modal('hide');
+                $('body').removeClass('modal-open');
                 $('.modal-backdrop.fade.show').remove();
+                $('#hapusProduk' + id_produk).modal('hide');
+
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
+
                 $('#isi-content-halaman').load(base_url + 'view/produk.php');
 
             }
@@ -86,11 +94,19 @@ function kategori(id, opsi) {
             document.getElementById("form-kategori").reset();
             if (data == 'delete') {
 
-                $('#hapusKategori' + id_kategori).modal('hide');
-                $('#isi-content-halaman').load(base_url + 'view/kategori.php');
+                $('body').removeClass('modal-open');
                 $('.modal-backdrop.fade.show').remove();
+                $('#hapusKategori' + id_kategori).modal('hide');
+
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
+
+                $('#isi-content-halaman').load(base_url + 'view/kategori.php');
 
             } else if (data == 'add') {
+
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
                 $('#isi-content-halaman').load(base_url + 'view/kategori.php');
             }
         }
@@ -188,12 +204,17 @@ function promo(id, opsi) {
             cache: false,
             processData: false,
             success: function (data) {
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop.fade.show').remove();
                 if (data == 'add') {
                     $('#tambahPromo').modal('hide');
                 } else if (data == 'update') {
                     $('#editPromo' + id_promo).modal('hide');
                 }
-                $('.modal-backdrop.fade.show').remove();
+
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
+
                 $('#isi-content-halaman').load(base_url + 'view/promo.php');
 
             }
@@ -207,8 +228,13 @@ function promo(id, opsi) {
             data: { "id_promo": id_promo, "opsi": opsi_control, },
             success: function () {
 
-                $('#hapusPromo' + id_promo).modal('hide');
+                $('body').removeClass('modal-open');
                 $('.modal-backdrop.fade.show').remove();
+                $('#hapusPromo' + id_promo).modal('hide');
+
+                $('#suksesModal').modal('show');
+                $('body').removeClass('modal-open');
+
                 $('#isi-content-halaman').load(base_url + 'view/promo.php');
             }
         });
@@ -230,7 +256,7 @@ function notif(id) {
         method: "POST",
         data: { "id_promo": id_promo },
         success: function () {
-            $('#suksesModal').modal('show');
+            $('#suksesNotifModal').modal('show');
         }
     });
 }
@@ -248,23 +274,49 @@ function transaksi(order_id, opsi) {
         url: base_url + "controllers/transaksi.php",
         method: "POST",
         data: { "id_order": id_order, "opsi": opsi_control },
-        success: function (data) {
+        success: function () {
 
-            if (data == 'kirim') {
-                $('#kirimPesanan' + id_order).modal('hide');
-            }
-            if (data == 'konfirmasi') {
-                $('#konfirmasiPembayaran' + id_order).modal('hide');
-            }
+
+            $('body').removeClass('modal-open');
             $('.modal-backdrop.fade.show').remove();
+            $('#kirimPesanan' + id_order).modal('hide');
+            $('#konfirmasiPembayaran' + id_order).modal('hide');
+            
+            $('#suksesModal').modal('show');
+            $('body').removeClass('modal-open');
+            
             $('#isi-content-halaman').load(base_url + 'view/transaksi.php');
-
-            alert('eksekusi sukses');
         }
     });
 }
 
 // control transaksi
+
+// control pengunjung
+function pengunjung(id) {
+    var id_pengunjung = id;
+    var base_url = window.location.origin + '/admin/';
+
+    $.ajax({
+        url: base_url + "controllers/pengunjung.php",
+        method: "POST",
+        data: { "id_pengunjung": id_pengunjung },
+        success: function () {
+
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop.fade.show').remove();
+            $('#hapusPengunjung' + id_pengunjung).modal('hide');
+            
+            $('#suksesModal').modal('show');
+            $('body').removeClass('modal-open');
+            
+            $('#isi-content-halaman').load(base_url + 'view/pengunjung.php');
+            
+        }
+    });
+}
+
+// control pengunjung
 
 
 

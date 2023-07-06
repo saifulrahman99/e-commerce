@@ -17,7 +17,7 @@ $harga_promo = cek_diskon($id);
         </button>
 
         <div class="row justify-content-evenly">
-            <dizv class="galeri col-11 col-md-6 col-lg-3 p-0">
+            <div class="galeri col-11 col-md-6 col-lg-3 p-0">
 
                 <!-- slide galeri -->
                 <div class="mySlides">
@@ -57,8 +57,7 @@ $harga_promo = cek_diskon($id);
 
                 <!-- slide galeri end -->
 
-
-            </dizv>
+            </div>
             <div class="deskripsi col-12 col-lg-5 px-2">
                 <div class="rounded bg-white">
                     <span class="nama-produk d-block mb-3"><?= ucwords(strtolower($select['nm_produk'])) ?></span>

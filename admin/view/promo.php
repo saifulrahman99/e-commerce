@@ -174,7 +174,7 @@
 
 
  <!-- Modal sukses -->
- <div class="modal fade" id="suksesModal" tabindex="-1" aria-labelledby="suksesModalLabel" aria-hidden="true">
+ <div class="modal fade" id="suksesNotifModal" tabindex="-1" aria-labelledby="suksesNotifModalLabel" aria-hidden="true">
      <div class="modal-dialog modal-dialog-centered">
          <div class="modal-content text-center p-3 pb-4">
              <div class="modal-body" style="height: 250px;">
@@ -299,8 +299,6 @@
          </div>
      </div>
  <?php } ?>
-
- <script src="<?= base_url('assets/js/ajax-admin.js') ?>"></script>
 
  <script>
      $(document).ready(function() {

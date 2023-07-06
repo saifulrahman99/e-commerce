@@ -95,6 +95,7 @@ if (!isset($_SESSION['access_token'])) {
                     <li><a href="<?= base_url('home') ?>" class="menu menu-nav">Home</a></li>
                     <li><a href="<?= base_url('produk') ?>" class="menu menu-nav">Produk</a></li>
                     <li><a href="#" class="menu menu-nav">About Us</a></li>
+                    <li><a href="<?= base_url('transaksi') ?>" class="menu menu-nav">Transaksi</a></li>
                     <li class="px-2">
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="menu-nav-extra position-relative">
                             <i data-feather="shopping-cart"></i>
@@ -106,11 +107,6 @@ if (!isset($_SESSION['access_token'])) {
                         <a href="#" class="menu-nav position-relative">
                             <i data-feather="message-square"></i>
                             <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
-                        </a>
-                    </li>
-                    <li class="px-2">
-                        <a href="<?= base_url('transaksi') ?>" class="menu-nav">
-                            <i data-feather="file-text"></i>
                         </a>
                     </li>
                     <?php if ($login_button == '') : ?>

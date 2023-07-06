@@ -196,9 +196,11 @@
                                         if ($sk['status_terkirim'] == 0) {
                                         ?>
                                          <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/batalkan" type="button" class="btn btn-sm btn-danger mb-2">Batalkan Pesanan</a>
-                                     <?php } elseif ($sk['status_terkirim'] == 1) { ?>
-                                         <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/konfirmasi" type="button" class="btn btn-sm btn-success mb-2">Konfirmasi Barang Diterima</a>
-                                     <?php } elseif ($sk['status_terkirim'] == 2) { ?>
+                                         <?php } elseif ($sk['status_terkirim'] == 1) {
+                                            if ($sk['metode_bayar']   != 'cod') { ?>
+                                             <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/konfirmasi" type="button" class="btn btn-sm btn-success mb-2">Konfirmasi Barang Diterima</a>
+                                         <?php }
+                                        } elseif ($sk['status_terkirim'] == 2) { ?>
                                          <a href="transaksi/notapesanan/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-info text-white mb-2">Lihat Resi</a>
                                      <?php }
                                     }
