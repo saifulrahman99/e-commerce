@@ -1,20 +1,30 @@
 <?php
 require('../assets/basis/kon.php');
 
-$id_promo = $_POST['id_promo'];
-$promo = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM promo WHERE id_promo = '$id_promo'"));
+$judul = $_POST['judul'];
+$ket = $_POST['ket'];
+$action = !empty($_POST['action']) ? $_POST['action'] : 'https://technoyus.my.id';
 
-$nm_promo = $promo['nm_promo'];
-$keterangan = $promo['keterangan'];
-$gambar = $promo['gambar'];
-$id_produk = $promo['id_produk'];
+$gambar = $_FILES['gambar'];
 
-if ($id_produk != 0) {
-    $action = 'https://technoyus.my.id/produk/lihat/' . $id_produk;
+$path = '../assets/img/notif/';
+
+if (empty($gambar['name'])) {
+    $gambar = 'https://technoyus.my.id/assets/img/brand/adastra.png';
 } else {
-    $action = 'https://technoyus.my.id/produk';
+
+    $filepath = $path . $gambar['name'];
+
+    if (!file_exists($filepath)) {
+        $upload_gambar = move_uploaded_file($gambar['tmp_name'], $filepath);
+    } else {
+        unlink($filepath);
+        $upload_gambar = move_uploaded_file($gambar['tmp_name'], $filepath);
+    }
+    $gambar = 'https://technoyus.my.id/admin/assets/img/notif/' . $gambar['name'];
 }
 
+echo "$judul, $ket, $action, $gambar";
 
 
 $token = mysqli_query($db, "SELECT DISTINCT token FROM pengunjung WHERE token != ''");
@@ -32,10 +42,10 @@ $server_key = 'AAAAyEHLmKE:APA91bHyBrCa3oNpWrVDjqjbCKy97Wz9VSbtP1_BuEApEVbO1uCCh
 // Set the message payload
 $message = array(
     'data' => array(
-        'title' => $nm_promo,
-        'body' => $keterangan,
+        'title' => $judul,
+        'body' => $ket,
         'icon' => 'https://technoyus.my.id/assets/img/brand/adastra.jpg',
-        'image' => "https://technoyus.my.id/assets/img/promo/" . $gambar,
+        'image' => $gambar,
         'click_action' => $action
     ),
     'registration_ids' => $token_push,

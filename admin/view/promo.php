@@ -179,7 +179,7 @@
          <div class="modal-content text-center p-3 pb-4">
              <div class="modal-body" style="height: 250px;">
                  <h2 style="font-weight: 700 !important;">Push Notif Berhasil</h2>
-                 <img src="<?=  base_url('assets/img/notif-success.gif')?>" alt="">
+                 <img src="<?= base_url('assets/img/notif-success.gif') ?>" alt="">
                  <div class="d-block text-center">
                      <button type="button" class="btn btn-info btn-lg px-4 fs-3" data-dismiss="modal">OK</button>
                  </div>
@@ -286,7 +286,7 @@
                      </h5>
                  </div>
                  <div class="modal-body text-center">
-                    <img src="<?=base_url('assets/img/warning.gif')?>" alt="">
+                     <img src="<?= base_url('assets/img/warning.gif') ?>" alt="">
                      <p class="text-dark">
                          Yakin Untuk Menghapus Data Promo <b><?= $modal['nm_promo'] ?></b> ?
                      </p>
@@ -313,6 +313,7 @@
          });
      });
  </script>
+ <script src="<?= base_url('assets/js/ajax-admin.js') ?>"></script>
 
 
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

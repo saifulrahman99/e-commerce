@@ -83,7 +83,8 @@
                                                  <i class="ti-alert"></i> Peringatan !
                                              </h5>
                                          </div>
-                                         <div class="modal-body">
+                                         <div class="modal-body text-center">
+                                             <img src="<?= base_url('assets/img/warning.gif') ?>" alt="">
                                              <p class="text-dark">
                                                  Yakin Untuk Menghapus Data Produk <b><?= $p['nm_produk'] ?></b> ?
                                              </p>

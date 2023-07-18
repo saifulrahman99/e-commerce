@@ -12,7 +12,7 @@ require 'controllers/off-promo.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Admin</title>
 
     <link rel="apple-touch-icon" href="<?= base_url('../assets/img/brand/adastra.png') ?>">
     <link rel="shortcut icon" href="<?= base_url('../assets/img/brand/adastra.png') ?>">
@@ -77,7 +77,7 @@ require 'controllers/off-promo.php';
                         <a><i class="menu-icon ti-receipt"></i>Transaksi </a>
                     </li>
                     <li class="klik_menu" id="pesan">
-                        <a><i class="menu-icon ti-comment-alt"></i>Pesan <span class="count bg-danger">3</span></a>
+                        <a><i class="menu-icon ti-comment-alt"></i>Pesan </a>
                     </li>
                     <li class="klik_menu" id="notifikasi">
                         <a><i class="menu-icon ti-bell"></i>Notifikasi </a>
@@ -96,6 +96,38 @@ require 'controllers/off-promo.php';
 
     <!-- Right Panel -->
     <div id="right-panel" class="right-panel">
+
+        <!-- toast notif -->
+        <div class="position-fixed p-3" style="z-index: 5; right: 0; top: 1; width: 250px;">
+            <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+                <div class="toast-header">
+                    <img src="<?= base_url('../assets/img/brand/adastra.jpg') ?>" class="rounded mr-2" alt="..." style="width: 20px;">
+                    <strong class="mr-auto">Notifikasi</strong>
+                </div>
+                <div class="toast-body">
+                    Ada Pesan Baru
+                </div>
+            </div>
+        </div>
+        <!-- /toast notif -->
+
+        <!-- Modal sukses-->
+        <div class="modal fade" id="suksesModal" tabindex="-1" aria-labelledby="suksesModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-body text-center py-4">
+                        <h3 style="font-weight: 700;">Berhasil</h3>
+                        <img src="assets/img/success.gif" alt="..">
+                        <div class="text-center mt-3">
+                            <button type="button" class="btn btn-lg btn-success px-5" data-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Modal sukses-->
+
+
         <!-- Header-->
         <header id="header" class="header">
             <div class="top-left">
@@ -107,30 +139,26 @@ require 'controllers/off-promo.php';
             </div>
             <div class="top-right">
                 <div class="header-menu">
+                    <div id="input-jml-pesan">
+
+                    </div>
+
+                    <?php
+                    $id_admin = $_COOKIE['id_admin'];
+                    // set jlm pesan awal
+                    $total_pesan = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(status_terbaca) as jml_pesan FROM obrolan WHERE status_terbaca = '0' AND pengirim != '$id_admin'"));
+                    ?>
+                    <!-- jml pesan awal -->
+                    <input type="text" id="total_pesan_diterima_old" value="<?= $total_pesan['jml_pesan'] ?>" hidden>
+                    <!-- jml pesan awal -->
                     <div class="header-left">
 
                         <div class="dropdown for-notification">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-bell"></i>
-                                <span class="count bg-danger">3</span>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="notification" onclick="loadPesan()">
+                                <i class="fa fa-comments"></i>
+                                <span id="notif-bell-pesan" class="count bg-danger op-none"></span>
                             </button>
-                            <div class="dropdown-menu" aria-labelledby="notification">
-                                <p class="red">You have 3 Notification</p>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-check"></i>
-                                    <p>Server #1 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-info"></i>
-                                    <p>Server #2 overloaded.</p>
-                                </a>
-                                <a class="dropdown-item media" href="#">
-                                    <i class="fa fa-warning"></i>
-                                    <p>Server #3 overloaded.</p>
-                                </a>
-                            </div>
                         </div>
-
 
                     </div>
 
@@ -160,7 +188,6 @@ require 'controllers/off-promo.php';
         <div id="isi-content-halaman">
 
 
-
         </div>
         <!-- /.content -->
         <div class="clearfix"></div>
@@ -181,22 +208,6 @@ require 'controllers/off-promo.php';
 
     </div>
     <!-- /#right-panel -->
-
-    <!-- Modal sukses-->
-    <div class="modal fade" id="suksesModal" tabindex="-1" aria-labelledby="suksesModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body text-center py-4">
-                    <h3 style="font-weight: 700;">Berhasil</h3>
-                    <img src="assets/img/success.gif" alt="..">
-                    <div class="text-center mt-3">
-                        <button type="button" class="btn btn-lg btn-success px-5" data-dismiss="modal">OK</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 
     <!-- Scripts -->
@@ -236,13 +247,16 @@ require 'controllers/off-promo.php';
     ?>
     <script>
         $(document).ready(function() {
+
             var hlm = "<?= $hlm ?>";
+            // alert(hlm);
 
             if (hlm != '') {
                 var page = "../view/" + hlm + ".php";
                 $('#isi-content-halaman').load(page);
             }
         });
+        document.getElementsByClassName('subtitle').remove();
     </script>
 </body>
 

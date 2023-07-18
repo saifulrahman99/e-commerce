@@ -27,9 +27,11 @@ $cookie_telepon = (isset($_COOKIE['telepon'])) ? $_COOKIE['telepon'] : '';
 
 if ($cookie_nama != $nm_pembeli || $cookie_nama == '') {
     setcookie('nama', $nm_pembeli, time() + (60 * 60 * 24 * 365), '/');
-} elseif ($cookie_alamat != $alamat || $cookie_alamat == '') {
+}
+if ($cookie_alamat != $alamat || $cookie_alamat == '') {
     setcookie('alamat', $alamat, time() + (60 * 60 * 24 * 365), '/');
-} elseif ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
+}
+if ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
     setcookie('telepon', $nomor_hp, time() + (60 * 60 * 24 * 365), '/');
 }
 

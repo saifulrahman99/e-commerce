@@ -6,37 +6,37 @@ require_once('assets/basis/kon.php');
 require('function.php');
 require('controllers/add-user.php');
 
-$login_button = '';
+// $login_button = '';
 
-if (isset($_GET["code"])) {
-    $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
-    if (!isset($token['error'])) {
-        $google_client->setAccessToken($token['access_token']);
-        $_SESSION['access_token'] = $token['access_token'];
-        $google_service = new Google_Service_Oauth2($google_client);
-        $data = $google_service->userinfo->get();
-        if (!empty($data['given_name']) && !empty($data['family_name'])) {
-            $given_name = $data['given_name'];
-            $family_name = $data['family_name'];
-            $_SESSION['name'] = $given_name;
-        }
-        if (!empty($data['email'])) {
-            $_SESSION['user_email_address'] = $data['email'];
-        }
+// if (isset($_GET["code"])) {
+//     $token = $google_client->fetchAccessTokenWithAuthCode($_GET["code"]);
+//     if (!isset($token['error'])) {
+//         $google_client->setAccessToken($token['access_token']);
+//         $_SESSION['access_token'] = $token['access_token'];
+//         $google_service = new Google_Service_Oauth2($google_client);
+//         $data = $google_service->userinfo->get();
+//         if (!empty($data['given_name']) && !empty($data['family_name'])) {
+//             $given_name = $data['given_name'];
+//             $family_name = $data['family_name'];
+//             $_SESSION['name'] = $given_name;
+//         }
+//         if (!empty($data['email'])) {
+//             $_SESSION['user_email_address'] = $data['email'];
+//         }
 
-        if (!empty($data['gender'])) {
-            $_SESSION['user_gender'] = $data['gender'];
-        }
+//         if (!empty($data['gender'])) {
+//             $_SESSION['user_gender'] = $data['gender'];
+//         }
 
-        if (!empty($data['picture'])) {
-            $_SESSION['user_image'] = $data['picture'];
-        }
-    }
-}
+//         if (!empty($data['picture'])) {
+//             $_SESSION['user_image'] = $data['picture'];
+//         }
+//     }
+// }
 
-if (!isset($_SESSION['access_token'])) {
-    $login_button = '<a href="' . $google_client->createAuthUrl() . '" class="opsi-login text-decoration-none rounded"><img src="assets/img/brand/google.png" width="30" alt="google"/><span class="fw-bolder"> Login Google</span></a>';
-}
+// if (!isset($_SESSION['access_token'])) {
+//     $login_button = '<a href="' . $google_client->createAuthUrl() . '" class="opsi-login text-decoration-none rounded"><img src="assets/img/brand/google.png" width="30" alt="google"/><span class="fw-bolder"> Login Google</span></a>';
+// }
 // session_destroy();
 ?>
 <!DOCTYPE html>
@@ -75,6 +75,7 @@ if (!isset($_SESSION['access_token'])) {
     <link rel="shortcut icon" href="<?= base_url('assets/img/brand/adastra.png') ?>" type="image/x-icon">
     <link rel="stylesheet" href="<?= base_url('assets/css/style.css') ?>">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/gh/yesiamrocks/cssanimation.io@1.0.3/cssanimation.min.css" rel="stylesheet">
@@ -94,8 +95,13 @@ if (!isset($_SESSION['access_token'])) {
                 <ul>
                     <li><a href="<?= base_url('home') ?>" class="menu menu-nav">Home</a></li>
                     <li><a href="<?= base_url('produk') ?>" class="menu menu-nav">Produk</a></li>
-                    <li><a href="#" class="menu menu-nav">About Us</a></li>
                     <li><a href="<?= base_url('transaksi') ?>" class="menu menu-nav">Transaksi</a></li>
+                    <li class="px-2">
+                        <a href="<?= base_url('pesan') ?>" class="menu-nav position-relative">
+                            <i data-feather="message-square"></i>
+                            <span id="dot-notif-pesan" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle op-none"> </span>
+                        </a>
+                    </li>
                     <li class="px-2">
                         <a href="<?= base_url('keranjang') ?>" id="hrefCart" class="menu-nav-extra position-relative">
                             <i data-feather="shopping-cart"></i>
@@ -103,20 +109,11 @@ if (!isset($_SESSION['access_token'])) {
                             <span id="jml-item-dalam-cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"> </span>
                         </a>
                     </li>
-                    <li class="px-2">
-                        <a href="#" class="menu-nav position-relative">
-                            <i data-feather="message-square"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
-                        </a>
-                    </li>
-                    <?php if ($login_button == '') : ?>
-                        <li class="px-2"><span class="nav-user-profile menu-nav"> <i data-feather="user" class="pb-1"></i> <span class=""><?php echo $_SESSION['name'] ?></span></span></li>
 
-                    <?php endif; ?>
                 </ul>
             </nav>
 
-
+            <!-- mobile menu -->
             <nav class="navbar-nav-extra">
                 <ul class="d-flex justify-content-evenly">
 
@@ -125,10 +122,13 @@ if (!isset($_SESSION['access_token'])) {
                     <li><a href="<?= base_url('produk') ?>" class="menu-nav m-0 p-0"> <i data-feather="shopping-bag"></i><span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Produk" || $halaman == "Lihat") ? "active-mobile" : "" ?>">Produk</span> </a> </li>
 
                     <li>
-                        <a href="#" class="menu-nav position-relative ">
-                            <i data-feather="message-square" class="d-block m-auto"> </i>
-                            <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"> </span>
-                            <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Pesan") ? "active-mobile" : "" ?>">Pesan</span>
+                        <a href="<?= base_url('pesan') ?>" class="menu-nav position-relative ">
+                            <div class="position-relative" style="width: 30px; margin: auto;">
+                                <i data-feather="message-square" class="d-block m-auto"> </i>
+                                <span id="dot-notif-pesan-mobile" class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle op-none"> </span>
+
+                            </div>
+                            <span class="d-block m-auto rounded mt-1 px-1 <?= ($halaman == "Pesan") ? "active-mobile" : "" ?>">pesan</span>
                         </a>
                     </li>
 
@@ -140,6 +140,8 @@ if (!isset($_SESSION['access_token'])) {
                     </li>
                 </ul>
             </nav>
+            <!-- /mobile menu -->
+
 
             <nav class="navbar-nav-extra-menu">
                 <ul class="p-0">
@@ -155,6 +157,27 @@ if (!isset($_SESSION['access_token'])) {
 
         </div>
     </header>
+
+    <?php
+    $id_obrolan = (isset($_GET['admin']) && !empty($_GET['admin']) ? $_GET['admin'] : 1);
+    ?>
+    <!-- value pengunjung dan admin untuk digunakan di js -->
+    <input type="text" name="idAdmin" value="<?= $id_obrolan ?>" hidden>
+    <input type="text" name="idPengunjung" value="<?= $id_pengunjung ?>" hidden>
+
+    <?php
+    // set jlm pesan awal
+    $total_pesan = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(status_terbaca) as jml_pesan FROM obrolan WHERE status_terbaca = '0' AND pengirim != '$id_pengunjung' AND id_pengunjung='$id_pengunjung'"));
+    ?>
+    <input type="text" id="total_pesan_diterima_old" value="<?= $total_pesan['jml_pesan'] ?>" hidden>
+
+    <div id="input-jml-pesan">
+
+    </div>
+
+    <!-- /value untuk digunakan di js -->
+
+
     <div id="navbar-show" class="navbar-show"></div>
     <!-- navigasi end -->
 
@@ -175,6 +198,9 @@ if (!isset($_SESSION['access_token'])) {
             break;
         case 'Transaksi':
             include 'view/transaksi.php';
+            break;
+        case 'Pesan':
+            include 'view/pesan.php';
             break;
     }
     ?>
@@ -226,8 +252,8 @@ if (!isset($_SESSION['access_token'])) {
                         <p class=" text-white mb-2" style="font-size: 0.9rem;">
                             Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, harum.
                         </p>
-                        <i class="fa-solid fa-location-dot text-warning"></i>
-                        <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-warning text-decoration-none">Lihat Lokasi</a>
+                        <i class="fa-regular fa-map text-white"></i>
+                        <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-white text-decoration-none fw-bold">Lihat Lokasi</a>
                     </div>
                     <div class="mt-1 text-center text-white">
                         IP Anda : <?= get_client_ip_env() ?>
@@ -244,6 +270,20 @@ if (!isset($_SESSION['access_token'])) {
     </footer>
 
     <!-- footer end -->
+
+    <!-- toast notif -->
+    <div class="position-fixed p-3" style="z-index: 5; right: 0; top: 1; width: 250px;">
+        <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+            <div class="toast-header">
+                <img src="<?= base_url('../assets/img/brand/adastra.jpg') ?>" class="rounded mr-2" alt="..." style="width: 20px;">
+                <strong class="mr-auto">Notifikasi</strong>
+            </div>
+            <div class="toast-body">
+                Ada Pesan Baru
+            </div>
+        </div>
+    </div>
+    <!-- /toast notif -->
 
     <!-- popup add keranjang -->
     <div class="position-fixed top-50 start-50 translate-middle">
@@ -270,12 +310,28 @@ if (!isset($_SESSION['access_token'])) {
 
     <!-- js costum -->
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
+
     <?php
-    if ($halaman != "Lihat") { ?>
+    if ($halaman != "Lihat" && $halaman != "Pesan") {
+        $path_addToken = 'controllers/add-token-notif.php';
+    ?>
         <script src="<?= base_url('assets/js/ajax.js') ?>"></script>
-    <?php } else { ?>
+
+    <?php }
+    if ($halaman == 'Lihat') {
+        $path_addToken = '../../controllers/add-token-notif.php';
+    ?>
         <script src="<?= base_url('assets/js/ajax-lihat.js') ?>"></script>
+
+    <?php }
+    if ($halaman == 'Pesan') {
+        $path_addToken = '../../controllers/add-token-notif.php';
+    ?>
+        <script type="text/javascript" src="<?= base_url('assets/js/ajax-pesan.js') ?>"></script>
     <?php } ?>
+
+    <script src="<?= base_url('assets/js/all-page-ajax.js') ?>"></script>
+
     <!-- icon -->
     <script src="https://unpkg.com/feather-icons"></script>
     <script>
@@ -310,20 +366,21 @@ if (!isset($_SESSION['access_token'])) {
         }).then((currentToken) => {
             // app token used for sending notifications
             if (currentToken) {
-                console.log(currentToken);
+                // console.log(currentToken);
                 // document.getElementById('token-notif').innerHTML = currentToken;
 
                 var id_pengunjung = '<?= $id_pengunjung ?>';
                 var token = currentToken;
+                var path = '<?= $path_addToken ?>';
                 $.ajax({
-                    url: "controllers/add-token-notif.php",
+                    url: path,
                     method: "POST",
                     data: {
                         "id_pengunjung": id_pengunjung,
                         "token": token
                     },
                     success: function(data) {
-                        console.log('save sukses');
+                        // console.log('save sukses');
                     }
                 });
 

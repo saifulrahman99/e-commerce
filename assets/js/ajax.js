@@ -56,7 +56,7 @@ function addCart(id, harga, opsi) {
     $.ajax({
         url: "controllers/cart.php",
         method: "POST",
-        data: { "id_produk": id_produk, "opsi": opsi_cart ,"harga": harga_produk},
+        data: { "id_produk": id_produk, "opsi": opsi_cart, "harga": harga_produk },
         success: function () {
 
             const cartToast = document.getElementById('cartToast')
@@ -88,8 +88,7 @@ function hapusItemCart(id, opsi) {
 // jalankan fungsi jml item dalam keranjang
 setInterval(function () {
     updateCart();
-
-}, 500);
+}, 1000);
 
 
 

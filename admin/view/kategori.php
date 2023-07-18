@@ -80,7 +80,8 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
                             <i class="ti-alert"></i> Peringatan !
                         </h5>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body text-center">
+                        <img src="<?= base_url('assets/img/warning.gif') ?>" alt="">
                         <p class="text-dark">
                             Yakin Untuk Menghapus Data Kategori <b><?= $modal['kategori'] ?></b> ?
                         </p>

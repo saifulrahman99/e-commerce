@@ -47,49 +47,49 @@ $(window).on('scroll', function () {
 
 // ======== whell mouse scroll section ==============
 
-const element = document.querySelector(".promo-content");
+// const element = document.querySelector(".promo-content");
 
-element.addEventListener('wheel', (event) => {
-    event.preventDefault();
+// element.addEventListener('wheel', (event) => {
+//     event.preventDefault();
 
-    element.scrollBy({
-        left: event.deltaY < 0 ? -30 : 30,
+//     element.scrollBy({
+//         left: event.deltaY < 0 ? -30 : 30,
 
-    });
-});
+//     });
+// });
 // ======== whell mouse scroll section ==============
 
 
 
 
 // ======== grap scroll section ==============
-const slider = document.querySelector('.grap-content');
-let isDown = false;
-let startX;
-let scrollLeft;
+// const slider = document.querySelector('.grap-content');
+// let isDown = false;
+// let startX;
+// let scrollLeft;
 
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-});
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
-slider.addEventListener('mousemove', (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 3; //scroll-fast
-    slider.scrollLeft = scrollLeft - walk;
-    console.log(walk);
-});
+// slider.addEventListener('mousedown', (e) => {
+//     isDown = true;
+//     slider.classList.add('active');
+//     startX = e.pageX - slider.offsetLeft;
+//     scrollLeft = slider.scrollLeft;
+// });
+// slider.addEventListener('mouseleave', () => {
+//     isDown = false;
+//     slider.classList.remove('active');
+// });
+// slider.addEventListener('mouseup', () => {
+//     isDown = false;
+//     slider.classList.remove('active');
+// });
+// slider.addEventListener('mousemove', (e) => {
+//     if (!isDown) return;
+//     e.preventDefault();
+//     const x = e.pageX - slider.offsetLeft;
+//     const walk = (x - startX) * 3; //scroll-fast
+//     slider.scrollLeft = scrollLeft - walk;
+//     console.log(walk);
+// });
 // ======== grap scroll section ==============
 
 

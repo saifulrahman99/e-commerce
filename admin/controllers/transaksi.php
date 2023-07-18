@@ -61,7 +61,7 @@ if ($opsi == 'konfirmasi') {
         'data' => array(
             'title' => 'Pesananmu Sudah Dikirim',
             'body' => $pesanan,
-            'icon' => 'https://technoyus.my.id/assets/img/brand/adastra.png',
+            'icon' => 'https://technoyus.my.id/assets/img/brand/adastra.jpg',
             'image' => '',
             'click_action' => 'https://technoyus.my.id/transaksi'
         ),
