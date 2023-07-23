@@ -20,7 +20,7 @@ if (mysqli_num_rows($query) > 0) {
 
         $harga_promo = cek_diskon($produk['id_produk']);
 ?>
-        <div class="col-6 col-md-3 col-lg-2 mb-5">
+        <div class="col-6 col-md-3 col-lg-2 mb-4 p-1">
             <div class="card cssanimation fadeInBottom">
                 <img src="<?= (!empty($gambar_produk)) ? '../assets/img/produk/' . $gambar_produk : '../assets/img/produk/default-produk.jpg' ?>" alt="..." style="aspect-ratio: 1/1;" class="rounded-top">
                 <div class="card-body px-3 py-3">

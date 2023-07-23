@@ -53,7 +53,7 @@
         </div>
 
 
-        <div id="show-produk" class="row big-demo go-wide" data-js="filtering-demo">
+        <div id="show-produk" class="row big-demo go-wide px-2" data-js="filtering-demo">
         </div>
     </div>
 
