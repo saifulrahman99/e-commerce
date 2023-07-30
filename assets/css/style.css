@@ -457,6 +457,9 @@ input {
     display: none;
 }
 
+#img-promo-0 {
+    width: 90%;
+}
 
 /* ============== end section promo start ============== */
 
@@ -1456,6 +1459,10 @@ footer .copyright span {
 
     #img-promo {
         height: 100%;
+    }
+
+    .gif-empty-search {
+        margin-left: -2rem !important;
     }
 }
 

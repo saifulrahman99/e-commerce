@@ -36,7 +36,7 @@
 
                         </div>
                         <div class="card-content p-0">
-                            <div class="messenger-box overflow-y-auto p-3" style="height: 60vh;">
+                            <div class="messenger-box overflow-y-auto p-3" style="height: 55vh;">
                                 <div class="text-center mb-2">
                                     <label class="p-1 bg-light shadow-sm" style="font-size: 0.7em;">Mulai Obrolanmu</label>
                                 </div>

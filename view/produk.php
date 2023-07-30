@@ -26,7 +26,7 @@
             }
         </script>
 
-        <div class="filter bg-white p-4 text-center shadow position-relative rounded m-auto">
+        <div class="filter bg-white p-2 p-md-3 text-center shadow position-relative rounded m-auto">
             <div class="input-group">
                 <button class="filter-search input-group-text bg-white" id="inputGroup-sizing-default" onclick="open_filter()">
                     <i data-feather="sliders"></i>

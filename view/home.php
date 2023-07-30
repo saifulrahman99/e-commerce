@@ -20,312 +20,270 @@
 
 </section>
 
-<section id="promo" class="promo">
-    <div class="container">
-        <h2 class="judul-section fs-2 my-3 my-lg-0 mb-lg-3">Promo <span class="text-ijo judul-section fs-2 my-3 my-lg-0 mb-lg-3">Terbatas</span></h2>
+<?php
+$promo = mysqli_query($db, "SELECT * FROM promo WHERE status = '1'");
+$jml_promo = mysqli_num_rows($promo);
+$jml_carousel = $jml_promo / 2;
 
-        <!-- pakai carousel -->
-        <div id="carouselPromoDekstop" class="carousel slide">
+if ($jml_promo > 0) { ?>
+    <section id="promo" class="promo">
+        <div class="container">
+            <h2 class="judul-section fs-2 my-3 my-lg-0 mb-lg-3">Promo <span class="text-ijo judul-section fs-2 my-3 my-lg-0 mb-lg-3">Terbatas</span></h2>
 
-            <div class="carousel-indicators mb-0 mb-0">
+            <!-- pakai carousel -->
+            <div id="carouselPromoDekstop" class="carousel slide">
 
-                <a href="#carouselPromoDekstop" data-bs-slide-to="0" class="active mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide1"></a>
+                <div class="carousel-indicators mb-0 mb-0">
 
-                <a href="#carouselPromoDekstop" data-bs-slide-to="1" class="mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide2"></a>
+                    <?php
+                    for ($i = 0; $i < $jml_carousel; $i++) { ?>
+                        <a href="#carouselPromoDekstop" data-bs-slide-to="<?= $i ?>" class="<?= ($i == 0) ? "active" : "" ?> mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide<?= $i ?>"></a>
+                    <?php } ?>
 
-            </div>
+                </div>
+                <div class="carousel-inner pe-0">
 
-            <div class="carousel-inner pe-0">
+                    <?php
+                    $limit = 0;
+                    for ($i = 1; $i < $jml_carousel + 1; $i++) { ?>
 
-                <div class="carousel-item active">
-                    <div class="d-flex pb-3 justify-content-center">
+                        <div class="carousel-item <?= ($i == 1) ? "active" : "" ?>">
+                            <div class="d-flex pb-3 justify-content-center">
 
-                        <div class="row col-lg-6 px-2">
+                                <?php
+                                $start = $limit;
+                                $limit = $i + 1;
 
-                            <div id="content-promo-left" class=" col-lg-7 py-5 pe-0">
+                                $query_iPromo = mysqli_query($db, "SELECT * FROM promo WHERE status = '1' ORDER BY id_promo DESC LIMIT $start,$limit");
 
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center shadow-sm" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
+                                foreach ($query_iPromo as $p) {
 
-                            <div id="content-promo-right" class="promo my-2 ps-lg-0  col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div class="position-relative" style="aspect-ratio: 1/1;">
+                                    $id_produk = $p['id_produk'];
 
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
+                                    if ($id_produk != 0) {
 
-                                        <div class="overlay-promo position-absolute bottom-0 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
+                                        $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_produk'"));
 
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
+                                        $gmbr_produk = (!empty($produk['gambar'])) ? $produk['gambar'] : "default-produk.jpg";
+
+                                        $harga_promo = ($p['harga_promo'] == 0) ? $produk['harga_pokok'] : $p['harga_promo'];
+                                        $diskon = number_format((($harga_promo / $produk['harga_jual']) * 100), 2);
+                                        $arr_diskon = explode('.', $diskon);
+                                        $diskon = ($arr_diskon[1] == '00') ? $arr_diskon[0] : $diskon;
+
+                                        $diskon = 100 - $diskon;
+                                ?>
+                                        <div id="item-promo" class="row col-lg-6 px-2">
+
+                                            <div id="content-promo-left" class=" col-lg-7 py-5 pe-0">
+
+                                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center shadow-sm" style="height: 100%;">
+                                                    <h6 class="tebal-700 text-center">Berakhir pada</h6>
+                                                    <div id="countdown<?= $id_produk ?>" class="countdown text-danger fw-bold mb-2">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="content-promo-right" class="promo my-2 ps-lg-0  col-lg-5">
+                                                <div class="card border border-0 shadow rounded overflow-hidden">
+                                                    <div class="position-relative" style="aspect-ratio: 1/1;">
+
+                                                        <img id="img-promo" src="<?= base_url('assets/img/produk/' . $gmbr_produk) ?>" alt="...">
+
+                                                        <div class="overlay-promo position-absolute bottom-0 px-3 py-3">
+                                                            <h3 class="nmPromo tebal-600 fs-5 text-white mb-3"><?= $produk['nm_produk'] ?></h3>
+
+                                                            <?php if ($produk['harga_jual'] != $produk['harga_pokok']) { ?>
+                                                                <span class="coret-text fs-6 text-white"><?= rupiah($produk['harga_jual']) ?></span>
+                                                                <span class="label-diskon rounded p-1">-<?= $diskon ?>%</span>
+                                                            <?php } ?>
+                                                            <span class="d-block fs-5 text-white" style="font-weight: 700;"><?= ($p['harga_promo'] == 0) ? rupiah($produk['harga_pokok']) : rupiah($p['harga_promo']) ?></span>
+
+                                                            <a href="<?= base_url('produk/lihat/' . $id_produk) ?>" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+
+                                    <?php } else { ?>
+
+                                        <div id="item-promo" class="row justify-content-center col-lg-6 px-2">
+                                            <div class="text-center">
+                                                <h6 class="fw-bold">Berakhir pada</h6>
+                                                <div id="countdown<?= $id_produk ?>" class="countdown text-danger fw-bold my-2">
+
+                                                </div>
+
+                                                <img src="<?= base_url('assets/img/promo/' . $p['gambar']) ?>" alt="" id="img-promo-0" class="my-1 pb-1">
+
+                                            </div>
+                                        </div>
+
+                                    <?php } ?>
+                                    <script>
+                                        setInterval(() => {
+                                            var countDownDate = new Date('<?= $p['waktu_selesai'] ?>').getTime();
+                                            var countDownTag = 'countdown' + <?= $id_produk ?>;
+                                            countdown(countDownDate, countDownTag)
+                                        }, 1000);
+                                    </script>
+
+                                <?php } ?>
+
                             </div>
                         </div>
 
-
-                        <div class="row col-lg-6 px-2">
-
-                            <div class=" col-lg-7 py-5 pe-0">
-
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
-
-                            <div class="promo my-2 ps-lg-0  col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div id="content-promo-left" class="position-relative" style="aspect-ratio: 1/1;">
-
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
-
-                                        <div class="overlay-promo position-absolute bottom-0 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
-
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
 
-                <div class="carousel-item">
-                    <div class="d-flex pb-3 justify-content-center">
+                <button class="carousel-control-prev bg-white position-absolute top-50 translate-middle rounded-circle border shadow-sm" type="button" data-bs-target="#carouselPromoDekstop" data-bs-slide="prev" style="opacity: 1;">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
 
-                        <div class="row col-lg-6 px-2">
-
-                            <div class=" col-lg-7 py-5 pe-0">
-
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center shadow-sm" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
-
-                            <div class="promo my-2 ps-lg-0  col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div id="content-promo-left" class="position-relative" style="aspect-ratio: 1/1;">
-
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
-
-                                        <div class="overlay-promo position-absolute bottom-0 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
-
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <button class="carousel-control-next bg-white position-absolute top-50 start-100 translate-middle rounded-circle border shadow-sm" type="button" data-bs-target="#carouselPromoDekstop" data-bs-slide="next" style="opacity: 1;">
+                    <i class="fa-solid fa-angle-right"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <!-- /pakai carousel -->
 
 
-                        <div class="row col-lg-6 px-2">
 
-                            <div class=" col-lg-7 py-5 pe-0">
 
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
 
-                            <div class="promo my-2 ps-lg-0  col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div id="content-promo-left" class="position-relative" style="aspect-ratio: 1/1;">
 
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
 
-                                        <div class="overlay-promo position-absolute bottom-0 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
+            <!-- carousel Handheld -->
+            <div id="carouselPromoHandheld" class="carousel slide">
 
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="carousel-indicators mb-0 mb-0">
+                    <?php
+                    $i = 0;
+                    foreach ($promo as $p) { ?>
+
+                        <a href="#carouselPromoHandheld" data-bs-slide-to="<?= $i ?>" class="<?= ($i == 0) ? "active" : "" ?> mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide<?= $i ?>"></a>
+
+                    <?php $i++;
+                    } ?>
                 </div>
 
+                <div class="carousel-inner">
+                    <?php
+                    $i = 1;
+                    foreach ($promo as $p) {
+
+
+                        $id_produk = intval($p['id_produk']);
+
+                        if ($id_produk != 0) {
+
+                            $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_produk'"));
+
+                            $gmbr_produk = (!empty($produk['gambar'])) ? $produk['gambar'] : $harga_promo = ($p['harga_promo'] == 0) ? $produk['harga_pokok'] : $p['harga_promo'];
+                            "default-produ
+                            k.jpg";
+
+                            $diskon = number_format((($harga_promo / $produk['harga_jual']) * 100), 2);
+                            $arr_diskon = explode('.', $diskon);
+                            $diskon = ($arr_diskon[1] == '00') ? $arr_diskon[0] : $diskon;
+
+                            $diskon = 100 - $diskon;
+                    ?>
+
+                            <div class="carousel-item <?= ($i == 1) ? "active" : "" ?>">
+                                <div class="d-flex pb-3 justify-content-center">
+                                    <div class="row col-12 col-lg-6 px-2">
+
+                                        <div id="content-promo-left" class=" col-md-7 col-lg-7 py-5 pe-0">
+
+                                            <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center shadow-sm" style="height: 100%;">
+                                                <h6 class="tebal-700 text-center">Berakhir pada</h6>
+                                                <div id="countdownTablet<?= $id_produk ?>" class="countdown text-danger fw-bold mb-2">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="content-promo-right" class="promo my-2 ps-lg-0 col-md-5 col-lg-5">
+                                            <div class="card border border-0 shadow rounded overflow-hidden">
+                                                <div class="position-relative" style="aspect-ratio: 1/1;">
+
+                                                    <div id="countdownMobile<?= $id_produk ?>" class="countdown-mobile text-danger fw-bold mb-2 position-absolute top-0 mt-3 ms-2">
+
+                                                    </div>
+
+                                                    <img id="img-promo" src="<?= base_url('assets/img/produk/' . $gmbr_produk) ?>" alt="...">
+
+                                                    <div class="overlay-promo position-absolute bottom-0 col-12 px-3 py-3">
+                                                        <h3 class="nmPromo tebal-600 fs-5 text-white"><?= $produk['nm_produk'] ?></h3>
+                                                        <?php if ($produk['harga_jual'] != $produk['harga_pokok']) { ?>
+                                                            <span class="coret-text fs-6 text-white"><?= rupiah($produk['harga_jual']) ?></span>
+                                                            <span class="label-diskon rounded p-1">-<?= $diskon ?>%</span>
+                                                        <?php } ?>
+                                                        <span class="d-block fs-5 text-white" style="font-weight: 700;"><?= ($p['harga_promo'] == 0) ? rupiah($produk['harga_pokok']) : rupiah($p['harga_promo']) ?></span>
+
+                                                        <a href="<?= base_url('produk/lihat/' . $id_produk) ?>" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        <?php } else { ?>
+
+                            <div class="carousel-item <?= ($i == 1) ? "active" : "" ?> pb-3">
+                                <div id="item-promo" class="row justify-content-center col-lg-6 px-2">
+                                    <div class="text-center">
+                                        <h6 class="fw-bold">Berakhir pada</h6>
+                                        <div id="countdownMobile<?= $id_produk ?>" class="countdown text-danger fw-bold my-2">
+
+                                        </div>
+
+                                        <img src="<?= base_url('assets/img/promo/' . $p['gambar']) ?>" alt="..." id="img-promo-0" class="my-1">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        <?php   } ?>
+
+                        <script>
+                            setInterval(() => {
+                                var countDownDate = new Date('<?= $p['waktu_selesai'] ?>').getTime();
+                                var countDownTagM = 'countdownMobile' + <?= $id_produk ?>;
+                                var countDownTagT = 'countdownTablet' + <?= $id_produk ?>;
+
+                                countdown(countDownDate, countDownTagM);
+                                if (countDownTagT != 'countdownTablet0') {
+                                    countdown(countDownDate, countDownTagT);
+                                }
+                            }, 1000);
+                        </script>
+
+                    <?php $i++;
+                    } ?>
+                </div>
+
+                <button class="carousel-control-prev bg-white position-absolute top-50 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoHandheld" data-bs-slide="prev">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next bg-white position-absolute top-50 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoHandheld" data-bs-slide="next">
+                    <i class="fa-solid fa-angle-right"></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
+            <!-- /carousel Handheld -->
 
-            <button class="carousel-control-prev bg-white position-absolute top-50 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoDekstop" data-bs-slide="prev">
-                <i class="fa-solid fa-angle-left"></i>
-                <span class="visually-hidden">Previous</span>
-            </button>
-
-            <button class="carousel-control-next bg-white position-absolute top-50 start-100 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoDekstop" data-bs-slide="next">
-                <i class="fa-solid fa-angle-right"></i>
-                <span class="visually-hidden">Next</span>
-            </button>
         </div>
-        <!-- /pakai carousel -->
-
-
-
-
-
-
-
-        <!-- carousel Handheld -->
-        <div id="carouselPromoHandheld" class="carousel slide">
-
-            <div class="carousel-indicators mb-0 mb-0">
-
-                <a href="#carouselPromoHandheld" data-bs-slide-to="0" class="active mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide1"></a>
-
-                <a href="#carouselPromoHandheld" data-bs-slide-to="1" class="mx-1 p-1 rounded-circle" aria-current="true" aria-label="Slide2"></a>
-
-            </div>
-
-            <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <div class="d-flex pb-3 justify-content-center">
-                        <div class="row col-12 col-lg-6 px-2">
-
-                            <div id="content-promo-left" class=" col-md-7 col-lg-7 py-5 pe-0">
-
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center shadow-sm" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
-
-                            <div id="content-promo-right" class="promo my-2 ps-lg-0 col-md-5 col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div class="position-relative" style="aspect-ratio: 1/1;">
-
-                                        <div class="countdown-mobile mb-2 position-absolute top-0 mt-3 ms-2">
-                                            <span class="p-2 bg-danger text-white rounded">4h</span>
-                                            <span class="p-2 bg-danger text-white rounded">17j</span>
-                                            <span class="p-2 bg-danger text-white rounded">4m</span>
-                                            <span class="p-2 bg-danger text-white rounded">54d</span>
-                                        </div>
-
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
-
-                                        <div class="overlay-promo position-absolute bottom-0 col-12 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
-
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="d-flex pb-3 justify-content-center">
-
-                        <div class="row col-12 col-lg-6 px-2">
-
-                            <div id="content-promo-left" class="col-md-7 col-lg-7 py-5 pe-0">
-
-                                <div id="banner-promo" class="border border-end-0 rounded-start p-3 d-flex align-items-center flex-column justify-content-center" style="height: 100%;">
-                                    <div class="countdown mb-2">
-                                        <span class="p-2 bg-danger text-white rounded">4h</span>
-                                        <span class="p-2 bg-danger text-white rounded">17j</span>
-                                        <span class="p-2 bg-danger text-white rounded">4m</span>
-                                        <span class="p-2 bg-danger text-white rounded">54d</span>
-                                    </div>
-                                    <h3 class="tebal-700 text-center">Lebih HEMAT Rp&nbsp1.000</h3>
-                                </div>
-                            </div>
-
-                            <div id="content-promo-right" class="promo my-2 ps-lg-0 col-md-5 col-lg-5">
-                                <div class="card border border-0 shadow rounded overflow-hidden">
-                                    <div class="position-relative" style="aspect-ratio: 1/1;">
-
-                                        <div class="countdown-mobile mb-2 position-absolute top-0 mt-3 ms-2">
-                                            <span class="p-2 bg-danger text-white rounded">4h</span>
-                                            <span class="p-2 bg-danger text-white rounded">17j</span>
-                                            <span class="p-2 bg-danger text-white rounded">4m</span>
-                                            <span class="p-2 bg-danger text-white rounded">54d</span>
-                                        </div>
-
-                                        <img id="img-promo" src="<?= base_url('assets/img/produk/apel-fuji.jpg') ?>" alt="...">
-
-                                        <div class="overlay-promo position-absolute bottom-0 col-12 px-3 py-3">
-                                            <h3 class="nmPromo tebal-600 fs-5 text-white">Yogurt Biokul Manggo</h3>
-                                            <span class="coret-text fs-6 text-white">Rp 10.000</span>
-                                            <span class="label-diskon rounded p-1">-10%</span>
-                                            <span class="d-block fs-5 text-white" style="font-weight: 700;">Rp 9.000</span>
-
-                                            <a href="#" class="text-dark fw-bold text-white btn btn-warning px-3 my-3 position-absolute bottom-0 end-0 me-3" style="border-radius: 20px !important; border: 3px solid white;">Lihat</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <button class="carousel-control-prev bg-white position-absolute top-50 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoHandheld" data-bs-slide="prev">
-                <i class="fa-solid fa-angle-left"></i>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next bg-white position-absolute top-50 translate-middle rounded-circle border" type="button" data-bs-target="#carouselPromoHandheld" data-bs-slide="next">
-                <i class="fa-solid fa-angle-right"></i>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-        <!-- /carousel Handheld -->
-
-    </div>
-</section>
-
+    </section>
+<?php } ?>
 
 <section id="about" class="about">
     <div class="container">

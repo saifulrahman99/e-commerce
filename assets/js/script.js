@@ -98,35 +98,6 @@ $(window).on('scroll', function () {
 
 // ======== tombol scroll ==============
 
-// event dan promo
-$('#btn-kiri-produk-promo').click(function () {
-    $('.produk-promo').animate({ scrollLeft: '-=440' }, 1000);
-});
-
-$('#btn-kanan-produk-promo').click(function () {
-    $('.produk-promo').animate({ scrollLeft: '+=440' }, 1000);
-});
-
-
-// terlaris
-$('#btn-kiri-produk-terlaris').click(function () {
-    $('.produk-terlaris').animate({ scrollLeft: '-=440' }, 1000);
-});
-
-$('#btn-kanan-produk-terlaris').click(function () {
-    $('.produk-terlaris').animate({ scrollLeft: '+=440' }, 1000);
-});
-
-// terbaru
-$('#btn-kiri-produk-terbaru').click(function () {
-    $('.produk-terbaru').animate({ scrollLeft: '-=440' }, 1000);
-});
-
-$('#btn-kanan-produk-terbaru').click(function () {
-    $('.produk-terbaru').animate({ scrollLeft: '+=440' }, 1000);
-});
-
-
 // sejenis
 function geserKiri() {
     let bungkus = $('.produk-sejenis');
@@ -172,7 +143,7 @@ function tambah(i) {
             document.getElementById("jml-item" + i).value = stok;
             alert("Jumlah Melebihi Stok");
         } else {
-            document.getElementById("jml-item" + i).value = jml + 0.5;
+            document.getElementById("jml-item" + i).value = jml + 1;
         }
     }
 }
@@ -189,7 +160,7 @@ function kurang(i) {
         document.getElementById("jml-item" + i).value = 1;
     }
     else {
-        document.getElementById("jml-item" + i).value = jml - 0.5;
+        document.getElementById("jml-item" + i).value = jml - 1;
     }
 }
 
@@ -214,7 +185,7 @@ function tambahV() {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml + 0.5;
+        document.getElementById("jml-item").value = jml + 1;
     }
 }
 function kurangV() {
@@ -230,7 +201,7 @@ function kurangV() {
         document.getElementById("jml-item").value = 1;
     }
     else {
-        document.getElementById("jml-item").value = jml - 0.5;
+        document.getElementById("jml-item").value = jml - 1;
     }
 }
 
@@ -296,7 +267,35 @@ function open_filter() {
     x.classList.toggle("open-filter");
 }
 // ======== tombol popover filter produk ==============
+
+
+
+
 $(".jenis-pembayaran label").click(function () {
     // $(this).toggleClass("payment-aktif");
     $(".jenis-pembayaran label").addClass("payment-aktif");
 });
+
+
+// Hitungan Mundur Waktu Dilakukan Setiap Satu Detik
+function countdown(time, tag) {
+    // Silahkan anda atur tanggal anda
+    var countDownDate = time;
+    var CountDownTag = ''+tag+'';
+    // Mendapatkan Tanggal dan waktu Pada Hari ini
+    var now = new Date().getTime();
+    //Jarak Waktu Antara Hitungan Mundur
+    var distance = countDownDate - now;
+    // Perhitungan waktu hari, jam, menit dan detik
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Tampilkan hasilnya di elemen id = "carasingkat"
+    document.getElementById(CountDownTag).innerHTML = "<span class='p-2 bg-danger text-white rounded'>" + days + "h</span> : <span class='p-2 bg-danger text-white rounded'>" + hours + "j</span> : <span class='p-2 bg-danger text-white rounded'>" +
+        minutes + "m</span> : <span class='p-2 bg-danger text-white rounded'>" + seconds + "d</span>";
+    // Jika hitungan mundur selesai,
+    if (distance < 0) {
+        document.getElementById(CountDownTag).innerHTML = "<span class='p-2 bg-danger text-white rounded'> EXPIRED </span>";
+    }
+}
