@@ -2,7 +2,7 @@
     <div class="container home">
         <div class="row row-tagline">
             <div class="tagline col-12 col-sm-6 d-flex flex-column justify-content-center cssanimation fadeInLeft">
-                <h1 class="mb-3 mb-md-4">Belanja <span>Buah dan Sayur</span></h1>
+                <h1 class="mb-3 mb-md-4">Belanja <span style="margin-left: -2.9px;">Buah dan Sayur</span></h1>
                 <p class="mb-3 mb-md-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab cupiditate vitae adipisci commodi non temporibus cumque ea ut, minima culpa.</p>
                 <div class="cta">
                     <a href="produk" class="btn btn-lg shadow"> <img src="assets/img/shopping-cart.svg" alt=".." class="me-2 pb-1"> Belanja Sekarang</a>
@@ -288,9 +288,6 @@ if ($jml_promo > 0) { ?>
 <section id="about" class="about">
     <div class="container">
         <div class="row">
-            <!-- <div class="col-12 text-center">
-                <h2 class="judul-section">About Us</h2>
-            </div> -->
             <div id="left-panel-about" class="col-12 col-md-8 col-lg-6">
                 <img src="https://img.freepik.com/free-photo/woman-with-tablet-buying-healthy-food-supermarket-grocery-store_342744-1110.jpg?w=1060&t=st=1689548917~exp=1689549517~hmac=19dabc37579833615211d86c34acd4da95ee160043c8c637a306bbd2e6eeb450" alt="..." class="position-relative" style="right: -3em; width: 100%;-webkit-clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%);
 clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); overflow: hidden;
@@ -301,10 +298,12 @@ clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); overflow: hidden;
                 <div class="content-about py-lg-3 px-lg-4 position-relative bg-white shadow" style="left: -3em; border-radius: 20px;">
 
                     <h2 class="judul-section fs-2 my-3 my-lg-0 mb-lg-3">About <span class="text-ijo judul-section fs-2 my-3 my-lg-0 mb-lg-3">Us</span></h2>
+                    <?php
+                    $s_about = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan ='data_toko'"));
 
-                    <p class="text-justify">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa vel neque ipsam provident velit, sed corrupti nemo fugiat consequuntur similique veniam. Aliquid exercitationem vitae, rem sapiente consectetur eaque blanditiis dignissimos.</p>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eum labore laborum inventore velit soluta pariatur ea dolores debitis ducimus dicta modi quo, perferendis odit, vitae illo natus veritatis doloremque.</p>
-                    <p class="text-justify">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem eum labore laborum inventore velit soluta pariatur ea dolores debitis ducimus dicta modi quo, perferendis odit, vitae illo natus veritatis doloremque.</p>
+                    $about = unserialize($s_about['isi_pengaturan']);
+                    echo $about['about_us'];
+                    ?>
 
                 </div>
             </div>

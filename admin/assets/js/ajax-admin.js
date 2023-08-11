@@ -365,7 +365,7 @@ function showListPengunjung() {
 
 
 setInterval(() => {
-    
+
     show_notif();
     jmlPesanNow();
     playSound();
@@ -402,7 +402,7 @@ function show_notif() {
 
     if (pNew == 0) {
         $('#notif-bell-pesan').addClass('op-none');
-    }else{
+    } else {
         $('#notif-bell-pesan').removeClass('op-none');
     }
 
@@ -443,16 +443,16 @@ function show_chat() {
 
 // click user
 function idPengunjung(id) {
-    
+
     setIdPengunjung(id);
     read(id);
-    
+
     document.getElementById("total_pesan_diterima_old").value = document.getElementById("total_pesan_diterima").value;
     // console.log();
-    
-    
+
+
     $("input[name=input_id_pengunjung]").val(id);
-    
+
     document.getElementById("user-obrolan").innerHTML = "(User" + id + ")";
     scrollBawah();
 }
@@ -510,10 +510,7 @@ function setIdPengunjung(id) {
     $.ajax({
         type: 'POST',
         url: base_url + "controllers/set-id-pengunjung.php",
-        data: { "idC_pengunjung": id },
-        success: function () {
-
-        }
+        data: { "idC_pengunjung": id }
 
     });
 }
@@ -529,4 +526,47 @@ function loadPesan() {
 function scrollBawah() {
     var bawah = $('.messenger-box')[0].scrollHeight;
     $('.messenger-box').scrollTop(bawah);
+}
+
+
+// show_edit_produk
+function show_edit_produk(id) {
+    var base_url = window.location.origin + '/admin/';
+    // var page = document.querySelector("#tabel-produk_info").innerHTML;
+
+    $.ajax({
+        type: 'POST',
+        url: base_url + "data/show-edit-produk.php",
+        data: { "id": id },
+        success: function (data) {
+            $('#area-modal-edit').html(data);
+
+            setTimeout(() => {
+                $('#editProduk' + id).modal('show')
+            }, 100);
+        }
+    });
+}
+
+
+// crud toko
+function toko() {
+
+    var base_url = window.location.origin + '/admin/';
+
+    $.ajax({
+        url: base_url + "controllers/toko.php",
+        method: "POST",
+        data: $("#form-data-toko").serialize(),
+        success: function (data) {
+            console.log(data);
+
+            $('#suksesModal').modal('show');
+            $('body').removeClass('modal-open');
+
+            $('#isi-content-halaman').load(base_url + 'view/toko.php');
+
+        }
+    });
+
 }

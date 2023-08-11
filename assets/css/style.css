@@ -562,7 +562,13 @@ footer .copyright span {
 .sosial-media>i {
     font-size: 0.8em;
 }
-
+#fOprasional p {
+    color: white !important;
+    margin-bottom: 3px !important;
+}
+#fAlamat p{
+    color: white !important;
+}
 /* ============== footer end ============== */
 
 
@@ -1047,6 +1053,11 @@ footer .copyright span {
 }
 
 /* ============== obrolan end ============== */
+
+
+
+
+
 
 
 

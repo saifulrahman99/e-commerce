@@ -222,38 +222,40 @@ require('controllers/add-user.php');
         <div class="body-footer">
 
             <div class="container">
+                <?php
+                $s_info_toko = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan ='data_toko'"));
+
+                $info = unserialize($s_info_toko['isi_pengaturan']);
+
+                ?>
                 <div class="row justify-content-evenly">
 
-                    <div class="col-12 col-md-4 col-lg-3 text-center text-md-start mb-5 mb-md-0">
+                    <div id="fOprasional" class="col-12 col-md-4 col-lg-3 text-center text-md-start mb-5 mb-md-0">
                         <h5 class="text-white">Jam Buka</h5>
-                        <span class="d-block text-white">Senin - Kamis : 08.00 - 16.00</span>
-                        <span class="d-block text-white">Jumat : 13.00 - 16.00</span>
-                        <span class="d-block text-white">Minggu : Libur</span>
+                        <?= $info['oprasional'] ?>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
                         <h5 class="text-center text-white">Sosial Media</h5>
                         <div class="row justify-content-center">
-                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
+                            <a href="<?= $info['ig'] ?>" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-instagram text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Instagram</span>
                             </a>
-                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
+                            <a href="<?= $info['fb'] ?>" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-facebook text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Facebook</span>
                             </a>
-                            <a href="#" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
+                            <a href="https://wa.me/<?= $info['wa'] ?>" target="_blank" class="col-4 col-md-6 col-lg-4 sosial-media text-decoration-none text-center mb-2 mb-lg-0">
                                 <i class="d-block fa-brands fa-whatsapp text-white fs-3 mb-2"></i>
                                 <span class="d-block text-white">Whatsapp</span>
                             </a>
                         </div>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-3 text-center text-md-start">
+                    <div id="fAlamat" class="col-12 col-md-4 col-lg-3 text-center text-md-start">
                         <h5 class="text-center text-white">Alamat Toko</h5>
-                        <p class=" text-white mb-2" style="font-size: 0.9rem;">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. At, harum.
-                        </p>
+                        <?= $info['alamat'] ?>
                         <i class="fa-regular fa-map text-white"></i>
-                        <a href="https://goo.gl/maps/UQ1ruuepLQiodRK97" target="_blank" class="text-white text-decoration-none fw-bold">Lihat Lokasi</a>
+                        <a href="<?= $info['lokasi'] ?>" target="_blank" class="text-white text-decoration-none fw-bold">Lihat Lokasi</a>
                     </div>
                     <div class="mt-1 text-center text-white">
                         IP Anda : <?= get_client_ip_env() ?>
@@ -312,23 +314,21 @@ require('controllers/add-user.php');
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
 
     <?php
-    if ($halaman != "Lihat" && $halaman != "Pesan") {
-        $path_addToken = 'controllers/add-token-notif.php';
-    ?>
-        <script src="<?= base_url('assets/js/ajax.js') ?>"></script>
+    switch ($halaman) {
+        case 'Lihat':
+            $url = '-lihat.js';
+            break;
+        case 'Pesan':
+            $url = '-pesan.js';
+            break;
 
-    <?php }
-    if ($halaman == 'Lihat') {
-        $path_addToken = '../../controllers/add-token-notif.php';
+        default:
+            $url = '.js';
+            break;
+    }
     ?>
-        <script src="<?= base_url('assets/js/ajax-lihat.js') ?>"></script>
 
-    <?php }
-    if ($halaman == 'Pesan') {
-        $path_addToken = '../../controllers/add-token-notif.php';
-    ?>
-        <script type="text/javascript" src="<?= base_url('assets/js/ajax-pesan.js') ?>"></script>
-    <?php } ?>
+    <script type="text/javascript" src="<?= base_url('assets/js/ajax' . $url) ?>"></script>
 
     <script src="<?= base_url('assets/js/all-page-ajax.js') ?>"></script>
 
@@ -366,14 +366,13 @@ require('controllers/add-user.php');
         }).then((currentToken) => {
             // app token used for sending notifications
             if (currentToken) {
-                // console.log(currentToken);
-                // document.getElementById('token-notif').innerHTML = currentToken;
 
                 var id_pengunjung = '<?= $id_pengunjung ?>';
                 var token = currentToken;
                 var path = '<?= $path_addToken ?>';
+                var base_url = window.location.origin + "/";
                 $.ajax({
-                    url: path,
+                    url: base_url + 'controllers/add-token-notif.php',
                     method: "POST",
                     data: {
                         "id_pengunjung": id_pengunjung,

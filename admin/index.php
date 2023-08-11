@@ -187,9 +187,9 @@ require 'controllers/off-promo.php';
         <!-- Content -->
         <div id="isi-content-halaman">
 
-
         </div>
         <!-- /.content -->
+        
         <div class="clearfix"></div>
 
 
@@ -235,15 +235,19 @@ require 'controllers/off-promo.php';
     <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.pie.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery.flot.tooltip@0.9.0/js/jquery.flot.tooltip.min.js"></script>
 
+    <!-- ckeditor -->
+    <script src="<?= base_url('vendor/ckeditor/ckeditor.js') ?>"></script>
+    <!-- /ckeditor -->
+
 
     <script src="<?= base_url('assets/template/js/init/fullcalendar-init.js') ?>"></script>
-    <script src="<?= base_url('assets/js/admin-script.js') ?>"></script>
+    <script src="<?= base_url('assets/js/admin-halaman.js') ?>"></script>
     <script src="<?= base_url('assets/js/ajax-admin.js') ?>"></script>
 
     <script src="<?= base_url('assets/template/js/init/flot-chart-init.js') ?>"></script>
 
     <?php
-    $hlm = (isset($_GET['halaman'])) ? $_GET['halaman'] : "";
+    $hlm = (isset($_SESSION['hlmn_admin'])) ? $_SESSION['hlmn_admin'] : "";
     ?>
     <script>
         $(document).ready(function() {
@@ -252,12 +256,16 @@ require 'controllers/off-promo.php';
             // alert(hlm);
 
             if (hlm != '') {
-                var page = "../view/" + hlm + ".php";
-                $('#isi-content-halaman').load(page);
+                var page = "view/" + hlm + ".php";
+                setTimeout(() => {
+                    $('#isi-content-halaman').load(page);
+                }, 50);
             }
         });
         document.getElementsByClassName('subtitle').remove();
     </script>
+
+    <?php $_SESSION['hlmn_admin'] = ''; ?>
 </body>
 
 </html>

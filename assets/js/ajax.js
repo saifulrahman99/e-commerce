@@ -52,9 +52,9 @@ function addCart(id, harga, opsi) {
     var id_produk = $("#id_produk" + id).val();
     var opsi_cart = opsi;
     var harga_produk = harga;
-
+    var base_url = window.location.origin + "/";
     $.ajax({
-        url: "controllers/cart.php",
+        url: base_url + "controllers/cart.php",
         method: "POST",
         data: { "id_produk": id_produk, "opsi": opsi_cart, "harga": harga_produk },
         success: function () {
@@ -72,9 +72,9 @@ function addCart(id, harga, opsi) {
 function hapusItemCart(id, opsi) {
     var id_produk = id;
     var opsi_cart = opsi;
-
+    var base_url = window.location.origin + "/";
     $.ajax({
-        url: "controllers/cart.php",
+        url: base_url + "controllers/cart.php",
         method: "POST",
         data: { "id_produk": id_produk, "opsi": opsi_cart },
         success: function () {
@@ -94,8 +94,9 @@ setInterval(function () {
 
 
 function updateCart() {
+    var base_url = window.location.origin + "/";
     $.ajax({
-        url: "data/jml-cart.php",
+        url: base_url + "data/jml-cart.php",
         method: "POST",
         success: function (data) {
 
