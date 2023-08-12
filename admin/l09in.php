@@ -42,7 +42,7 @@ require 'assets/komponen/css.php';
 
             <div class="konten-login row justify-content-center align-items-center">
 
-                <div class="form-login col-12 col-md-8 col-lg-4">
+                <div class="form-login col-12 col-md-8 col-lg-4 m-auto">
                     <form action="login-control" method="post" id="form-login" class="py-4 border rounded p-3 shadow-sm position-relative">
                         <input type="text" name="login" hidden>
                         <div class="brand-login text-center">
@@ -68,9 +68,9 @@ require 'assets/komponen/css.php';
                     </form>
                 </div>
 
-                <div class="col-12 col-lg-8 text-center gambar-login">
-                    <img src="<?= base_url('../assets/img/home-buah.png') ?>" alt="" class="cssanimation hu__hu__" style="width: 80%;">
-                </div>
+                <!-- <div class="col-12 col-lg-8 text-center gambar-login">
+                    <img src="<?//base_url('../assets/img/home-buah.png') ?>" alt="" class="cssanimation hu__hu__" style="width: 80%;">
+                </div> -->
             </div>
         </div>
     </section>

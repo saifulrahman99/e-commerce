@@ -9,7 +9,8 @@ require_once '../vendor/payment/Midtrans.php';
 $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'data_api'"));
 $data = unserialize($select['isi_pengaturan']);
 
-$server_key = $data['server_key'];
+$server_key = ($data['mode_pembayaran'] == 'sandbox') ? $data['server_sandbox'] : $data['server_production'];
+
 $nomor_target = $data['nomor_tujuan'];
 $token_wa = $data['token_wa'];
 
