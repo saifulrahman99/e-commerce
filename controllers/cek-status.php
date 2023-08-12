@@ -5,7 +5,16 @@ namespace Midtrans;
 require '../function.php';
 require '../assets/basis/kon.php';
 require_once '../vendor/payment/Midtrans.php';
-Config::$serverKey = 'SB-Mid-server-z-__Mmo5avW30d27vWSREhKd';
+
+$select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'data_api'"));
+$data = unserialize($select['isi_pengaturan']);
+
+$server_key = $data['server_key'];
+$nomor_target = $data['nomor_tujuan'];
+$token_wa = $data['token_wa'];
+
+
+Config::$serverKey = $server_key;
 
 $orderId = $_GET['orderId'];
 
@@ -75,7 +84,7 @@ if ($transaction == 'settlement') {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
-            'target' => "085156980936|" . $nama_pembeli,
+            'target' => $nomor_target . "|" . $nama_pembeli,
             'message' => '*Notifikasi Pemesanan*
 
 Pesanan atas nama *{name}* dengan belanjaan :
@@ -89,7 +98,7 @@ https://technoyus.my.id/admin/adastra/transaksi
             'countryCode' => '62', //optional
         ),
         CURLOPT_HTTPHEADER => array(
-            'Authorization: @ec9ZkWrLCRZ-#v51RP0' //change TOKEN to your actual token
+            'Authorization: ' . $token_wa //change TOKEN to your actual token
         ),
     ));
 

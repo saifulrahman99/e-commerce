@@ -5,6 +5,7 @@ require('config.php');
 require_once('assets/basis/kon.php');
 require('function.php');
 require('controllers/add-user.php');
+require('admin/controllers/off-promo.php');
 
 // $login_button = '';
 
@@ -329,8 +330,6 @@ require('controllers/add-user.php');
     ?>
 
     <script type="text/javascript" src="<?= base_url('assets/js/ajax' . $url) ?>"></script>
-
-    <script src="<?= base_url('assets/js/all-page-ajax.js') ?>"></script>
 
     <!-- icon -->
     <script src="https://unpkg.com/feather-icons"></script>

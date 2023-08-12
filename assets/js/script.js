@@ -43,61 +43,6 @@ $(window).on('scroll', function () {
 // ======== end header navbar ==============
 
 
-
-
-// ======== whell mouse scroll section ==============
-
-// const element = document.querySelector(".promo-content");
-
-// element.addEventListener('wheel', (event) => {
-//     event.preventDefault();
-
-//     element.scrollBy({
-//         left: event.deltaY < 0 ? -30 : 30,
-
-//     });
-// });
-// ======== whell mouse scroll section ==============
-
-
-
-
-// ======== grap scroll section ==============
-// const slider = document.querySelector('.grap-content');
-// let isDown = false;
-// let startX;
-// let scrollLeft;
-
-// slider.addEventListener('mousedown', (e) => {
-//     isDown = true;
-//     slider.classList.add('active');
-//     startX = e.pageX - slider.offsetLeft;
-//     scrollLeft = slider.scrollLeft;
-// });
-// slider.addEventListener('mouseleave', () => {
-//     isDown = false;
-//     slider.classList.remove('active');
-// });
-// slider.addEventListener('mouseup', () => {
-//     isDown = false;
-//     slider.classList.remove('active');
-// });
-// slider.addEventListener('mousemove', (e) => {
-//     if (!isDown) return;
-//     e.preventDefault();
-//     const x = e.pageX - slider.offsetLeft;
-//     const walk = (x - startX) * 3; //scroll-fast
-//     slider.scrollLeft = scrollLeft - walk;
-//     console.log(walk);
-// });
-// ======== grap scroll section ==============
-
-
-
-
-
-// ======== tombol scroll ==============
-
 // sejenis
 function geserKiri() {
     let bungkus = $('.produk-sejenis');
@@ -297,5 +242,62 @@ function countdown(time, tag) {
     // Jika hitungan mundur selesai,
     if (distance < 0) {
         document.getElementById(CountDownTag).innerHTML = "<span class='p-2 bg-danger text-white rounded'> EXPIRED </span>";
+    }
+}
+
+
+
+setInterval(() => {
+    jmlPesanNow();
+}, 100);
+
+setInterval(function () {
+    playSound();
+    show_notif();
+}, 1500);
+// jumlah pesan diterima
+// show jml notif pesan
+function jmlPesanNow() {
+    var base_url = window.location.origin + '/';
+
+    $.ajax({
+        url: base_url + "data/show-jml-pesan-diterima.php",
+        success: function (data) {
+            $('#input-jml-pesan').html(data);
+        }
+    });
+}
+
+// jumlah pesan diterima
+
+
+function playSound() {
+
+    // atur untuk dapat notif pesan baru
+    var base_url = window.location.origin + '/';
+    var pOld = $("#total_pesan_diterima_old").val();
+    var pNew = $("#total_pesan_diterima").val();
+    var audio = new Audio(base_url + 'admin/assets/sound/notif.mp3');
+
+    if (pNew > pOld) {
+        $("#total_pesan_diterima_old").val(pNew);
+        $('#liveToast').toast('show');
+        audio.play();
+    }
+    if (pNew < pOld) {
+        $("#total_pesan_diterima_old").val(pNew);
+    }
+    // atur untuk dapat notif pesan baru
+}
+
+// show jml notif pesan
+function show_notif() {
+    var pNew = $("#total_pesan_diterima").val();
+    if (pNew == 0) {
+        $('#dot-notif-pesan').addClass('op-none');
+        $('#dot-notif-pesan-mobile').addClass('op-none');
+    } else {
+        $('#dot-notif-pesan').removeClass('op-none');
+        $('#dot-notif-pesan-mobile').removeClass('op-none');
     }
 }

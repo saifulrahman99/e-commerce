@@ -40,7 +40,7 @@ $harga_promo = cek_diskon($id);
                 <a class="next" onclick="plusSlides(1)">❯</a>
 
                 <div class="row row-navigator mb-2">
-                    <div class="column">
+                    <div class="column" style="margin-left: -1px;">
                         <img class="demo cursor" src="<?= (!empty($gambar_produk)) ? base_url('/assets/img/produk/' . $gambar_produk) : base_url('/assets/img/produk/default-produk.jpg') ?>" onclick="currentSlide(1)" alt="The Woods">
                     </div>
                     <?php
@@ -48,7 +48,7 @@ $harga_promo = cek_diskon($id);
                     if ($select['galeri'] != '') {
                         foreach ($galeri as $g) {
                     ?>
-                            <div class="column">
+                            <div class="column" style="margin-left: -1px">
                                 <img class="demo cursor" src="<?= base_url('assets/img/produk/galeri/' . $g) ?>" onclick="currentSlide(<?= $urutanSlide++ ?>)" alt="Cinque Terre">
                             </div>
                     <?php }
@@ -186,7 +186,7 @@ $harga_promo = cek_diskon($id);
             <!-- end produk -->
 
             <div class="col-4 col-md-2 col-lg-1 p-1 item-scroll">
-                <div class="card shadow-sm position-relative" style="min-height:30vh;">
+                <div class="card shadow-sm position-relative" style="height:100%;">
                     <a href="<?= base_url('produk') ?>" class="position-absolute top-50 start-50 translate-middle p-2 text-decoration-none text-center">
                         <i data-feather="arrow-right" class="mb-2"></i>
                         <span class="d-block fw-bolder">More</span>

@@ -47,6 +47,9 @@ $(document).ready(function () {
 });
 
 
+
+
+
 // tambah ke keranjnag dengan kuantitas 1
 function addCart(id, harga, opsi) {
     var id_produk = $("#id_produk" + id).val();

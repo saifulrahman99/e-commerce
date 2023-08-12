@@ -236,6 +236,17 @@ form textarea {
     opacity: 0;
 }
 
+.navbar .navbar-nav>.active>a,
+.navbar .navbar-nav a:hover,
+.navbar .navbar-nav>.active>a:focus,
+.navbar .navbar-nav>.active>a:hover,
+.navbar .navbar-nav li.active .menu-icon,
+.navbar .navbar-nav li:hover>a i,
+.navbar .navbar-nav li:hover .toggle_nav_button:before,
+.navbar .navbar-nav li .toggle_nav_button.nav-open:before {
+    color: rgb(80, 184, 46) !important;
+}
+
 #list-obrolan-pengunjung {
     height: 65vh;
     overflow-y: auto;

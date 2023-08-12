@@ -84,8 +84,8 @@ require 'controllers/off-promo.php';
                     </li>
                     <li class="menu-title">Pengaturan</li><!-- /.menu-title -->
 
-                    <li class="klik_menu" id="pengaturan">
-                        <a><i class="menu-icon ti-settings"></i>Pengaturan </a>
+                    <li class="klik_menu" id="api">
+                        <a><i class="menu-icon ti-settings"></i>Pengaturan API</a>
                     </li>
 
                 </ul>
@@ -169,10 +169,6 @@ require 'controllers/off-promo.php';
 
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                            <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
 
                             <a class="nav-link" href="logout"><i class="fa fa-power -off"></i>Logout</a>
 

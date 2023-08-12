@@ -549,22 +549,25 @@ function show_edit_produk(id) {
 }
 
 
-// crud toko
-function toko() {
+// crud api
+function api() {
 
     var base_url = window.location.origin + '/admin/';
+    var form = new FormData(document.getElementById("form-data-api"));
 
     $.ajax({
-        url: base_url + "controllers/toko.php",
+        url: base_url + "controllers/api.php",
         method: "POST",
-        data: $("#form-data-toko").serialize(),
-        success: function (data) {
-            console.log(data);
+        data: form,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function () {
 
             $('#suksesModal').modal('show');
             $('body').removeClass('modal-open');
 
-            $('#isi-content-halaman').load(base_url + 'view/toko.php');
+            $('#isi-content-halaman').load(base_url + 'view/api.php');
 
         }
     });

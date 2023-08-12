@@ -100,7 +100,7 @@
                             }
                             ?>
 
-                         <div class="p-0 mb-2 fw-bolder">
+                         <div class="p-0 mb-2">
                              <?= substr($nm_transaksi, 0, -2) ?>
                          </div>
                          <div class="p-0">

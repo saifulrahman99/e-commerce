@@ -183,9 +183,15 @@
         </div>
     </div>
     <?php
-    if (!empty($_SESSION['keranjang'])) { ?>
+    if (!empty($_SESSION['keranjang'])) {
+
+        $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'data_api'"));
+
+        $data = unserialize($select['isi_pengaturan']);
+
+    ?>
         <!-- TODO: Remove ".sandbox" from script src URL for production environment. Also input your client key in "data-client-key" -->
-        <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-j1UwFlBeVMen-Fxd"></script>
+        <script src="https://app<?= ($data['mode_pembayaran'] == 'sandbox') ? '.sandbox' : '' ?>.midtrans.com/snap/snap.js" data-client-key="<?= ($data['mode_pembayaran'] == 'sandbox') ? $data['client_sandbox'] : $data['client_production'] ?>"></script>
         <script type="text/javascript">
             document.getElementById('btn-bayar-belanjaan').onclick = function() {
 

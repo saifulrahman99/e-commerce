@@ -36,23 +36,27 @@ if ($cookie_telepon != $nomor_hp || $cookie_telepon == '') {
 }
 
 
+$select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'data_api'"));
+
+$data = unserialize($select['isi_pengaturan']);
+
+$server_key = ($data['mode_pembayaran'] == 'sandbox') ? $data['server_sandbox'] : $data['server_production'];
+
 require_once '../vendor/payment/Midtrans.php';
 
 //Set Your server key
-Config::$serverKey = "SB-Mid-server-z-__Mmo5avW30d27vWSREhKd";
+Config::$serverKey = $server_key;
 
 // Uncomment for production environment
-// Config::$isProduction = true;
+if ($data['mode_pembayaran'] == 'production') {
+    Config::$isProduction = true;
+}
 
 // Enable sanitization
 Config::$isSanitized = true;
 
 // Enable 3D-Secure
 Config::$is3ds = true;
-
-// Uncomment for append and override notification URL
-// Config::$appendNotifUrl = "https://example.com";
-// Config::$overrideNotifUrl = "https://example.com";
 
 // Required
 $now = date('d-m-Y');
@@ -173,6 +177,9 @@ if ($metode_bayar != 'cod') {
         $nomor_hp;
     }
 
+    $nomor_target = $data['nomor_tujuan'];
+    $token_wa = $data['token_wa'];
+
     $catatan = (empty($catatan)) ? 'tidak ada' : $catatan;
     // notif ke admin
     $curl = curl_init();
@@ -187,7 +194,7 @@ if ($metode_bayar != 'cod') {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => array(
-            'target' => "081998282879|" . $nm_pembeli,
+            'target' => $nomor_target . "|" . $nm_pembeli,
             'message' => '*Notifikasi Pemesanan*
 
 Pesanan atas nama *{name}*
@@ -208,7 +215,7 @@ https://technoyus.my.id/admin/adastra/transaksi
             'countryCode' => '62', //optional
         ),
         CURLOPT_HTTPHEADER => array(
-            'Authorization: @ec9ZkWrLCRZ-#v51RP0' //change TOKEN to your actual token
+            'Authorization: ' . $token_wa //change TOKEN to your actual token
         ),
     ));
 

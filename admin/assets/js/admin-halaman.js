@@ -15,8 +15,8 @@ $(document).ready(function () {
             $('#isi-content-halaman').load(base_url + 'view/kategori.php');
         } else if (menu == "transaksi") {
             $('#isi-content-halaman').load(base_url + 'view/transaksi.php');
-        } else if (menu == "pengaturan") {
-            $('#isi-content-halaman').load(base_url + 'view/pengaturan.php');
+        } else if (menu == "api") {
+            $('#isi-content-halaman').load(base_url + 'view/api.php');
         } else if (menu == "notifikasi") {
             $('#isi-content-halaman').load(base_url + 'view/notifikasi.php');
         } else if (menu == "toko") {
