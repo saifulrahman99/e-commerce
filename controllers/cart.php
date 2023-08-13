@@ -26,7 +26,7 @@ if ($_POST['opsi'] == 'direct') {
 
     $id_produk = $_POST['id_produk'];
     unset($_SESSION['keranjang'][$id_produk]);
-    $jmlData = count($_SESSION['keranjang']);
+    // $jmlData = count($_SESSION['keranjang']);
 } elseif ($_POST['opsi'] == 'lihat') {
 
     $qty = $_POST['jml-item'];
