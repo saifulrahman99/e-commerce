@@ -54,6 +54,7 @@ foreach ($select as $p) { ?>
                                 <option <?= ($p['satuan'] == 'Ons') ? 'selected' : '' ?> value="Ons"> Ons </option>
                                 <option <?= ($p['satuan'] == 'PAK') ? 'selected' : '' ?> value="PAK"> PAK </option>
                                 <option <?= ($p['satuan'] == 'PCS') ? 'selected' : '' ?> value="PCS"> PCS </option>
+                                <option <?= ($p['satuan'] == 'Liter') ? 'selected' : '' ?> value="Liter"> Liter </option>
                             </select>
                         </div>
                         <div class="form-group mb-2 col-12 col-md-6">

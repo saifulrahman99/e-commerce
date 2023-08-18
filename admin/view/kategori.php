@@ -42,8 +42,8 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
                     <table id="tabel-kategori" class="table table-striped">
                         <thead>
                             <th style="max-width: 40px;">#</th>
-                            <th style="max-width: 240px;">Nama Kategori</th>
                             <th>Kode Kategori</th>
+                            <th style="max-width: 240px;">Nama Kategori</th>
                             <th>Aksi</th>
                         </thead>
                         <tbody>
@@ -51,8 +51,8 @@ $select = mysqli_query($db, "SELECT * FROM kategori ORDER BY id_kategori DESC");
                             foreach ($select as $k) { ?>
                                 <tr>
                                     <td><?= $no++ ?></td>
-                                    <td><?= $k['kategori'] ?></td>
                                     <td><?= $k['kode_kategori'] ?></td>
+                                    <td><?= $k['kategori'] ?></td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-danger mx-2" data-toggle="modal" data-target="#hapusKategori<?= $k['id_kategori'] ?>">
                                             <i class="ti-trash"></i>

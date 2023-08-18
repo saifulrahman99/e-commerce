@@ -41,8 +41,8 @@
              <table id="tabel-produk" class="table table-striped">
                  <thead>
                      <th>#</th>
-                     <th>Nama</th>
                      <th>Kode</th>
+                     <th>Nama</th>
                      <th>Merk</th>
                      <th>Harga Pokok</th>
                      <th>Harga Jual</th>
@@ -55,8 +55,8 @@
                         foreach ($select as $p) { ?>
                          <tr>
                              <td><?= $no++ ?></td>
-                             <td><?= $p['nm_produk'] ?></td>
                              <td><?= $p['kode_produk'] ?></td>
+                             <td><?= $p['nm_produk'] ?></td>
                              <td><?= $p['merek'] ?></td>
                              <td><?= $p['harga_pokok'] ?></td>
                              <td><?= $p['harga_jual'] ?></td>
@@ -156,6 +156,7 @@
                              <option value="Ons"> Ons </option>
                              <option value="PAK"> PAK </option>
                              <option value="PCS"> PCS </option>
+                             <option value="Liter"> Liter </option>
                          </select>
                      </div>
                      <div class="form-group mb-2 col-12 col-md-6">

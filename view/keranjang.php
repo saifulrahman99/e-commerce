@@ -14,7 +14,7 @@
                 <div class="row g-2 p-4 bg-white">
 
                     <h1 class="judul-section mb-0">Keranjang Belanja</h1>
-                    <div class="col-12 col-md-9 mb-3">
+                    <div class="col-12 col-md-8 col-lg-9 mb-3">
                         <?php
                         $keranjang = $_SESSION['keranjang'];
 
@@ -38,35 +38,35 @@
 
                         ?>
                             <!-- item cart -->
-                            <div class="list-item py-3 mb-3">
+                            <div class="list-item py-1 mb-3">
 
                                 <div class="item row align-items-center">
 
-                                    <div class="col-5 col-md-2 p-4">
+                                    <div class="col-5 col-md-4 col-lg-2 p-4">
                                         <a href="produk/lihat/<?= $produk['id_produk'] ?>">
                                             <img id="gmbr-prdk-keranjang" src="<?= (!empty($produk['gambar'])) ? base_url('assets/img/produk/' . $produk['gambar']) : base_url('assets/img/produk/default-produk.jpg') ?>" class="item-img" alt="..." style="aspect-ratio: 1/1;">
                                         </a>
                                     </div>
 
 
-                                    <div class="col-7 col-md-6 row">
-                                        <div class="col-12 col-md-8 text-start text-md-center">
+                                    <div class="col-7 col-lg-6 row">
+                                        <div class="col-12 col-lg-8 text-start text-md-center">
                                             <span class="nama_produk mb-2"><?= $produk['nm_produk'] ?></span>
                                         </div>
-                                        <div class="col-12 col-md-4 text-start text-md-center">
+                                        <div class="col-12 col-lg-4 text-start text-md-center">
                                             <span class="harga" style="font-weight: 800 !important;"><?= rupiah($_SESSION['keranjang'][$produk['id_produk']][1]) ?></span>
                                         </div>
 
                                     </div>
 
-                                    <div class="col-12 col-md-3 row">
-                                        <div class="col-6 col-md-9 mt-3">
+                                    <div class="col-12 col-lg-3 row">
+                                        <div class="col-6 col-md-5 col-lg-9 mt-3">
                                             <ul class="pagination jml-item">
                                                 <li class="page-item">
                                                     <button type="button" class="page-link" onclick="kurang(<?= $i ?>)"><i class="fa-solid fa-minus"></i></button>
                                                 </li>
                                                 <li class="page-item">
-                                                    <input type="text" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control text-center" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)" readonly></input>
+                                                    <input type="text" id="jml-item<?= $i ?>" name="qty[<?= $produk['id_produk'] ?>]" class="form-control text-center" min="1" max="<?= $produk['stok'] ?>" value="<?= $_SESSION['keranjang'][$produk['id_produk']][0] ?>" onkeypress="return hanyaAngka(event)" required></input>
                                                     <input type="text" id="stok<?= $i ?>" value="<?= $produk['stok'] ?>" hidden>
                                                 </li>
                                                 <li class=" page-item">
@@ -82,8 +82,16 @@
                                         </div>
                                     </div>
 
+                                    <label style="font-size: 0.8em;">Sisa Stok : <?= $produk['stok'] ?></label>
+
                                 </div>
                             </div>
+
+                            <!-- script untuk cek stok secara berkala dalam 1 detik -->
+                            <script type="text/javascript">
+
+                            </script>
+
                             <!-- item cart -->
                         <?php $i++;
                         } ?>
@@ -94,7 +102,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-3 px-0 px-md-2">
+                    <div class="col-12 col-md-4 col-lg-3 px-0 px-md-2">
 
                         <div class="tagihan rounded d-flex flex-column p-3" style="font-weight: 600;">
 

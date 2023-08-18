@@ -108,6 +108,7 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                                 <td>
                                     <?php
                                     if ($t['metode_bayar'] != 'cod') {
+
                                         if ($t['status_bayar'] == 0) { ?>
                                             <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#konfirmasiPembayaran<?= $t['order_id'] ?>">
                                                 Konfirmasi Bayar
@@ -123,20 +124,19 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                                             }
                                         }
                                     } else {
+
                                         if ($t['status_bayar'] != 2) {
-                                            if ($t['status_terkirim'] == 0 || empty($t['status_terkirim'])) { ?>
+                                            if ($t['status_bayar'] == 1 && $t['status_terkirim'] == 0) { ?>
                                                 <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#kirimPesanan<?= $t['order_id'] ?>">
                                                     Kirim Pesanan
                                                 </button>
-                                            <?php } elseif ($t['status_terkirim'] == 1 && $t['status_bayar'] == 0) { ?>
+                                            <?php } elseif ($t['status_bayar'] == 0) { ?>
                                                 <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#konfirmasiPembayaran<?= $t['order_id'] ?>">
                                                     Konfirmasi Bayar
                                                 </button>
                                     <?php }
                                         }
-                                    }
-
-                                    ?>
+                                    } ?>
                                 </td>
                                 <!-- modal kirim pesanan -->
                                 <div class="modal fade" id="kirimPesanan<?= $t['order_id'] ?>" tabindex="-1" aria-labelledby="kirimPesanan<?= $t['order_id'] ?>Label" aria-hidden="true">
