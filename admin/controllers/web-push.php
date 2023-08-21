@@ -24,8 +24,6 @@ if (empty($gambar['name'])) {
     $gambar = 'https://technoyus.my.id/admin/assets/img/notif/' . $gambar['name'];
 }
 
-echo "$judul, $ket, $action, $gambar";
-
 
 $token = mysqli_query($db, "SELECT DISTINCT token FROM pengunjung WHERE token != ''");
 

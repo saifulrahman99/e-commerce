@@ -2,8 +2,8 @@
 
 namespace Midtrans;
 
-require '../function.php';
 require '../assets/basis/kon.php';
+require '../function.php';
 require_once '../vendor/payment/Midtrans.php';
 
 $select = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'data_api'"));

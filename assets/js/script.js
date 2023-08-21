@@ -196,6 +196,55 @@ function disableTambah() {
 }
 
 
+// =============== keranjang ===================
+function disableCheckout(id_produk, i, jmlProduk) {
+    cekStok(id_produk);
+
+    var stok = parseFloat(document.getElementById("sisa-stok" + id_produk).innerHTML);
+    var checkout = document.getElementById("button-checkout");
+    var jmlItem = document.getElementById("jml-item" + i).value;
+
+    if (isNaN(jmlItem) || jmlItem == '' || jmlItem == 0) {
+
+        checkout.style.background = 'gray';
+        checkout.classList.remove('btn-ijo');
+        checkout.setAttribute('data-bs-target', '');
+    } else {
+        var jmlItemLihat = parseFloat(jmlItem);
+        checkout.setAttribute('data-bs-target', "#modalCheckout")
+        checkout.classList.add('btn-ijo');
+
+    }
+
+    if (jmlItemLihat > stok) {
+        alert("Melebihi Stok");
+        document.getElementById("jml-item" + i).value = stok;
+    }
+
+    var jmlkProdukAkhir = 9999;
+    for (let index = 0; index < jmlProduk; index++) {
+        var jmlItemProduk = document.getElementById("jml-item" + index).value;
+
+        if (jmlkProdukAkhir > jmlItemProduk) {
+            console.log(jmlItemProduk);
+            var jmlkProdukAkhir = jmlItemProduk;
+        }
+
+    }
+
+    if (jmlkProdukAkhir == 0) {
+        checkout.style.background = 'gray';
+        checkout.classList.remove('btn-ijo');
+        checkout.setAttribute('data-bs-target', '');
+    } else {
+        var jmlItemLihat = parseFloat(jmlItem);
+        checkout.setAttribute('data-bs-target', "#modalCheckout")
+        checkout.classList.add('btn-ijo');
+    }
+}
+
+// =============== keranjang ===================
+
 
 
 // ======== tombol kembali ==============
@@ -226,7 +275,7 @@ $(".jenis-pembayaran label").click(function () {
 function countdown(time, tag) {
     // Silahkan anda atur tanggal anda
     var countDownDate = time;
-    var CountDownTag = ''+tag+'';
+    var CountDownTag = '' + tag + '';
     // Mendapatkan Tanggal dan waktu Pada Hari ini
     var now = new Date().getTime();
     //Jarak Waktu Antara Hitungan Mundur

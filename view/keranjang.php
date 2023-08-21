@@ -28,7 +28,7 @@
                         $sql .= trim($idItem, ',');
                         $sql .= ')';
                         $select = mysqli_query($db, $sql);
-
+                        $jml_produk_keranjang = mysqli_num_rows($select);
 
                         // total awal untuk item
                         $total = 0;
@@ -82,14 +82,16 @@
                                         </div>
                                     </div>
 
-                                    <label style="font-size: 0.8em;">Sisa Stok : <?= $produk['stok'] ?></label>
+                                    <label style="font-size: 0.8em;">Sisa Stok : <span id="sisa-stok<?= $produk['id_produk'] ?>"></span></label>
 
                                 </div>
                             </div>
 
                             <!-- script untuk cek stok secara berkala dalam 1 detik -->
                             <script type="text/javascript">
-
+                                setInterval(() => {
+                                    disableCheckout(<?= $produk['id_produk'] ?>, <?= $i ?>, <?= $jml_produk_keranjang ?>);
+                                }, 1000);
                             </script>
 
                             <!-- item cart -->
@@ -110,9 +112,11 @@
                             <span class="fs-5" style="font-weight: 700;"> <?= rupiah($total) ?></span>
 
                             <!-- Button trigger modal -->
-                            <button type="button" class="btn btn-ijo text-white mt-3" data-bs-toggle="modal" data-bs-target="#modalCheckout">
+                            <button type="button" id="button-checkout" class="btn btn-ijo text-white mt-3" data-bs-toggle="modal" data-bs-target="#modalCheckout">
                                 Checkout
                             </button>
+
+                            <span class="text-danger text-center mt-3" style="font-size: 0.7em;">usahakan update keranjang sebelum checkout</span>
 
                         </div>
                     </div>

@@ -118,3 +118,23 @@ function updateCart() {
     });
 
 }
+
+
+function cekStok(id_produk) {
+    var base_url = window.location.origin + "/";
+
+    $.ajax({
+        url: base_url + "data/cek-stok.php",
+        method: "POST",
+        data: { "id_produk": id_produk },
+        success: function (data) {
+
+            document.getElementById("sisa-stok"+id_produk).innerHTML = data;
+            // if (data == 0) {
+                
+            // }else{
+
+            // }
+        }
+    });
+}
