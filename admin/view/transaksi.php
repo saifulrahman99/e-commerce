@@ -30,7 +30,7 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
             <div class="button mb-3 d-flex flex-wrap">
 
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success btn-sm mr-1 my-1">
+                <button type="button" class="btn btn-success btn-sm mr-1 my-1" data-toggle="modal" data-target="#eksporExcel">
                     Ekspor (excel)
                 </button>
 
@@ -256,6 +256,37 @@ $select = mysqli_query($db, "SELECT * FROM transaksi ORDER BY id_transaksi DESC"
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="eksporExcel" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="eksporExcelLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eksporExcelLabel">Ekspor Data Penjualan</h5>
+            </div>
+            <form action="<?= base_url('laporan-penjualan') ?>" method="post" target="_blank">
+                <div class="modal-body">
+                    <div class="form-group mb-2">
+                        <label for="tgl_awal" class="mb-1">Tanggal Awal</label>
+                        <input type="date" name="tgl_awal" class="form-control" id="tgl_awal" />
+                    </div>
+
+                    <div class="form-group mb-2">
+                        <label for="tgl_akhir" class="mb-1">Tanggal Akhir</label>
+                        <input type="date" name="tgl_akhir" class="form-control" id="tgl_akhir" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row col-12 justify-content-center">
+                        <button type="button" class="btn btn-secondary col-5 mx-1" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-ijo text-white col-5 mx-1">Ekspor</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -209,7 +209,7 @@
                                     if ($sk['status_terkirim'] == 1) { ?>
                                      <a href="transaksi/controltransaksi/<?= $sk['order_id'] ?>/konfirmasi" type="button" class="btn btn-sm btn-success mb-2">Konfirmasi Barang Diterima</a>
                                  <?php } elseif ($sk['status_terkirim'] == 2) { ?>
-                                     <a href="transaksi/notapesanan/<?= $sk['order_id'] ?>" type="button" class="btn btn-sm btn-info text-white mb-2">Lihat Resi</a>
+                                     <a href="transaksi/notapesanan/<?= $sk['order_id'] ?>" type="button" target="_blank" class="btn btn-sm btn-info text-white mb-2">Lihat Resi</a>
                              <?php }
                                 }
                                 ?>

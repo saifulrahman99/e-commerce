@@ -25,6 +25,8 @@ RewriteRule ^transaksi/batalkanbayar/([a-zA-Z0-9_-]+) controllers/batalkan-bayar
 
 RewriteRule ^transaksi/notif controllers/notification-handler.php
 
+RewriteRule ^transaksi/notapesanan/([a-zA-Z0-9_-]+) view/resi.php?orderId=$1
+
 RewriteRule ^transaksi/controltransaksi/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+) controllers/control-transaksi.php?orderId=$1&opsi=$2
 
 # pesan
@@ -46,3 +48,4 @@ RewriteRule ^admin/logout$ admin/controllers/logout.php
 
 RewriteRule ^admin/login-control$ admin/controllers/login.php
 
+RewriteRule ^admin/laporan-penjualan$ admin/controllers/laporan-penjualan.php
