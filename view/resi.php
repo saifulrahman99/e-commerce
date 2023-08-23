@@ -112,7 +112,7 @@ $belanjaan = json_decode($order['belanjaan']);
                     <tr>
                         <td></td>
                         <td colspan="2" class="tebal text-start pt-4">TOTAL TAGIHAN</td>
-                        <td class="tebal text-center"><?= rupiah($totalBelanja) ?></td>
+                        <td class="tebal text-center pt-4"><?= rupiah($totalBelanja) ?></td>
                     </tr>
                 </tbody>
             </table>
