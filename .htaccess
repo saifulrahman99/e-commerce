@@ -39,6 +39,7 @@ RewriteRule ^admin/login$ admin/l09in.php
 RewriteRule ^admin/adastra$ admin/index.php
 RewriteRule ^admin/adastra/$ admin/index.php
 
+RewriteRule ^admin/adastra/edit-akun$ admin/controllers/edit-akun.php
 RewriteRule ^admin/adastra/produk-control/ekspor$ admin/controllers/ekspor-produk.php
 
 RewriteRule ^admin/adastra/([a-zA-Z0-9_-]+)$ admin/index.php?halaman=$1

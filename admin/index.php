@@ -207,18 +207,24 @@ require 'controllers/off-promo.php';
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title" id="exampleModalLabel">Pengaturan Akun Admin</h5>
                     </div>
-                    <div class="modal-body">
-
-                    </div>
-                    <div class="modal-footer row justify-content-center">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
+                    <form action="<?= base_url('adastra/edit-akun') ?>" method="post">
+                        <div class="modal-body">
+                            <div class="form-group mb-2">
+                                <label for="username" class="mb-1">Username</label>
+                                <input type="text" name="username" class="form-control" id="username" placeholder="Kosongi jika tidak ada perubahan" />
+                            </div>
+                            <div class="form-group mb-2">
+                                <label for="password" class="mb-1">Password</label>
+                                <input type="password" name="password" class="form-control" id="password" placeholder="Kosongi jika tidak ada perubahan" />
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-center">
+                            <button type="submit" class="btn btn-success col-11">Simpan Perubahan</button>
+                            <button type="button" class="btn btn-secondary col-11" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
