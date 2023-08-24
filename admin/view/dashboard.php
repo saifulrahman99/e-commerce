@@ -2,6 +2,12 @@
     session_start();
     require_once '../../assets/basis/kon.php';
     require '../function/base_url.php';
+
+    function rupiah($angka)
+    {
+        $hasil_rupiah = "Rp&nbsp" . number_format($angka, 0, ',', '.');
+        return $hasil_rupiah;
+    }
     ?>
  <div class="content">
 
@@ -19,7 +25,10 @@
                              </div>
                              <div class="stat-content">
                                  <div class="text-left dib">
-                                     <div class="stat-text">$<span class="count">23569</span></div>
+                                     <?php
+                                        $pendapatan = mysqli_fetch_assoc(mysqli_query($db, "SELECT SUM(biaya) as pendapatan FROM `transaksi` WHERE status_bayar = '1'"));
+                                        ?>
+                                     <div class="stat-text"><span class="count"><?= rupiah($pendapatan['pendapatan']) ?></span></div>
                                      <div class="stat-heading">Pendapatan</div>
                                  </div>
                              </div>
@@ -37,7 +46,10 @@
                              </div>
                              <div class="stat-content">
                                  <div class="text-left dib">
-                                     <div class="stat-text"><span class="count">3435</span></div>
+                                     <?php
+                                        $penjualan = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(id_transaksi) as penjualan FROM `transaksi` WHERE status_bayar = '1'"));
+                                        ?>
+                                     <div class="stat-text"><span class="count"><?= $penjualan['penjualan'] ?></span></div>
                                      <div class="stat-heading">Penjualan</div>
                                  </div>
                              </div>
@@ -55,7 +67,10 @@
                              </div>
                              <div class="stat-content">
                                  <div class="text-left dib">
-                                     <div class="stat-text"><span class="count">2986</span></div>
+                                     <?php
+                                        $pembeli = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(DISTINCT id_pengunjung) as jml FROM transaksi WHERE status_bayar = '1'"));
+                                        ?>
+                                     <div class="stat-text"><span class="count"><?= $pembeli['jml'] ?></span></div>
                                      <div class="stat-heading">Pembeli</div>
                                  </div>
                              </div>
@@ -73,7 +88,10 @@
                              </div>
                              <div class="stat-content">
                                  <div class="text-left dib">
-                                     <div class="stat-text"><span class="count">2986</span></div>
+                                     <?php
+                                        $pengunjung = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(`id_pengunjung`) as jml  FROM `pengunjung`"));
+                                        ?>
+                                     <div class="stat-text"><span class="count"><?= $pengunjung['jml'] ?></span></div>
                                      <div class="stat-heading">Pengunjung</div>
                                  </div>
                              </div>
@@ -93,31 +111,103 @@
                      <div class="card-body">
                          <h4 class="box-title">Pesanan Yang Belum Dikirim </h4>
                      </div>
-                     <div class="card-body--">
+                     <div class="card-body">
+                         <?php
+                            $select = mysqli_query($db, "SELECT * FROM transaksi WHERE status_bayar = '1' AND status_terkirim = '0' ORDER BY id_transaksi DESC");
+
+                            ?>
                          <div class="table table-responsive">
                              <table class="table ">
                                  <thead>
                                      <tr>
                                          <th class="serial">#</th>
-                                         <!-- <th class="avatar">Avatar</th> -->
-                                         <th>ID</th>
-                                         <th>Name</th>
-                                         <th>Product</th>
-                                         <th>Quantity</th>
-                                         <th class="text-center">Status</th>
+                                         <th>ID Order</th>
+                                         <th>Nama</th>
+                                         <th>Belanjaan</th>
+                                         <th>Pembayaran</th>
+                                         <th>Total</th>
+                                         <th class="text-center">Aksi</th>
                                      </tr>
                                  </thead>
                                  <tbody>
-                                     <tr>
-                                         <td class="serial">1.</td>
-                                         <td> #5469 </td>
-                                         <td> <span class="name">Louis Stanley</span> </td>
-                                         <td> <span class="product">iMax</span> </td>
-                                         <td><span class="count">231</span></td>
-                                         <td class="text-center">
-                                             <span class="badge badge-complete bg-success p-1 text-white">Complete</span>
-                                         </td>
-                                     </tr>
+                                     <?php
+                                        $no = 1;
+                                        foreach ($select as $order) {
+                                            $belanjaan = $order['belanjaan'];
+                                            $belanjaan = json_decode($belanjaan);
+                                        ?>
+                                         <tr>
+                                             <td class="serial"><?= $no++ ?></td>
+                                             <td> <?= $order['order_id'] ?> </td>
+                                             <td> <?= $order['nm_pembeli'] ?> </td>
+                                             <td> <button type="button" data-toggle="modal" data-target="#detailModal<?= $order['id_transaksi'] ?>" class="btn btn-sm btn-light shadow-sm text-secondary">Lihat</button> </td>
+                                             <td> <?= $order['metode_bayar'] ?> </td>
+                                             <td> <?= rupiah($order['biaya']) ?> </td>
+                                             <td class="text-center">
+                                                 <button type="button" class="btn btn-sm btn-success mx-2" data-toggle="modal" data-target="#kirimPesanan<?= $order['order_id'] ?>">
+                                                     Kirim Pesanan
+                                                 </button>
+                                             </td>
+
+
+                                             <!-- Detail Belanjaan -->
+                                             <div class="modal fade" id="detailModal<?= $order['id_transaksi'] ?>" tabindex="-1" aria-labelledby="detailModal<?= $order['id_transaksi'] ?>Label" aria-hidden="true">
+                                                 <div class="modal-dialog modal-dialog-centered">
+                                                     <div class="modal-content">
+                                                         <div class="modal-body row">
+                                                             <?php
+                                                                foreach ($belanjaan as $id_item => $ket_item) {
+                                                                    $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$id_item'"));
+                                                                ?>
+
+                                                                 <div class="col-12 item-produk my-1 pb-1 border-bottom">
+                                                                     <div class="d-flex align-items-center">
+                                                                         <a href="<?= base_url('../produk/lihat/' . $id_item) ?>" class="text-decoration-none">
+                                                                             <img src="<?= (!empty($produk['gambar'])) ? base_url('../assets/img/produk/' . $produk['gambar']) : base_url('../assets/img/produk/default-produk.jpg') ?>" alt="..." style="width: 3rem; aspect-ratio: 1/1;" class="border rounded mb-1">
+                                                                         </a>
+                                                                         <h6 class="ml-2 mr-1 mb-0"><?= $produk['nm_produk'] ?></h6>
+                                                                         <i class="ti-close mx-1" style="font-size: 0.5em;"></i>
+                                                                         <span style="font-weight: 600;"><?= $ket_item[0] ?></span>
+                                                                         <span>&nbsp<?= $produk['satuan'] ?></span>
+                                                                     </div>
+                                                                     <div class="text-end mt-2">
+                                                                         <?php
+                                                                            $totalHargaItem = $ket_item[1] * $ket_item[0];
+                                                                            echo rupiah($totalHargaItem);
+                                                                            ?>
+                                                                     </div>
+                                                                 </div>
+                                                             <?php } ?>
+                                                         </div>
+                                                         <div class="modal-footer">
+                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- /Detail Belanjaan -->
+
+
+                                             <!-- modal kirim pesanan -->
+                                             <div class="modal fade" id="kirimPesanan<?= $order['order_id'] ?>" tabindex="-1" aria-labelledby="kirimPesanan<?= $order['order_id'] ?>Label" aria-hidden="true">
+                                                 <div class="modal-dialog modal-dialog-centered">
+                                                     <div class="modal-content">
+                                                         <div class="modal-body">
+                                                             <p class="text-dark">
+                                                                 Yakin Untuk Kirim Pesanan Atas Nama <b><?= $order['nm_pembeli'] ?></b> ?
+                                                             </p>
+                                                         </div>
+                                                         <div class="modal-footer">
+                                                             <button type="button" class="btn btn-secondary col-4" data-dismiss="modal">Tidak</button>
+                                                             <button type="button" class="btn btn-danger col-4" onclick="transaksi('<?= $order['order_id'] ?>','kirim')">Ya </button>
+                                                         </div>
+                                                     </div>
+                                                 </div>
+                                             </div>
+                                             <!-- /modal kirim pesanan -->
+
+                                         </tr>
+                                     <?php } ?>
                                  </tbody>
                              </table>
                          </div> <!-- /.table-stats -->
@@ -175,6 +265,18 @@
              <!-- /pengunjung -->
 
              <div class="col-lg-6">
+
+                 <?php
+                    $arr_os = array();
+                    $os = mysqli_query($db, "SELECT DISTINCT os FROM `pengunjung`");
+                    foreach ($os as $opsis) {
+                        $nm_os = $opsis['os'];
+                        array_push($arr_os, $nm_os);
+                        $jml = mysqli_fetch_assoc(mysqli_query($db, "SELECT COUNT(os) as jml FROM `pengunjung` WHERE os = '$nm_os'"));
+                    ?>
+                     <input type="text" id="os<?= $opsis['os'] ?>" value="<?= $jml['jml'] ?>" hidden>
+                 <?php } ?>
+                 <div id="arr_os" style="display: none;"><?= json_encode($arr_os) ?></div>
                  <div class="card">
                      <div class="card-body">
                          <h4 class="mb-3 box-title">OS Pengunjung</h4>
@@ -186,26 +288,6 @@
              </div><!-- /# column -->
 
          </div>
-
-
-         <!-- Modal - Calendar - Add New Event -->
-         <div class="modal fade none-border" id="event-modal">
-             <div class="modal-dialog">
-                 <div class="modal-content">
-                     <div class="modal-header">
-                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                         <h4 class="modal-title"><strong>Add New Event</strong></h4>
-                     </div>
-                     <div class="modal-body"></div>
-                     <div class="modal-footer">
-                         <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Close</button>
-                         <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                         <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
-                     </div>
-                 </div>
-             </div>
-         </div>
-         <!-- /#event-modal -->
 
          <!-- Scripts -->
          <script src="<?= base_url('assets/template/js/init/flot-chart-init.js') ?>"></script>
