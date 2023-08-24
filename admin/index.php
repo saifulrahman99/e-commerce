@@ -168,7 +168,7 @@ require 'controllers/off-promo.php';
                         </a>
 
                         <div class="user-menu dropdown-menu">
-                            <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
+                            <a class="nav-link" href="#exampleModal" data-toggle="modal"><i class="fa fa- user"></i>Settings</a>
 
                             <a class="nav-link" href="logout"><i class="fa fa-power -off"></i>Logout</a>
 
@@ -185,7 +185,7 @@ require 'controllers/off-promo.php';
 
         </div>
         <!-- /.content -->
-        
+
         <div class="clearfix"></div>
 
 
@@ -202,6 +202,27 @@ require 'controllers/off-promo.php';
         <!-- /.site-footer -->
 
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer row justify-content-center">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!-- /#right-panel -->
 
@@ -216,7 +237,7 @@ require 'controllers/off-promo.php';
     <script src="<?= base_url('assets/template/js/main.js') ?>"></script>
 
     <!-- data table -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>

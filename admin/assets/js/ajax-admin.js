@@ -372,7 +372,6 @@ setInterval(() => {
 
     show_chat();
     showListPengunjung();
-    read();
 
 }, 1500);
 // paly sound notif

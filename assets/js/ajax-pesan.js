@@ -1,7 +1,8 @@
 setInterval(function () {
     show_chat();
     read();
-    showListadmin()
+    showListadmin();
+    updateCart();
 }, 1500);
 
 function scrollBawah() {
@@ -95,4 +96,28 @@ function read() {
 function scrollBawah() {
     var bawah = $('.messenger-box')[0].scrollHeight;
     $('.messenger-box').scrollTop(bawah);
+}
+
+
+function updateCart() {
+    var base_url = window.location.origin + "/";
+    $.ajax({
+        url: base_url + "data/jml-cart.php",
+        method: "POST",
+        success: function (data) {
+
+            var jml = data;
+
+            if (jml < 1) {
+                document.getElementById("jml-item-dalam-cart").style.display = "none";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "none";
+            } else {
+                document.getElementById("jml-item-dalam-cart").style.display = "block";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "block";
+                $('#jml-item-dalam-cart').html(data);
+                $('#jml-item-dalam-cart-mobile').html(data);
+            }
+        }
+    });
+
 }

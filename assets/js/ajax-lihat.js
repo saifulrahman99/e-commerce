@@ -1,6 +1,7 @@
 setInterval(function () {
     subTotalLihat();
     disableTambah();
+    updateCart();
 }, 500);
 
 function addCartLihat(id, harga, opsi) {
@@ -23,4 +24,27 @@ function addCartLihat(id, harga, opsi) {
             toast.show()
         }
     });
+}
+
+function updateCart() {
+    var base_url = window.location.origin + "/";
+    $.ajax({
+        url: base_url + "data/jml-cart.php",
+        method: "POST",
+        success: function (data) {
+
+            var jml = data;
+
+            if (jml < 1) {
+                document.getElementById("jml-item-dalam-cart").style.display = "none";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "none";
+            } else {
+                document.getElementById("jml-item-dalam-cart").style.display = "block";
+                document.getElementById("jml-item-dalam-cart-mobile").style.display = "block";
+                $('#jml-item-dalam-cart').html(data);
+                $('#jml-item-dalam-cart-mobile').html(data);
+            }
+        }
+    });
+
 }

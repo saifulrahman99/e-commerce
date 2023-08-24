@@ -11,7 +11,6 @@ $tmsg_new = mysqli_num_rows($select);
 $tgl = '';
 
 foreach ($select as $pesan) {
-
     $waktu = explode(' ', $pesan['waktu']);
 
     if ($tgl != substr($pesan['waktu'], 0, -8)) {
