@@ -31,8 +31,8 @@ function kodeRandom($panjang)
 
 function cek_diskon($id)
 {
-    $db = mysqli_connect("localhost", "saiz5787_yusuf", "yusuf5787", "saiz5787_yusuf");
-
+    // $db = mysqli_connect("localhost", "saiz5787_yusuf", "yusuf5787", "saiz5787_yusuf");
+    $db = mysqli_connect("localhost", "saiz5787_adastra", "adastra5787", "saiz5787_adastra");
     $harga_jual = '';
 
     $query_promoAll = "SELECT * FROM promo WHERE id_produk = '0' AND status = '1'";
@@ -77,8 +77,6 @@ function cek_diskon($id)
             }
         }
     }
-
-
 
     return $harga_jual;
 }
