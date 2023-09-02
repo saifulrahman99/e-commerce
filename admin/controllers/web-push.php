@@ -1,5 +1,5 @@
 <?php
-require('../assets/basis/kon.php');
+require('../../assets/basis/kon.php');
 
 $judul = $_POST['judul'];
 $ket = $_POST['ket'];

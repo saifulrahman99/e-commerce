@@ -446,6 +446,7 @@ function idPengunjung(id) {
     setIdPengunjung(id);
     read(id);
 
+
     document.getElementById("total_pesan_diterima_old").value = document.getElementById("total_pesan_diterima").value;
     // console.log();
 
@@ -571,4 +572,27 @@ function api() {
         }
     });
 
+}
+
+function rekomendasi() {
+    var base_url = window.location.origin + '/admin/';
+    var form = new FormData(document.getElementById("form-tambah-rek-produk"));
+
+    $.ajax({
+        url: base_url + "controllers/rekomendasi.php",
+        method: "POST",
+        data: form,
+        contentType: false,
+        cache: false,
+        processData: false,
+        success: function () {
+
+            $('body').removeClass('modal-open');
+            $('#suksesModal').modal('show');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop.fade.show').remove();
+
+            $('#isi-content-halaman').load(base_url + 'view/rekomendasi.php');
+        }
+    });
 }

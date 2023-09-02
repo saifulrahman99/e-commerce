@@ -99,13 +99,13 @@ if (empty($coockiePengunjung)) {
 
     $select = mysqli_num_rows(mysqli_query($db, "$q_user"));
 
-    if ($select < 1) {
+    if ($select > 0) {
+        $select_id = mysqli_fetch_assoc(mysqli_query($db, "$q_user"));
+        setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 365), '/');
+    } else {
         $query = "INSERT INTO pengunjung(ip_address, browser, os, waktu) VALUES ('$ip_user','$user_browser','$user_os','$today')";
 
         $insert = mysqli_query($db, $query);
-    } else {
-        $select_id = mysqli_fetch_assoc(mysqli_query($db, "$q_user"));
-        setcookie('id_pengunjung', $select_id['id_pengunjung'], time() + (60 * 60 * 24 * 365), '/');
     }
 }
 

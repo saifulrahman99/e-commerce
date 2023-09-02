@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once '../assets/basis/kon.php';
+require_once '../../assets/basis/kon.php';
 
 if (isset($_POST['login'])) {
 

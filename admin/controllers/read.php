@@ -1,5 +1,6 @@
 <?php
-require('../assets/basis/kon.php');
+require_once('../../assets/basis/kon.php');
+
 $id_pengunjung = (isset($_POST['id_pengunjung']) && !empty($_POST['id_pengunjung'])) ? $_POST['id_pengunjung'] : $_COOKIE['idC_pengunjung'];
 $id_admin = $_COOKIE['id_admin'];
 

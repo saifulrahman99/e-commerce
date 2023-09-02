@@ -144,7 +144,8 @@ input {
 
 /* ============== navbar start ============== */
 #navbar .logo-web img {
-    max-width: 5rem !important;
+    max-width: 5rem;
+    transition: 0.3s;
 }
 
 #navbar .nav-user-profile {
@@ -562,13 +563,16 @@ footer .copyright span {
 .sosial-media>i {
     font-size: 0.8em;
 }
+
 #fOprasional p {
     color: white !important;
     margin-bottom: 3px !important;
 }
-#fAlamat p{
+
+#fAlamat p {
     color: white !important;
 }
+
 /* ============== footer end ============== */
 
 
@@ -1055,8 +1059,19 @@ footer .copyright span {
 /* ============== obrolan end ============== */
 
 
+/* ============== rekomendasi produk start ============== */
+#item-rekomendasi-produk {
+    max-width: 200px;
+    transition: 0.3s;
+}
+#item-rekomendasi-produk:hover {
+    transform: rotate(4deg);
+}
+#item-rekomendasi-produk .card .card-body a:hover {
+    color: #1fc245 !important;
+}
 
-
+/* ============== rekomendasi produk end ============== */
 
 
 
@@ -1137,6 +1152,10 @@ footer .copyright span {
 
     .carousel-control-next {
         left: 100% !important;
+    }
+
+    #navbar .logo-web img {
+        max-width: 5rem !important;
     }
 
 }
@@ -1304,6 +1323,7 @@ footer .copyright span {
     .carousel-control-next {
         left: 95% !important;
     }
+
 }
 
 /* ============== handpone end ============== */

@@ -18,7 +18,6 @@ function hanyaAngka(evt) {
 var header = $('#navbar-show');
 var menu = $('.menu-nav');
 var circleLogo = $('.cricle-logo');
-// var search = $('.search-input');
 var barNavigasi = $(".bar-navigasi");
 
 var range = 10;
@@ -28,7 +27,6 @@ $(window).on('scroll', function () {
         header.css({ 'opacity': 0 });
         circleLogo.css({ 'background': 'white' });
         circleLogo.css({ 'opacity': 1 });
-        // search.css({ 'border': 'none' });
         barNavigasi.css({ 'opacity': 1 });
 
     } else if (calc < '0') {
@@ -36,7 +34,6 @@ $(window).on('scroll', function () {
         menu.css({ 'color': 'black' });
         circleLogo.css({ 'background': 'rgb(254, 234, 186)' });
         circleLogo.css({ 'opacity': 0 });
-        // search.css({ 'border': '1px solid gray' });
         barNavigasi.css({ 'opacity': 0 });
     }
 });

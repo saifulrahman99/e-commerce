@@ -21,6 +21,43 @@
 </section>
 
 <?php
+$list = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM pengaturan WHERE nm_pengaturan = 'rekomendasi'"));
+$data = $list['isi_pengaturan'];
+$dp = explode(',', $data);
+
+if (!empty($data)) { ?>
+    <section id="rekomendasi-produk" class="rekomendasi-produk my-5">
+        <div class="container">
+            <h2 class="judul-section fs-2 my-3 my-lg-0 mb-lg-3 text-center">Rekomendasi <span class="text-ijo judul-section fs-2 my-3 my-lg-0 mb-lg-3">Produk</span></h2>
+            <div class="marquee">
+
+                <marquee behavior="scroll" direction="right" class="py-3 d-flex justify-content-evenly" onmouseout="this.start()" onmouseover="this.stop()" loop="true">
+
+                    <?php foreach ($dp as $p) {
+                        $produk = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE kode_produk = '$p'"));
+                        $gambar = !empty($produk['gambar']) ? $produk['gambar'] : 'default-produk.jpg';
+                    ?>
+                        <div id="item-rekomendasi-produk" class="me-2 d-inline-block">
+                            <div class="card">
+                                <div class="card-header p-0 overflow-hidden">
+                                    <img src="<?= base_url('assets/img/produk/' . $gambar) ?>" alt="..." style="width: 100%;">
+                                </div>
+                                <div class="card-body">
+                                    <a href="<?=base_url('produk/lihat/'.$produk['id_produk'])?>" class="text-decoration-none text-dark">
+                                        <?= $produk['nm_produk'] ?>
+                                        <span class="d-block fw-bold"><?= rupiah($produk['harga_jual']) ?></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </marquee>
+            </div>
+
+        </div>
+    </section>
+<?php }
+
 $promo = mysqli_query($db, "SELECT * FROM promo WHERE status = '1'");
 $jml_promo = mysqli_num_rows($promo);
 $jml_carousel = $jml_promo / 2;
@@ -310,12 +347,6 @@ clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); overflow: hidden;
         </div>
     </div>
 </section>
-
-
-
-
-
-
 
 
 

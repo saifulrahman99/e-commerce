@@ -60,6 +60,7 @@ require 'controllers/off-promo.php';
                         <ul class="sub-menu children dropdown-menu">
                             <li class="pt-2 pb-1 klik_menu" id="produk"><i class="ti-direction pt-2"></i><a>Produk</a></li>
                             <li class="pt-2 pb-1 klik_menu" id="kategori"><i class="ti-direction pt-2"></i><a>Kategori</a></li>
+                            <li class="pt-2 pb-1 klik_menu" id="rekomendasi"><i class="ti-direction pt-2"></i><a>Rekomendasi</a></li>
                         </ul>
                     </li>
                     <li class="klik_menu" id="promo">
@@ -282,7 +283,7 @@ require 'controllers/off-promo.php';
                 var page = "view/" + hlm + ".php";
                 setTimeout(() => {
                     $('#isi-content-halaman').load(page);
-                }, 50);
+                }, 100);
             }
         });
         document.getElementsByClassName('subtitle').remove();

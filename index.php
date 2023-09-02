@@ -87,9 +87,8 @@ require('admin/controllers/off-promo.php');
     <!-- navigasi start -->
     <header id="navbar" class="navbar">
         <div class="container">
-            <div class="logo-web" style="position:relative;">
-                <!-- <h1>Butik Buah Adastra</h1> -->
-                <img src="<?= base_url('assets/img/brand/adastra.png') ?>" alt="logo adastra">
+            <div class="logo-web" style="position:relative; height: 5rem;">
+                <img id="logo-toko" src="<?= base_url('assets/img/brand/adastra.png') ?>" alt="logo adastra" style="<?= ($halaman == 'Home') ? 'max-width: 15rem; position: absolute;' : 'max-width: 5rem' ?>;">
                 <div class="cricle-logo" style=" position: absolute; padding: 3rem 3rem; background-color: white; top: -1rem; left: -0.5rem; z-index: -1; border-radius: 50%;"></div>
             </div>
             <nav class="navbar-nav">
@@ -311,6 +310,10 @@ require('admin/controllers/off-promo.php');
     <!-- jquery js -->
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 
+    <?php
+    if ($halaman == 'Home') { ?>
+        <script src="<?= base_url('assets/js/script-home.js') ?>"></script>
+    <?php } ?>
     <!-- js costum -->
     <script src="<?= base_url('assets/js/script.js') ?>"></script>
 
@@ -326,9 +329,7 @@ require('admin/controllers/off-promo.php');
         default:
             $url = '.js';
             break;
-    }
-    ?>
-
+    } ?>
     <script type="text/javascript" src="<?= base_url('assets/js/ajax' . $url) ?>"></script>
 
     <!-- icon -->

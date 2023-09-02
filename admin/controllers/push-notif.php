@@ -1,5 +1,5 @@
 <?php
-require('../assets/basis/kon.php');
+require('../../assets/basis/kon.php');
 
 $id_promo = $_POST['id_promo'];
 $promo = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM promo WHERE id_promo = '$id_promo'"));

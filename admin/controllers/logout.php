@@ -1,6 +1,6 @@
 <?
 session_start();
-require_once '../assets/basis/kon.php';
+require_once '../../assets/basis/kon.php';
 
 unset($_SESSION['status_login']);
 setcookie('username', '');

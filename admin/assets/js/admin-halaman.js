@@ -23,6 +23,8 @@ $(document).ready(function () {
             $('#isi-content-halaman').load(base_url + 'view/toko.php');
         } else if (menu == "pengunjung") {
             $('#isi-content-halaman').load(base_url + 'view/pengunjung.php');
+        } else if (menu == "rekomendasi") {
+            $('#isi-content-halaman').load(base_url + 'view/rekomendasi.php');
         }
 
         $('.klik_menu.active').removeClass('active');

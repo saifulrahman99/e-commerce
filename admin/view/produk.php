@@ -1,6 +1,14 @@
  <?php
     require_once '../../assets/basis/kon.php';
     require '../function/base_url.php';
+
+    function ribuan($angka)
+    {
+        $hasil_rupiah = number_format($angka, 0, ',', '.');
+        return $hasil_rupiah;
+    }
+
+
     $select = mysqli_query($db, "SELECT * FROM produk INNER JOIN kategori ON produk.id_kategori = kategori.id_kategori ORDER BY id_produk DESC");
     ?>
  <div class="breadcrumbs">
@@ -58,8 +66,8 @@
                              <td><?= $p['kode_produk'] ?></td>
                              <td><?= $p['nm_produk'] ?></td>
                              <td><?= $p['merek'] ?></td>
-                             <td><?= $p['harga_pokok'] ?></td>
-                             <td><?= $p['harga_jual'] ?></td>
+                             <td><?= ribuan($p['harga_pokok']) ?></td>
+                             <td><?= ribuan($p['harga_jual']) ?></td>
                              <td><?= $p['stok'] ?></td>
                              <td><?= $p['kategori'] ?></td>
                              <td>
