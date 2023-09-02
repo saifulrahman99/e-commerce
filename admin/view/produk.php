@@ -39,7 +39,7 @@
 
                  <a class="btn btn-success btn-sm mx-1 my-1" data-toggle="modal" href="#imporExcel">Impor Excel</a>
 
-                 <!-- <a class="btn btn-success btn-sm mx-1 my-1" href="<?// base_url('produk-control/ekspor') ?>" target="_blank">Ekspor Excel</a> -->
+                 <a class="btn btn-success btn-sm mx-1 my-1" href="<?= base_url('adastra/produk-control/ekspor') ?>" target="_blank">Ekspor Excel</a>
 
                  <button id="reload-produk" class="btn btn-success btn-sm ml-2 my-1"><i class="ti-reload"></i> Refrash</button>
 
