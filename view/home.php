@@ -2,7 +2,7 @@
     <div class="container home">
         <div class="row row-tagline">
             <div class="tagline col-12 col-sm-6 d-flex flex-column justify-content-center cssanimation fadeInLeft">
-                <h1 class="mb-3 mb-md-4">Belanja <span style="margin-left: -2.9px;">Buah dan Sayur</span></h1>
+                <h1 class="mb-3 mb-md-4">Hidup Sehat <span style="margin-left: -2.9px;">Konsumsi Produk Organik</span></h1>
                 <p class="mb-3 mb-md-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab cupiditate vitae adipisci commodi non temporibus cumque ea ut, minima culpa.</p>
                 <div class="cta">
                     <a href="produk" class="btn btn-lg shadow"> <img src="assets/img/shopping-cart.svg" alt=".." class="me-2 pb-1"> Belanja Sekarang</a>
@@ -347,38 +347,3 @@ clip-path: polygon(0 0, 100% 0%, 75% 100%, 0% 100%); overflow: hidden;
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-<!-- <section id="login" class="login">
-    <div class="container">
-        <div class="panel panel-default mb-5">
-            <?php
-            //if ($login_button == '') {
-            ?>
-                <div class="panel-body">
-                    <img src="<? // echo $_SESSION['user_image'] 
-                                ?>" alt="foto" style="border-radius: 50%;">
-                    <h3><b>Name :</b> <? // echo $_SESSION['name'] 
-                                        ?></h3>
-                    <h3><b>Email :</b> <? // echo $_SESSION['user_email_address'] 
-                                        ?></h3>
-                    <h3><a href="Logout">Logout</a></h3>
-                </div>
-            <? // } else { 
-            ?>
-                <h4 align="center" class="pt-5 mt-5" style="font-weight: 600 !important;">Login Melalui Akun Google Untuk Menggunakan Fitur Chat</h4>
-
-                <p class="fw-bolder text-center">Gunakan fitur chat untuk menghubungi penjual secara langsung!</p>
-                <div align="center"><? // echo $login_button 
-                                    ?></div>
-            <? // }
-            ?>
-        </div>
-    </div>
-</section> -->

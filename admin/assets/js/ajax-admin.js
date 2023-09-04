@@ -180,7 +180,6 @@ $(document).ready(function () {
 
 
 // controllers promo
-
 function promo(id, opsi) {
     var id_promo = id;
     var opsi_control = opsi;

@@ -8,7 +8,7 @@ header("Content-Disposition: attachment; filename=Laporan_Penjualan_" . $tgl_now
 
 function rupiah($angka)
 {
-    $hasil_rupiah = "Rp " . number_format($angka, 0, ',', '.');
+    $hasil_rupiah = "Rp&nbsp" . number_format($angka, 0, ',', '.');
     return $hasil_rupiah;
 }
 function bulan($bulan)
@@ -69,11 +69,12 @@ $bln_akhir = explode('-', $tgl_akhir);
 <table border="1">
     <thead>
         <th>No</th>
-        <th>ID Order</th>
-        <th>Tanggal</th>
+        <th style="min-width: 200px;">ID Order</th>
+        <th style="min-width: 200px;">Tanggal</th>
         <th>Nama</th>
         <th>Alamat</th>
         <th>Nomor Telpon</th>
+        <th style="min-width: 300px;">Belanjaan</th>
         <th>Mata Uang</th>
         <th>Modal</th>
         <th>Total</th>
@@ -91,15 +92,26 @@ $bln_akhir = explode('-', $tgl_akhir);
 
                 $modal = $modal + $harga['harga_pokok'];
             }
+
+            $w = explode(' ', $o['waktu_transaksi']);
+            $w_1 = explode('-', $w[0]);
         ?>
             <tr>
                 <td><?= $i++ ?></td>
                 <td><?= $o['order_id'] ?></td>
-                <td><?= $o['waktu_transaksi'] ?></td>
+                <td><?= "$w_1[2]-$w_1[1]-$w_1[0] $w[1] WIB" ?></td>
                 <td><?= $o['nm_pembeli'] ?></td>
                 <td><?= $o['alamat'] ?></td>
                 <td style="text-align: center;"><?= $o['nomor_hp'] ?></td>
-                <td><?= 'IDR' ?></td>
+                <td>
+                    <?php
+                    foreach ($belanjaan as $key => $value) {
+                        $item = mysqli_fetch_assoc(mysqli_query($db, "SELECT * FROM produk WHERE id_produk = '$key'"));
+                    ?>
+                        <li style="list-style: number;"><?= $item['nm_produk'] . " x " . $value[0] ?></li>
+                    <?php } ?>
+                </td>
+                <td style="text-align: center;"><?= 'IDR' ?></td>
                 <td><?= $modal ?></td>
                 <td style="background-color: <?= ($modal > $o['biaya']) ? 'red' : '' ?>;"><?= $o['biaya'] ?></td>
             </tr>
@@ -108,26 +120,23 @@ $bln_akhir = explode('-', $tgl_akhir);
             $totalPendapatan = $totalPendapatan + $o['biaya'];
         } ?>
         <tr>
-            <td colspan="9">&nbsp</td>
+            <td colspan="10">&nbsp</td>
         </tr>
         <tr>
-            <td colspan="5"></td>
+            <td colspan="7"></td>
             <td>TOTAL MODAL</td>
-            <td style="text-align: center;">:</td>
             <td><?= rupiah($total_modal) ?></td>
             <td></td>
         </tr>
         <tr>
-            <td colspan="5"></td>
+            <td colspan="7"></td>
             <td>TOTAL PENDAPATAN KOTOR</td>
-            <td style="text-align: center;">:</td>
             <td></td>
             <td><?= rupiah($totalPendapatan) ?></td>
         </tr>
         <tr>
-            <td colspan="5"></td>
+            <td colspan="7"></td>
             <td>LABA/KEUNTUNGAN</td>
-            <td style="text-align: center;">:</td>
             <td colspan="2" style="text-align: center;"><?= rupiah(($totalPendapatan - $total_modal)) ?></td>
         </tr>
     </tbody>

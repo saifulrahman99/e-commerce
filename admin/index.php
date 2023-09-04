@@ -63,8 +63,12 @@ require 'controllers/off-promo.php';
                             <li class="pt-2 pb-1 klik_menu" id="rekomendasi"><i class="ti-direction pt-2"></i><a>Rekomendasi</a></li>
                         </ul>
                     </li>
-                    <li class="klik_menu" id="promo">
-                        <a><i class="menu-icon fa fa-gift"></i>Promo </a>
+                    <li class="klik_menu menu-item-has-children dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-gift"></i></i>Promo</a>
+                        <ul class="sub-menu children dropdown-menu">
+                            <li class="pt-2 pb-1 klik_menu" id="promo"> <a><i class="ti-direction pt-2"></i>Promo </a> </li>
+                            <li class="pt-2 pb-1 klik_menu" id="peruser"><i class="ti-direction pt-2"></i><a>Per User</a></li>
+                        </ul>
                     </li>
                     <li class="klik_menu" id="toko">
                         <a><i class="menu-icon fa fa-laptop"></i>Toko </a>

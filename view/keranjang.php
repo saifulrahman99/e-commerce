@@ -180,7 +180,7 @@
 
                         </div>
 
-                        <!-- <textarea class="form-control" id="info-error"></textarea> -->
+                        <textarea class="form-control" id="info-error"></textarea>
                 </div>
 
                 <div class="modal-footer d-flex flex-column">
@@ -233,7 +233,7 @@
                     url: "controllers/transaksi.php",
                     data: $('#form-pembayaran').serialize(),
                     success: function(data) {
-                        // document.getElementById("info-error").innerHTML = data;
+                        document.getElementById("info-error").innerHTML = data;
 
                         if (data != 'cod') {
                             $('#modalCheckout').modal('hide');

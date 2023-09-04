@@ -77,6 +77,29 @@ function cek_diskon($id)
         }
     }
 
+    if (isset($_COOKIE['id_pengunjung']) && !empty($_COOKIE['id_pengunjung'])) {
+        $id_pengunjung = $_COOKIE['id_pengunjung'];
+        $query_promo_user = "SELECT * FROM promo_user INNER JOIN produk ON promo_user.id_produk = produk.id_produk WHERE promo_user.id_produk = '$id' AND id_pengunjung = '$id_pengunjung' AND status = '1'";
+
+        $jmlPromoUser = mysqli_num_rows(mysqli_query($db, $query_promo_user));
+
+        if ($jmlPromoUser > 0) {
+            $data_harga_promo_user = mysqli_fetch_assoc(mysqli_query($db, $query_promo_user));
+            $waktuP_mulai = strtotime($data_harga_promo_user['waktu_mulai']);
+            $waktuP_selesai = strtotime($data_harga_promo_user['waktu_selesai']);
+            $timeNow = strtotime(date("Y-m-d H:i"));
+
+            if ($waktuP_mulai <= $timeNow && $waktuP_selesai >= $timeNow) {
+                // tentukan harga
+                $harga_jual = $data_harga_promo_user['harga_promo_user'];
+
+                if ($harga_jual == 0) {
+                    $harga_jual = $data_harga['harga_pokok'];
+                }
+            }
+        }
+    }
+
     return $harga_jual;
 }
 

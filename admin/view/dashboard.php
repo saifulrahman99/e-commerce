@@ -113,7 +113,7 @@
                      </div>
                      <div class="card-body">
                          <?php
-                            $select = mysqli_query($db, "SELECT * FROM transaksi WHERE status_bayar = '1' AND status_terkirim = '0' ORDER BY id_transaksi DESC");
+                            $select = mysqli_query($db, "SELECT * FROM transaksi WHERE status_terkirim = '0' AND ORDER BY id_transaksi DESC");
 
                             ?>
                          <div class="table table-responsive">

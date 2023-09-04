@@ -25,6 +25,8 @@ $(document).ready(function () {
             $('#isi-content-halaman').load(base_url + 'view/pengunjung.php');
         } else if (menu == "rekomendasi") {
             $('#isi-content-halaman').load(base_url + 'view/rekomendasi.php');
+        } else if (menu == "peruser") {
+            $('#isi-content-halaman').load(base_url + 'view/peruser.php');
         }
 
         $('.klik_menu.active').removeClass('active');
