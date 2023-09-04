@@ -164,7 +164,6 @@
                              <option value="Ons"> Ons </option>
                              <option value="PAK"> PAK </option>
                              <option value="PCS"> PCS </option>
-                             <option value="Liter"> Liter </option>
                          </select>
                      </div>
                      <div class="form-group mb-2 col-12 col-md-6">
